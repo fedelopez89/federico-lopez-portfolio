@@ -1,34 +1,60 @@
 import { FC } from 'react';
-import './aboutme.css';
+import { Image } from '../../ui';
+import {
+  AboutMeContainer,
+  Description,
+  PhotoContainer,
+} from './AboutMe.styles';
 
 const AboutMe: FC = () => {
   return (
-    <>
-      <div className="about-me-description">
+    <AboutMeContainer>
+      <Description
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
         <h1>about me</h1>
         <p>
-          Hi! I am{' '}
+          Hi! I'm{' '}
           <strong>
             <u>Federico López</u>
           </strong>
-          .
+          , a Senior Frontend Developer with 10+ years of experience in software
+          engineering.
         </p>
         <br />
         <p>
-          I'm a Software Engineer with more than ten years of work in
-          technology. Currently working as a FrontEnd Web Developer.
+          Specialized in building high-performance, scalable web applications
+          using modern technologies like
+          <strong> React</strong>, <strong>TypeScript</strong>, and{' '}
+          <strong>Next.js</strong>. I've successfully delivered enterprise
+          solutions for global companies in fintech, healthcare, and wellness
+          industries.
         </p>
         <p>
-          I'm a passionate individual who always wants to learn more about
-          software engineering and computer science. I consider myself a quick
-          learner always setting out challenges to learn different programming
-          concepts and to find a more efficient way of solving problems.
+          Passionate about clean code, performance optimization, and creating
+          exceptional user experiences. I thrive in collaborative environments
+          and enjoy mentoring teams while staying current with the latest
+          frontend technologies and best practices.
         </p>
-      </div>
-      <figure className="about-photo">
-        <img src="./images/photo__01.jpeg" alt="myself" />
-      </figure>
-    </>
+      </Description>
+      <PhotoContainer
+        initial={{ opacity: 0, x: 50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <Image
+          src="./images/photo__01.jpeg"
+          alt="Federico López"
+          priority
+          width="100%"
+          height="auto"
+        />
+      </PhotoContainer>
+    </AboutMeContainer>
   );
 };
 

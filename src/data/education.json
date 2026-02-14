@@ -3,7 +3,7 @@
   "educations": [
     {
       "id": "fullstack",
-      "title": "fullstack nodejs",
+      "title": "fullstack web development - node.js specialization",
       "institute": {
         "name": "education it",
         "href": "https://www.linkedin.com/school/educacionit/"
@@ -20,17 +20,17 @@
         "province": "Buenos Aires",
         "country": "Argentina"
       },
-      "notes": ""
+      "notes": "Advanced full-stack development program covering modern JavaScript, React, Node.js, databases, and deployment strategies."
     },
     {
       "id": "engineering",
       "title": "computer systems engineering",
       "institute": {
-        "name": "national university BA",
+        "name": "national technological university",
         "href": "https://www.linkedin.com/school/universidad-tecnologica-nacional/"
       },
       "start": {
-        "month": "january",
+        "month": "march",
         "year": "2008"
       },
       "end": {
@@ -41,7 +41,7 @@
         "province": "Buenos Aires",
         "country": "Argentina"
       },
-      "notes": "Incompleted. Third year reached."
+      "notes": "Foundation in computer science, algorithms, data structures, and software engineering principles."
     },
     {
       "id": "highSchool",

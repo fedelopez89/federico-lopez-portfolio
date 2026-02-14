@@ -1,97 +1,126 @@
 import { FC } from 'react';
 import { useNavbarScroll } from '@/hooks';
-import './header.css';
+import {
+  HeaderContainer,
+  Navbar,
+  NavContainer,
+  Logo,
+  NavMenu,
+  NavItem,
+  NavLink,
+  HeaderIntro,
+  Title,
+  Role,
+  SocialLinks,
+  SocialItem,
+  SocialLink,
+} from './Header.styles';
+
+const navItems = [
+  { href: '#aboutme', label: 'ABOUT ME' },
+  { href: '#skills', label: 'SKILLS' },
+  { href: '#experience', label: 'EXPERIENCE' },
+  { href: '#education', label: 'EDUCATION' },
+];
+
+const socialLinks = [
+  {
+    href: 'https://github.com/fedelopez89',
+    icon: 'fa fa-github fa-2x',
+    label: 'GitHub',
+  },
+  {
+    href: 'https://www.linkedin.com/in/federicoglopez/',
+    icon: 'fa fa-linkedin fa-2x',
+    label: 'LinkedIn',
+  },
+];
 
 const Header: FC = () => {
   const { isScrolled } = useNavbarScroll(100);
 
   return (
-    <header id="home">
-      <nav
-        className={`navbar navbar-expand-md fixed-top navbar-dark ${isScrolled ? 'scrolling' : ''}`}
-        style={{ backgroundColor: isScrolled ? 'black' : 'transparent' }}
+    <HeaderContainer id="home">
+      <Navbar
+        $isScrolled={isScrolled}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
       >
-        <div className="container-sm">
-          <a className="navbar-brand" href="#home">
+        <NavContainer>
+          <Logo
+            href="#home"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             HOME
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
+          </Logo>
+          <NavMenu
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
           >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div
-            className="collapse navbar-collapse justify-content-center"
-            id="navbarNav"
-          >
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <a
-                  className="nav-link active"
-                  aria-current="page"
-                  href="#aboutme"
-                >
-                  ABOUT ME
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#skills">
-                  SKILLS
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#experience">
-                  EXPERIENCE
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#education">
-                  EDUCATION
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <div className="header-intro">
-        <h1>Federico G. López</h1>
-        <div className="header-intro-roles">
-          <p>Senior Frontend Developer</p>
-        </div>
-        <div className="wrapper">
-          <ul>
-            <li className="github">
-              <a
-                href="https://github.com/fedelopez89"
+            {navItems.map((item, index) => (
+              <NavItem
+                key={item.href}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * index }}
+                whileHover={{ y: -2 }}
+              >
+                <NavLink href={item.href}>{item.label}</NavLink>
+              </NavItem>
+            ))}
+          </NavMenu>
+        </NavContainer>
+      </Navbar>
+
+      <HeaderIntro
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+      >
+        <Title
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
+          Federico G. López
+        </Title>
+        <Role
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.7 }}
+        >
+          Senior Frontend Developer | React & TypeScript Specialist
+        </Role>
+        <SocialLinks
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.9 }}
+        >
+          {socialLinks.map((link, index) => (
+            <SocialItem
+              key={link.href}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1 + index * 0.1 }}
+            >
+              <SocialLink
+                href={link.href}
                 target="_blank"
                 rel="noreferrer"
+                aria-label={link.label}
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                whileTap={{ scale: 0.9 }}
               >
-                <i className="fa fa-github fa-2x" aria-hidden="true">
-                  {' '}
-                </i>
-              </a>
-            </li>
-            <li className="linkedin">
-              <a
-                href="https://www.linkedin.com/in/federicoglopez/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <i className="fa fa-linkedin fa-2x" aria-hidden="true">
-                  {' '}
-                </i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </header>
+                <i className={link.icon} aria-hidden="true" />
+              </SocialLink>
+            </SocialItem>
+          ))}
+        </SocialLinks>
+      </HeaderIntro>
+    </HeaderContainer>
   );
 };
 

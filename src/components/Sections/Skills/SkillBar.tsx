@@ -1,4 +1,12 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
+import {
+  SkillBarContainer,
+  SkillHeader,
+  SkillName,
+  SkillLevel,
+  ProgressBarContainer,
+  ProgressBarFill,
+} from './SkillBar.styles';
 
 interface SkillBarProps {
   name: string;
@@ -6,19 +14,29 @@ interface SkillBarProps {
   className?: string;
 }
 
-const SkillBar: FC<SkillBarProps> = ({ name, level, className = '' }) => {
+const SkillBar: FC<SkillBarProps> = ({ name, level }) => {
   return (
-    <div className="skill-item">
-      <h5 style={{ width: `${level}%` }} data-value={level}>
-        {name}
-      </h5>
-      <progress max="100" value={level} className={className}>
-        <div className="progress-bar">
-          <span style={{ width: `${level}%` }}>{level}%</span>
-        </div>
-      </progress>
-    </div>
+    <SkillBarContainer
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4 }}
+    >
+      <SkillHeader>
+        <SkillName>{name}</SkillName>
+        <SkillLevel>{level}%</SkillLevel>
+      </SkillHeader>
+      <ProgressBarContainer>
+        <ProgressBarFill
+          $level={level}
+          initial={{ width: 0 }}
+          whileInView={{ width: `${level}%` }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
+        />
+      </ProgressBarContainer>
+    </SkillBarContainer>
   );
 };
 
-export default SkillBar;
+export default memo(SkillBar);

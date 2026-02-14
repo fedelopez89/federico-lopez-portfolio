@@ -1,39 +1,63 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import educationHistory from '../../../data/education.json';
 import type { EducationConfig } from '@/types';
-import './education.css';
+import {
+  EducationContainer,
+  Title,
+  Timeline,
+  EducationCard,
+  DateAndLocation,
+  Details,
+} from './Education.styles';
 
 const Education: FC = () => {
   const { educations } = educationHistory as EducationConfig;
 
-  return (
-    <>
-      <div className="edu-title">
-        <h1 className="titles">education</h1>
-      </div>
-      <div className="edu-form">
-        {educations.map((education) => {
-          const { id, title, institute, start, end, place } = education;
-          const dateRange = `${start.month} ${start.year} - ${end.month} ${end.year}`;
-          const location = `${place.province}, ${place.country}`;
+  const educationItems = useMemo(
+    () =>
+      educations.map((education, index) => {
+        const { id, title, institute, start, end, place } = education;
+        const dateRange = `${start.month} ${start.year} - ${end.month} ${end.year}`;
+        const location = `${place.province}, ${place.country}`;
 
-          return (
-            <div key={id} className="edu-details">
-              <div className="edu-details-left">
-                <h5>{dateRange}</h5>
-                <h6>{location}</h6>
-              </div>
-              <div className="edu-details-right">
-                <h4>{title}</h4>
+        return (
+          <EducationCard
+            key={id}
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+          >
+            <DateAndLocation>
+              <h5>{dateRange}</h5>
+              <h6>{location}</h6>
+            </DateAndLocation>
+            <Details>
+              <h4>{title}</h4>
+              <h5>
                 <a href={institute.href} target="_blank" rel="noreferrer">
-                  <h5>{institute.name}</h5>
+                  {institute.name}
                 </a>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </>
+              </h5>
+            </Details>
+          </EducationCard>
+        );
+      }),
+    [educations]
+  );
+
+  return (
+    <EducationContainer>
+      <Title
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        education
+      </Title>
+      <Timeline>{educationItems}</Timeline>
+    </EducationContainer>
   );
 };
 

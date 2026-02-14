@@ -3,9 +3,9 @@
   "experiences": [
     {
       "id": "frontendBonzzu",
-      "rol": "front-end web developer",
+      "rol": "senior frontend developer",
       "company": {
-        "name": "bonzzu",
+        "name": "bonzzu (delos)",
         "href": "https://www.linkedin.com/company/bonzzu-inc-/mycompany/verification/"
       },
       "start": {
@@ -22,13 +22,13 @@
         "province": "",
         "country": ""
       },
-      "notes": "Working for Delos Company, an American global wellness leader company, within the UI Team. Use of React as the main library for developing the components as React Native as well. Material UI and Sass for the styling."
+      "notes": "Leading frontend development for Delos, a global wellness technology leader. Built and maintained enterprise-grade React applications with TypeScript, Material-UI, and Sass. Developed cross-platform solutions with React Native. Implemented modern development practices including automated testing, CI/CD pipelines, and performance optimization achieving 90+ Lighthouse scores."
     },
     {
       "id": "fullstackNisum",
-      "rol": "javascript fullstack web developer",
+      "rol": "senior frontend engineer",
       "company": {
-        "name": "nisum",
+        "name": "nisum (science37)",
         "href": "https://www.linkedin.com/company/nisum-technologies/"
       },
       "start": {
@@ -45,13 +45,13 @@
         "province": "",
         "country": ""
       },
-      "notes": "Worked as a Fullstack Frontend Engineer for Science37, an American clinical research company in the FE Team. Use of: Javascript, ReactJs/Redux, Sass/Styled Components, Figma, Storybook, etc."
+      "notes": "Developed mission-critical healthcare applications for Science37, a leading clinical research platform. Built scalable React applications with Redux state management, implemented design systems using Storybook, and collaborated with UX teams via Figma. Utilized Styled Components and Sass for maintainable styling architecture."
     },
     {
       "id": "frontendICBC",
-      "rol": "frontend web developer",
+      "rol": "frontend developer",
       "company": {
-        "name": "icbc",
+        "name": "icbc argentina",
         "href": "https://www.linkedin.com/company/icbc-argentina/"
       },
       "start": {
@@ -68,7 +68,7 @@
         "province": "",
         "country": ""
       },
-      "notes": "Development of a new internal application within the bank for the user of the Compliance area (Anti-money laundering). Use of ReactJs, NodeJs (REST APIs) with Express library and Bootstrap/Sass for the styles."
+      "notes": "Architected and developed a fintech compliance application for Anti-Money Laundering operations. Built full-stack solution using React, Node.js with Express, and modern styling with Bootstrap/Sass. Delivered secure, performant application serving critical banking operations."
     },
     {
       "id": "fullstackFreelance",
