@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import experienceHistory from '../../../data/experience.json';
 import type { ExperienceConfig, Experience as ExperienceType } from '@/types';
+import { calculateDuration } from '@/utils/dateCalculations';
 import { SectionTitle } from '../shared/SectionTitle';
 import {
   ExperienceContainer,
@@ -18,7 +19,8 @@ const Experience: FC = () => {
   const getDateRange = (exp: ExperienceType): string => {
     const { start, end } = exp;
     const endDate = end.active ? 'Present' : `${end.month} ${end.year}`;
-    return `${start.month} ${start.year} - ${endDate}`;
+    const duration = calculateDuration(exp);
+    return `${start.month} ${start.year} - ${endDate} (${duration})`;
   };
 
   const getLocation = (exp: ExperienceType): string => {

@@ -1,4 +1,7 @@
 import { FC } from 'react';
+import experienceHistory from '../../../data/experience.json';
+import type { ExperienceConfig } from '@/types';
+import { calculateYearsExperience } from '@/utils/dateCalculations';
 import {
   AboutMeContainer,
   Description,
@@ -10,13 +13,26 @@ import {
 } from './AboutMe.styles';
 import { SectionTitle } from '../shared/SectionTitle';
 
-const stats = [
-  { number: '16+', label: 'Years Experience' },
-  { number: '7+', label: 'Enterprise Clients' },
-  { number: '100%', label: 'Remote' },
-];
-
 const AboutMe: FC = () => {
+  const { experiences } = experienceHistory as ExperienceConfig;
+
+  // Calculate years since freelance start (January 2019)
+  const freelanceJob = experiences.find(
+    (exp) => exp.id === 'fullstackFreelance'
+  );
+  const yearsExp = freelanceJob
+    ? calculateYearsExperience(
+        freelanceJob.start.month,
+        freelanceJob.start.year
+      )
+    : '7+';
+
+  const stats = [
+    { number: yearsExp, label: 'Years Experience' },
+    { number: '7+', label: 'Enterprise Clients' },
+    { number: '100%', label: 'Remote' },
+  ];
+
   return (
     <AboutMeContainer>
       <SectionTitle
@@ -41,7 +57,7 @@ const AboutMe: FC = () => {
           and <strong>Next.js</strong>.
         </p>
         <p>
-          With <strong>16 years of IT experience</strong> and{' '}
+          With <strong>{yearsExp} years of IT experience</strong> and{' '}
           <strong>7+ years focused on modern frontend development</strong>, I've
           delivered impactful solutions for global companies in wellness,
           sports, fintech, and healthcare—reaching millions of users worldwide.

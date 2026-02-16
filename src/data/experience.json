@@ -9,7 +9,7 @@
         "href": "https://www.linkedin.com/company/bonzzu-inc-/mycompany/verification/"
       },
       "start": {
-        "month": "february",
+        "month": "February",
         "year": "2022"
       },
       "end": {
@@ -28,11 +28,11 @@
       "id": "fullstackFreelance",
       "rol": "frontend web developer",
       "company": {
-        "name": "freelancer",
+        "name": "Freelancer",
         "href": ""
       },
       "start": {
-        "month": "january",
+        "month": "January",
         "year": "2019"
       },
       "end": {
@@ -55,12 +55,12 @@
         "href": "https://www.linkedin.com/company/nisum-technologies/"
       },
       "start": {
-        "month": "august",
+        "month": "August",
         "year": "2021"
       },
       "end": {
         "active": false,
-        "month": "april",
+        "month": "April",
         "year": "2022"
       },
       "place": {
@@ -74,16 +74,16 @@
       "id": "mainframeICBC",
       "rol": "senior mainframe cobol developer",
       "company": {
-        "name": "icbc argentina",
+        "name": "ICBC (Industrial and Commercial Bank of China)",
         "href": "https://www.linkedin.com/company/icbc-argentina/"
       },
       "start": {
-        "month": "february",
+        "month": "February",
         "year": "2015"
       },
       "end": {
         "active": false,
-        "month": "august",
+        "month": "August",
         "year": "2021"
       },
       "place": {
@@ -97,16 +97,16 @@
       "id": "cobolDeveloper",
       "rol": "cobol developer",
       "company": {
-        "name": "isban / bbva / accenture",
+        "name": "isban / BBVA / accenture",
         "href": "https://www.linkedin.com/company/accenture/"
       },
       "start": {
-        "month": "march",
+        "month": "March",
         "year": "2010"
       },
       "end": {
         "active": false,
-        "month": "january",
+        "month": "January",
         "year": "2015"
       },
       "place": {
