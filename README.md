@@ -2,7 +2,7 @@
 
 # 🚀 Federico López - Senior Frontend Engineer Portfolio
 
-[![Live Demo](https://img.shields.io/badge/demo-live-success?style=for-the-badge&logo=vercel)](https://fedelopez89.github.io/resume)
+[![Live Demo](https://img.shields.io/badge/demo-live-success?style=for-the-badge&logo=vercel)](https://fedelopez89.github.io/federico-lopez-portfolio)
 [![React](https://img.shields.io/badge/React-19.2.4-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-7.3-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
@@ -12,7 +12,7 @@
 
 _Showcasing 16 years of IT experience with 7+ years specializing in modern frontend development_
 
-[View Live Demo](https://fedelopez89.github.io/resume) • [Report Bug](https://github.com/fedelopez89/resume/issues) • [Request Feature](https://github.com/fedelopez89/resume/issues)
+[View Live Demo](https://fedelopez89.github.io/federico-lopez-portfolio) • [Report Bug](https://github.com/fedelopez89/federico-lopez-portfolio/issues) • [Request Feature](https://github.com/fedelopez89/federico-lopez-portfolio/issues)
 
 </div>
 
@@ -114,8 +114,8 @@ npm >= 9.0.0 or yarn >= 1.22.0
 
 ```bash
 # Clone the repository
-git clone https://github.com/fedelopez89/resume.git
-cd resume
+git clone https://github.com/fedelopez89/federico-lopez-portfolio.git
+cd federico-lopez-portfolio
 
 # Install dependencies
 npm install
@@ -256,7 +256,7 @@ resume/
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/fedelopez89/resume/issues).
+Feel free to check the [issues page](https://github.com/fedelopez89/federico-lopez-portfolio/issues).
 
 ---
 
@@ -291,7 +291,7 @@ _Senior Frontend Engineer_
 - 🏦 **6+ years in fintech** (ICBC, BBVA) building mission-critical systems
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-federicoglopez-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/federicoglopez/)
-[![Portfolio](https://img.shields.io/badge/Portfolio-Live-success?style=for-the-badge&logo=vercel)](https://fedelopez89.github.io/resume)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Live-success?style=for-the-badge&logo=vercel)](https://fedelopez89.github.io/federico-lopez-portfolio)
 [![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:fede.lopez89@gmail.com)
 
 </div>
