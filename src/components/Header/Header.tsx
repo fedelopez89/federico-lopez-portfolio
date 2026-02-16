@@ -1,71 +1,145 @@
-import './header.css';
+import { FC } from 'react';
+import { useNavbarScroll, useScrollSpy } from '@/hooks';
+import {
+  HeaderContainer,
+  Navbar,
+  NavContainer,
+  Logo,
+  NavMenu,
+  NavItem,
+  NavLink,
+  HeaderIntro,
+  Title,
+  Role,
+  SocialLinks,
+  SocialItem,
+  SocialLink,
+} from './Header.styles';
 
-const Header = () => {
-    return (
-        <header id="home">
-            <nav
-                className={"navbar navbar-expand-md fixed-top navbar-dark"}
-                style={{ backgroundColor: 'transparent' }}
+const navItems = [
+  { href: '#aboutme', label: 'ABOUT ME', id: 'aboutme' },
+  { href: '#projects', label: 'PROJECTS', id: 'projects' },
+  { href: '#experience', label: 'EXPERIENCE', id: 'experience' },
+  { href: '#languages', label: 'LANGUAGES', id: 'languages' },
+  { href: '#education', label: 'EDUCATION', id: 'education' },
+];
+
+const socialLinks = [
+  {
+    href: 'https://github.com/fedelopez89',
+    icon: 'fa fa-github fa-2x',
+    label: 'GitHub',
+  },
+  {
+    href: 'https://www.linkedin.com/in/federicoglopez/',
+    icon: 'fa fa-linkedin fa-2x',
+    label: 'LinkedIn',
+  },
+];
+
+const Header: FC = () => {
+  const { isScrolled } = useNavbarScroll(100);
+  const activeSection = useScrollSpy({
+    sectionIds: ['home', ...navItems.map((item) => item.id)],
+  });
+
+  return (
+    <HeaderContainer id="home" as="header" role="banner">
+      <Navbar
+        as="nav"
+        role="navigation"
+        aria-label="Main navigation"
+        $isScrolled={isScrolled}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <NavContainer>
+          <Logo
+            href="#home"
+            aria-label="Home"
+            $isScrolled={isScrolled}
+            whileTap={{ scale: 0.95 }}
+          >
+            HOME
+          </Logo>
+          <NavMenu
+            as="ul"
+            role="menubar"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            {navItems.map((item, index) => (
+              <NavItem
+                as="li"
+                role="none"
+                key={item.href}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * index }}
+              >
+                <NavLink
+                  href={item.href}
+                  role="menuitem"
+                  aria-label={item.label}
+                  $isScrolled={isScrolled}
+                  $isActive={activeSection === item.id}
+                >
+                  {item.label}
+                </NavLink>
+              </NavItem>
+            ))}
+          </NavMenu>
+        </NavContainer>
+      </Navbar>
+
+      <HeaderIntro
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+      >
+        <Title
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
+          Federico López
+        </Title>
+        <Role
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.7 }}
+        >
+          Senior Frontend Engineer
+        </Role>
+        <SocialLinks
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.9 }}
+        >
+          {socialLinks.map((link, index) => (
+            <SocialItem
+              key={link.href}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1 + index * 0.1 }}
             >
-                <div className={"container-sm"}>
-                    <a className={"navbar-brand"} href="#home">HOME</a>
-                    <button
-                        className="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarNav"
-                        aria-controls="navbarNav"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div
-                        className="collapse navbar-collapse justify-content-center"
-                        id="navbarNav"
-                    >
-                        <ul className="navbar-nav">
-                            <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#aboutme">ABOUT ME</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#skills">SKILLS</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#experience">EXPERIENCE</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#education">EDUCATION</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <div className="header-intro">
-                <h1>Federico G. López</h1>
-                <div className="header-intro-roles">
-                    <p>Frontend Web Developer</p>
-                </div>
-                <div className="wrapper">
-                    <ul>
-                        <li className="github">
-                            <a href="https://github.com/fedelopez89" target="_blank" rel="noreferrer">
-                                <i className="fa fa-github fa-2x" aria-hidden="true"> </i>
-                            </a>
-                        </li>
-                        <li className="linkedin">
-                            <a
-                                href="https://www.linkedin.com/in/federicoglopez/"
-                                target="_blank" rel="noreferrer"
-                            >
-                                <i className="fa fa-linkedin fa-2x" aria-hidden="true"> </i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </header>
-    )
-}
+              <SocialLink
+                href={link.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={link.label}
+                whileTap={{ scale: 0.9 }}
+              >
+                <i className={link.icon} aria-hidden="true" />
+              </SocialLink>
+            </SocialItem>
+          ))}
+        </SocialLinks>
+      </HeaderIntro>
+    </HeaderContainer>
+  );
+};
 
-export default Header
+export default Header;

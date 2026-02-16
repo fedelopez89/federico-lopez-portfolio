@@ -1,15 +1,16 @@
-import Footer from "./components/Footer/Footer";
-import Header from "./components/Header/Header";
-import Main from "./components/Main/Main";
+import { FC } from 'react';
+import { ThemeProvider } from './context';
+import { Header, Main, Footer, ThemeToggle } from '@components';
 
-function App() {
+const App: FC = () => {
   return (
-    <>
+    <ThemeProvider>
       <Header />
       <Main />
       <Footer />
-    </>
+      <ThemeToggle />
+    </ThemeProvider>
   );
-}
+};
 
 export default App;

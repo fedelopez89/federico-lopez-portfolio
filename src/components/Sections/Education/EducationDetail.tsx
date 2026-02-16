@@ -1,7 +1,5 @@
 const EducationDetail = () => {
-    return (
-        <div>EducationDetail</div>
-    )
-}
+  return <div>EducationDetail</div>;
+};
 
-export default EducationDetail
+export default EducationDetail;

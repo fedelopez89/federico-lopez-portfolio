@@ -1,65 +1,55 @@
-import { createElement } from "react";
-import AboutMe from "../Sections/AboutMe/AboutMe";
-import Education from "../Sections/Education/Education";
-import Experience from "../Sections/Experience/Experience";
-import Skills from "../Sections/Skills/Skills";
-import './main.css';
+import { FC, Suspense, lazy } from 'react';
+import { ScrollToTopButton } from '../layout/ScrollToTop';
+import { LoadingSpinner } from '../ui';
+import { MainContainer, Section } from './Main.styles';
 
-type sectionPageType = {
-    id: string;
-    component: () => JSX.Element;
-}[]
+// Lazy load sections for better performance
+const AboutMe = lazy(() => import('../Sections/AboutMe/AboutMe'));
+const Projects = lazy(() => import('../Sections/Projects/Projects'));
+const Experience = lazy(() => import('../Sections/Experience/Experience'));
+const Education = lazy(() => import('../Sections/Education/Education'));
+const Languages = lazy(() => import('../Sections/Languages/Languages'));
 
-const sectionsPage: sectionPageType = [{ id: "aboutme", component: AboutMe }, { id: "skills", component: Skills }, { id: "experience", component: Experience }, { id: "education", component: Education }];
-
-const mybutton = document.getElementById("myBtn");
-
-const topFunction = () => {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+interface SectionConfig {
+  id: string;
+  component: FC;
 }
 
-const scrollFunction = () => {
-    if (
-        document.body.scrollTop > 20 ||
-        document.documentElement.scrollTop > 20
-    ) {
-        if (mybutton) {
-            mybutton.style.display = "block"
-        }
-    } else {
-        if (mybutton) {
-            mybutton.style.display = "none";
-        }
-    }
-}
+const sections: SectionConfig[] = [
+  { id: 'aboutme', component: AboutMe },
+  { id: 'projects', component: Projects },
+  { id: 'experience', component: Experience },
+  { id: 'languages', component: Languages },
+  { id: 'education', component: Education },
+];
 
-window.addEventListener("scroll", function () {
-    const nav = document.querySelector("nav");
-    const heigth = 100;
-    if (nav) {
-        nav.classList.toggle("scrolling", window.scrollY >= heigth);
-        if (window.scrollY >= heigth) {
-            nav.style.backgroundColor = "black";
-        } else {
-            nav.style.backgroundColor = "transparent";
-        }
-    }
-});
-
-window.onscroll = function () {
-    scrollFunction();
+const Main: FC = () => {
+  return (
+    <MainContainer
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      {sections.map((section) => {
+        const Component = section.component;
+        return (
+          <Section
+            key={section.id}
+            id={section.id}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <Suspense fallback={<LoadingSpinner />}>
+              <Component />
+            </Suspense>
+          </Section>
+        );
+      })}
+      <ScrollToTopButton />
+    </MainContainer>
+  );
 };
 
-const Main = () => {
-    return (
-        <main>{sectionsPage.map(({ id, component }) => <section id={id}>{createElement(component)}</section>)}
-            <span>
-                <button onClick={topFunction} id="myBtn" title="Go to top"></button>
-            </span>
-        </main>
-    )
-}
-
-export default Main
-
+export default Main;

@@ -1,33 +1,64 @@
-import educationHistory from '../../../configurations/education.json';
-import './education.css';
+import { FC, useMemo } from 'react';
+import educationHistory from '../../../data/education.json';
+import type { EducationConfig } from '@/types';
+import { SectionTitle } from '../shared/SectionTitle';
+import {
+  EducationContainer,
+  Timeline,
+  EducationCard,
+  DateAndLocation,
+  Details,
+} from './Education.styles';
 
-const Education = () => {
-    return (
-        <>
-            <div className="edu-title">
-                <h1 className="titles">education</h1>
-            </div>
-            <div className="edu-form">
-                {educationHistory.educations.map(education => {
-                    const { id, title, institute, start, end, place } = education;
-                    return (<div className="edu-details" id={id}>
-                        <div className="edu-details-left">
-                            <h5>{`${start.month} ${start.year} - ${end.month} ${end.year}`}</h5>
-                            <h6>{`${place.province} , ${place.country}`}</h6>
-                        </div>
-                        <div className="edu-details-right">
-                            <h4>{title}</h4>
-                            <a
-                                href={institute.href}
-                                target="_blank" rel="noreferrer"
-                            ><h5>{institute.name}</h5></a
-                            >
-                        </div>
-                    </div>)
-                })}
-            </div>
-        </>
-    )
-}
+const Education: FC = () => {
+  const { educations } = educationHistory as EducationConfig;
 
-export default Education
+  const educationItems = useMemo(
+    () =>
+      educations.map((education, index) => {
+        const { id, title, institute, start, end, place } = education;
+        const dateRange = `${start.month} ${start.year} - ${end.month} ${end.year}`;
+        const location = `${place.province}, ${place.country}`;
+
+        return (
+          <EducationCard
+            key={id}
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+          >
+            <DateAndLocation>
+              <h5>{dateRange}</h5>
+              <h6>{location}</h6>
+            </DateAndLocation>
+            <Details>
+              <h4>{title}</h4>
+              <h5>
+                <a href={institute.href} target="_blank" rel="noreferrer">
+                  {institute.name}
+                </a>
+              </h5>
+            </Details>
+          </EducationCard>
+        );
+      }),
+    [educations]
+  );
+
+  return (
+    <EducationContainer>
+      <SectionTitle
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        education
+      </SectionTitle>
+      <Timeline>{educationItems}</Timeline>
+    </EducationContainer>
+  );
+};
+
+export default Education;

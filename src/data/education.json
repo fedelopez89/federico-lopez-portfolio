@@ -1,0 +1,68 @@
+{
+  "sectionId": "education",
+  "educations": [
+    {
+      "id": "fullstack",
+      "title": "fullstack node.js",
+      "institute": {
+        "name": "education it",
+        "href": "https://www.linkedin.com/school/educacionit/"
+      },
+      "start": {
+        "month": "January",
+        "year": "2020"
+      },
+      "end": {
+        "month": "December",
+        "year": "2021"
+      },
+      "place": {
+        "province": "Buenos Aires",
+        "country": "Argentina"
+      },
+      "notes": "Comprehensive full-stack development program covering modern JavaScript, React, Node.js, databases, REST APIs, and deployment strategies."
+    },
+    {
+      "id": "engineering",
+      "title": "computer systems engineering",
+      "institute": {
+        "name": "national university of technology",
+        "href": "https://www.linkedin.com/school/universidad-tecnologica-nacional/"
+      },
+      "start": {
+        "month": "March",
+        "year": "2008"
+      },
+      "end": {
+        "month": "December",
+        "year": "2013"
+      },
+      "place": {
+        "province": "Buenos Aires",
+        "country": "Argentina"
+      },
+      "notes": "Foundation in computer science, algorithms, data structures, and software engineering principles."
+    },
+    {
+      "id": "business",
+      "title": "bachelor's degree in business administration",
+      "institute": {
+        "name": "institute euskal-echea",
+        "href": "https://euskalechea.com.ar/"
+      },
+      "start": {
+        "month": "March",
+        "year": "2004"
+      },
+      "end": {
+        "month": "December",
+        "year": "2006"
+      },
+      "place": {
+        "province": "Buenos Aires",
+        "country": "Argentina"
+      },
+      "notes": "Business administration fundamentals including management, finance, and organizational behavior."
+    }
+  ]
+}
