@@ -44,9 +44,18 @@ const Experience: FC = () => {
           download="Resume_LOPEZ_Federico.pdf"
           target="_blank"
           rel="noreferrer"
+          aria-label="Download Resume PDF"
         >
-          <i className="fa fa-download" aria-hidden="true" />
-          RESUME
+          <svg
+            width="20"
+            height="20"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+          </svg>
+          DOWNLOAD RESUME
         </DownloadButton>
       </Header>
       <Timeline>

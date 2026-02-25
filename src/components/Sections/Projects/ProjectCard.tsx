@@ -161,7 +161,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
     >
       <ImageContainer>
         {project.imageUrl ? (
-          <ProjectImage src={project.imageUrl} alt={project.title} />
+          <ProjectImage
+            src={project.imageUrl}
+            alt={project.title}
+            loading={index < 2 ? 'eager' : 'lazy'}
+            fetchPriority={index === 0 ? 'high' : 'auto'}
+            decoding="async"
+          />
         ) : (
           <ImagePlaceholder>
             <svg

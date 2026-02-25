@@ -11,7 +11,8 @@ export interface Project {
   category: 'freelance' | 'personal' | 'professional';
 }
 
-const getImageUrl = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+const getImageUrl = (path: string) =>
+  `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
 
 export const projects: Project[] = [
   {
@@ -21,7 +22,7 @@ export const projects: Project[] = [
       'Production-ready Gmail replica built for AI evaluation platform. Featured in The New York Times for innovative AI testing approach. Pixel-perfect recreation implementing email management, compose functionality, labels, folders, and advanced search. Built with Next.js and Material UI for optimal performance and accessibility.',
     technologies: ['React', 'TypeScript', 'Next.js', 'Material UI', 'Redux'],
     demoUrl: 'https://real-gomail.vercel.app/',
-    imageUrl: getImageUrl('/images/projects/gmail-clone.webp'),
+    imageUrl: getImageUrl('/images/projects/gmail-clone-opt.webp'),
     featured: true,
     featuredLabel: 'Featured in The New York Times',
     category: 'freelance',
@@ -33,7 +34,7 @@ export const projects: Project[] = [
       'High-fidelity food delivery platform clone featuring restaurant browsing, menu exploration, cart management, and checkout flow. Built with Next.js and Material UI to replicate DoorDash user experience with responsive design and smooth interactions.',
     technologies: ['React', 'TypeScript', 'Next.js', 'Material UI', 'Redux'],
     demoUrl: 'https://real-dashdish.vercel.app/',
-    imageUrl: getImageUrl('/images/projects/dashdish-clone.jpg'),
+    imageUrl: getImageUrl('/images/projects/dashdish-clone-opt.webp'),
     featured: true,
     featuredLabel: 'Featured in The New York Times',
     category: 'freelance',
@@ -45,7 +46,7 @@ export const projects: Project[] = [
       'Comprehensive ride-sharing platform clone with real-time map integration, route calculation, pricing estimates, and driver matching simulation. Featured in The New York Times as part of REAL Evals AI testing platform. Built with Next.js and Material UI.',
     technologies: ['React', 'TypeScript', 'Next.js', 'Material UI', 'Redux'],
     demoUrl: 'https://real-udriver.vercel.app/',
-    imageUrl: getImageUrl('/images/projects/uber-clone.jpg'),
+    imageUrl: getImageUrl('/images/projects/uber-clone-opt.webp'),
     featured: true,
     featuredLabel: 'Featured in The New York Times',
     category: 'freelance',
@@ -57,7 +58,7 @@ export const projects: Project[] = [
       'Full-featured airline booking platform clone replicating United Airlines flight search, seat selection, booking flow, and trip management. Implements complex multi-step forms, real-time availability, and responsive design with Next.js and Material UI.',
     technologies: ['React', 'TypeScript', 'Next.js', 'Material UI', 'Redux'],
     demoUrl: 'https://real-flyunified.vercel.app/',
-    imageUrl: getImageUrl('/images/projects/united-clone.jpg'),
+    imageUrl: getImageUrl('/images/projects/united-clone-opt.webp'),
     featured: true,
     featuredLabel: 'Featured in The New York Times',
     category: 'freelance',
@@ -78,7 +79,7 @@ export const projects: Project[] = [
       'Chakra UI',
     ],
     demoUrl: 'https://nfl.playrcx.com/',
-    imageUrl: getImageUrl('/images/projects/nfl-finder.png'),
+    imageUrl: getImageUrl('/images/projects/nfl-finder-opt.webp'),
     category: 'professional',
   },
   {
@@ -96,7 +97,7 @@ export const projects: Project[] = [
       'Chakra UI',
     ],
     demoUrl: 'https://jrnba.playrcx.com/',
-    imageUrl: getImageUrl('/images/projects/nba-finder.png'),
+    imageUrl: getImageUrl('/images/projects/nba-finder-opt.webp'),
     category: 'professional',
   },
   {
@@ -114,7 +115,7 @@ export const projects: Project[] = [
       'Chakra UI',
     ],
     demoUrl: 'https://street.playrcx.com/',
-    imageUrl: getImageUrl('/images/projects/nhl-finder.png'),
+    imageUrl: getImageUrl('/images/projects/nhl-finder-opt.webp'),
     category: 'professional',
   },
   {
@@ -132,7 +133,7 @@ export const projects: Project[] = [
       'Chakra UI',
     ],
     demoUrl: 'https://go.playrcx.com/',
-    imageUrl: getImageUrl('/images/projects/mls-finder.png'),
+    imageUrl: getImageUrl('/images/projects/mls-finder-opt.webp'),
     category: 'professional',
   },
   {
@@ -152,7 +153,7 @@ export const projects: Project[] = [
       'CI/CD',
     ],
     demoUrl: 'https://app.factupro.es/login?from=%2F',
-    imageUrl: getImageUrl('/images/projects/factupro.png'),
+    imageUrl: getImageUrl('/images/projects/factupro-opt.webp'),
     category: 'freelance',
   },
 ];

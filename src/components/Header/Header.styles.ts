@@ -6,7 +6,7 @@ export const HeaderContainer = styled.header`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: url('./images/portfolio_bkg.png') no-repeat center center;
+  background: url('./images/portfolio_bkg.webp') no-repeat center center;
   background-size: cover;
   background-attachment: fixed;
 

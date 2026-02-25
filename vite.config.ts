@@ -34,8 +34,10 @@ export default defineConfig({
 
   build: {
     outDir: 'dist',
-    sourcemap: true,
+    sourcemap: false, // Disable sourcemaps in production for smaller bundle
     minify: 'esbuild',
+    target: 'es2015',
+    cssMinify: true,
     rollupOptions: {
       output: {
         manualChunks: {
@@ -57,5 +59,6 @@ export default defineConfig({
         entryFileNames: 'assets/js/[name]-[hash].js',
       },
     },
+    chunkSizeWarningLimit: 600,
   },
 });

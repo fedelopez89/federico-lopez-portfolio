@@ -21,9 +21,10 @@ _Showcasing 16 years of IT experience with 7+ years specializing in modern front
 ## ✨ Highlights
 
 🎯 **[Featured in The New York Times](https://www.linkedin.com/posts/svanweelden_silicon-valley-builds-amazon-and-gmail-copycats-activity-7404333944894398465-CIyW/)** - Recognized for exceptional frontend engineering contributions  
-⚡ **Lightning Fast** - FCP: 320ms, TTFB: 20ms (Web Vitals Core)  
+⚡ **Lightning Fast** - Lighthouse 100/100 Desktop, 97/100 Mobile  
+🖼️ **Optimized Images** - WebP format with 98% size reduction  
 🎨 **Modern Architecture** - React 19, TypeScript 5.9, Component-Driven Design  
-♿ **Accessible** - WCAG 2.1 compliant with semantic HTML  
+♿ **Accessible** - WCAG 2.1 compliant with semantic HTML & SVG icons  
 📱 **Responsive** - Mobile-first, works seamlessly across all devices  
 🌗 **Theme Support** - Smooth dark/light mode with system preference detection
 
@@ -87,16 +88,22 @@ Complete billing system for SMBs with payment tracking and automation.
 
 ```
 Lighthouse Score (Desktop):
-  Performance: ████████████████████ 98/100
-  Accessibility: ██████████████████ 100/100
-  Best Practices: ████████████████ 100/100
-  SEO: ████████████████████████ 100/100
+  Performance: ████████████████████ 100/100 🏆
+  Accessibility: ███████████████████ 99/100 ✅
+  Best Practices: ███████████████ 96/100 ✅
+  SEO: ████████████████████████ 100/100 ✅
+
+Lighthouse Score (Mobile):
+  Performance: ███████████████████ 97/100 🚀
+  Accessibility: ███████████████████ 99/100 ✅
+  Best Practices: ███████████████ 96/100 ✅
+  SEO: ████████████████████████ 100/100 ✅
 
 Core Web Vitals:
-  FCP (First Contentful Paint): 320ms ✅
-  LCP (Largest Contentful Paint): <1.5s ✅
-  CLS (Cumulative Layout Shift): 0.05 ✅
-  TTFB (Time to First Byte): 20ms ✅
+  FCP (First Contentful Paint): 1.9s ✅
+  LCP (Largest Contentful Paint): 3.6s ✅
+  Total Bundle Size: ~420KB (gzipped) ✅
+  Images: 220KB (WebP optimized) ✅
 ```
 
 ---
@@ -214,10 +221,12 @@ resume/
 ### ⚡ **Performance Optimizations**
 
 - **Code Splitting**: React.lazy() for route-based splitting
-- **Lazy Loading**: IntersectionObserver for images
-- **Bundle Optimization**: Manual chunks for vendor libraries
+- **Lazy Loading**: Smart image loading with fetchPriority
+- **Bundle Optimization**: Manual chunks for vendor libraries (React, Framer Motion, Styled Components)
 - **Tree Shaking**: Dead code elimination with Vite
-- **Asset Optimization**: Compressed images and fonts preloading
+- **Image Optimization**: WebP format with 98% size reduction (9MB → 220KB)
+- **SVG Icons**: Inline SVG replacing Font Awesome CDN (eliminates blocking request)
+- **Build Optimization**: Minified JS/CSS, disabled sourcemaps in production
 
 ### 🎬 **Smooth Animations**
 
