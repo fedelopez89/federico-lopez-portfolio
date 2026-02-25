@@ -72,6 +72,22 @@
       fetchpriority="high"
     />
 
+    <!-- Google Analytics 4 -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-WJEC2XPHNB"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-WJEC2XPHNB', {
+        page_path: window.location.pathname,
+      });
+    </script>
+
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
       {
