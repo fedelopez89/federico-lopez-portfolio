@@ -1,4 +1,4 @@
-import{j as i,m as o}from"./animation-vendor-DrnF3h2A.js";import{l as r}from"./styled-vendor-DTa8fuMn.js";import{a as n,S as t,b as s}from"./SectionTitle-CSMheUGK.js";const c=[{name:"Spanish",proficiency:"Native",level:100},{name:"English",proficiency:"Advanced",level:85}],l=r.section`
+import{j as i,m as o}from"./animation-vendor-A5lK5uU-.js";import{l as r}from"./styled-vendor-FewTp2Xz.js";import{a as n,S as t,b as s}from"./SectionTitle-BFmgpo8B.js";const c=[{name:"Spanish",proficiency:"Native",level:100},{name:"English",proficiency:"Advanced",level:85}],l=r.section`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 ${({theme:e})=>e.spacing.lg};
@@ -76,4 +76,3 @@ import{j as i,m as o}from"./animation-vendor-DrnF3h2A.js";import{l as r}from"./s
   color: ${({theme:e})=>e.colors.textSecondary};
   font-weight: 500;
 `,b=()=>i.jsxs(l,{id:"languages","aria-label":"Languages",children:[i.jsxs(n,{children:[i.jsx(t,{initial:{opacity:0,y:-20},whileInView:{opacity:1,y:0},viewport:{once:!0},transition:{duration:.5},children:"languages"}),i.jsx(s,{initial:{opacity:0,y:-20},whileInView:{opacity:1,y:0},viewport:{once:!0},transition:{duration:.5,delay:.1},children:"Professional communication across multiple languages"})]}),i.jsx(d,{children:c.map((e,a)=>i.jsxs(p,{initial:{opacity:0,y:20},whileInView:{opacity:1,y:0},viewport:{once:!0},transition:{duration:.4,delay:a*.1},children:[i.jsxs(m,{children:[i.jsx(g,{children:e.name}),i.jsx(x,{$level:e.level,children:e.proficiency})]}),i.jsx(u,{role:"progressbar","aria-valuenow":e.level,"aria-valuemin":0,"aria-valuemax":100,"aria-label":`${e.name} proficiency`,children:i.jsx(h,{$level:e.level,initial:{width:0},whileInView:{width:`${e.level}%`},viewport:{once:!0},transition:{duration:1,delay:a*.1+.3,ease:"easeOut"}})}),i.jsxs(y,{children:[e.level,"% Proficiency"]})]},e.name))})]});export{b as default};
-//# sourceMappingURL=Languages-BKV7GbEY.js.map

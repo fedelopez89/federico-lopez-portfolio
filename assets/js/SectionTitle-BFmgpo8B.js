@@ -1,4 +1,4 @@
-import{l as o}from"./styled-vendor-DTa8fuMn.js";import{m as e}from"./animation-vendor-DrnF3h2A.js";const n=o(e.h2)`
+import{l as o}from"./styled-vendor-FewTp2Xz.js";import{m as e}from"./animation-vendor-A5lK5uU-.js";const n=o(e.h2)`
   font-size: ${({theme:t})=>t.typography.fontSize["4xl"]};
   font-weight: ${({theme:t})=>t.typography.fontWeight.bold};
   color: ${({theme:t})=>t.colors.text};
@@ -29,4 +29,3 @@ import{l as o}from"./styled-vendor-DTa8fuMn.js";import{m as e}from"./animation-v
     font-size: ${({theme:t})=>t.typography.fontSize.base};
   }
 `;export{n as S,r as a,p as b};
-//# sourceMappingURL=SectionTitle-CSMheUGK.js.map

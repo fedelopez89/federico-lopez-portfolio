@@ -1,4 +1,4 @@
-import{m as c,j as e}from"./animation-vendor-DrnF3h2A.js";import{e as m,a as g}from"./dateCalculations-psY9vaM7.js";import{S as h}from"./SectionTitle-CSMheUGK.js";import{l as i}from"./styled-vendor-DTa8fuMn.js";const x=i.div`
+import{m as l,j as e}from"./animation-vendor-A5lK5uU-.js";import{e as m,a as g}from"./dateCalculations-psY9vaM7.js";import{S as h}from"./SectionTitle-BFmgpo8B.js";import{l as i}from"./styled-vendor-FewTp2Xz.js";const x=i.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 ${({theme:o})=>o.spacing.lg};
@@ -6,7 +6,7 @@ import{m as c,j as e}from"./animation-vendor-DrnF3h2A.js";import{e as m,a as g}f
   @media (max-width: ${({theme:o})=>o.breakpoints.md}) {
     padding: 0 ${({theme:o})=>o.spacing.md};
   }
-`,f=i.div`
+`,$=i.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,11 +15,11 @@ import{m as c,j as e}from"./animation-vendor-DrnF3h2A.js";import{e as m,a as g}f
   @media (max-width: ${({theme:o})=>o.breakpoints.sm}) {
     margin-bottom: ${({theme:o})=>o.spacing["2xl"]};
   }
-`;i(c.h1)`
+`;i(l.h1)`
   text-transform: uppercase;
   color: ${({theme:o})=>o.colors.text};
   margin: 0;
-`;const $=i.a`
+`;const f=i.a`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -69,7 +69,7 @@ import{m as c,j as e}from"./animation-vendor-DrnF3h2A.js";import{e as m,a as g}f
   @media (max-width: ${({theme:o})=>o.breakpoints.md}) {
     padding-left: ${({theme:o})=>o.spacing.lg};
   }
-`,y=i(c.div)`
+`,y=i(l.div)`
   position: relative;
   margin-bottom: ${({theme:o})=>o.spacing["2xl"]};
   padding-left: ${({theme:o})=>o.spacing.xl};
@@ -152,5 +152,4 @@ import{m as c,j as e}from"./animation-vendor-DrnF3h2A.js";import{e as m,a as g}f
     line-height: ${({theme:o})=>o.typography.lineHeight.relaxed};
     margin: 0;
   }
-`,S=()=>{const{experiences:o}=m,l=r=>{const{start:t,end:a}=r,s=a.active?"Present":`${a.month} ${a.year}`,n=g(r);return`${t.month} ${t.year} - ${s} (${n})`},d=r=>{const{place:t}=r;return t.remote?"Remote":`${t.province}, ${t.country}`};return e.jsxs(x,{children:[e.jsx(h,{initial:{opacity:0,y:-20},whileInView:{opacity:1,y:0},viewport:{once:!0},transition:{duration:.6},children:"experience"}),e.jsx(f,{children:e.jsxs($,{href:"./pdf/Resume_LOPEZ_Federico.pdf",download:"Resume_LOPEZ_Federico.pdf",target:"_blank",rel:"noreferrer",children:[e.jsx("i",{className:"fa fa-download","aria-hidden":"true"}),"RESUME"]})}),e.jsx(u,{children:o.map((r,t)=>{const{id:a,rol:s,company:n,notes:p}=r;return e.jsxs(y,{initial:{opacity:0,x:-50},whileInView:{opacity:1,x:0},viewport:{once:!0},transition:{duration:.6,delay:t*.1},children:[e.jsxs(b,{children:[e.jsx("h5",{children:l(r)}),e.jsx("h6",{children:d(r)})]}),e.jsxs(w,{children:[e.jsx("h4",{children:s}),e.jsx("h5",{children:n.href?e.jsx("a",{href:n.href,target:"_blank",rel:"noreferrer",children:n.name}):n.name}),e.jsx("p",{children:p})]})]},a)})})]})};export{S as default};
-//# sourceMappingURL=Experience-Bh00Q8bZ.js.map
+`,D=()=>{const{experiences:o}=m,c=r=>{const{start:t,end:a}=r,s=a.active?"Present":`${a.month} ${a.year}`,n=g(r);return`${t.month} ${t.year} - ${s} (${n})`},d=r=>{const{place:t}=r;return t.remote?"Remote":`${t.province}, ${t.country}`};return e.jsxs(x,{children:[e.jsx(h,{initial:{opacity:0,y:-20},whileInView:{opacity:1,y:0},viewport:{once:!0},transition:{duration:.6},children:"experience"}),e.jsx($,{children:e.jsxs(f,{href:"./pdf/Resume_LOPEZ_Federico.pdf",download:"Resume_LOPEZ_Federico.pdf",target:"_blank",rel:"noreferrer","aria-label":"Download Resume PDF",children:[e.jsx("svg",{width:"20",height:"20",fill:"currentColor",viewBox:"0 0 24 24","aria-hidden":"true",children:e.jsx("path",{d:"M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"})}),"DOWNLOAD RESUME"]})}),e.jsx(u,{children:o.map((r,t)=>{const{id:a,rol:s,company:n,notes:p}=r;return e.jsxs(y,{initial:{opacity:0,x:-50},whileInView:{opacity:1,x:0},viewport:{once:!0},transition:{duration:.6,delay:t*.1},children:[e.jsxs(b,{children:[e.jsx("h5",{children:c(r)}),e.jsx("h6",{children:d(r)})]}),e.jsxs(w,{children:[e.jsx("h4",{children:s}),e.jsx("h5",{children:n.href?e.jsx("a",{href:n.href,target:"_blank",rel:"noreferrer",children:n.name}):n.name}),e.jsx("p",{children:p})]})]},a)})})]})};export{D as default};
