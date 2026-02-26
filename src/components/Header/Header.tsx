@@ -1,5 +1,7 @@
 import { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavbarScroll, useScrollSpy } from '@/hooks';
+import { LanguageToggle } from '@/components/LanguageToggle';
 import {
   HeaderContainer,
   Navbar,
@@ -22,11 +24,11 @@ import {
 } from './Header.styles';
 
 const navItems = [
-  { href: '#aboutme', label: 'ABOUT ME', id: 'aboutme' },
-  { href: '#projects', label: 'PROJECTS', id: 'projects' },
-  { href: '#experience', label: 'EXPERIENCE', id: 'experience' },
-  { href: '#languages', label: 'LANGUAGES', id: 'languages' },
-  { href: '#education', label: 'EDUCATION', id: 'education' },
+  { href: '#aboutme', labelKey: 'header.about', id: 'aboutme' },
+  { href: '#projects', labelKey: 'header.projects', id: 'projects' },
+  { href: '#experience', labelKey: 'header.experience', id: 'experience' },
+  { href: '#languages', labelKey: 'header.languages', id: 'languages' },
+  { href: '#education', labelKey: 'header.education', id: 'education' },
 ];
 
 const socialLinks = [
@@ -51,6 +53,7 @@ const socialLinks = [
 ];
 
 const Header: FC = () => {
+  const { t } = useTranslation();
   const { isScrolled } = useNavbarScroll(100);
   const activeSection = useScrollSpy({
     sectionIds: ['home', ...navItems.map((item) => item.id)],
@@ -83,7 +86,7 @@ const Header: FC = () => {
             $isScrolled={isScrolled}
             whileTap={{ scale: 0.95 }}
           >
-            HOME
+            {t('header.home')}
           </Logo>
 
           <MobileMenuButton
@@ -116,14 +119,23 @@ const Header: FC = () => {
                 <NavLink
                   href={item.href}
                   role="menuitem"
-                  aria-label={item.label}
+                  aria-label={t(item.labelKey)}
                   $isScrolled={isScrolled}
                   $isActive={activeSection === item.id}
                 >
-                  {item.label}
+                  {t(item.labelKey)}
                 </NavLink>
               </NavItem>
             ))}
+            <NavItem
+              as="li"
+              role="none"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 * navItems.length }}
+            >
+              <LanguageToggle isScrolled={isScrolled} />
+            </NavItem>
           </NavMenu>
         </NavContainer>
       </Navbar>
@@ -161,9 +173,18 @@ const Header: FC = () => {
             onClick={handleMobileLinkClick}
             $isActive={activeSection === item.id}
           >
-            {item.label}
+            {t(item.labelKey)}
           </MobileNavLink>
         ))}
+
+        <div
+          style={{
+            padding: '1rem',
+            borderTop: '1px solid rgba(255,255,255,0.1)',
+          }}
+        >
+          <LanguageToggle />
+        </div>
       </MobileMenu>
 
       <HeaderIntro
@@ -176,14 +197,14 @@ const Header: FC = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          Federico López
+          {t('header.name')}
         </Title>
         <Role
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7 }}
         >
-          Senior Frontend Engineer
+          {t('header.role')}
         </Role>
         <SocialLinks
           initial={{ opacity: 0, y: 20 }}

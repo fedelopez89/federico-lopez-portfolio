@@ -1,4 +1,5 @@
 import { FC, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import educationHistory from '../../../data/education.json';
 import type { EducationConfig } from '@/types';
 import { SectionTitle } from '../shared/SectionTitle';
@@ -11,13 +12,16 @@ import {
 } from './Education.styles';
 
 const Education: FC = () => {
+  const { t } = useTranslation();
   const { educations } = educationHistory as EducationConfig;
 
   const educationItems = useMemo(
     () =>
       educations.map((education, index) => {
-        const { id, title, institute, start, end, place } = education;
-        const dateRange = `${start.month} ${start.year} - ${end.month} ${end.year}`;
+        const { id, start, end, place } = education;
+        const startMonth = t(`months.${start.month}`);
+        const endMonth = t(`months.${end.month}`);
+        const dateRange = `${startMonth} ${start.year} - ${endMonth} ${end.year}`;
         const location = `${place.province}, ${place.country}`;
 
         return (
@@ -33,17 +37,21 @@ const Education: FC = () => {
               <h6>{location}</h6>
             </DateAndLocation>
             <Details>
-              <h4>{title}</h4>
+              <h4>{t(`education.${id}.title`)}</h4>
               <h5>
-                <a href={institute.href} target="_blank" rel="noreferrer">
-                  {institute.name}
+                <a
+                  href={education.institute.href}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {t(`education.${id}.institute`)}
                 </a>
               </h5>
             </Details>
           </EducationCard>
         );
       }),
-    [educations]
+    [educations, t]
   );
 
   return (
@@ -54,7 +62,7 @@ const Education: FC = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        education
+        {t('sections.education')}
       </SectionTitle>
       <Timeline>{educationItems}</Timeline>
     </EducationContainer>

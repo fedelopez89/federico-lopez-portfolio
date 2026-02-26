@@ -24,6 +24,7 @@ _Showcasing 16 years of IT experience with 7+ years specializing in modern front
 ⚡ **Lightning Fast** - Lighthouse 100/100 Desktop, 97/100 Mobile  
 🖼️ **Optimized Images** - WebP format with 98% size reduction  
 🎨 **Modern Architecture** - React 19, TypeScript 5.9, Component-Driven Design  
+🌍 **Multilingual** - English/Spanish i18n with automatic browser detection  
 ♿ **Accessible** - WCAG 2.1 compliant with semantic HTML & SVG icons  
 📱 **Responsive** - Mobile-first, works seamlessly across all devices  
 🌗 **Theme Support** - Smooth dark/light mode with system preference detection
@@ -42,6 +43,11 @@ _Showcasing 16 years of IT experience with 7+ years specializing in modern front
 
 ![Styled Components](https://img.shields.io/badge/Styled_Components-6.3.9-DB7093?logo=styled-components&logoColor=white)
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.34-0055FF?logo=framer&logoColor=white)
+
+### Internationalization
+
+![react-i18next](https://img.shields.io/badge/react--i18next-15.x-26A69A?logo=i18next&logoColor=white)
+![i18next](https://img.shields.io/badge/i18next-24.x-26A69A?logo=i18next&logoColor=white)
 
 ### Tools & Optimization
 
@@ -160,51 +166,74 @@ npm run preview
 ```
 resume/
 ├── 📁 public/              # Static assets
-│   ├── images/             # Image assets
+│   ├── images/
+│   │   └── projects/       # Project images (WebP optimized)
 │   └── pdf/                # Resume PDF
 ├── 📁 src/
 │   ├── 📁 components/      # React components
-│   │   ├── Header/         # Navigation & hero
+│   │   ├── Header/         # Navigation & hero section
 │   │   ├── Footer/         # Footer component
 │   │   ├── Main/           # Main layout wrapper
+│   │   ├── LanguageToggle/ # Language switcher (EN/ES)
+│   │   ├── ThemeToggle/    # Dark/light mode toggle
 │   │   ├── Sections/       # Content sections
-│   │   │   ├── AboutMe/    # Introduction section
-│   │   │   ├── Skills/     # Skills showcase
-│   │   │   ├── Experience/ # Work history
-│   │   │   └── Education/  # Academic background
+│   │   │   ├── AboutMe/    # Introduction & stats
+│   │   │   ├── Projects/   # Project portfolio grid
+│   │   │   │   └── ProjectCard.tsx
+│   │   │   ├── Experience/ # Work history timeline
+│   │   │   ├── Education/  # Academic background
+│   │   │   │   └── EducationDetail.tsx
+│   │   │   ├── Languages/  # Language proficiency
+│   │   │   └── shared/     # Shared section components
+│   │   │       └── SectionTitle.tsx
 │   │   ├── layout/         # Layout utilities
 │   │   │   └── ScrollToTop/# Scroll-to-top button
 │   │   ├── ui/             # Reusable UI components
-│   │   │   ├── Button.tsx  # Button component
-│   │   │   ├── Card.tsx    # Card component
-│   │   │   ├── Badge.tsx   # Badge component
-│   │   │   ├── Image.tsx   # Lazy-loaded image
-│   │   │   └── ...         # Other UI primitives
-│   │   └── ThemeToggle/    # Dark/light mode toggle
+│   │   │   └── LoadingSpinner.tsx
+│   │   └── index.ts        # Component exports
 │   ├── 📁 context/         # React Context
-│   │   └── ThemeContext.tsx # Theme provider & hook
-│   ├── 📁 data/            # JSON data
-│   │   ├── skills.ts       # Skills data
+│   │   ├── ThemeContext.tsx # Theme provider & hook
+│   │   └── index.ts
+│   ├── 📁 data/            # Data files
+│   │   ├── projects.ts     # Project data
 │   │   ├── experience.json # Work experience
 │   │   ├── education.json  # Education history
-│   │   └── contactme.json  # Contact information
+│   │   └── contact-me.json # Contact information
 │   ├── 📁 hooks/           # Custom React hooks
-│   │   ├── useScrollToTop.ts
-│   │   └── useNavbarScroll.ts
+│   │   ├── useScrollToTop.ts  # Scroll-to-top logic
+│   │   ├── useNavbarScroll.ts # Navbar scroll detection
+│   │   ├── useScrollSpy.ts    # Active section tracking
+│   │   └── index.ts
+│   ├── 📁 i18n/            # Internationalization
+│   │   ├── config.ts       # i18next configuration
+│   │   └── locales/        # Translation files
+│   │       ├── en/
+│   │       │   └── translation.json
+│   │       └── es/
+│   │           └── translation.json
 │   ├── 📁 styles/          # Styling
 │   │   ├── theme.ts        # Theme configuration
 │   │   ├── GlobalStyles.ts # Global CSS
 │   │   └── styled.d.ts     # Styled-components types
 │   ├── 📁 types/           # TypeScript definitions
+│   │   ├── contact.types.ts
+│   │   ├── education.types.ts
+│   │   ├── experience.types.ts
+│   │   └── index.ts
 │   ├── 📁 utils/           # Utility functions
-│   │   └── reportWebVitals.ts # Performance monitoring
+│   │   ├── dateCalculations.ts # Date/time helpers
+│   │   └── reportWebVitals.ts  # Performance monitoring
 │   ├── App.tsx             # Root component
-│   └── main.tsx            # Entry point
+│   ├── main.tsx            # Entry point
+│   └── vite-env.d.ts       # Vite type declarations
 ├── .editorconfig           # Editor configuration
 ├── .prettierrc             # Prettier config
 ├── eslint.config.js        # ESLint configuration
 ├── tsconfig.json           # TypeScript config
+├── tsconfig.node.json      # TypeScript config for Node
 ├── vite.config.ts          # Vite configuration
+├── NAMING_CONVENTIONS.md   # Code style guide
+├── SEO_ACCESSIBILITY.md    # SEO & A11y guidelines
 └── package.json            # Dependencies & scripts
 ```
 
@@ -217,6 +246,15 @@ resume/
 - Custom theme with dark/light mode support
 - Consistent spacing, typography, and color scales
 - Reusable component library with TypeScript interfaces
+- Styled-components for scoped styling with theming
+
+### 🌍 **Internationalization (i18n)**
+
+- Full English/Spanish support with react-i18next
+- Automatic language detection from browser settings
+- Persistent language selection with localStorage
+- Translates all content: navigation, projects, experience, education
+- Clean language toggle UI integrated in navbar
 
 ### ⚡ **Performance Optimizations**
 

@@ -5,7 +5,6 @@ export const FooterContainer = styled(motion.footer)`
   background: ${({ theme }) => theme.colors.background};
   border-top: 1px solid ${({ theme }) => theme.colors.border};
   padding: ${({ theme }) => `${theme.spacing['2xl']} 0`};
-  margin-top: ${({ theme }) => theme.spacing['4xl']};
 `;
 
 export const FooterContent = styled.div`

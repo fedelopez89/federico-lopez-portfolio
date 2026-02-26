@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { projects, technologies } from '../../../data/projects';
@@ -90,6 +91,7 @@ const EmptyState = styled(motion.div)`
 `;
 
 const Projects: React.FC = () => {
+  const { t } = useTranslation();
   const [selectedFilter, setSelectedFilter] = useState<string>('All');
 
   const filteredProjects =
@@ -108,7 +110,7 @@ const Projects: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          projects
+          {t('sections.projects')}
         </SectionTitle>
         <SectionSubtitle
           initial={{ opacity: 0, y: -20 }}
@@ -116,8 +118,7 @@ const Projects: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          A selection of my work, including projects featured in The New York
-          Times
+          {t('projects.subtitle')}
         </SectionSubtitle>
       </SectionHeader>
 
@@ -127,7 +128,7 @@ const Projects: React.FC = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.2 }}
         role="group"
-        aria-label="Filter projects by technology"
+        aria-label={t('projects.filterLabel')}
       >
         {technologies.map((tech) => (
           <FilterButton
@@ -167,8 +168,8 @@ const Projects: React.FC = () => {
               d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-          <h3>No projects found</h3>
-          <p>Try selecting a different technology filter</p>
+          <h3>{t('projects.emptyState.title')}</h3>
+          <p>{t('projects.emptyState.description')}</p>
         </EmptyState>
       )}
     </Section>

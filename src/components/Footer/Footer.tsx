@@ -1,4 +1,5 @@
 import { FC, ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { ContactItem } from '@/types';
 import {
   FooterContainer,
@@ -46,6 +47,7 @@ const contactLinks: ContactItem[] = [
 ];
 
 const Footer: FC = () => {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -62,7 +64,7 @@ const Footer: FC = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          © {currentYear} Federico López. All rights reserved.
+          {t('footer.copyright', { year: currentYear })}
         </Copyright>
         <SocialLinks
           initial={{ opacity: 0, y: 20 }}

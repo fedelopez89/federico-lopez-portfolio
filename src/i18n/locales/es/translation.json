@@ -1,0 +1,167 @@
+{
+  "header": {
+    "home": "INICIO",
+    "about": "SOBRE MÍ",
+    "projects": "PROYECTOS",
+    "experience": "EXPERIENCIA",
+    "languages": "IDIOMAS",
+    "education": "EDUCACIÓN",
+    "name": "Federico López",
+    "role": "Ingeniero Frontend Senior"
+  },
+  "sections": {
+    "aboutme": "sobre mí",
+    "projects": "proyectos",
+    "experience": "experiencia",
+    "languages": "idiomas",
+    "education": "educación"
+  },
+  "buttons": {
+    "downloadResume": "DESCARGAR CV",
+    "liveDemo": "Ver Demo",
+    "code": "Código",
+    "viewAll": "Ver Todos los Proyectos",
+    "showLess": "Mostrar Menos"
+  },
+  "footer": {
+    "copyright": "© {{year}} Federico López. Todos los derechos reservados."
+  },
+  "aboutMe": {
+    "intro": "¡Hola! Soy <strong>Federico López</strong>, Ingeniero Frontend Senior especializado en construir aplicaciones web de <strong>alto rendimiento</strong>, <strong>escalables</strong> y <strong>centradas en el usuario</strong> con <strong>React</strong>, <strong>TypeScript</strong> y <strong>Next.js</strong>.",
+    "experience": "Con <strong>{{years}} años de experiencia en TI</strong> y <strong>más de 7 años enfocado en desarrollo frontend moderno</strong>, he entregado soluciones impactantes para compañías globales en bienestar, deportes, fintech y salud, alcanzando millones de usuarios en todo el mundo.",
+    "passion": "Apasionado por arquitectura limpia, componentes reutilizables y resolver desafíos UX complejos. Prospero en entornos remotos Agile, colaborando con equipos multifuncionales para impulsar la excelencia del producto.",
+    "stats": {
+      "yearsExperience": "Años de Experiencia",
+      "enterpriseClients": "Clientes Empresariales",
+      "remote": "Remoto"
+    },
+    "featured": "Destacado en <link>The New York Times</link>"
+  },
+  "projects": {
+    "subtitle": "Una selección de mi trabajo, incluyendo proyectos destacados en The New York Times",
+    "filterAll": "Todos",
+    "nytLabel": "Destacado en The New York Times",
+    "realevalsgmail": {
+      "title": "Clon de Gmail - REAL Evals",
+      "description": "Réplica de Gmail lista para producción construida para plataforma de evaluación de IA. Destacado en The New York Times por enfoque innovador en pruebas de IA. Recreación pixel-perfect implementando gestión de correos, funcionalidad de redacción, etiquetas, carpetas y búsqueda avanzada. Construido con Next.js y Material UI para rendimiento y accesibilidad óptimos."
+    },
+    "realevalsdash dish": {
+      "title": "Clon de DoorDash - REAL Evals",
+      "description": "Clon de alta fidelidad de plataforma de entrega de comida con navegación de restaurantes, exploración de menús, gestión de carrito y flujo de compra. Construido con Next.js y Material UI para replicar la experiencia de usuario de DoorDash con diseño responsive e interacciones fluidas."
+    },
+    "realevalsuber": {
+      "title": "Clon de Uber - REAL Evals",
+      "description": "Clon integral de plataforma de viajes compartidos con integración de mapas en tiempo real, cálculo de rutas, estimaciones de precios y simulación de emparejamiento de conductores. Destacado en The New York Times como parte de la plataforma de pruebas de IA REAL Evals. Construido con Next.js y Material UI."
+    },
+    "realevals united": {
+      "title": "Clon de United Airlines - REAL Evals",
+      "description": "Clon completo de plataforma de reservas de aerolínea replicando búsqueda de vuelos de United Airlines, selección de asientos, flujo de reserva y gestión de viajes. Implementa formularios multi-paso complejos, disponibilidad en tiempo real y diseño responsive con Next.js y Material UI."
+    },
+    "nflleaguefinder": {
+      "title": "Buscador de Ligas NFL - RCX Sports",
+      "description": "Plataforma avanzada de búsqueda y descubrimiento para ligas de fantasía NFL. Incluye filtrado completo, datos de ligas en tiempo real, plantillas de equipos, estadísticas de jugadores y explorador de configuraciones de liga. Construido para la plataforma RCX Sports para mejorar la experiencia de descubrimiento de ligas."
+    },
+    "nbaleaguefinder": {
+      "title": "Buscador de Ligas NBA - RCX Sports",
+      "description": "Herramienta de búsqueda y descubrimiento para ligas de fantasía NBA con capacidades avanzadas de filtrado. Muestra información de ligas, detalles de equipos, plantillas de jugadores y estadísticas en tiempo real. Optimizado para rendimiento con miles de ligas."
+    },
+    "nhlleaguefinder": {
+      "title": "Buscador de Ligas NHL - RCX Sports",
+      "description": "Navegador integral de ligas de fantasía NHL con filtrado por tipo de liga, tamaño y configuraciones. Incluye análisis de equipos, estadísticas de jugadores y clasificaciones de liga. Construido con diseño responsive para experiencia fluida en móvil y escritorio."
+    },
+    "mlsleaguefinder": {
+      "title": "Buscador de Ligas MLS - RCX Sports",
+      "description": "Plataforma de descubrimiento de ligas de fantasía de fútbol para ligas MLS. Permite a los usuarios buscar, filtrar y explorar ligas con plantillas detalladas de equipos, estadísticas de jugadores y configuraciones de liga. Implementa actualizaciones de datos en tiempo real y navegación intuitiva."
+    },
+    "factupro": {
+      "title": "FactuPro - Gestión de Facturas",
+      "description": "Sistema completo de gestión de facturación y cobros para PYMEs. Implementa generación de facturas, seguimiento de pagos, gestión de clientes y recordatorios automatizados con diseño responsive y cumplimiento de accesibilidad."
+    }
+  },
+  "experience": {
+    "frontendBonzzu": {
+      "role": "ingeniero frontend senior",
+      "company": "bonzzu",
+      "notes": "Entregando aplicaciones escalables en React/Next.js para Delos Company y RCX Sports. Diseñé sistemas de componentes reutilizables con Material UI, Chakra UI y Shadcn UI. Lideré optimizaciones de rendimiento mediante SSR, división de código y mejoras de eficiencia."
+    },
+    "fullstackFreelance": {
+      "role": "desarrollador web frontend",
+      "company": "Freelancer",
+      "notes": "Entregué soluciones de alto impacto para clientes internacionales incluyendo Vrio, Wpromote, REAL Evals (destacado por The New York Times) y FactuPro. Especializado en SSR, optimización de rendimiento y arquitecturas escalables."
+    },
+    "fullstackNisum": {
+      "role": "ingeniero full stack",
+      "company": "nisum (science37)",
+      "notes": "Entregué y mantuve interfaces React/Redux para la plataforma de investigación clínica de Science37 usando JavaScript y TypeScript. Desarrollé componentes UI reutilizables con Storybook y colaboré con equipos distribuidos en múltiples zonas horarias en entornos Agile remotos."
+    },
+    "mainframeICBC": {
+      "role": "desarrollador senior mainframe cobol",
+      "company": "ICBC (Banco Industrial y Comercial de China)",
+      "notes": "Lideré iniciativas Anti-Lavado de Dinero incluyendo análisis de impacto y estimación de esfuerzos. Desarrollé y mantuve aplicaciones COBOL en entornos batch y online (CICS) con DB2, mensajería MQ y archivos VSAM/QSAM. Gestioné incidentes de producción asegurando estabilidad del sistema bajo SLAs estrictos."
+    },
+    "cobolDeveloper": {
+      "role": "desarrollador cobol",
+      "company": "isban / BBVA / accenture",
+      "notes": "Desarrollé componentes COBOL para sistemas financieros y batch de alto volumen en múltiples instituciones bancarias. Realicé análisis de requisitos, mejoras de sistema y diseño técnico. Utilicé DB2, MQ, JCL y CICS para procesamiento de datos empresariales en entornos de misión crítica."
+    },
+    "frontendConstellation": {
+      "role": "desarrollador frontend",
+      "company": "Constellation Software Inc.",
+      "notes": "Construí aplicaciones web para clientes empresariales usando React y TypeScript. Colaboré con equipos multifuncionales para entregar funcionalidades de alta calidad a tiempo."
+    },
+    "softwareQuintica": {
+      "role": "desarrollador de software",
+      "company": "Quintica Software Solutions",
+      "notes": "Desarrollé aplicaciones web full-stack usando frameworks JavaScript modernos. Participé en todas las fases del ciclo de vida del desarrollo de software."
+    }
+  },
+  "education": {
+    "fullstack": {
+      "title": "fullstack node.js",
+      "institute": "education it"
+    },
+    "engineering": {
+      "title": "ingeniería en sistemas informáticos",
+      "institute": "universidad tecnológica nacional"
+    },
+    "business": {
+      "title": "licenciatura en administración de empresas",
+      "institute": "instituto euskal-echea"
+    }
+  },
+  "languages": {
+    "subtitle": "Comunicación profesional en múltiples idiomas",
+    "spanish": {
+      "name": "Español",
+      "proficiency": "Nativo",
+      "description": "Hablante nativo con experiencia en comunicación empresarial profesional"
+    },
+    "english": {
+      "name": "Inglés",
+      "proficiency": "Avanzado",
+      "description": "Dominio profesional fluido para comunicación con clientes internacionales"
+    }
+  },
+  "months": {
+    "January": "Enero",
+    "February": "Febrero",
+    "March": "Marzo",
+    "April": "Abril",
+    "May": "Mayo",
+    "June": "Junio",
+    "July": "Julio",
+    "August": "Agosto",
+    "September": "Septiembre",
+    "October": "Octubre",
+    "November": "Noviembre",
+    "December": "Diciembre"
+  },
+  "time": {
+    "present": "Presente",
+    "year": "año",
+    "years": "años",
+    "month": "mes",
+    "months": "meses",
+    "remote": "Remoto"
+  }
+}

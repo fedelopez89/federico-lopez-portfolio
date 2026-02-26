@@ -1,0 +1,167 @@
+{
+  "header": {
+    "home": "HOME",
+    "about": "ABOUT ME",
+    "projects": "PROJECTS",
+    "experience": "EXPERIENCE",
+    "languages": "LANGUAGES",
+    "education": "EDUCATION",
+    "name": "Federico López",
+    "role": "Senior Frontend Engineer"
+  },
+  "sections": {
+    "aboutme": "about me",
+    "projects": "projects",
+    "experience": "experience",
+    "languages": "languages",
+    "education": "education"
+  },
+  "buttons": {
+    "downloadResume": "DOWNLOAD RESUME",
+    "liveDemo": "Live Demo",
+    "code": "Code",
+    "viewAll": "View All Projects",
+    "showLess": "Show Less"
+  },
+  "footer": {
+    "copyright": "© {{year}} Federico López. All rights reserved."
+  },
+  "aboutMe": {
+    "intro": "Hi! I'm <strong>Federico López</strong>, a Senior Frontend Engineer specializing in building <strong>high-performance</strong>, <strong>scalable</strong>, and <strong>user-centric</strong> web applications with <strong>React</strong>, <strong>TypeScript</strong>, and <strong>Next.js</strong>.",
+    "experience": "With <strong>{{years}} years of IT experience</strong> and <strong>7+ years focused on modern frontend development</strong>, I've delivered impactful solutions for global companies in wellness, sports, fintech, and healthcare—reaching millions of users worldwide.",
+    "passion": "Passionate about clean architecture, reusable components, and solving complex UX challenges. I thrive in remote Agile environments, collaborating with cross-functional teams to drive product excellence.",
+    "stats": {
+      "yearsExperience": "Years Experience",
+      "enterpriseClients": "Enterprise Clients",
+      "remote": "Remote"
+    },
+    "featured": "Featured in <link>The New York Times</link>"
+  },
+  "projects": {
+    "subtitle": "A selection of my work, including projects featured in The New York Times",
+    "filterAll": "All",
+    "nytLabel": "Featured in The New York Times",
+    "realevalsgmail": {
+      "title": "Gmail Clone - REAL Evals",
+      "description": "Production-ready Gmail replica built for AI evaluation platform. Featured in The New York Times for innovative AI testing approach. Pixel-perfect recreation implementing email management, compose functionality, labels, folders, and advanced search. Built with Next.js and Material UI for optimal performance and accessibility."
+    },
+    "realevalsdashdish": {
+      "title": "DoorDash Clone - REAL Evals",
+      "description": "High-fidelity food delivery platform clone featuring restaurant browsing, menu exploration, cart management, and checkout flow. Built with Next.js and Material UI to replicate DoorDash user experience with responsive design and smooth interactions."
+    },
+    "realevalsuber": {
+      "title": "Uber Clone - REAL Evals",
+      "description": "Comprehensive ride-sharing platform clone with real-time map integration, route calculation, pricing estimates, and driver matching simulation. Featured in The New York Times as part of REAL Evals AI testing platform. Built with Next.js and Material UI."
+    },
+    "realevals united": {
+      "title": "United Airlines Clone - REAL Evals",
+      "description": "Full-featured airline booking platform clone replicating United Airlines flight search, seat selection, booking flow, and trip management. Implements complex multi-step forms, real-time availability, and responsive design with Next.js and Material UI."
+    },
+    "nflleaguefinder": {
+      "title": "NFL League Finder - RCX Sports",
+      "description": "Advanced search and discovery platform for NFL fantasy leagues. Features comprehensive filtering, real-time league data, team rosters, player stats, and league settings explorer. Built for RCX Sports platform to enhance league discovery experience."
+    },
+    "nbaleaguefinder": {
+      "title": "NBA League Finder - RCX Sports",
+      "description": "Search and discovery tool for NBA fantasy leagues with advanced filtering capabilities. Displays league information, team details, player rosters, and real-time statistics. Optimized for performance with thousands of leagues."
+    },
+    "nhlleaguefinder": {
+      "title": "NHL League Finder - RCX Sports",
+      "description": "Comprehensive NHL fantasy league browser with filtering by league type, size, and settings. Features team analysis, player statistics, and league standings. Built with responsive design for seamless mobile and desktop experience."
+    },
+    "mlsleaguefinder": {
+      "title": "MLS League Finder - RCX Sports",
+      "description": "Soccer fantasy league discovery platform for MLS leagues. Enables users to search, filter, and explore leagues with detailed team rosters, player stats, and league configurations. Implements real-time data updates and intuitive navigation."
+    },
+    "factupro": {
+      "title": "FactuPro - Invoice Management",
+      "description": "Complete invoice and billing management system for SMBs. Implemented invoice generation, payment tracking, client management, and automated reminders with responsive design and accessibility compliance."
+    }
+  },
+  "experience": {
+    "frontendBonzzu": {
+      "role": "senior frontend engineer",
+      "company": "bonzzu",
+      "notes": "Delivering scalable React/Next.js applications for Delos Company and RCX Sports. Designed reusable component systems using Material UI, Chakra UI, and Shadcn UI. Led performance optimizations through SSR, code splitting, and rendering efficiency improvements."
+    },
+    "fullstackFreelance": {
+      "role": "frontend web developer",
+      "company": "Freelancer",
+      "notes": "Delivered high-impact solutions for international clients including Vrio, Wpromote, REAL Evals (featured by The New York Times), and FactuPro. Specialized in SSR, performance optimization, and scalable component architectures."
+    },
+    "fullstackNisum": {
+      "role": "full stack engineer",
+      "company": "nisum (science37)",
+      "notes": "Delivered and maintained React/Redux interfaces for Science37's clinical research platform using JavaScript and TypeScript. Developed reusable UI components with Storybook and partnered with distributed teams across multiple time zones in remote Agile environments."
+    },
+    "mainframeICBC": {
+      "role": "senior mainframe cobol developer",
+      "company": "ICBC (Industrial and Commercial Bank of China)",
+      "notes": "Led Anti-Money Laundering initiatives including impact analysis and effort estimation. Developed and maintained COBOL applications in batch and online (CICS) environments with DB2, MQ messaging, and VSAM/QSAM files. Managed production incidents ensuring system stability under strict SLAs."
+    },
+    "cobolDeveloper": {
+      "role": "cobol developer",
+      "company": "isban / BBVA / accenture",
+      "notes": "Developed COBOL components for financial and high-volume batch systems across multiple banking institutions. Performed requirements analysis, system enhancements, and technical design. Leveraged DB2, MQ, JCL, and CICS for enterprise data processing in mission-critical environments."
+    },
+    "frontendConstellation": {
+      "role": "frontend developer",
+      "company": "Constellation Software Inc.",
+      "notes": "Built customer-facing web applications for enterprise clients using React and TypeScript. Collaborated with cross-functional teams to deliver high-quality features on schedule."
+    },
+    "softwareQuintica": {
+      "role": "software developer",
+      "company": "Quintica Software Solutions",
+      "notes": "Developed full-stack web applications using modern JavaScript frameworks. Participated in all phases of software development lifecycle."
+    }
+  },
+  "education": {
+    "fullstack": {
+      "title": "fullstack node.js",
+      "institute": "education it"
+    },
+    "engineering": {
+      "title": "computer systems engineering",
+      "institute": "national university of technology"
+    },
+    "business": {
+      "title": "bachelor's degree in business administration",
+      "institute": "institute euskal-echea"
+    }
+  },
+  "languages": {
+    "subtitle": "Professional communication across multiple languages",
+    "spanish": {
+      "name": "Spanish",
+      "proficiency": "Native",
+      "description": "Native speaker with professional business communication expertise"
+    },
+    "english": {
+      "name": "English",
+      "proficiency": "Advanced",
+      "description": "Fluent professional proficiency for international client communication"
+    }
+  },
+  "months": {
+    "January": "January",
+    "February": "February",
+    "March": "March",
+    "April": "April",
+    "May": "May",
+    "June": "June",
+    "July": "July",
+    "August": "August",
+    "September": "September",
+    "October": "October",
+    "November": "November",
+    "December": "December"
+  },
+  "time": {
+    "present": "Present",
+    "year": "year",
+    "years": "years",
+    "month": "month",
+    "months": "months",
+    "remote": "Remote"
+  }
+}

@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import experienceHistory from '../../../data/experience.json';
 import type { ExperienceConfig, Experience as ExperienceType } from '@/types';
 import { calculateDuration } from '@/utils/dateCalculations';
@@ -14,18 +15,24 @@ import {
 } from './Experience.styles';
 
 const Experience: FC = () => {
+  const { t } = useTranslation();
   const { experiences } = experienceHistory as ExperienceConfig;
 
   const getDateRange = (exp: ExperienceType): string => {
     const { start, end } = exp;
-    const endDate = end.active ? 'Present' : `${end.month} ${end.year}`;
+    const startMonth = t(`months.${start.month}`);
+    const endDate = end.active
+      ? t('time.present')
+      : `${t(`months.${end.month}`)} ${end.year}`;
     const duration = calculateDuration(exp);
-    return `${start.month} ${start.year} - ${endDate} (${duration})`;
+    return `${startMonth} ${start.year} - ${endDate} (${duration})`;
   };
 
   const getLocation = (exp: ExperienceType): string => {
     const { place } = exp;
-    return place.remote ? 'Remote' : `${place.province}, ${place.country}`;
+    return place.remote
+      ? t('time.remote')
+      : `${place.province}, ${place.country}`;
   };
 
   return (
@@ -36,7 +43,7 @@ const Experience: FC = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        experience
+        {t('sections.experience')}
       </SectionTitle>
       <Header>
         <DownloadButton
@@ -55,12 +62,12 @@ const Experience: FC = () => {
           >
             <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
           </svg>
-          DOWNLOAD RESUME
+          {t('buttons.downloadResume')}
         </DownloadButton>
       </Header>
       <Timeline>
         {experiences.map((experience, index) => {
-          const { id, rol, company, notes } = experience;
+          const { id, company } = experience;
           return (
             <ExperienceCard
               key={id}
@@ -74,17 +81,17 @@ const Experience: FC = () => {
                 <h6>{getLocation(experience)}</h6>
               </DateAndLocation>
               <Details>
-                <h4>{rol}</h4>
+                <h4>{t(`experience.${id}.role`)}</h4>
                 <h5>
                   {company.href ? (
                     <a href={company.href} target="_blank" rel="noreferrer">
-                      {company.name}
+                      {t(`experience.${id}.company`)}
                     </a>
                   ) : (
-                    company.name
+                    t(`experience.${id}.company`)
                   )}
                 </h5>
-                <p>{notes}</p>
+                <p>{t(`experience.${id}.notes`)}</p>
               </Details>
             </ExperienceCard>
           );

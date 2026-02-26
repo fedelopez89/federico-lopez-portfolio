@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import {
@@ -7,6 +8,7 @@ import {
 } from '../shared/SectionTitle';
 
 interface Language {
+  id: string;
   name: string;
   proficiency: 'Native' | 'Advanced' | 'Intermediate' | 'Basic';
   level: number;
@@ -14,11 +16,13 @@ interface Language {
 
 const languages: Language[] = [
   {
+    id: 'spanish',
     name: 'Spanish',
     proficiency: 'Native',
     level: 100,
   },
   {
+    id: 'english',
     name: 'English',
     proficiency: 'Advanced',
     level: 85,
@@ -123,6 +127,8 @@ const LevelText = styled.p`
 `;
 
 const Languages: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <Section id="languages" aria-label="Languages">
       <SectionHeader>
@@ -132,7 +138,7 @@ const Languages: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          languages
+          {t('sections.languages')}
         </SectionTitle>
         <SectionSubtitle
           initial={{ opacity: 0, y: -20 }}
@@ -140,7 +146,7 @@ const Languages: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          Professional communication across multiple languages
+          {t('languages.subtitle')}
         </SectionSubtitle>
       </SectionHeader>
 
@@ -154,9 +160,9 @@ const Languages: React.FC = () => {
             transition={{ duration: 0.4, delay: index * 0.1 }}
           >
             <LanguageHeader>
-              <LanguageName>{language.name}</LanguageName>
+              <LanguageName>{t(`languages.${language.id}.name`)}</LanguageName>
               <ProficiencyBadge $level={language.level}>
-                {language.proficiency}
+                {t(`languages.${language.id}.proficiency`)}
               </ProficiencyBadge>
             </LanguageHeader>
 
@@ -165,7 +171,7 @@ const Languages: React.FC = () => {
               aria-valuenow={language.level}
               aria-valuemin={0}
               aria-valuemax={100}
-              aria-label={`${language.name} proficiency`}
+              aria-label={`${t(`languages.${language.id}.name`)} proficiency`}
             >
               <ProgressBar
                 $level={language.level}
@@ -180,7 +186,7 @@ const Languages: React.FC = () => {
               />
             </ProgressBarContainer>
 
-            <LevelText>{language.level}% Proficiency</LevelText>
+            <LevelText>{language.level}%</LevelText>
           </LanguageCard>
         ))}
       </LanguagesContainer>
