@@ -78,14 +78,20 @@
       src="https://www.googletagmanager.com/gtag/js?id=G-WJEC2XPHNB"
     ></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
+      // Only load Google Analytics in production (not localhost)
+      if (
+        window.location.hostname !== 'localhost' &&
+        window.location.hostname !== '127.0.0.1'
+      ) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-WJEC2XPHNB', {
+          page_path: window.location.pathname,
+        });
       }
-      gtag('js', new Date());
-      gtag('config', 'G-WJEC2XPHNB', {
-        page_path: window.location.pathname,
-      });
     </script>
 
     <!-- Structured Data (JSON-LD) -->
@@ -113,7 +119,7 @@
         "description": "Senior Frontend Engineer with 16 years of IT experience and 7+ years specializing in React, TypeScript & Next.js"
       }
     </script>
-    <script type="module" crossorigin src="/federico-lopez-portfolio/assets/js/index-BkKHgaMe.js"></script>
+    <script type="module" crossorigin src="/federico-lopez-portfolio/assets/js/index-BnV5lh9s.js"></script>
     <link rel="modulepreload" crossorigin href="/federico-lopez-portfolio/assets/js/styled-vendor-FewTp2Xz.js">
     <link rel="modulepreload" crossorigin href="/federico-lopez-portfolio/assets/js/animation-vendor-A5lK5uU-.js">
     <link rel="modulepreload" crossorigin href="/federico-lopez-portfolio/assets/js/react-vendor-C1xc24pP.js">
