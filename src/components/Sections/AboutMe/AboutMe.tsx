@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 import experienceHistory from '../../../data/experience.json';
 import type { ExperienceConfig } from '@/types';
 import { calculateYearsExperience } from '@/utils/dateCalculations';
@@ -14,11 +14,13 @@ import {
 } from './AboutMe.styles';
 import { SectionTitle } from '../shared/SectionTitle';
 
+const NYT_HREF =
+  'https://www.linkedin.com/posts/svanweelden_silicon-valley-builds-amazon-and-gmail-copycats-activity-7404333944894398465-CIyW/';
+
 const AboutMe: FC = () => {
   const { t } = useTranslation();
   const { experiences } = experienceHistory as ExperienceConfig;
 
-  // Calculate years since freelance start (January 2019)
   const freelanceJob = experiences.find(
     (exp) => exp.id === 'fullstackFreelance'
   );
@@ -51,12 +53,12 @@ const AboutMe: FC = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.1 }}
       >
-        <p dangerouslySetInnerHTML={{ __html: t('aboutMe.intro') }} />
-        <p
-          dangerouslySetInnerHTML={{
-            __html: t('aboutMe.experience', { years: yearsExp }),
-          }}
-        />
+        <p>
+          <Trans i18nKey="aboutMe.intro" />
+        </p>
+        <p>
+          <Trans i18nKey="aboutMe.experience" values={{ years: yearsExp }} />
+        </p>
         <p>{t('aboutMe.passion')}</p>
       </Description>
 
@@ -96,15 +98,18 @@ const AboutMe: FC = () => {
           <path d="M12 2L3.5 20.5L13.5 16L21 20.5L12 2Z" />
         </svg>
         <span>
-          {t('aboutMe.featured').split('<link>')[0]}
-          <a
-            href="https://www.linkedin.com/posts/svanweelden_silicon-valley-builds-amazon-and-gmail-copycats-activity-7404333944894398465-CIyW/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            The New York Times
-          </a>
-          {t('aboutMe.featured').split('</link>')[1]}
+          <Trans
+            i18nKey="aboutMe.featured"
+            components={{
+              nyt: (
+                <a
+                  href={NYT_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              ),
+            }}
+          />
         </span>
       </FeaturedBadge>
     </AboutMeContainer>

@@ -3,7 +3,6 @@
   "private": true,
   "version": "2.0.0",
   "type": "module",
-  "homepage": "http://fedelopez89.github.io/federico-lopez-portfolio",
   "dependencies": {
     "@emotion/is-prop-valid": "^1.4.0",
     "framer-motion": "^12.34.0",
@@ -23,8 +22,7 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,css,md}\"",
     "type-check": "tsc --noEmit",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "vercel --prod"
   },
   "browserslist": {
     "production": [
@@ -53,7 +51,6 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.0",
-    "gh-pages": "^4.0.0",
     "globals": "^17.3.0",
     "prettier": "^3.8.1",
     "rollup-plugin-visualizer": "^6.0.5",

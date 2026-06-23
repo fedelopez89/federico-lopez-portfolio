@@ -35,7 +35,7 @@
       "enterpriseClients": "Clientes Empresariales",
       "remote": "Remoto"
     },
-    "featured": "Destacado en <link>The New York Times</link>"
+    "featured": "Destacado en <nyt>The New York Times</nyt>"
   },
   "projects": {
     "subtitle": "Una selección de mi trabajo, incluyendo proyectos destacados en The New York Times",

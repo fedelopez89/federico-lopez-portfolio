@@ -35,7 +35,7 @@
       "enterpriseClients": "Enterprise Clients",
       "remote": "Remote"
     },
-    "featured": "Featured in <link>The New York Times</link>"
+    "featured": "Featured in <nyt>The New York Times</nyt>"
   },
   "projects": {
     "subtitle": "A selection of my work, including projects featured in The New York Times",

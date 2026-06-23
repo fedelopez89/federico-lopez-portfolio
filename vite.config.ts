@@ -4,7 +4,7 @@ import path from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig({
-  base: '/federico-lopez-portfolio/',
+  base: '/',
   plugins: [
     react(),
     visualizer({
