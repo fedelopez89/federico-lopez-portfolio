@@ -135,51 +135,113 @@ export const MobileMenu = styled(motion.div)<{ $isOpen: boolean }>`
   width: 80%;
   max-width: 320px;
   background: ${({ theme }) => theme.colors.background};
-  box-shadow: ${({ theme }) => theme.shadows.xl};
+  box-shadow: ${({ theme }) => theme.shadows['2xl']};
   z-index: ${({ theme }) => theme.zIndex.modal + 1};
-  padding: ${({ theme }) => theme.spacing.xl};
   overflow-y: auto;
+  overflow-x: hidden;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     display: flex;
     flex-direction: column;
-    gap: ${({ theme }) => theme.spacing.md};
+  }
+`;
+
+export const MobileMenuHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: ${({ theme }) => `${theme.spacing.lg} ${theme.spacing.xl}`};
+  background: linear-gradient(
+    135deg,
+    ${({ theme }) => theme.colors.primary} 0%,
+    ${({ theme }) => theme.colors.secondary} 100%
+  );
+`;
+
+export const MobileMenuTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  span:first-child {
+    font-size: ${({ theme }) => theme.typography.fontSize.base};
+    font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
+    color: white;
+    letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wide};
+  }
+
+  span:last-child {
+    font-size: ${({ theme }) => theme.typography.fontSize.xs};
+    color: rgba(255, 255, 255, 0.75);
+    letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wider};
+    text-transform: uppercase;
   }
 `;
 
 export const MobileCloseButton = styled.button`
-  align-self: flex-end;
-  background: none;
-  border: none;
-  color: ${({ theme }) => theme.colors.text};
-  font-size: ${({ theme }) => theme.typography.fontSize['2xl']};
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: ${({ theme }) => theme.borderRadius.full};
+  color: white;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  padding: ${({ theme }) => theme.spacing.sm};
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
-  transition: color ${({ theme }) => theme.transitions.fast};
+  transition: all ${({ theme }) => theme.transitions.fast};
+  flex-shrink: 0;
 
   &:hover {
-    color: ${({ theme }) => theme.colors.primary};
+    background: rgba(255, 255, 255, 0.25);
   }
 `;
 
+export const MobileNavLinks = styled.nav`
+  display: flex;
+  flex-direction: column;
+  padding: ${({ theme }) => `${theme.spacing.md} 0`};
+  flex: 1;
+`;
+
 export const MobileNavLink = styled.a<{ $isActive?: boolean }>`
-  display: block;
-  color: ${({ theme }) => theme.colors.text};
+  display: flex;
+  align-items: center;
+  color: ${({ theme, $isActive }) =>
+    $isActive ? theme.colors.primary : theme.colors.text};
   text-decoration: none;
-  font-size: ${({ theme }) => theme.typography.fontSize.lg};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
-  letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wide};
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
+  letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wider};
   text-transform: uppercase;
-  padding: ${({ theme }) => `${theme.spacing.lg} ${theme.spacing.xl}`};
-  border-radius: ${({ theme }) => theme.borderRadius.base};
-  transition: all ${({ theme }) => theme.transitions.fast};
+  padding: ${({ theme }) => `${theme.spacing.md} ${theme.spacing.xl}`};
+  border-left: 3px solid
+    ${({ theme, $isActive }) =>
+      $isActive ? theme.colors.primary : 'transparent'};
   background: ${({ $isActive, theme }) =>
     $isActive ? theme.colors.primaryLight : 'transparent'};
+  transition: all ${({ theme }) => theme.transitions.fast};
 
   &:hover {
-    background: ${({ theme }) => theme.colors.primaryLight};
     color: ${({ theme }) => theme.colors.primary};
+    border-left-color: ${({ theme }) => theme.colors.primary};
+    background: ${({ theme }) => theme.colors.primaryLight};
+    padding-left: calc(${({ theme }) => theme.spacing.xl} + 4px);
+  }
+`;
+
+export const MobileMenuFooter = styled.div`
+  padding: ${({ theme }) => `${theme.spacing.md} ${theme.spacing.xl}`};
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  span {
+    font-size: ${({ theme }) => theme.typography.fontSize.xs};
+    color: ${({ theme }) => theme.colors.textTertiary};
+    text-transform: uppercase;
+    letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wider};
   }
 `;
 

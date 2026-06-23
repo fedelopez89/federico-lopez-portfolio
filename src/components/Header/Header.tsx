@@ -19,8 +19,12 @@ import {
   MobileMenuButton,
   MobileMenuOverlay,
   MobileMenu,
+  MobileMenuHeader,
+  MobileMenuTitle,
   MobileCloseButton,
+  MobileNavLinks,
   MobileNavLink,
+  MobileMenuFooter,
 } from './Header.styles';
 
 const navItems = [
@@ -157,34 +161,38 @@ const Header: FC = () => {
         animate={{ x: isMobileMenuOpen ? 0 : '100%' }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       >
-        <MobileCloseButton
-          onClick={handleMobileMenuToggle}
-          aria-label="Close mobile menu"
-        >
-          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
-          </svg>
-        </MobileCloseButton>
-
-        {navItems.map((item) => (
-          <MobileNavLink
-            key={item.href}
-            href={item.href}
-            onClick={handleMobileLinkClick}
-            $isActive={activeSection === item.id}
+        <MobileMenuHeader>
+          <MobileMenuTitle>
+            <span>Federico López</span>
+            <span>{t('header.role')}</span>
+          </MobileMenuTitle>
+          <MobileCloseButton
+            onClick={handleMobileMenuToggle}
+            aria-label="Close mobile menu"
           >
-            {t(item.labelKey)}
-          </MobileNavLink>
-        ))}
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+            </svg>
+          </MobileCloseButton>
+        </MobileMenuHeader>
 
-        <div
-          style={{
-            padding: '1rem',
-            borderTop: '1px solid rgba(255,255,255,0.1)',
-          }}
-        >
+        <MobileNavLinks role="navigation" aria-label="Mobile navigation">
+          {navItems.map((item) => (
+            <MobileNavLink
+              key={item.href}
+              href={item.href}
+              onClick={handleMobileLinkClick}
+              $isActive={activeSection === item.id}
+            >
+              {t(item.labelKey)}
+            </MobileNavLink>
+          ))}
+        </MobileNavLinks>
+
+        <MobileMenuFooter>
+          <span>{t('header.home')}</span>
           <LanguageToggle isScrolled={true} />
-        </div>
+        </MobileMenuFooter>
       </MobileMenu>
 
       <HeaderIntro
