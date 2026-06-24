@@ -8,8 +8,6 @@ const AboutMe = lazy(() => import('../Sections/AboutMe/AboutMe'));
 const Projects = lazy(() => import('../Sections/Projects/Projects'));
 const Experience = lazy(() => import('../Sections/Experience/Experience'));
 const Education = lazy(() => import('../Sections/Education/Education'));
-const Languages = lazy(() => import('../Sections/Languages/Languages'));
-
 interface SectionConfig {
   id: string;
   component: FC;
@@ -19,7 +17,6 @@ const sections: SectionConfig[] = [
   { id: 'aboutme', component: AboutMe },
   { id: 'projects', component: Projects },
   { id: 'experience', component: Experience },
-  { id: 'languages', component: Languages },
   { id: 'education', component: Education },
 ];
 

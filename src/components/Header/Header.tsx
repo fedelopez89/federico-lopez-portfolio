@@ -31,8 +31,7 @@ const navItems = [
   { href: '#aboutme', labelKey: 'header.about', id: 'aboutme' },
   { href: '#projects', labelKey: 'header.projects', id: 'projects' },
   { href: '#experience', labelKey: 'header.experience', id: 'experience' },
-  { href: '#languages', labelKey: 'header.languages', id: 'languages' },
-  { href: '#education', labelKey: 'header.education', id: 'education' },
+{ href: '#education', labelKey: 'header.education', id: 'education' },
 ];
 
 const socialLinks = [
