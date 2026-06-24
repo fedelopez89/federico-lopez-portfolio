@@ -1,8 +1,8 @@
 <div align="center">
 
-# 🚀 Federico López - Senior Frontend Engineer Portfolio
+# Federico López - Senior Frontend Engineer Portfolio
 
-[![Live Demo](https://img.shields.io/badge/demo-live-success?style=for-the-badge&logo=vercel)](https://fedelopez89.github.io/federico-lopez-portfolio)
+[![Live Demo](https://img.shields.io/badge/demo-live-success?style=for-the-badge&logo=vercel)](https://federicoglopez.dev)
 [![React](https://img.shields.io/badge/React-19.2.4-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-7.3-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
@@ -12,54 +12,40 @@
 
 _Showcasing 16 years of IT experience with 7+ years specializing in modern frontend development_
 
-[View Live Demo](https://fedelopez89.github.io/federico-lopez-portfolio) • [Report Bug](https://github.com/fedelopez89/federico-lopez-portfolio/issues) • [Request Feature](https://github.com/fedelopez89/federico-lopez-portfolio/issues)
+[View Live](https://federicoglopez.dev) • [Report Bug](https://github.com/fedelopez89/federico-lopez-portfolio/issues)
 
 </div>
 
 ---
 
-## ✨ Highlights
+## Highlights
 
-🎯 **[Featured in The New York Times](https://www.linkedin.com/posts/svanweelden_silicon-valley-builds-amazon-and-gmail-copycats-activity-7404333944894398465-CIyW/)** - Recognized for exceptional frontend engineering contributions  
-⚡ **Lightning Fast** - Lighthouse 100/100 Desktop, 97/100 Mobile  
-🖼️ **Optimized Images** - WebP format with 98% size reduction  
-🎨 **Modern Architecture** - React 19, TypeScript 5.9, Component-Driven Design  
-🌍 **Multilingual** - English/Spanish i18n with automatic browser detection  
-♿ **Accessible** - WCAG 2.1 compliant with semantic HTML & SVG icons  
-📱 **Responsive** - Mobile-first, works seamlessly across all devices  
-🌗 **Theme Support** - Smooth dark/light mode with system preference detection
-
----
-
-## 🛠️ Tech Stack
-
-### Core
-
-![React](https://img.shields.io/badge/React-19.2.4-20232A?logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-7.3-646CFF?logo=vite&logoColor=white)
-
-### Styling & Animation
-
-![Styled Components](https://img.shields.io/badge/Styled_Components-6.3.9-DB7093?logo=styled-components&logoColor=white)
-![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.34-0055FF?logo=framer&logoColor=white)
-
-### Internationalization
-
-![react-i18next](https://img.shields.io/badge/react--i18next-15.x-26A69A?logo=i18next&logoColor=white)
-![i18next](https://img.shields.io/badge/i18next-24.x-26A69A?logo=i18next&logoColor=white)
-
-### Tools & Optimization
-
-![ESLint](https://img.shields.io/badge/ESLint-9.x-4B32C3?logo=eslint)
-![Prettier](https://img.shields.io/badge/Prettier-3.x-F7B93E?logo=prettier&logoColor=black)
-![Web Vitals](https://img.shields.io/badge/Web_Vitals-5.1-brightgreen)
+- **Featured in The New York Times** - Recognized for exceptional frontend engineering contributions
+- **Lighthouse 100/100 Desktop** - Performance, Accessibility, SEO all perfect
+- **Lighthouse 91/100 Mobile** - Optimized for real devices on slow networks
+- **Multilingual** - English/Spanish i18n with automatic browser detection
+- **Accessible** - WCAG 2.1 AA compliant, Lighthouse Accessibility 100/100
+- **Responsive** - Mobile-first design with custom hamburger menu
+- **Theme Support** - Smooth dark/light mode with system preference detection
 
 ---
 
-## 🏆 Featured Projects
+## Tech Stack
 
-### 🌟 AI Evaluation Platform Clones (Featured in NYT)
+| Layer | Technology |
+|---|---|
+| Framework | React 19 + TypeScript 5.9 |
+| Build | Vite 7.3 |
+| Styling | styled-components v6 |
+| Animation | framer-motion |
+| i18n | react-i18next + i18next |
+| Deployment | Vercel + Custom domain |
+
+---
+
+## Featured Projects
+
+### AI Evaluation Platform Clones (Featured in NYT)
 
 Production-ready replicas built for REAL Evals AI testing platform:
 
@@ -68,9 +54,7 @@ Production-ready replicas built for REAL Evals AI testing platform:
 - **Uber Clone** - Real-time maps, route calculation | [Demo](https://real-udriver.vercel.app/)
 - **United Airlines** - Flight search, seat selection, booking | [Demo](https://real-flyunified.vercel.app/)
 
-**Tech**: React, TypeScript, Next.js, Material UI, Redux
-
-### 🏈 RCX Sports League Finders
+### RCX Sports League Finders
 
 Enterprise search platforms for fantasy sports leagues:
 
@@ -79,276 +63,110 @@ Enterprise search platforms for fantasy sports leagues:
 - **NHL League Finder** - [street.playrcx.com](https://street.playrcx.com/)
 - **MLS League Finder** - [go.playrcx.com](https://go.playrcx.com/)
 
-**Tech**: React, TypeScript, Next.js, Context API, Chakra UI, Google Maps API, REST API
+### FactuPro - Invoice Management SaaS
 
-### 💼 FactuPro - Invoice Management SaaS
-
-Complete billing system for SMBs with payment tracking and automation.  
-[Live Demo](https://app.factupro.es/login)
-
-**Tech**: Next.js, Shadcn UI, React Hook Form, Tailwind CSS, SSR, CI/CD
+Complete billing system for SMBs. [Live Demo](https://app.factupro.es/login)
 
 ---
 
-## 📊 Performance Metrics
+## Performance
 
 ```
-Lighthouse Score (Desktop):
-  Performance: ████████████████████ 100/100 🏆
-  Accessibility: ███████████████████ 99/100 ✅
-  Best Practices: ███████████████ 96/100 ✅
-  SEO: ████████████████████████ 100/100 ✅
+Lighthouse Desktop (federicoglopez.dev):
+  Performance:    100/100
+  Accessibility:  100/100
+  Best Practices:  77/100  *
+  SEO:            100/100
 
-Lighthouse Score (Mobile):
-  Performance: ███████████████████ 97/100 🚀
-  Accessibility: ███████████████████ 99/100 ✅
-  Best Practices: ███████████████ 96/100 ✅
-  SEO: ████████████████████████ 100/100 ✅
+Lighthouse Mobile (Slow 4G, Moto G Power):
+  Performance:     91/100
+  Accessibility:  100/100
+  Best Practices:  77/100  *
+  SEO:            100/100
 
-Core Web Vitals:
-  FCP (First Contentful Paint): 1.9s ✅
-  LCP (Largest Contentful Paint): 3.6s ✅
-  Total Bundle Size: ~420KB (gzipped) ✅
-  Images: 220KB (WebP optimized) ✅
+* MetaMask Chrome extension deprecation warning + Trusted Types
+  (not fixable without changing styled-components internals)
+
+Core Web Vitals (Desktop):
+  FCP:  0.5s
+  LCP:  0.8s
+  TBT:  0ms
+  CLS:  0
+  SI:   0.6s
 ```
 
 ---
 
-## 🚀 Quick Start
-
-### Prerequisites
+## Quick Start
 
 ```bash
-Node.js >= 18.0.0
-npm >= 9.0.0 or yarn >= 1.22.0
-```
-
-### Installation & Setup
-
-```bash
-# Clone the repository
 git clone https://github.com/fedelopez89/federico-lopez-portfolio.git
 cd federico-lopez-portfolio
-
-# Install dependencies
 npm install
-
-# Start development server
 npm run dev
-# 🎉 Open http://localhost:5173
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
 ```
 
----
-
-## 📦 Available Scripts
-
-| Command                | Description                                    |
-| ---------------------- | ---------------------------------------------- |
-| `npm run dev`          | Start Vite dev server on http://localhost:5173 |
-| `npm run build`        | Build for production (optimized bundle)        |
-| `npm run preview`      | Preview production build locally               |
-| `npm run lint`         | Run ESLint with auto-fix                       |
-| `npm run format`       | Format code with Prettier                      |
-| `npm run format:check` | Check code formatting                          |
-| `npm run type-check`   | TypeScript type checking (no emit)             |
-| `npm run deploy`       | Deploy to GitHub Pages                         |
+Open http://localhost:5173
 
 ---
 
-## 🏗️ Project Architecture
+## Available Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start dev server on http://localhost:5173 |
+| `npm run build` | Production build |
+| `npm run preview` | Preview production build locally |
+| `npm run lint` | ESLint with auto-fix |
+| `npm run format` | Prettier format |
+| `npm run type-check` | TypeScript check (no emit) |
+| `npm run deploy` | Deploy to Vercel |
+
+---
+
+## Project Structure
 
 ```
 resume/
-├── 📁 public/              # Static assets
-│   ├── images/
-│   │   └── projects/       # Project images (WebP optimized)
-│   └── pdf/                # Resume PDF
-├── 📁 src/
-│   ├── 📁 components/      # React components
-│   │   ├── Header/         # Navigation & hero section
-│   │   ├── Footer/         # Footer component
-│   │   ├── Main/           # Main layout wrapper
-│   │   ├── LanguageToggle/ # Language switcher (EN/ES)
-│   │   ├── ThemeToggle/    # Dark/light mode toggle
-│   │   ├── Sections/       # Content sections
-│   │   │   ├── AboutMe/    # Introduction & stats
-│   │   │   ├── Projects/   # Project portfolio grid
-│   │   │   │   └── ProjectCard.tsx
-│   │   │   ├── Experience/ # Work history timeline
-│   │   │   ├── Education/  # Academic background
-│   │   │   │   └── EducationDetail.tsx
-│   │   │   ├── Languages/  # Language proficiency
-│   │   │   └── shared/     # Shared section components
-│   │   │       └── SectionTitle.tsx
-│   │   ├── layout/         # Layout utilities
-│   │   │   └── ScrollToTop/# Scroll-to-top button
-│   │   ├── ui/             # Reusable UI components
-│   │   │   └── LoadingSpinner.tsx
-│   │   └── index.ts        # Component exports
-│   ├── 📁 context/         # React Context
-│   │   ├── ThemeContext.tsx # Theme provider & hook
-│   │   └── index.ts
-│   ├── 📁 data/            # Data files
-│   │   ├── projects.ts     # Project data
-│   │   ├── experience.json # Work experience
-│   │   ├── education.json  # Education history
-│   │   └── contact-me.json # Contact information
-│   ├── 📁 hooks/           # Custom React hooks
-│   │   ├── useScrollToTop.ts  # Scroll-to-top logic
-│   │   ├── useNavbarScroll.ts # Navbar scroll detection
-│   │   ├── useScrollSpy.ts    # Active section tracking
-│   │   └── index.ts
-│   ├── 📁 i18n/            # Internationalization
-│   │   ├── config.ts       # i18next configuration
-│   │   └── locales/        # Translation files
-│   │       ├── en/
-│   │       │   └── translation.json
-│   │       └── es/
-│   │           └── translation.json
-│   ├── 📁 styles/          # Styling
-│   │   ├── theme.ts        # Theme configuration
-│   │   ├── GlobalStyles.ts # Global CSS
-│   │   └── styled.d.ts     # Styled-components types
-│   ├── 📁 types/           # TypeScript definitions
-│   │   ├── contact.types.ts
-│   │   ├── education.types.ts
-│   │   ├── experience.types.ts
-│   │   └── index.ts
-│   ├── 📁 utils/           # Utility functions
-│   │   ├── dateCalculations.ts # Date/time helpers
-│   │   └── reportWebVitals.ts  # Performance monitoring
-│   ├── App.tsx             # Root component
-│   ├── main.tsx            # Entry point
-│   └── vite-env.d.ts       # Vite type declarations
-├── .editorconfig           # Editor configuration
-├── .prettierrc             # Prettier config
-├── eslint.config.js        # ESLint configuration
-├── tsconfig.json           # TypeScript config
-├── tsconfig.node.json      # TypeScript config for Node
-├── vite.config.ts          # Vite configuration
-├── NAMING_CONVENTIONS.md   # Code style guide
-├── SEO_ACCESSIBILITY.md    # SEO & A11y guidelines
-└── package.json            # Dependencies & scripts
+├── public/
+│   ├── images/            # Static images (WebP optimized)
+│   ├── ga.js              # Google Analytics (external, CSP-safe)
+│   ├── robots.txt
+│   └── sitemap.xml
+├── src/
+│   ├── components/
+│   │   ├── Header/        # Navigation + hero section
+│   │   ├── Footer/
+│   │   ├── Main/          # Layout wrapper (lazy loads sections)
+│   │   ├── LanguageToggle/
+│   │   ├── ThemeToggle/
+│   │   └── Sections/
+│   │       ├── AboutMe/
+│   │       ├── Projects/
+│   │       ├── Experience/
+│   │       ├── Education/
+│   │       └── Languages/
+│   ├── context/           # ThemeContext
+│   ├── data/              # projects.ts, experience.json, education.json
+│   ├── hooks/             # useNavbarScroll, useScrollSpy, useScrollToTop
+│   ├── i18n/              # react-i18next config + EN/ES translations
+│   ├── styles/            # theme.ts, GlobalStyles.ts
+│   └── types/
+├── vercel.json            # Security headers + cache config
+├── .npmrc                 # legacy-peer-deps=true
+└── NAMING_CONVENTIONS.md
 ```
 
 ---
 
-## 🎨 Key Features
+## About Me
 
-### 🎭 **Design System**
+**Federico López** — Senior Frontend Engineer
 
-- Custom theme with dark/light mode support
-- Consistent spacing, typography, and color scales
-- Reusable component library with TypeScript interfaces
-- Styled-components for scoped styling with theming
-
-### 🌍 **Internationalization (i18n)**
-
-- Full English/Spanish support with react-i18next
-- Automatic language detection from browser settings
-- Persistent language selection with localStorage
-- Translates all content: navigation, projects, experience, education
-- Clean language toggle UI integrated in navbar
-
-### ⚡ **Performance Optimizations**
-
-- **Code Splitting**: React.lazy() for route-based splitting
-- **Lazy Loading**: Smart image loading with fetchPriority
-- **Bundle Optimization**: Manual chunks for vendor libraries (React, Framer Motion, Styled Components)
-- **Tree Shaking**: Dead code elimination with Vite
-- **Image Optimization**: WebP format with 98% size reduction (9MB → 220KB)
-- **SVG Icons**: Inline SVG replacing Font Awesome CDN (eliminates blocking request)
-- **Build Optimization**: Minified JS/CSS, disabled sourcemaps in production
-
-### 🎬 **Smooth Animations**
-
-- Framer Motion for declarative animations
-- Scroll-triggered reveals with `whileInView`
-- Optimized for 60fps performance
-
-### 🧪 **Developer Experience**
-
-- TypeScript strict mode for type safety
-- ESLint + Prettier for code quality
-- Hot Module Replacement (HMR) with Vite
-- Path aliases (`@/`) for clean imports
-
-### 📱 **Accessibility**
-
-- Semantic HTML5 structure
-- ARIA labels and roles
-- Keyboard navigation support
-- Focus management
-
----
-
-## 🌐 Browser Support
-
-| Browser | Version            |
-| ------- | ------------------ |
-| Chrome  | Last 2 versions ✅ |
-| Firefox | Last 2 versions ✅ |
-| Safari  | Last 2 versions ✅ |
-| Edge    | Last 2 versions ✅ |
-
----
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome!
-
-Feel free to check the [issues page](https://github.com/fedelopez89/federico-lopez-portfolio/issues).
-
----
-
-## 📄 License
-
-This project is [MIT](LICENSE) licensed.
-
----
-
-## 👤 About Me
-
-<div align="center">
-
-**Federico López**  
-_Senior Frontend Engineer_
-
-🎯 **16 Years IT Experience** | 7+ Years Modern Frontend Development  
-🌟 **Featured in The New York Times** for innovative AI evaluation platform  
-🌍 **100% Remote** | Working with global clients across 3 continents  
-💼 **7+ Enterprise Clients** | Bonzzu, Science37, Vrio, REAL Evals
-
-### Specializations
-
-`React` `TypeScript` `Next.js` `Redux` `Performance Optimization` `Component Architecture`
-
-### Career Highlights
-
-- 🏢 **Senior Frontend Engineer @ Bonzzu** (2022 - Present)
-- 🎨 **Built 4 production clones featured by NYT** for REAL Evals
-- 🏈 **Developed 4 fantasy sports platforms** for RCX Sports
-- 💰 **Created enterprise invoicing SaaS** from scratch (FactuPro)
-- 🏦 **6+ years in fintech** (ICBC, BBVA) building mission-critical systems
+- 16 years IT experience, 7+ years modern frontend
+- Featured in The New York Times for AI evaluation platform work
+- 100% Remote | Working with global clients across 3 continents
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-federicoglopez-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/federicoglopez/)
-[![Portfolio](https://img.shields.io/badge/Portfolio-Live-success?style=for-the-badge&logo=vercel)](https://fedelopez89.github.io/federico-lopez-portfolio)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Live-success?style=for-the-badge&logo=vercel)](https://federicoglopez.dev)
 [![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:fede.lopez89@gmail.com)
-
-</div>
-
----
-
-<div align="center">
-
-**⭐ Star this repo if you find it helpful!**
-
-Built with React, TypeScript & Vite
-
-</div>
