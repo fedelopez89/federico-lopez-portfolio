@@ -68,16 +68,15 @@ export const EducationCard = styled(motion.div)`
 export const DateAndLocation = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing.sm};
 
-  h5 {
+  p {
     color: ${({ theme }) => theme.colors.textSecondary};
     font-size: ${({ theme }) => theme.typography.fontSize.sm};
     font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
     margin: 0 0 ${({ theme }) => theme.spacing.xs} 0;
   }
 
-  h6 {
+  p:last-child {
     color: ${({ theme }) => theme.colors.textTertiary};
-    font-size: ${({ theme }) => theme.typography.fontSize.sm};
     font-weight: ${({ theme }) => theme.typography.fontWeight.regular};
     margin: 0;
   }
@@ -95,14 +94,14 @@ export const Details = styled.div`
     transform: translateX(4px);
   }
 
-  h4 {
+  h3 {
     color: ${({ theme }) => theme.colors.text};
     font-size: ${({ theme }) => theme.typography.fontSize.xl};
     margin: 0 0 ${({ theme }) => theme.spacing.xs} 0;
     text-transform: capitalize;
   }
 
-  h5 {
+  h4 {
     margin: 0;
 
     a {

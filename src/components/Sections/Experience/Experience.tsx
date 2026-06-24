@@ -77,12 +77,12 @@ const Experience: FC = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
               <DateAndLocation>
-                <h5>{getDateRange(experience)}</h5>
-                <h6>{getLocation(experience)}</h6>
+                <p>{getDateRange(experience)}</p>
+                <p>{getLocation(experience)}</p>
               </DateAndLocation>
               <Details>
-                <h4>{t(`experience.${id}.role`)}</h4>
-                <h5>
+                <h3>{t(`experience.${id}.role`)}</h3>
+                <h4>
                   {company.href ? (
                     <a href={company.href} target="_blank" rel="noreferrer">
                       {t(`experience.${id}.company`)}
@@ -90,7 +90,7 @@ const Experience: FC = () => {
                   ) : (
                     t(`experience.${id}.company`)
                   )}
-                </h5>
+                </h4>
                 <p>{t(`experience.${id}.notes`)}</p>
               </Details>
             </ExperienceCard>

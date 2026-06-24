@@ -106,7 +106,6 @@ const Header: FC = () => {
 
           <NavMenu
             as="ul"
-            role="menubar"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
@@ -114,7 +113,6 @@ const Header: FC = () => {
             {navItems.map((item, index) => (
               <NavItem
                 as="li"
-                role="none"
                 key={item.href}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -122,7 +120,6 @@ const Header: FC = () => {
               >
                 <NavLink
                   href={item.href}
-                  role="menuitem"
                   aria-label={t(item.labelKey)}
                   $isScrolled={isScrolled}
                   $isActive={activeSection === item.id}
@@ -133,7 +130,6 @@ const Header: FC = () => {
             ))}
             <NavItem
               as="li"
-              role="none"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 * navItems.length }}
@@ -198,33 +194,33 @@ const Header: FC = () => {
       <HeaderIntro
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
       >
         <Title
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
         >
           {t('header.name')}
         </Title>
         <Role
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.7 }}
+          transition={{ duration: 0.4, delay: 0.35 }}
         >
           {t('header.role')}
         </Role>
         <SocialLinks
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.9 }}
+          transition={{ duration: 0.4, delay: 0.5 }}
         >
           {socialLinks.map((link, index) => (
             <SocialItem
               key={link.href}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1 + index * 0.1 }}
+              transition={{ delay: 0.6 + index * 0.1 }}
             >
               <SocialLink
                 href={link.href}

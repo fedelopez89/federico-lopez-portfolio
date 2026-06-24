@@ -33,12 +33,12 @@ const Education: FC = () => {
             transition={{ duration: 0.6, delay: index * 0.1 }}
           >
             <DateAndLocation>
-              <h5>{dateRange}</h5>
-              <h6>{location}</h6>
+              <p>{dateRange}</p>
+              <p>{location}</p>
             </DateAndLocation>
             <Details>
-              <h4>{t(`education.${id}.title`)}</h4>
-              <h5>
+              <h3>{t(`education.${id}.title`)}</h3>
+              <h4>
                 <a
                   href={education.institute.href}
                   target="_blank"
@@ -46,7 +46,7 @@ const Education: FC = () => {
                 >
                   {t(`education.${id}.institute`)}
                 </a>
-              </h5>
+              </h4>
             </Details>
           </EducationCard>
         );
