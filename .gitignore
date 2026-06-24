@@ -29,6 +29,9 @@ yarn-error.log*
 # Instructions privadas (no commitear)
 .github/instructions/
 
+# Scripts locales (no commitear)
+scripts/generate-og-image.py
+
 # IDE
 .vscode/
 .idea/
