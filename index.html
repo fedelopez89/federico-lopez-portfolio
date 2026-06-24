@@ -65,12 +65,18 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Preload critical image for LCP optimization -->
+    <!-- Preload hero background for LCP optimization -->
+    <link
+      rel="preload"
+      as="image"
+      href="/images/portfolio_bkg.webp"
+      fetchpriority="high"
+    />
+    <!-- Preload first project image -->
     <link
       rel="preload"
       as="image"
       href="/images/projects/gmail-clone-opt.webp"
-      fetchpriority="high"
     />
 
     <!-- Google Analytics 4 -->
