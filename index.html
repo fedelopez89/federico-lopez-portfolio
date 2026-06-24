@@ -74,26 +74,8 @@
     />
 
     <!-- Google Analytics 4 -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-WJEC2XPHNB"
-    ></script>
-    <script>
-      // Only load Google Analytics in production (not localhost)
-      if (
-        window.location.hostname !== 'localhost' &&
-        window.location.hostname !== '127.0.0.1'
-      ) {
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-          dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'G-WJEC2XPHNB', {
-          page_path: window.location.pathname,
-        });
-      }
-    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WJEC2XPHNB"></script>
+    <script defer src="/ga.js"></script>
 
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
