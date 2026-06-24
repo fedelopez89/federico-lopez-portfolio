@@ -41,9 +41,10 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-          'animation-vendor': ['framer-motion'],
-          'styled-vendor': ['styled-components'],
+          'vendor-react': ['react', 'react-dom'],
+          'vendor-motion': ['framer-motion'],
+          'vendor-styled': ['styled-components'],
+          'vendor-i18n': ['i18next', 'react-i18next'],
         },
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name?.split('.') || [];

@@ -50,7 +50,7 @@ export const SocialLink = styled(motion.a)`
   border-radius: ${({ theme }) => theme.borderRadius.full};
   background: ${({ theme }) => theme.colors.surfaceAlt};
   color: ${({ theme }) => theme.colors.text};
-  transition: all ${({ theme }) => theme.transitions.fast};
+  transition: background-color, color, border-color, transform ${({ theme }) => theme.transitions.fast};
   border: 1px solid ${({ theme }) => theme.colors.border};
 
   &:hover {

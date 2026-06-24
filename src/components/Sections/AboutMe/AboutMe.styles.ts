@@ -87,7 +87,7 @@ export const StatBox = styled(motion.div)`
   background: ${({ theme }) => theme.colors.surface};
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.borderRadius.lg};
-  transition: all ${({ theme }) => theme.transitions.fast};
+  transition: transform, box-shadow, border-color ${({ theme }) => theme.transitions.fast};
 
   &:hover {
     transform: translateY(-4px);
@@ -138,7 +138,7 @@ export const TechBadge = styled(motion.span)`
   font-size: ${({ theme }) => theme.typography.fontSize.sm};
   font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
   cursor: default;
-  transition: all ${({ theme }) => theme.transitions.fast};
+  transition: background-color, border-color ${({ theme }) => theme.transitions.fast};
 
   &:hover {
     background: ${({ theme }) => theme.colors.primary}25;

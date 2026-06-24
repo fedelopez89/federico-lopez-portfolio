@@ -87,7 +87,7 @@ export const Details = styled.div`
   padding: ${({ theme }) => theme.spacing.lg};
   border-radius: ${({ theme }) => theme.borderRadius.lg};
   border: 1px solid ${({ theme }) => theme.colors.border};
-  transition: all ${({ theme }) => theme.transitions.base};
+  transition: box-shadow, transform ${({ theme }) => theme.transitions.base};
 
   &:hover {
     box-shadow: ${({ theme }) => theme.shadows.md};

@@ -46,7 +46,7 @@ export const Navbar = styled(motion.nav)<NavbarProps>`
     $isScrolled ? 'blur(10px)' : 'none'};
   box-shadow: ${({ $isScrolled, theme }) =>
     $isScrolled ? theme.shadows.md : 'none'};
-  transition: all ${({ theme }) => theme.transitions.base};
+  transition: background-color, backdrop-filter, box-shadow ${({ theme }) => theme.transitions.base};
 `;
 
 export const NavContainer = styled.div`
@@ -189,7 +189,7 @@ export const MobileCloseButton = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all ${({ theme }) => theme.transitions.fast};
+  transition: background-color ${({ theme }) => theme.transitions.fast};
   flex-shrink: 0;
 
   &:hover {
@@ -220,7 +220,7 @@ export const MobileNavLink = styled.a<{ $isActive?: boolean }>`
       $isActive ? theme.colors.primary : 'transparent'};
   background: ${({ $isActive, theme }) =>
     $isActive ? theme.colors.primaryLight : 'transparent'};
-  transition: all ${({ theme }) => theme.transitions.fast};
+  transition: color, border-color, background-color, padding-left ${({ theme }) => theme.transitions.fast};
 
   &:hover {
     color: ${({ theme }) => theme.colors.primary};
@@ -257,7 +257,7 @@ export const NavLink = styled.a<{ $isScrolled?: boolean; $isActive?: boolean }>`
   text-transform: uppercase;
   padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.md}`};
   border-radius: ${({ theme }) => theme.borderRadius.base};
-  transition: all ${({ theme }) => theme.transitions.fast};
+  transition: color ${({ theme }) => theme.transitions.fast};
   position: relative;
 
   &::after {
@@ -345,7 +345,7 @@ export const SocialLink = styled(motion.a)`
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   color: ${({ theme }) => theme.colors.background};
-  transition: all ${({ theme }) => theme.transitions.fast};
+  transition: background-color, border-color, transform, color ${({ theme }) => theme.transitions.fast};
   border: 2px solid rgba(255, 255, 255, 0.2);
 
   &:hover {

@@ -41,7 +41,7 @@ export const DownloadButton = styled.a`
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color, transform 0.2s ease;
 
   &:hover {
     background: ${({ theme }) => theme.colors.primaryHover};
@@ -132,7 +132,7 @@ export const Details = styled.div`
   padding: ${({ theme }) => theme.spacing.lg};
   border-radius: ${({ theme }) => theme.borderRadius.lg};
   border: 1px solid ${({ theme }) => theme.colors.border};
-  transition: all ${({ theme }) => theme.transitions.base};
+  transition: box-shadow, transform ${({ theme }) => theme.transitions.base};
 
   &:hover {
     box-shadow: ${({ theme }) => theme.shadows.md};

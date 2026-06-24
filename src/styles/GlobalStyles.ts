@@ -88,7 +88,7 @@ export const GlobalStyles = createGlobalStyle`
     cursor: pointer;
     border: none;
     background: none;
-    transition: all ${({ theme }) => theme.transitions.fast};
+    transition: color, background-color, opacity ${({ theme }) => theme.transitions.fast};
 
     &:focus-visible {
       outline: 2px solid ${({ theme }) => theme.colors.primary};
