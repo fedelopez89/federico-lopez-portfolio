@@ -4,8 +4,6 @@
     "about": "SOBRE MÍ",
     "projects": "PROYECTOS",
     "experience": "EXPERIENCIA",
-    "languages": "IDIOMAS",
-    "education": "EDUCACIÓN",
     "contact": "CONTACTO",
     "name": "Federico López",
     "role": "Ingeniero Frontend Senior"
@@ -13,9 +11,7 @@
   "sections": {
     "aboutme": "sobre mí",
     "projects": "proyectos",
-    "experience": "experiencia",
-    "languages": "idiomas",
-    "education": "educación"
+    "experience": "experiencia"
   },
   "buttons": {
     "downloadResume": "DESCARGAR CV",
@@ -114,33 +110,6 @@
       "role": "desarrollador de software",
       "company": "Quintica Software Solutions",
       "notes": "Desarrollé aplicaciones web full-stack usando frameworks JavaScript modernos. Participé en todas las fases del ciclo de vida del desarrollo de software."
-    }
-  },
-  "education": {
-    "fullstack": {
-      "title": "fullstack node.js",
-      "institute": "education it"
-    },
-    "engineering": {
-      "title": "ingeniería en sistemas informáticos",
-      "institute": "universidad tecnológica nacional"
-    },
-    "business": {
-      "title": "licenciatura en administración de empresas",
-      "institute": "instituto euskal-echea"
-    }
-  },
-  "languages": {
-    "subtitle": "Comunicación profesional en múltiples idiomas",
-    "spanish": {
-      "name": "Español",
-      "proficiency": "Nativo",
-      "description": "Hablante nativo con experiencia en comunicación empresarial profesional"
-    },
-    "english": {
-      "name": "Inglés",
-      "proficiency": "Avanzado",
-      "description": "Dominio profesional fluido para comunicación con clientes internacionales"
     }
   },
   "months": {
