@@ -29,7 +29,7 @@
   },
   "aboutMe": {
     "intro": "¡Hola! Soy <strong>Federico López</strong>, Ingeniero Frontend Senior especializado en construir aplicaciones web de <strong>alto rendimiento</strong>, <strong>escalables</strong> y <strong>centradas en el usuario</strong> con <strong>React</strong>, <strong>TypeScript</strong> y <strong>Next.js</strong>.",
-    "experience": "Con <strong>{{years}} años de experiencia en TI</strong> y <strong>más de 7 años enfocado en desarrollo frontend moderno</strong>, he entregado soluciones impactantes para compañías globales en bienestar, deportes, fintech y salud, alcanzando millones de usuarios en todo el mundo.",
+    "experience": "Con <strong>más de 16 años de experiencia en TI</strong> y <strong>más de 7 años enfocado en desarrollo frontend moderno</strong>, he entregado soluciones impactantes para compañías globales en bienestar, deportes, fintech y salud, alcanzando millones de usuarios en todo el mundo.",
     "passion": "Apasionado por arquitectura limpia, componentes reutilizables y resolver desafíos UX complejos. Prospero en entornos remotos Agile, colaborando con equipos multifuncionales para impulsar la excelencia del producto.",
     "stats": {
       "yearsExperience": "Años de Experiencia",
