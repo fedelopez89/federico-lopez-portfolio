@@ -4,6 +4,7 @@
   "version": "2.0.0",
   "type": "module",
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@emotion/is-prop-valid": "^1.4.0",
     "framer-motion": "^12.34.0",
     "i18next": "^25.8.13",

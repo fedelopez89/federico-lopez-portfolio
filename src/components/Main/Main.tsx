@@ -7,7 +7,7 @@ import { MainContainer, Section } from './Main.styles';
 const AboutMe = lazy(() => import('../Sections/AboutMe/AboutMe'));
 const Projects = lazy(() => import('../Sections/Projects/Projects'));
 const Experience = lazy(() => import('../Sections/Experience/Experience'));
-const Education = lazy(() => import('../Sections/Education/Education'));
+const Contact = lazy(() => import('../Sections/Contact/Contact'));
 interface SectionConfig {
   id: string;
   component: FC;
@@ -17,7 +17,7 @@ const sections: SectionConfig[] = [
   { id: 'aboutme', component: AboutMe },
   { id: 'projects', component: Projects },
   { id: 'experience', component: Experience },
-  { id: 'education', component: Education },
+  { id: 'contact', component: Contact },
 ];
 
 const Main: FC = () => {

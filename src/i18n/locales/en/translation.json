@@ -6,6 +6,7 @@
     "experience": "EXPERIENCE",
     "languages": "LANGUAGES",
     "education": "EDUCATION",
+    "contact": "CONTACT",
     "name": "Federico López",
     "role": "Senior Frontend Engineer"
   },
@@ -163,5 +164,29 @@
     "month": "month",
     "months": "months",
     "remote": "Remote"
+  },
+  "contact": {
+    "title": "contact",
+    "subtitle": "Let's work together",
+    "panelTagline": "I'm open to senior frontend roles, freelance projects, and technical consulting. Drop me a line and I'll get back to you within 24 hours.",
+    "formTitle": "Send me a message",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "your@email.com",
+    "messagePlaceholder": "Tell me about your project or opportunity...",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "success": "Message sent! I'll get back to you soon.",
+    "error": "Something went wrong. Please try again or email me directly.",
+    "validation": {
+      "nameRequired": "Please enter your name.",
+      "emailRequired": "Please enter your email address.",
+      "emailInvalid": "Please enter a valid email address.",
+      "messageRequired": "Please enter a message.",
+      "messageTooShort": "Message must be at least 40 characters.",
+      "messageTooLong": "Message cannot exceed 300 characters."
+    }
   }
 }
