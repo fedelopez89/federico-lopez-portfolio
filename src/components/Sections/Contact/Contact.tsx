@@ -99,6 +99,13 @@ const Contact: FC = () => {
     }
 
     setErrors({});
+
+    const honeypot = new FormData(formRef.current).get('_honeypot') as string;
+    if (honeypot) {
+      setStatus('success');
+      return;
+    }
+
     setStatus('loading');
 
     try {
@@ -195,6 +202,15 @@ const Contact: FC = () => {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 noValidate
               >
+                <input
+                  type="text"
+                  name="_honeypot"
+                  style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                />
+
                 <FieldGroup>
                   <Label htmlFor="contact-name">{t('contact.name')}</Label>
                   <Input
