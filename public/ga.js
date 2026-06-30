@@ -7,5 +7,5 @@ if (
     dataLayer.push(arguments);
   }
   gtag('js', new Date());
-  gtag('config', 'G-WJEC2XPHNB', { page_path: window.location.pathname });
+  gtag('config', 'G-WJEC2XPHNB');
 }
