@@ -18,7 +18,9 @@
     "liveDemo": "Ver Demo",
     "code": "Código",
     "viewAll": "Ver Todos los Proyectos",
-    "showLess": "Mostrar Menos"
+    "showLess": "Mostrar Menos",
+    "viewDetails": "Ver Detalles",
+    "backToPortfolio": "Volver al Portfolio"
   },
   "footer": {
     "copyright": "© {{year}} Federico López. Todos los derechos reservados."
@@ -42,7 +44,7 @@
       "title": "Clon de Gmail - REAL Evals",
       "description": "Réplica de Gmail lista para producción construida para plataforma de evaluación de IA. Destacado en The New York Times por enfoque innovador en pruebas de IA. Recreación pixel-perfect implementando gestión de correos, funcionalidad de redacción, etiquetas, carpetas y búsqueda avanzada. Construido con Next.js y Material UI para rendimiento y accesibilidad óptimos."
     },
-    "realevalsdash dish": {
+    "realevalsdashdish": {
       "title": "Clon de DoorDash - REAL Evals",
       "description": "Clon de alta fidelidad de plataforma de entrega de comida con navegación de restaurantes, exploración de menús, gestión de carrito y flujo de compra. Construido con Next.js y Material UI para replicar la experiencia de usuario de DoorDash con diseño responsive e interacciones fluidas."
     },
@@ -50,7 +52,7 @@
       "title": "Clon de Uber - REAL Evals",
       "description": "Clon integral de plataforma de viajes compartidos con integración de mapas en tiempo real, cálculo de rutas, estimaciones de precios y simulación de emparejamiento de conductores. Destacado en The New York Times como parte de la plataforma de pruebas de IA REAL Evals. Construido con Next.js y Material UI."
     },
-    "realevals united": {
+    "realevalsunited": {
       "title": "Clon de United Airlines - REAL Evals",
       "description": "Clon completo de plataforma de reservas de aerolínea replicando búsqueda de vuelos de United Airlines, selección de asientos, flujo de reserva y gestión de viajes. Implementa formularios multi-paso complejos, disponibilidad en tiempo real y diseño responsive con Next.js y Material UI."
     },

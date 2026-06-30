@@ -18,7 +18,9 @@
     "liveDemo": "Live Demo",
     "code": "Code",
     "viewAll": "View All Projects",
-    "showLess": "Show Less"
+    "showLess": "Show Less",
+    "viewDetails": "View Details",
+    "backToPortfolio": "Back to Portfolio"
   },
   "footer": {
     "copyright": "© {{year}} Federico López. All rights reserved."
@@ -50,7 +52,7 @@
       "title": "Uber Clone - REAL Evals",
       "description": "Comprehensive ride-sharing platform clone with real-time map integration, route calculation, pricing estimates, and driver matching simulation. Featured in The New York Times as part of REAL Evals AI testing platform. Built with Next.js and Material UI."
     },
-    "realevals united": {
+    "realevalsunited": {
       "title": "United Airlines Clone - REAL Evals",
       "description": "Full-featured airline booking platform clone replicating United Airlines flight search, seat selection, booking flow, and trip management. Implements complex multi-step forms, real-time availability, and responsive design with Next.js and Material UI."
     },
