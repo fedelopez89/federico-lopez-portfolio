@@ -174,7 +174,58 @@
           "author": {
             "@id": "https://federicoglopez.dev/#person"
           },
-          "inLanguage": ["en", "es"]
+          "inLanguage": ["en", "es"],
+          "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": ["h1", "h2", ".hero-description", ".about-intro"]
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "@id": "https://federicoglopez.dev/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What technologies does Federico López specialize in?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Federico López specializes in React, TypeScript, and Next.js. He also works with Material UI, Chakra UI, Shadcn UI, Tailwind CSS, Redux, and has deep expertise in Server-Side Rendering (SSR), web performance optimization, Core Web Vitals, and clean architecture patterns."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How many years of experience does Federico López have?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Federico López has 16+ years of total IT experience, with 7+ years focused exclusively on modern frontend development using React, TypeScript, and Next.js."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is Federico López available for remote work?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, Federico López is available for remote opportunities including senior frontend roles, freelance projects, and technical consulting. He has extensive experience collaborating with distributed teams across multiple time zones."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Has Federico López's work been featured in major publications?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Federico López built production-ready AI evaluation applications for REAL Evals — a platform used to benchmark large language models — which was featured in The New York Times."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Where is Federico López based?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Federico López is based in Argentina and works remotely with clients and companies worldwide."
+              }
+            }
+          ]
         }
       ]
     </script>

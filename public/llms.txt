@@ -1,0 +1,50 @@
+# Federico López — Senior Frontend Engineer
+
+> Senior Frontend Engineer with 16+ years of IT experience. Specializes in React, TypeScript, and Next.js. Based in Argentina. Available for remote opportunities worldwide. Work featured in The New York Times.
+
+## About
+
+Federico López is a Senior Frontend Engineer with 16+ years of total IT experience and 7+ years focused on modern frontend development. He builds high-performance, scalable, and accessible web applications for global companies in wellness, sports, fintech, and healthcare sectors — reaching millions of users worldwide.
+
+His work was featured in The New York Times for building production-ready AI evaluation applications used to benchmark large language models at REAL Evals.
+
+## Core Skills
+
+- **Frontend**: React, TypeScript, Next.js, JavaScript (ES2024+)
+- **UI Libraries**: Material UI, Chakra UI, Shadcn UI, Tailwind CSS
+- **State Management**: Redux, Context API
+- **Architecture**: Clean Architecture, Hexagonal Architecture, Atomic Design
+- **Performance**: Server-Side Rendering (SSR), code splitting, Core Web Vitals optimization
+- **Tools**: Storybook, Jest, React Testing Library
+- **Methodologies**: Remote Agile, cross-functional teams, distributed collaboration
+
+## Experience
+
+- **Senior Frontend Engineer — Bonzzu** (Current): React/Next.js applications for Delos Company and RCX Sports. Reusable component systems, SSR, and performance optimization.
+- **Frontend Web Developer — Freelance**: Clients include REAL Evals (featured in The New York Times), Vrio, Wpromote, and FactuPro.
+- **Full Stack Engineer — Nisum (Science37)**: Clinical research platform using React, Redux, and TypeScript. Storybook component library.
+- **Senior Mainframe COBOL Developer — ICBC**: Anti-Money Laundering systems, COBOL, DB2, CICS.
+- **COBOL Developer — ISBAN / BBVA / Accenture**: Enterprise financial batch systems.
+
+## Notable Projects
+
+- **Gmail Clone (REAL Evals)**: Production-ready Gmail replica for AI evaluation. Featured in The New York Times. Built with Next.js and Material UI.
+- **DoorDash Clone (REAL Evals)**: High-fidelity food delivery platform clone. Next.js + Material UI.
+- **Uber Clone (REAL Evals)**: Ride-sharing platform with real-time map integration. Featured in The New York Times.
+- **NFL / NBA / NHL / MLS League Finder (RCX Sports)**: Fantasy league discovery platforms with advanced filtering and real-time data.
+- **FactuPro**: Invoice and billing management system for SMBs.
+
+## Education
+
+- National University of Technology (Universidad Tecnológica Nacional), Argentina
+
+## Availability
+
+Open to senior frontend roles, freelance projects, and technical consulting. Available immediately for remote opportunities.
+
+## Links
+
+- Portfolio: https://federicoglopez.dev/
+- LinkedIn: https://www.linkedin.com/in/federicoglopez/
+- GitHub: https://github.com/fedelopez89
+- Contact form: https://federicoglopez.dev/#contact
