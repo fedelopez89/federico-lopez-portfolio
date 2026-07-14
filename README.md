@@ -21,8 +21,8 @@ _Showcasing 16 years of IT experience with 7+ years specializing in modern front
 ## Highlights
 
 - **Featured in The New York Times** - Recognized for exceptional frontend engineering contributions
-- **Lighthouse 100/100 Desktop** - Performance, Accessibility, SEO all perfect
-- **Lighthouse 91/100 Mobile** - Optimized for real devices on slow networks
+- **Lighthouse 97/100 Desktop** - Performance, Accessibility, Best Practices and SEO all 100
+- **Lighthouse 83/100 Mobile** - Optimized for real devices on slow networks
 - **Multilingual** - English/Spanish i18n with automatic browser detection
 - **Accessible** - WCAG 2.1 AA compliant, Lighthouse Accessibility 100/100
 - **Responsive** - Mobile-first design with custom hamburger menu
@@ -73,26 +73,16 @@ Complete billing system for SMBs. [Live Demo](https://app.factupro.es/login)
 
 ```
 Lighthouse Desktop (federicoglopez.dev):
-  Performance:    100/100
+  Performance:     97/100
   Accessibility:  100/100
-  Best Practices:  77/100  *
+  Best Practices: 100/100
   SEO:            100/100
 
-Lighthouse Mobile (Slow 4G, Moto G Power):
-  Performance:     91/100
+Lighthouse Mobile (Slow 4G):
+  Performance:     83/100
   Accessibility:  100/100
-  Best Practices:  77/100  *
+  Best Practices: 100/100
   SEO:            100/100
-
-* MetaMask Chrome extension deprecation warning + Trusted Types
-  (not fixable without changing styled-components internals)
-
-Core Web Vitals (Desktop):
-  FCP:  0.5s
-  LCP:  0.8s
-  TBT:  0ms
-  CLS:  0
-  SI:   0.6s
 ```
 
 ---
