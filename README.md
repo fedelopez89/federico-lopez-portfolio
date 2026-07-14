@@ -119,8 +119,11 @@ Open http://localhost:5173
 ```
 resume/
 ├── public/
-│   ├── images/            # Static images (WebP optimized)
+│   ├── images/
+│   │   └── projects/      # WebP optimized project screenshots
+│   ├── pdf/               # Resume PDF download
 │   ├── ga.js              # Google Analytics (external, CSP-safe)
+│   ├── llms.txt           # AI crawler profile (AEO/GEO)
 │   ├── robots.txt
 │   └── sitemap.xml
 ├── src/
@@ -130,19 +133,27 @@ resume/
 │   │   ├── Main/          # Layout wrapper (lazy loads sections)
 │   │   ├── LanguageToggle/
 │   │   ├── ThemeToggle/
+│   │   ├── layout/
+│   │   │   └── ScrollToTop/
+│   │   ├── ui/            # Shared UI primitives
+│   │   │   ├── LoadingSpinner.tsx
+│   │   │   └── ProjectDetailSkeleton.tsx
 │   │   └── Sections/
 │   │       ├── AboutMe/
 │   │       ├── Projects/
 │   │       ├── Experience/
-│   │       ├── Education/
-│   │       └── Languages/
+│   │       ├── Contact/
+│   │       └── shared/    # SectionTitle and other shared section components
+│   ├── pages/
+│   │   └── ProjectDetail/ # /projects/:id route — lazy loaded
 │   ├── context/           # ThemeContext
-│   ├── data/              # projects.ts, experience.json, education.json
+│   ├── data/              # projects.ts, experience.json
 │   ├── hooks/             # useNavbarScroll, useScrollSpy, useScrollToTop
 │   ├── i18n/              # react-i18next config + EN/ES translations
 │   ├── styles/            # theme.ts, GlobalStyles.ts
-│   └── types/
-├── vercel.json            # Security headers + cache config
+│   ├── types/
+│   └── utils/             # reportWebVitals.ts, dateCalculations.ts
+├── vercel.json            # SPA rewrites + security headers
 ├── .npmrc                 # legacy-peer-deps=true
 └── NAMING_CONVENTIONS.md
 ```
