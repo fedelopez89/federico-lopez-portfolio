@@ -241,7 +241,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
               <TechBadge key={tech} role="listitem">{tech}</TechBadge>
             ))}
             {extraCount > 0 && (
-              <MoreBadge aria-label={`${extraCount} more technologies`}>
+              <MoreBadge role="listitem" aria-label={`${extraCount} more technologies`}>
                 +{extraCount}
               </MoreBadge>
             )}

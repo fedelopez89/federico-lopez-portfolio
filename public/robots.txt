@@ -24,4 +24,4 @@ User-agent: CCBot
 Allow: /
 
 Sitemap: https://federicoglopez.dev/sitemap.xml
-LLMs: https://federicoglopez.dev/llms.txt
+# LLMs: https://federicoglopez.dev/llms.txt
