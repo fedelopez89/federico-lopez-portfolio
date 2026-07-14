@@ -130,6 +130,7 @@ const Contact: FC = () => {
   return (
     <>
       <SectionTitle
+        id="section-contact"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -138,7 +139,7 @@ const Contact: FC = () => {
         {t('contact.title')}
       </SectionTitle>
 
-      <ContactWrapper>
+      <ContactWrapper aria-labelledby="section-contact">
         <ContactPanel
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -221,11 +222,16 @@ const Contact: FC = () => {
                     disabled={isLoading}
                     autoComplete="name"
                     maxLength={NAME_MAX}
+                    required
+                    aria-required="true"
+                    aria-invalid={!!errors.from_name}
+                    aria-describedby="contact-name-error"
                     $hasError={!!errors.from_name}
                     onChange={() => clearError('from_name')}
                   />
                   {errors.from_name && (
                     <FieldError
+                      id="contact-name-error"
                       initial={{ opacity: 0, y: -4 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.2 }}
@@ -244,11 +250,16 @@ const Contact: FC = () => {
                     placeholder={t('contact.emailPlaceholder')}
                     disabled={isLoading}
                     autoComplete="email"
+                    required
+                    aria-required="true"
+                    aria-invalid={!!errors.from_email}
+                    aria-describedby="contact-email-error"
                     $hasError={!!errors.from_email}
                     onChange={() => clearError('from_email')}
                   />
                   {errors.from_email && (
                     <FieldError
+                      id="contact-email-error"
                       initial={{ opacity: 0, y: -4 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.2 }}
@@ -265,6 +276,10 @@ const Contact: FC = () => {
                     name="message"
                     placeholder={t('contact.messagePlaceholder')}
                     disabled={isLoading}
+                    required
+                    aria-required="true"
+                    aria-invalid={!!errors.message}
+                    aria-describedby="contact-message-error contact-char-count"
                     $hasError={!!errors.message}
                     maxLength={MSG_MAX}
                     onChange={(e) => {
@@ -273,6 +288,8 @@ const Contact: FC = () => {
                     }}
                   />
                   <CharCount
+                    id="contact-char-count"
+                    aria-live="polite"
                     $warn={msgLength >= MSG_MAX * 0.85}
                     $over={msgLength > MSG_MAX}
                   >
@@ -280,6 +297,7 @@ const Contact: FC = () => {
                   </CharCount>
                   {errors.message && (
                     <FieldError
+                      id="contact-message-error"
                       initial={{ opacity: 0, y: -4 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.2 }}

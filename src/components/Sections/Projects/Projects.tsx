@@ -102,9 +102,10 @@ const Projects: React.FC = () => {
         );
 
   return (
-    <Section id="projects" aria-label="Projects showcase">
+    <Section id="projects" aria-labelledby="section-projects">
       <SectionHeader>
         <SectionTitle
+          id="section-projects"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -156,6 +157,7 @@ const Projects: React.FC = () => {
           transition={{ duration: 0.3 }}
         >
           <svg
+            aria-hidden="true"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

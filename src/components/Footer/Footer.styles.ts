@@ -21,7 +21,7 @@ export const FooterContent = styled.div`
   }
 `;
 
-export const Copyright = styled(motion.h5)`
+export const Copyright = styled(motion.p)`
   font-size: ${({ theme }) => theme.typography.fontSize.sm};
   font-weight: ${({ theme }) => theme.typography.fontWeight.regular};
   color: ${({ theme }) => theme.colors.textSecondary};

@@ -36,8 +36,9 @@ const Experience: FC = () => {
   };
 
   return (
-    <ExperienceContainer>
+    <ExperienceContainer aria-labelledby="section-experience">
       <SectionTitle
+        id="section-experience"
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -84,7 +85,12 @@ const Experience: FC = () => {
                 <h3>{t(`experience.${id}.role`)}</h3>
                 <h4>
                   {company.href ? (
-                    <a href={company.href} target="_blank" rel="noreferrer">
+                    <a
+                      href={company.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${t(`experience.${id}.company`)} (opens in new tab)`}
+                    >
                       {t(`experience.${id}.company`)}
                     </a>
                   ) : (

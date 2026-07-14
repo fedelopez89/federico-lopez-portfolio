@@ -59,6 +59,7 @@ const LanguageToggle = ({ isScrolled = false }: LanguageToggleProps) => {
   const changeLanguage = (lang: string) => {
     if (i18n.language !== lang) {
       i18n.changeLanguage(lang);
+      document.documentElement.lang = lang;
     }
   };
 
