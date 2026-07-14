@@ -137,8 +137,8 @@ export const GlobalStyles = createGlobalStyle`
 
   .skip-link {
     position: absolute;
-    top: -100%;
-    left: 1rem;
+    top: -9999px;
+    left: -9999px;
     padding: 0.75rem 1.5rem;
     background: #2563eb;
     color: white;
@@ -146,11 +146,11 @@ export const GlobalStyles = createGlobalStyle`
     border-radius: 0 0 8px 8px;
     z-index: 9999;
     text-decoration: none;
-    transition: top 0.2s;
   }
 
   .skip-link:focus {
-    top: 0;
+    top: 1rem;
+    left: 1rem;
   }
 
   @media (prefers-reduced-motion: reduce) {
