@@ -9,8 +9,19 @@ interface ProjectCardProps {
   index: number;
 }
 
+const CardLink = styled(RouterLink)`
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 12px;
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.primary};
+    outline-offset: 3px;
+  }
+`;
+
 const Card = styled(motion.article)`
-  position: relative;
   background: ${({ theme }) => theme.colors.surface};
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 12px;
@@ -19,7 +30,7 @@ const Card = styled(motion.article)`
   display: flex;
   flex-direction: column;
 
-  &:hover {
+  ${CardLink}:hover & {
     transform: translateY(-6px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35), 0 12px 40px rgba(0, 0, 0, 0.5);
     border-color: ${({ theme }) => theme.colors.primary};
@@ -41,7 +52,7 @@ const ProjectImage = styled.img`
   object-fit: cover;
   transition: transform 0.35s ease;
 
-  ${Card}:hover & {
+  ${CardLink}:hover & {
     transform: scale(1.04);
   }
 `;
@@ -104,23 +115,6 @@ const Title = styled.h3`
   flex: 1;
 `;
 
-const TitleLink = styled(RouterLink)`
-  color: inherit;
-  text-decoration: none;
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.primary};
-    outline-offset: 2px;
-    border-radius: 3px;
-  }
-`;
-
 const ArrowIcon = styled.span`
   flex-shrink: 0;
   width: 28px;
@@ -134,7 +128,7 @@ const ArrowIcon = styled.span`
   transition: all 0.2s ease;
   margin-top: 1px;
 
-  ${Card}:hover & {
+  ${CardLink}:hover & {
     background: ${({ theme }) => theme.colors.primary};
     color: white;
     transform: translate(2px, -2px);
@@ -183,64 +177,62 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   const extraCount = project.technologies.length - MAX_TECH;
 
   return (
-    <Card
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.08 }}
+    <CardLink
+      to={`/projects/${project.id}`}
+      state={{ fromPortfolio: true }}
+      aria-label={`View details of ${translatedTitle}`}
     >
-      <ImageContainer>
-        {project.imageUrl ? (
-          <ProjectImage
-            src={project.imageUrl}
-            alt={project.title}
-            loading={index < 2 ? 'eager' : 'lazy'}
-            fetchPriority={index === 0 ? 'high' : 'auto'}
-            decoding="async"
-          />
-        ) : (
-          <ImagePlaceholder>
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </svg>
-          </ImagePlaceholder>
-        )}
-        {project.featured && featuredLabel && (
-          <FeaturedBadge>★ NYT</FeaturedBadge>
-        )}
-      </ImageContainer>
-
-      <CardBody>
-        <TitleRow>
-          <Title>
-            <TitleLink
-              to={`/projects/${project.id}`}
-              state={{ fromPortfolio: true }}
-              aria-label={`View details of ${translatedTitle}`}
-            >
-              {translatedTitle}
-            </TitleLink>
-          </Title>
-          <ArrowIcon aria-hidden="true">
-            <svg fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-              <path d="M7 17L17 7M7 7h10v10" />
-            </svg>
-          </ArrowIcon>
-        </TitleRow>
-
-        <TechRow role="list" aria-label="Technologies used">
-          {visibleTech.map((tech) => (
-            <TechBadge key={tech} role="listitem">{tech}</TechBadge>
-          ))}
-          {extraCount > 0 && (
-            <MoreBadge aria-label={`${extraCount} more technologies`}>
-              +{extraCount}
-            </MoreBadge>
+      <Card
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: index * 0.08 }}
+      >
+        <ImageContainer>
+          {project.imageUrl ? (
+            <ProjectImage
+              src={project.imageUrl}
+              alt={project.title}
+              loading={index < 2 ? 'eager' : 'lazy'}
+              fetchPriority={index === 0 ? 'high' : 'auto'}
+              decoding="async"
+            />
+          ) : (
+            <ImagePlaceholder>
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+            </ImagePlaceholder>
           )}
-        </TechRow>
-      </CardBody>
-    </Card>
+          {project.featured && featuredLabel && (
+            <FeaturedBadge>★ NYT</FeaturedBadge>
+          )}
+        </ImageContainer>
+
+        <CardBody>
+          <TitleRow>
+            <Title>{translatedTitle}</Title>
+            <ArrowIcon aria-hidden="true">
+              <svg fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                <path d="M7 17L17 7M7 7h10v10" />
+              </svg>
+            </ArrowIcon>
+          </TitleRow>
+
+          <TechRow role="list" aria-label="Technologies used">
+            {visibleTech.map((tech) => (
+              <TechBadge key={tech} role="listitem">{tech}</TechBadge>
+            ))}
+            {extraCount > 0 && (
+              <MoreBadge aria-label={`${extraCount} more technologies`}>
+                +{extraCount}
+              </MoreBadge>
+            )}
+          </TechRow>
+        </CardBody>
+      </Card>
+    </CardLink>
   );
 };
 
