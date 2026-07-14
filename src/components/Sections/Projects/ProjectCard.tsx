@@ -164,6 +164,17 @@ const MoreBadge = styled(TechBadge)`
 
 const MAX_TECH = 3;
 
+function preloadImage(url: string) {
+  const href = url.startsWith('/') ? url : `/${url}`;
+  if (document.querySelector(`link[rel="preload"][href="${href}"]`)) return;
+  const link = document.createElement('link');
+  link.rel = 'preload';
+  link.as = 'image';
+  link.href = href;
+  link.setAttribute('fetchpriority', 'high');
+  document.head.appendChild(link);
+}
+
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   const { t } = useTranslation();
 
@@ -176,11 +187,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   const visibleTech = project.technologies.slice(0, MAX_TECH);
   const extraCount = project.technologies.length - MAX_TECH;
 
+  const handleClick = () => {
+    if (project.imageUrl) preloadImage(project.imageUrl);
+  };
+
   return (
     <CardLink
       to={`/projects/${project.id}`}
       state={{ fromPortfolio: true }}
       aria-label={`View details of ${translatedTitle}`}
+      onClick={handleClick}
     >
       <Card
         initial={{ opacity: 0, y: 20 }}
