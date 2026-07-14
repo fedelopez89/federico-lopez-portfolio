@@ -75,6 +75,12 @@ export const Logo = styled(motion.a)<{ $isScrolled?: boolean }>`
     color: ${({ theme, $isScrolled }) =>
       $isScrolled ? theme.colors.primary : theme.colors.background};
   }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.primary};
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
 `;
 
 export const NavMenu = styled(motion.ul)`
@@ -228,6 +234,12 @@ export const MobileNavLink = styled.a<{ $isActive?: boolean }>`
     background: ${({ theme }) => theme.colors.primaryLight};
     padding-left: calc(${({ theme }) => theme.spacing.xl} + 4px);
   }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.primary};
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
 `;
 
 export const MobileMenuFooter = styled.div`
@@ -280,6 +292,12 @@ export const NavLink = styled.a<{ $isScrolled?: boolean; $isActive?: boolean }>`
     &::after {
       width: 80%;
     }
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.primary};
+    outline-offset: 3px;
+    border-radius: 3px;
   }
 `;
 
@@ -353,6 +371,12 @@ export const SocialLink = styled(motion.a)`
     border-color: rgba(255, 255, 255, 0.4);
     transform: translateY(-4px);
     color: ${({ theme }) => theme.colors.background};
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.primary};
+    outline-offset: 3px;
+    border-radius: 3px;
   }
 
   i {

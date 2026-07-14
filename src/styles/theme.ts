@@ -19,7 +19,7 @@ export const lightTheme = {
     // Text colors
     text: '#111827',
     textSecondary: '#6b7280',
-    textTertiary: '#9ca3af',
+    textTertiary: '#6b7280',
 
     // Border colors
     border: '#e5e7eb',

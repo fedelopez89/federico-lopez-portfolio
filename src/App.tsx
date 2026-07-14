@@ -1,6 +1,6 @@
 import { FC, lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion, type Transition } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion, type Transition } from 'framer-motion';
 import { ThemeProvider } from './context';
 import { Header, Main, Footer, ThemeToggle } from '@components';
 import { ProjectDetailSkeleton } from './components/ui';
@@ -13,16 +13,16 @@ const pageVariants = {
   exit:    { opacity: 0 },
 } as const;
 
-const pageTransition: Transition = { duration: 0.15, ease: 'easeInOut' };
-
 function PageTransition({ children }: { children: React.ReactNode }) {
+  const shouldReduce = useReducedMotion();
+  const transition: Transition = { duration: shouldReduce ? 0 : 0.15, ease: 'easeInOut' };
   return (
     <motion.div
       variants={pageVariants}
       initial="initial"
       animate="animate"
       exit="exit"
-      transition={pageTransition}
+      transition={transition}
     >
       {children}
     </motion.div>

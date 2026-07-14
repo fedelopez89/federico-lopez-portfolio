@@ -35,7 +35,7 @@ export const ContactPanel = styled(motion.div)`
   }
 `;
 
-export const PanelHeading = styled.h2`
+export const PanelHeading = styled.h3`
   font-size: ${({ theme }) => theme.typography.fontSize['3xl']};
   font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
   color: white;
