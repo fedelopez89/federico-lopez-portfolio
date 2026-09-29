@@ -12,6 +12,13 @@
     "tagline": "Construyo interfaces rápidas y accesibles para productos que la gente realmente usa.",
     "ctaWork": "Ver proyectos",
     "ctaContact": "Contactar",
+    "ctaResume": "CV (PDF)",
+    "proof": {
+      "label": "Datos destacados",
+      "years": "Más de 16 años en TI",
+      "react": "Más de 7 años en React / Next.js",
+      "featured": "Destacado en The New York Times"
+    },
     "newTab": "(se abre en una pestaña nueva)",
     "a11y": {
       "home": "Volver al inicio",
@@ -40,18 +47,18 @@
   },
   "buttons": {
     "downloadResume": "Descargar CV",
-    "liveDemo": "Ver Demo",
+    "liveDemo": "Abrir demo",
     "code": "Código",
-    "viewAll": "Ver Todos los Proyectos",
-    "showLess": "Mostrar Menos",
-    "viewDetails": "Ver Detalles",
-    "backToPortfolio": "Volver al Portfolio",
-    "resumeFileType": "PDF"
+    "viewDetails": "Ver detalles",
+    "backToPortfolio": "Volver al portfolio",
+    "resumeFileType": "PDF",
+    "openApp": "Abrir app (requiere login)"
   },
   "footer": {
-    "copyright": "© {{year}} Federico López. Todos los derechos reservados.",
+    "copyright": "© {{year}} Federico López",
     "email": "Correo",
-    "links": "Redes y contacto"
+    "links": "Redes y contacto",
+    "resume": "CV (PDF)"
   },
   "aboutMe": {
     "intro": "¡Hola! Soy <strong>Federico López</strong>, Ingeniero Frontend Senior especializado en construir aplicaciones web de <strong>alto rendimiento</strong>, <strong>escalables</strong> y <strong>centradas en el usuario</strong> con <strong>React</strong>, <strong>TypeScript</strong> y <strong>Next.js</strong>.",
@@ -71,11 +78,7 @@
   },
   "projects": {
     "subtitle": "Una selección de mi trabajo, incluyendo proyectos destacados en The New York Times",
-    "filterAll": "Todos",
     "nytBadge": "Destacado NYT",
-    "filterLabel": "Filtrar proyectos por tecnología",
-    "resultCount_one": "{{count}} proyecto",
-    "resultCount_other": "{{count}} proyectos",
     "technologiesUsed": "Tecnologías utilizadas",
     "moreTechnologies_one": "+{{count}} tecnología más",
     "moreTechnologies_other": "+{{count}} tecnologías más",
@@ -85,13 +88,9 @@
       "personal": "Personal",
       "professional": "Profesional"
     },
-    "emptyState": {
-      "title": "No se encontraron proyectos",
-      "description": "Prueba con otro filtro de tecnología."
-    },
     "realevalsgmail": {
       "title": "Clon de Gmail - REAL Evals",
-      "description": "Réplica de Gmail lista para producción construida para plataforma de evaluación de IA. Destacado en The New York Times por enfoque innovador en pruebas de IA. Recreación pixel-perfect implementando gestión de correos, funcionalidad de redacción, etiquetas, carpetas y búsqueda avanzada. Construido con Next.js y Material UI para rendimiento y accesibilidad óptimos."
+      "description": "Réplica de Gmail lista para producción construida para plataforma de evaluación de IA. Recreación pixel-perfect implementando gestión de correos, funcionalidad de redacción, etiquetas, carpetas y búsqueda avanzada. Construido con Next.js y Material UI para rendimiento y accesibilidad óptimos."
     },
     "realevalsdashdish": {
       "title": "Clon de DoorDash - REAL Evals",
@@ -99,7 +98,7 @@
     },
     "realevalsuber": {
       "title": "Clon de Uber - REAL Evals",
-      "description": "Clon integral de plataforma de viajes compartidos con integración de mapas en tiempo real, cálculo de rutas, estimaciones de precios y simulación de emparejamiento de conductores. Destacado en The New York Times como parte de la plataforma de pruebas de IA REAL Evals. Construido con Next.js y Material UI."
+      "description": "Clon integral de plataforma de viajes compartidos con integración de mapas en tiempo real, cálculo de rutas, estimaciones de precios y simulación de emparejamiento de conductores. Construido con Next.js y Material UI."
     },
     "realevalsunited": {
       "title": "Clon de United Airlines - REAL Evals",
@@ -124,6 +123,19 @@
     "factupro": {
       "title": "FactuPro - Gestión de Facturas",
       "description": "Sistema completo de gestión de facturación y cobros para PYMEs. Implementa generación de facturas, seguimiento de pagos, gestión de clientes y recordatorios automatizados con diseño responsive y cumplimiento de accesibilidad."
+    },
+    "groups": {
+      "real-evals": {
+        "title": "REAL Evals",
+        "lead": "Clones de aplicaciones de alta fidelidad creados para evaluación de IA, destacados en The New York Times."
+      },
+      "rcx-sports": {
+        "title": "RCX Sports",
+        "lead": "Aplicaciones de búsqueda de ligas para RCX Sports en cuatro ligas: NFL, NBA, NHL y MLS."
+      },
+      "independent": {
+        "title": "Independientes"
+      }
     }
   },
   "experience": {
@@ -185,7 +197,7 @@
     "namePlaceholder": "Tu nombre",
     "emailPlaceholder": "tu@email.com",
     "messagePlaceholder": "Contame sobre tu proyecto u oportunidad...",
-    "send": "Enviar Mensaje",
+    "send": "Enviar mensaje",
     "sending": "Enviando…",
     "error": "No se pudo enviar tu mensaje. Tu texto sigue acá, así que intentá de nuevo o escribime directamente.",
     "validation": {
@@ -193,14 +205,14 @@
       "emailRequired": "Por favor ingresá tu email.",
       "emailInvalid": "Por favor ingresá un email válido.",
       "messageRequired": "Por favor ingresá un mensaje.",
-      "messageTooShort": "El mensaje debe tener al menos 40 caracteres."
+      "messageTooShort": "El mensaje debe tener al menos 10 caracteres."
     },
     "eyebrow": "Disponible para trabajar",
     "copyEmail": "Copiar dirección de email",
     "copied": "Copiado",
     "copyFailed": "No se pudo copiar automáticamente. La dirección está seleccionada: presioná Ctrl o Cmd+C.",
     "requiredNote": "Todos los campos son obligatorios.",
-    "messageHint": "Mínimo 40 caracteres",
+    "messageHint": "Mínimo 10 caracteres",
     "successTitle": "Mensaje enviado",
     "successText": "Gracias por escribirme. Te respondo pronto.",
     "sendAnother": "Enviar otro mensaje",
@@ -222,5 +234,10 @@
     "previous": "Anterior",
     "next": "Siguiente",
     "loading": "Cargando proyecto…"
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "text": "La página que buscás no existe.",
+    "cta": "Volver al inicio"
   }
 }

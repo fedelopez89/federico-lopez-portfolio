@@ -103,8 +103,7 @@ export const Category = styled.p`
   font-family: ${({ theme }) => theme.typography.fontFamily.mono};
   font-size: ${({ theme }) => theme.typography.fontSize.xs};
   font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
-  letter-spacing: ${({ theme }) => theme.typography.tracking.eyebrow};
-  text-transform: uppercase;
+  letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wide};
   color: ${({ theme }) => theme.colors.textMuted};
 `;
 
@@ -115,7 +114,7 @@ export const TitleRow = styled.div`
   gap: ${({ theme }) => theme.spacing.md};
 `;
 
-export const Title = styled.h3`
+export const Title = styled.h4`
   flex: 1;
   margin: 0;
   font-size: ${({ theme }) => theme.typography.fontSize.xl};

@@ -22,8 +22,7 @@ export const Chip = styled.span.withConfig({
   font-family: ${({ theme }) => theme.typography.fontFamily.mono};
   font-size: ${({ theme }) => theme.typography.fontSize.xs};
   font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
-  letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wider};
-  text-transform: uppercase;
+  letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wide};
   white-space: nowrap;
   color: ${({ theme, variant }) =>
     variant === 'accent'

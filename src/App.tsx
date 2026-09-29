@@ -1,11 +1,5 @@
 import { FC, lazy, Suspense, useEffect } from 'react';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-  useLocation,
-} from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import {
   AnimatePresence,
   MotionConfig,
@@ -13,13 +7,14 @@ import {
   useReducedMotion,
   type Transition,
 } from 'framer-motion';
-import i18n, { type TFunction } from 'i18next';
+import { type TFunction } from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { useDocumentTitle } from '@/hooks';
 import { ThemeProvider } from './context';
 import { Header, Main, Footer } from '@components';
 import { ProjectDetailSkeleton } from './components/ui';
-import { projects } from './data/projects';
+import NotFound from './pages/NotFound';
+import { titleForPath } from './utils/pageTitle';
 
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 
@@ -53,13 +48,6 @@ function PageTransition({ children }: { children: React.ReactNode }) {
  * so the pre-hydration and runtime titles are identical.
  */
 const homeTitle = (t: TFunction) => t('meta.homeTitle');
-
-/** Title of the page a path renders, without waiting for the lazy route. */
-const titleForPath = (pathname: string): string => {
-  const id = pathname.match(/^\/projects\/([^/]+)/)?.[1];
-  const project = projects.find((p) => p.id === id);
-  return project ? `${project.title} | Federico López` : homeTitle(i18n.t);
-};
 
 /** Home route content; owns the page title so it follows language changes. */
 function HomePage() {
@@ -115,7 +103,14 @@ function AppRoutes() {
               </PageTransition>
             }
           />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route
+            path="*"
+            element={
+              <PageTransition>
+                <NotFound />
+              </PageTransition>
+            }
+          />
         </Routes>
       </AnimatePresence>
     </>

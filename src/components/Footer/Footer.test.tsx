@@ -42,7 +42,19 @@ describe('Footer', () => {
     const list = document.querySelector('ul[role="list"]');
     expect(list).not.toBeNull();
     expect(list).toBe(screen.getByRole('list', { name: 'Social links' }));
-    expect(within(list as HTMLElement).getAllByRole('link')).toHaveLength(3);
+    expect(within(list as HTMLElement).getAllByRole('link')).toHaveLength(4);
+  });
+
+  it('drops the redundant rights-reserved sentence', () => {
+    renderWithProviders(<Footer />);
+    expect(screen.queryByText(/all rights reserved/i)).not.toBeInTheDocument();
+  });
+
+  it('links the resume PDF as a download from any route', () => {
+    renderWithProviders(<Footer />);
+    const resume = screen.getByRole('link', { name: 'Resume (PDF)' });
+    expect(resume).toHaveAttribute('href', '/pdf/Resume_LOPEZ_Federico.pdf');
+    expect(resume).toHaveAttribute('download', 'Resume_LOPEZ_Federico.pdf');
   });
 
   it('links the email with a mailto href and no new tab', () => {

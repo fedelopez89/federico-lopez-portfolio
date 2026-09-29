@@ -14,6 +14,7 @@ import {
   TextLink,
 } from '../../components/ui';
 import { stackVariants, fadeUpVariants } from '../../styles/motion';
+import { NotFoundView } from '../NotFound/NotFoundView';
 import { useProjectSeo } from './useProjectSeo';
 import { useNoindex } from './useNoindex';
 import {
@@ -42,7 +43,6 @@ import {
   PagerCard,
   PagerLabel,
   PagerTitle,
-  NotFound,
 } from './ProjectDetail.styles';
 
 /** Intrinsic size of the screenshots; reserves space before the image loads. */
@@ -116,7 +116,7 @@ function ProjectDetail() {
 
   if (!project) {
     // Keep the real href for middle-click and copy; plain clicks stay in the SPA.
-    const goToProjects = (e: MouseEvent<HTMLElement>) => {
+    const goToProjects = (e: MouseEvent<HTMLAnchorElement>) => {
       const plain = !(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey);
       if (e.button !== 0 || !plain) return;
       e.preventDefault();
@@ -124,23 +124,13 @@ function ProjectDetail() {
     };
 
     return (
-      <>
-        <PageHeader>
-          <SiteNav variant="page" />
-        </PageHeader>
-        <PageMain id="main-content" tabIndex={-1}>
-          <Container>
-            <NotFound>
-              <h1>{t('projectDetail.notFoundTitle')}</h1>
-              <p>{t('projectDetail.notFoundText')}</p>
-              <Button href="/#projects" onClick={goToProjects}>
-                {t('projectDetail.notFoundCta')}
-              </Button>
-            </NotFound>
-          </Container>
-        </PageMain>
-        <Footer />
-      </>
+      <NotFoundView
+        title={t('projectDetail.notFoundTitle')}
+        text={t('projectDetail.notFoundText')}
+        ctaLabel={t('projectDetail.notFoundCta')}
+        ctaHref="/#projects"
+        onCtaClick={goToProjects}
+      />
     );
   }
 
@@ -198,7 +188,11 @@ function ProjectDetail() {
                       externalLabel={newTab}
                       icon="↗"
                     >
-                      {t('buttons.liveDemo')}
+                      {t(
+                        project.demoRequiresLogin
+                          ? 'buttons.openApp'
+                          : 'buttons.liveDemo'
+                      )}
                     </Button>
                   )}
                   {project.repoUrl && (

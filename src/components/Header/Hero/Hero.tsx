@@ -2,6 +2,8 @@ import { FC, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { useMediaQueryHysteresis, usePointerGlow } from '@hooks';
+import { NYT_HREF } from '../../../data/featured';
+import { RESUME_FILENAME, RESUME_HREF } from '../../../data/resume';
 import { Button, Container, Eyebrow, TextLink } from '../../ui';
 import {
   stackVariants,
@@ -27,6 +29,9 @@ import {
   Tagline,
   Actions,
   SocialLinks,
+  ProofList,
+  ProofItem,
+  ProofLink,
 } from './Hero.styles';
 
 const socialLinks = [
@@ -118,14 +123,21 @@ const Hero: FC = () => {
             <FadeBlock $mt="2.5rem" variants={fadeUpVariants}>
               <Actions>
                 <Button href="#projects">{t('header.ctaWork')}</Button>
-                <Button href="#contact" variant="secondary">
-                  {t('header.ctaContact')}
+                <Button
+                  href={RESUME_HREF}
+                  download={RESUME_FILENAME}
+                  variant="secondary"
+                >
+                  {t('header.ctaResume')}
                 </Button>
               </Actions>
             </FadeBlock>
 
             <FadeBlock $mt="1.5rem" variants={fadeUpVariants}>
               <SocialLinks>
+                <li>
+                  <TextLink href="#contact">{t('header.ctaContact')}</TextLink>
+                </li>
                 {socialLinks.map((link) => (
                   <li key={link.href}>
                     <TextLink
@@ -139,6 +151,22 @@ const Hero: FC = () => {
                   </li>
                 ))}
               </SocialLinks>
+            </FadeBlock>
+
+            <FadeBlock $mt="2.5rem" variants={fadeUpVariants}>
+              <ProofList aria-label={t('header.proof.label')}>
+                <ProofItem>{t('header.proof.years')}</ProofItem>
+                <ProofItem>{t('header.proof.react')}</ProofItem>
+                <ProofItem>
+                  <ProofLink
+                    href={NYT_HREF}
+                    external
+                    externalLabel={t('header.newTab')}
+                  >
+                    {t('header.proof.featured')}
+                  </ProofLink>
+                </ProofItem>
+              </ProofList>
             </FadeBlock>
           </HeroStack>
         </Container>

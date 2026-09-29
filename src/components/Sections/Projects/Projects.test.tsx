@@ -1,9 +1,8 @@
 import { describe, it, expect, beforeAll, afterEach } from 'vitest';
-import { act, screen, waitFor, within } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { act, screen, within } from '@testing-library/react';
 import i18n from '../../../i18n/config';
 import Projects from './Projects';
-import { projects } from '../../../data/projects';
+import { PROJECT_GROUPS, projects } from '../../../data/projects';
 import {
   renderWithProviders,
   setupTestEnvironment,
@@ -18,195 +17,124 @@ describe('Projects', () => {
   });
 
   afterEach(async () => {
-    await i18n.changeLanguage('en');
+    await act(() => i18n.changeLanguage('en'));
   });
 
-  const usage = () => {
-    const counts = new Map<string, number>();
-    projects.forEach((p) =>
-      new Set(p.technologies).forEach((t) =>
-        counts.set(t, (counts.get(t) ?? 0) + 1)
+  it('assigns every project to a known group', () => {
+    projects.forEach((p) => expect(PROJECT_GROUPS).toContain(p.group));
+    const byGroup = (g: string) =>
+      projects.filter((p) => p.group === g).map((p) => p.id);
+    expect(byGroup('real-evals')).toEqual([
+      'real-evals-gmail',
+      'real-evals-dashdish',
+      'real-evals-uber',
+      'real-evals-united',
+    ]);
+    expect(byGroup('rcx-sports')).toEqual([
+      'nfl-league-finder',
+      'nba-league-finder',
+      'nhl-league-finder',
+      'mls-league-finder',
+    ]);
+    expect(byGroup('independent')).toEqual(['factupro']);
+  });
+
+  it('renders the three groups in order as h3 headings', () => {
+    renderProjects();
+    const headings = screen.getAllByRole('heading', { level: 3 });
+    expect(headings.map((h) => h.textContent)).toEqual([
+      'REAL Evals',
+      'RCX Sports',
+      'Independent',
+    ]);
+  });
+
+  it('omits the lead for the independent group', () => {
+    renderProjects();
+    const heading = screen.getByRole('heading', {
+      level: 3,
+      name: 'Independent',
+    });
+    expect(heading.parentElement?.querySelectorAll('p')).toHaveLength(0);
+  });
+
+  it('shows a factual one-line lead under each group title', () => {
+    renderProjects();
+    expect(
+      screen.getByText(
+        'High-fidelity app clones built for AI evaluation, featured in The New York Times.'
       )
-    );
-    return counts;
-  };
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'League finder apps for RCX Sports across four leagues: NFL, NBA, NHL and MLS.'
+      )
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/end to end/i)).not.toBeInTheDocument();
+  });
 
-  it('renders the filters as buttons inside a labelled group', () => {
+  it('keeps the outline section h2 > group h3 > card h4', () => {
     renderProjects();
-    const group = screen.getByRole('group', {
-      name: 'Filter projects by technology',
+    expect(screen.getAllByRole('heading', { level: 3 })).toHaveLength(3);
+    expect(screen.getAllByRole('heading', { level: 4 })).toHaveLength(
+      projects.length
+    );
+  });
+
+  it('puts each project in its own group grid, listed as a list', () => {
+    renderProjects();
+    PROJECT_GROUPS.forEach((group) => {
+      const title = i18n.t(`projects.groups.${group}.title`);
+      const heading = screen.getByRole('heading', { level: 3, name: title });
+      const region = heading.parentElement?.parentElement as HTMLElement;
+      const expected = projects.filter((p) => p.group === group);
+      expect(within(region).getAllByRole('article')).toHaveLength(
+        expected.length
+      );
+      expected.forEach((p) =>
+        expect(
+          within(region)
+            .getAllByRole('link')
+            .some((a) => a.getAttribute('href') === `/projects/${p.id}`)
+        ).toBe(true)
+      );
     });
-    const buttons = within(group).getAllByRole('button');
-    expect(buttons.length).toBeGreaterThan(1);
-    buttons.forEach((button) => expect(button).toHaveAttribute('aria-pressed'));
-  });
-
-  it('shows a translated "All" filter pressed by default', () => {
-    renderProjects();
-    expect(screen.getByRole('button', { name: 'All' })).toHaveAttribute(
-      'aria-pressed',
-      'true'
-    );
-    expect(screen.getByRole('button', { name: 'React' })).toHaveAttribute(
-      'aria-pressed',
-      'false'
+    expect(document.querySelectorAll('ul[role="list"]')).toHaveLength(
+      PROJECT_GROUPS.length
     );
   });
 
-  it('uses the visible text as the accessible name of every filter', () => {
+  it('no longer offers technology filters or a result count', () => {
     renderProjects();
-    const group = screen.getByRole('group', {
-      name: 'Filter projects by technology',
-    });
-    within(group)
-      .getAllByRole('button')
-      .forEach((button) => {
-        expect(button).toHaveAccessibleName(button.textContent ?? '');
-        expect(button).not.toHaveAttribute('aria-label');
-      });
+    expect(screen.queryByRole('group')).not.toBeInTheDocument();
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(screen.queryByRole('button')).not.toBeInTheDocument();
   });
 
-  it('announces the total count in a polite live region', () => {
-    renderProjects();
-    const status = screen.getByRole('status');
-    expect(status).toHaveAttribute('aria-live', 'polite');
-    expect(status).toHaveTextContent(`${projects.length} projects`);
-  });
-
-  it('does not re-announce the count when only the language changes', async () => {
-    renderProjects();
-    const before = screen.getByRole('status');
+  it('translates group titles and leads to Spanish', async () => {
     await act(() => i18n.changeLanguage('es'));
-    const after = screen.getByRole('status');
-    // A fresh region is inserted with its text already in place: not a change.
-    expect(after).not.toBe(before);
-    expect(after).toHaveTextContent(`${projects.length} proyectos`);
+    renderProjects();
+    expect(
+      screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent)
+    ).toEqual(['REAL Evals', 'RCX Sports', 'Independientes']);
+    expect(screen.queryByText(/punta a punta/i)).not.toBeInTheDocument();
   });
 
-  it('keeps the same live region when a filter changes so it is announced', async () => {
-    const user = userEvent.setup();
-    renderProjects();
-    const before = screen.getByRole('status');
-    await user.click(screen.getByRole('button', { name: 'Chakra UI' }));
-    expect(screen.getByRole('status')).toBe(before);
-  });
-
-  it('marks the project grid as a list', () => {
-    renderProjects();
-    const grid = document.querySelector('ul[role="list"]') as HTMLElement;
-    expect(grid).not.toBeNull();
-    expect(within(grid).getAllByRole('article')).toHaveLength(projects.length);
-  });
-
-  it('makes cards inert while they fade out', async () => {
-    renderProjects();
-    const kept = projects.filter((p) => p.technologies.includes('Chakra UI'));
-    // Synchronous click: the first waitFor poll runs inside the exit window.
-    act(() => {
-      screen.getByRole('button', { name: 'Chakra UI' }).click();
-    });
-    await waitFor(() =>
-      expect(document.querySelectorAll('li[inert]')).toHaveLength(
-        projects.length - kept.length
-      )
+  it('does not repeat the NYT sentence in project descriptions', () => {
+    projects.forEach((p) =>
+      expect(p.description).not.toMatch(/New York Times/)
     );
-    // Once the exit finishes only the matching, non-inert cards remain.
-    await waitFor(() =>
-      expect(screen.getAllByRole('article')).toHaveLength(kept.length)
-    );
-    expect(document.querySelectorAll('li[inert]')).toHaveLength(0);
-  });
-
-  it('filters projects by technology and updates the live count', async () => {
-    const user = userEvent.setup();
-    renderProjects();
-    const tech = 'Chakra UI'; // used by several projects, so it is a filter
-    const expected = projects.filter((p) => p.technologies.includes(tech));
-    expect(expected.length).toBeGreaterThan(0);
-    expect(expected.length).toBeLessThan(projects.length);
-
-    await user.click(screen.getByRole('button', { name: tech }));
-
-    expect(screen.getByRole('button', { name: tech })).toHaveAttribute(
-      'aria-pressed',
-      'true'
-    );
-    expect(screen.getByRole('button', { name: 'All' })).toHaveAttribute(
-      'aria-pressed',
-      'false'
-    );
-    expect(screen.getByRole('status')).toHaveTextContent(
-      expected.length === 1 ? '1 project' : `${expected.length} projects`
-    );
-    // Non-matching cards fade out (exit animation) and are then removed.
-    await waitFor(() =>
-      expect(screen.getAllByRole('article')).toHaveLength(expected.length)
-    );
-    const names = screen
-      .getAllByRole('article')
-      .map((card) => card.textContent ?? '');
-    expected.forEach((p) => {
-      expect(names.some((text) => text.includes(p.title))).toBe(true);
-    });
-  });
-
-  it('derives filters from data and omits technologies used by a single project', () => {
-    renderProjects();
-    const counts = usage();
-    const single = [...counts].filter(([, n]) => n === 1).map(([t]) => t);
-    const shared = [...counts].filter(([, n]) => n >= 2).map(([t]) => t);
-    expect(single.length).toBeGreaterThan(0);
-    single.forEach((t) =>
-      expect(screen.queryByRole('button', { name: t })).not.toBeInTheDocument()
-    );
-    const group = screen.getByRole('group', {
-      name: 'Filter projects by technology',
-    });
-    const labels = within(group)
-      .getAllByRole('button')
-      .map((b) => b.textContent);
-    expect(labels).toEqual(['All', ...labels.slice(1)]);
-    expect([...labels.slice(1)].sort()).toEqual([...shared].sort());
-    // Most used first.
-    const used = labels.slice(1).map((t) => counts.get(t as string) as number);
-    expect(used).toEqual([...used].sort((a, b) => b - a));
-  });
-
-  it('resets to all projects when clicking "All"', async () => {
-    const user = userEvent.setup();
-    renderProjects();
-    await user.click(screen.getByRole('button', { name: 'Chakra UI' }));
-    await user.click(screen.getByRole('button', { name: 'All' }));
-    expect(screen.getByRole('button', { name: 'All' })).toHaveAttribute(
-      'aria-pressed',
-      'true'
-    );
-    expect(screen.getByRole('status')).toHaveTextContent(
-      `${projects.length} projects`
-    );
-    await waitFor(() =>
-      expect(screen.getAllByRole('article')).toHaveLength(projects.length)
+    ['en', 'es'].forEach((lng) =>
+      projects.forEach((p) => {
+        const key = `projects.${p.id.replace(/-/g, '')}.description`;
+        expect(i18n.t(key, { lng })).not.toMatch(/New York Times/);
+      })
     );
   });
 
-  it('announces the count in Spanish with singular and plural forms', async () => {
-    await i18n.changeLanguage('es');
-    const user = userEvent.setup();
-    renderProjects();
-    expect(screen.getByRole('status')).toHaveTextContent(
-      `${projects.length} proyectos`
-    );
-    expect(screen.getByRole('button', { name: 'Todos' })).toHaveAttribute(
-      'aria-pressed',
-      'true'
-    );
-    const counts = usage();
-    const shared = [...counts].filter(([, n]) => n >= 2).map(([t]) => t);
-    // Single-project filters are hidden, so verify the singular plural key directly.
-    expect(i18n.t('projects.resultCount', { count: 1 })).toBe('1 proyecto');
-    await user.click(screen.getByRole('button', { name: shared[0] }));
-    expect(screen.getByRole('status')).toHaveTextContent(
-      `${counts.get(shared[0])} proyectos`
+  it('lists each technology once per project', () => {
+    projects.forEach((p) =>
+      expect(new Set(p.technologies).size).toBe(p.technologies.length)
     );
   });
 });

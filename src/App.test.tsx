@@ -155,4 +155,30 @@ describe('App shell', () => {
     await waitFor(() => expect(document.title).toBe(title(0)), timeout);
     expect(jsonLd()).toHaveLength(2);
   }, 30_000);
+
+  it.each(['/projects/', '/projects/x/y'])(
+    'renders the site 404 for %s',
+    async (path) => {
+      window.history.pushState({}, '', path);
+      render(<App />);
+      expect(
+        await screen.findByRole('heading', {
+          level: 1,
+          name: 'Page not found',
+        })
+      ).toBeInTheDocument();
+    }
+  );
+
+  it('renders a real 404 for unknown paths instead of redirecting', async () => {
+    window.history.pushState({}, '', '/definitely-not-a-page');
+    render(<App />);
+    expect(
+      await screen.findByRole('heading', { level: 1, name: 'Page not found' })
+    ).toBeInTheDocument();
+    expect(window.location.pathname).toBe('/definitely-not-a-page');
+    expect(
+      document.querySelector('meta[name="robots"]')?.getAttribute('content')
+    ).toBe('noindex');
+  });
 });

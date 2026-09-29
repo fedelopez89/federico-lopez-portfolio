@@ -443,7 +443,7 @@ describe('Contact', () => {
     expect(regions()).not.toContain('charNote');
     expect(screen.getByText('3 / 300')).toBeInTheDocument();
 
-    await user.type(message, 'x'.repeat(37));
+    await user.type(message, 'x'.repeat(7));
     expect(regions()).toContain('contact.charNote.minReached');
 
     fireEvent.change(message, { target: { value: 'y'.repeat(279) } });

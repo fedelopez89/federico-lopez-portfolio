@@ -1,6 +1,7 @@
 import styled, { css, keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 import { alpha } from '../../../styles/mixins';
+import { TextLink } from '../../ui';
 import { lightTheme } from '../../../styles/theme';
 
 const GRID_SIZE = '72px';
@@ -252,4 +253,48 @@ export const SocialLinks = styled.ul.attrs({ role: 'list' })`
   list-style: none;
   margin: 0;
   padding: 0;
+`;
+
+/**
+ * Proof points. Stacked below the lg breakpoint so a wrapped row can never
+ * start with an orphaned divider; from lg they sit in one row split by
+ * hairlines.
+ */
+export const ProofList = styled.ul.attrs({ role: 'list' })`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.xs};
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    flex-direction: row;
+    align-items: center;
+  }
+`;
+
+export const ProofItem = styled.li`
+  display: flex;
+  align-items: center;
+  min-height: 2rem;
+  font-family: ${({ theme }) => theme.typography.fontFamily.mono};
+  font-size: ${({ theme }) => theme.typography.fontSize.xs};
+  letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wide};
+  color: ${({ theme }) => theme.colors.textMuted};
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    & + & {
+      margin-left: ${({ theme }) => theme.spacing.lg};
+      padding-left: ${({ theme }) => theme.spacing.lg};
+      border-left: 1px solid ${({ theme }) => theme.colors.border};
+    }
+  }
+`;
+
+export const ProofLink = styled(TextLink)`
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+  text-decoration-color: currentColor;
 `;

@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { RESUME_FILENAME, RESUME_HREF } from '../../data/resume';
 import { Container, Hairline } from '../ui';
 import {
   FooterRoot,
@@ -26,13 +27,28 @@ const Footer: FC = () => {
           <Copyright>{t('footer.copyright', { year: currentYear })}</Copyright>
           <FooterLinks aria-label={t('footer.links')}>
             <li>
-              <FooterLink href={GITHUB_HREF} external externalLabel={newTab} arrow>
+              <FooterLink
+                href={GITHUB_HREF}
+                external
+                externalLabel={newTab}
+                arrow
+              >
                 GitHub
               </FooterLink>
             </li>
             <li>
-              <FooterLink href={LINKEDIN_HREF} external externalLabel={newTab} arrow>
+              <FooterLink
+                href={LINKEDIN_HREF}
+                external
+                externalLabel={newTab}
+                arrow
+              >
                 LinkedIn
+              </FooterLink>
+            </li>
+            <li>
+              <FooterLink href={RESUME_HREF} download={RESUME_FILENAME}>
+                {t('footer.resume')}
               </FooterLink>
             </li>
             <li>

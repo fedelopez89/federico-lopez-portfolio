@@ -242,12 +242,26 @@ describe('ProjectDetail', () => {
   it('names the live demo link with its visible text plus the new-tab hint', () => {
     renderDetail('real-evals-gmail');
     const demo = screen.getByRole('link', {
-      name: /^Live Demo\s*\(opens in a new tab\)$/,
+      name: /^Open live demo\s*\(opens in a new tab\)$/,
     });
     expect(demo).toHaveAttribute('href', first.demoUrl);
     expect(demo).toHaveAttribute('target', '_blank');
     expect(demo.getAttribute('rel')).toContain('noreferrer');
     expect(demo).not.toHaveAttribute('aria-label');
+  });
+
+  it('says login is required for projects flagged demoRequiresLogin', async () => {
+    renderDetail('factupro');
+    expect(
+      screen.getByRole('link', {
+        name: /^Open app \(login required\)\s*\(opens in a new tab\)$/,
+      })
+    ).toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /open live demo/i })).toBeNull();
+    await act(() => i18n.changeLanguage('es'));
+    expect(
+      screen.getByRole('link', { name: /^Abrir app \(requiere login\)/ })
+    ).toBeInTheDocument();
   });
 
   it('hides the code link when the project has no repository', () => {

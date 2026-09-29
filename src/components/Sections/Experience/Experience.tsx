@@ -8,6 +8,7 @@ import {
   toDateTimeValue,
 } from '@/utils/dateCalculations';
 import { useRevealOnFocus } from '@/hooks';
+import { RESUME_FILENAME, RESUME_HREF } from '../../../data/resume';
 import { Button } from '../../ui';
 import { fadeUpVariants, inViewProps } from '../../../styles/motion';
 import { SectionHeader } from '../shared/SectionHeader';
@@ -85,8 +86,8 @@ const Experience: FC = () => {
         <Button
           variant="secondary"
           size="md"
-          href="./pdf/Resume_LOPEZ_Federico.pdf"
-          download="Resume_LOPEZ_Federico.pdf"
+          href={RESUME_HREF}
+          download={RESUME_FILENAME}
           icon={<DownloadIcon />}
         >
           {t('buttons.downloadResume')}

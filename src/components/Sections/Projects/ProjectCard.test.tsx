@@ -14,6 +14,7 @@ const baseProject: Project = {
   description: 'A test project description.',
   technologies: ['React', 'TypeScript', 'Next.js'],
   category: 'personal',
+  group: 'independent',
 };
 
 describe('ProjectCard', () => {
@@ -26,6 +27,15 @@ describe('ProjectCard', () => {
       withRouter: true,
     });
     expect(screen.getByText('Test Project')).toBeInTheDocument();
+  });
+
+  it('renders the title as an h4 so it nests under the group h3', () => {
+    renderWithProviders(<ProjectCard project={baseProject} />, {
+      withRouter: true,
+    });
+    expect(
+      screen.getByRole('heading', { level: 4, name: 'Test Project' })
+    ).toBeInTheDocument();
   });
 
   it('link href points to /projects/{id}', () => {

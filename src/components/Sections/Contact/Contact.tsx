@@ -57,7 +57,7 @@ const GITHUB_HREF = 'https://github.com/fedelopez89';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const NAME_MAX = 50;
-const MSG_MIN = 40;
+const MSG_MIN = 10;
 const MSG_MAX = 300;
 const MSG_WARN_REMAINING = 20;
 const COPIED_RESET_MS = 2000;

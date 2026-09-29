@@ -12,6 +12,13 @@
     "tagline": "I build fast, accessible interfaces for products people actually use.",
     "ctaWork": "View work",
     "ctaContact": "Get in touch",
+    "ctaResume": "Resume (PDF)",
+    "proof": {
+      "label": "Highlights",
+      "years": "16+ years in IT",
+      "react": "7+ years in React / Next.js",
+      "featured": "Featured in The New York Times"
+    },
     "newTab": "(opens in a new tab)",
     "a11y": {
       "home": "Back to top",
@@ -40,18 +47,18 @@
   },
   "buttons": {
     "downloadResume": "Download resume",
-    "liveDemo": "Live Demo",
+    "liveDemo": "Open live demo",
     "code": "Code",
-    "viewAll": "View All Projects",
-    "showLess": "Show Less",
-    "viewDetails": "View Details",
-    "backToPortfolio": "Back to Portfolio",
-    "resumeFileType": "PDF"
+    "viewDetails": "View details",
+    "backToPortfolio": "Back to portfolio",
+    "resumeFileType": "PDF",
+    "openApp": "Open app (login required)"
   },
   "footer": {
-    "copyright": "© {{year}} Federico López. All rights reserved.",
+    "copyright": "© {{year}} Federico López",
     "email": "Email",
-    "links": "Social links"
+    "links": "Social links",
+    "resume": "Resume (PDF)"
   },
   "aboutMe": {
     "intro": "Hi! I'm <strong>Federico López</strong>, a Senior Frontend Engineer specializing in building <strong>high-performance</strong>, <strong>scalable</strong>, and <strong>user-centric</strong> web applications with <strong>React</strong>, <strong>TypeScript</strong>, and <strong>Next.js</strong>.",
@@ -71,11 +78,7 @@
   },
   "projects": {
     "subtitle": "A selection of my work, including projects featured in The New York Times",
-    "filterAll": "All",
     "nytBadge": "NYT feature",
-    "filterLabel": "Filter projects by technology",
-    "resultCount_one": "{{count}} project",
-    "resultCount_other": "{{count}} projects",
     "technologiesUsed": "Technologies used",
     "moreTechnologies_one": "+{{count}} more technology",
     "moreTechnologies_other": "+{{count}} more technologies",
@@ -85,13 +88,9 @@
       "personal": "Personal",
       "professional": "Professional"
     },
-    "emptyState": {
-      "title": "No projects found",
-      "description": "Try a different technology filter."
-    },
     "realevalsgmail": {
       "title": "Gmail Clone - REAL Evals",
-      "description": "Production-ready Gmail replica built for AI evaluation platform. Featured in The New York Times for innovative AI testing approach. Pixel-perfect recreation implementing email management, compose functionality, labels, folders, and advanced search. Built with Next.js and Material UI for optimal performance and accessibility."
+      "description": "Production-ready Gmail replica built for AI evaluation platform. Pixel-perfect recreation implementing email management, compose functionality, labels, folders, and advanced search. Built with Next.js and Material UI for optimal performance and accessibility."
     },
     "realevalsdashdish": {
       "title": "DoorDash Clone - REAL Evals",
@@ -99,7 +98,7 @@
     },
     "realevalsuber": {
       "title": "Uber Clone - REAL Evals",
-      "description": "Comprehensive ride-sharing platform clone with real-time map integration, route calculation, pricing estimates, and driver matching simulation. Featured in The New York Times as part of REAL Evals AI testing platform. Built with Next.js and Material UI."
+      "description": "Comprehensive ride-sharing platform clone with real-time map integration, route calculation, pricing estimates, and driver matching simulation. Built with Next.js and Material UI."
     },
     "realevalsunited": {
       "title": "United Airlines Clone - REAL Evals",
@@ -124,6 +123,19 @@
     "factupro": {
       "title": "FactuPro - Invoice Management",
       "description": "Complete invoice and billing management system for SMBs. Implemented invoice generation, payment tracking, client management, and automated reminders with responsive design and accessibility compliance."
+    },
+    "groups": {
+      "real-evals": {
+        "title": "REAL Evals",
+        "lead": "High-fidelity app clones built for AI evaluation, featured in The New York Times."
+      },
+      "rcx-sports": {
+        "title": "RCX Sports",
+        "lead": "League finder apps for RCX Sports across four leagues: NFL, NBA, NHL and MLS."
+      },
+      "independent": {
+        "title": "Independent"
+      }
     }
   },
   "experience": {
@@ -185,7 +197,7 @@
     "namePlaceholder": "Your name",
     "emailPlaceholder": "your@email.com",
     "messagePlaceholder": "Tell me about your project or opportunity...",
-    "send": "Send Message",
+    "send": "Send message",
     "sending": "Sending…",
     "error": "Your message couldn't be sent. Your text is still here, so please try again or email me directly.",
     "validation": {
@@ -193,14 +205,14 @@
       "emailRequired": "Please enter your email address.",
       "emailInvalid": "Please enter a valid email address.",
       "messageRequired": "Please enter a message.",
-      "messageTooShort": "Message must be at least 40 characters."
+      "messageTooShort": "Message must be at least 10 characters."
     },
     "eyebrow": "Available for work",
     "copyEmail": "Copy email address",
     "copied": "Copied",
     "copyFailed": "Couldn't copy automatically. The address is selected: press Ctrl or Cmd+C.",
     "requiredNote": "All fields are required.",
-    "messageHint": "Minimum 40 characters",
+    "messageHint": "Minimum 10 characters",
     "successTitle": "Message sent",
     "successText": "Thanks for reaching out. I'll get back to you soon.",
     "sendAnother": "Send another message",
@@ -222,5 +234,10 @@
     "previous": "Previous",
     "next": "Next",
     "loading": "Loading project…"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "The page you are looking for does not exist.",
+    "cta": "Back to home"
   }
 }
