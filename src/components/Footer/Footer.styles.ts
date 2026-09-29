@@ -28,7 +28,7 @@ export const Copyright = styled.p`
   color: ${({ theme }) => theme.colors.textMuted};
 `;
 
-export const FooterLinks = styled.ul`
+export const FooterLinks = styled.ul.attrs({ role: 'list' })`
   display: flex;
   flex-wrap: wrap;
   gap: ${({ theme }) => `0 ${theme.spacing.lg}`};

@@ -1,6 +1,7 @@
 import { FC, FormEvent, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Container, Eyebrow, TextLink, VisuallyHidden, Button } from '../../ui';
+import { useRevealOnFocus } from '@/hooks';
 import {
   fadeUpVariants,
   fadeVariants,
@@ -19,6 +20,8 @@ import {
   RowValue,
   EmailLink,
   CopyButton,
+  CopyNote,
+  RequiredNote,
   FormColumn,
   FormPanel,
   FormTitle,
@@ -112,6 +115,7 @@ const CheckIcon = () => (
 
 const Contact: FC = () => {
   const { t } = useTranslation();
+  const reveal = useRevealOnFocus();
   const formRef = useRef<HTMLFormElement>(null);
   const emailLinkRef = useRef<HTMLAnchorElement>(null);
   const successHeadingRef = useRef<HTMLHeadingElement>(null);
@@ -350,7 +354,7 @@ const Contact: FC = () => {
       />
 
       <Layout>
-        <Intro variants={fadeUpVariants} {...inViewProps}>
+        <Intro variants={fadeUpVariants} {...inViewProps} {...reveal('intro')}>
           <Eyebrow>{t('contact.eyebrow')}</Eyebrow>
           <IntroHeading>{t('contact.subtitle')}</IntroHeading>
           <IntroTagline>{t('contact.panelTagline')}</IntroTagline>
@@ -369,7 +373,9 @@ const Contact: FC = () => {
                   icon={copied ? <CheckIcon /> : <CopyIcon />}
                   onClick={handleCopy}
                 />
-                <VisuallyHidden role="status">{copyNote}</VisuallyHidden>
+                <CopyNote role="status" $visible={copyFailed && !!copyNote}>
+                  {copyNote}
+                </CopyNote>
               </RowValue>
             </ContactRow>
             <ContactRow>
@@ -401,7 +407,11 @@ const Contact: FC = () => {
           </ContactList>
         </Intro>
 
-        <FormColumn variants={fadeUpVariants} {...inViewProps}>
+        <FormColumn
+          variants={fadeUpVariants}
+          {...inViewProps}
+          {...reveal('form')}
+        >
           <FormPanel>
             {status === 'success' ? (
               <SuccessPanel
@@ -473,6 +483,8 @@ const Contact: FC = () => {
                       </SummaryList>
                     </ErrorSummary>
                   )}
+
+                  <RequiredNote>{t('contact.requiredNote')}</RequiredNote>
 
                   <FieldGroup>
                     <Label htmlFor="contact-name">{t('contact.name')}</Label>

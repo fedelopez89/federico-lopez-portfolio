@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll } from 'vitest';
-import { screen } from '@testing-library/react';
+import { screen, within } from '@testing-library/react';
 import '../../i18n/config';
 import Footer from './Footer';
 import {
@@ -35,6 +35,14 @@ describe('Footer', () => {
       expect(link.getAttribute('rel')).toMatch(/noreferrer/);
       expect(link).toHaveAccessibleName(/\(opens in a new tab\)/);
     }
+  });
+
+  it('keeps list semantics on the link list', () => {
+    renderWithProviders(<Footer />);
+    const list = document.querySelector('ul[role="list"]');
+    expect(list).not.toBeNull();
+    expect(list).toBe(screen.getByRole('list', { name: 'Social links' }));
+    expect(within(list as HTMLElement).getAllByRole('link')).toHaveLength(3);
   });
 
   it('links the email with a mailto href and no new tab', () => {

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 import { Container } from '../../ui';
 import { alpha, focusRing } from '../../../styles/mixins';
@@ -92,6 +92,30 @@ export const FilterButton = styled.button<{ $active: boolean }>`
   &:focus-visible {
     outline-offset: 2px;
   }
+
+  ${({ $active, theme }) =>
+    $active
+      ? css`
+          /* Fills are replaced in forced colors: restate the pressed state
+             with system colors so it stays distinguishable. */
+          @media (forced-colors: active) {
+            &,
+            &:hover {
+              forced-color-adjust: none;
+              background: Highlight;
+              color: HighlightText;
+              border-color: Highlight;
+            }
+          }
+        `
+      : css`
+          @media (prefers-contrast: more) {
+            &,
+            &:hover {
+              border-color: ${theme.colors.borderStrong};
+            }
+          }
+        `}
 `;
 
 export const ResultCount = styled.p`
@@ -103,7 +127,7 @@ export const ResultCount = styled.p`
   color: ${({ theme }) => theme.colors.textMuted};
 `;
 
-export const ProjectsGrid = styled.ul`
+export const ProjectsGrid = styled.ul.attrs({ role: 'list' })`
   position: relative; /* containing block for items pinned by AnimatePresence popLayout */
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));

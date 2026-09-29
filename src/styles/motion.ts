@@ -35,9 +35,14 @@ export const fadeVariants: Variants = {
 /** Tween used by overlays and drawers that enter and leave the tree. */
 export const overlayTransition = { duration: 0.3, ease: EASE };
 
-/** Spread on a motion element to animate it once when scrolled into view. */
+/**
+ * Spread on a motion element to animate it once when scrolled into view.
+ * The margin is 0 so nothing can sit inside the viewport while still hidden.
+ * Elements containing focusable children should also spread the props from
+ * useRevealOnFocus so keyboard focus always reveals them.
+ */
 export const inViewProps = {
   initial: 'hidden',
   whileInView: 'visible',
-  viewport: { once: true, margin: '-80px' },
+  viewport: { once: true, margin: '0px' },
 } as const;

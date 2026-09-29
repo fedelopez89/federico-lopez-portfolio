@@ -184,7 +184,7 @@ export const SectionTitle = styled.h2`
   letter-spacing: ${({ theme }) => theme.typography.tracking.heading};
 `;
 
-export const TechList = styled.ul`
+export const TechList = styled.ul.attrs({ role: 'list' })`
   display: flex;
   flex-wrap: wrap;
   gap: ${({ theme }) => theme.spacing.sm};

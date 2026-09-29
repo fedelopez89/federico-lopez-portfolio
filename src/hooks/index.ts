@@ -3,3 +3,7 @@ export * from './useNavbarScroll';
 export * from './useScrollSpy';
 export * from './usePointerGlow';
 export * from './useHashScroll';
+export * from './useMediaQuery';
+export * from './useDocumentTitle';
+export * from './useRevealOnFocus';
+export * from './useRestoreProjectFocus';

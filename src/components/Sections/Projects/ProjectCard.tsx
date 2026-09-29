@@ -56,7 +56,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   return (
     <CardLink
       to={`/projects/${project.id}`}
-      state={{ fromPortfolio: true }}
+      state={{ fromPortfolio: true, fromProject: project.id }}
       aria-labelledby={titleId}
       onClick={handleClick}
     >

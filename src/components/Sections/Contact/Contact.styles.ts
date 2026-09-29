@@ -1,14 +1,11 @@
 import styled, { css, keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 import { Button, Card, TextLink } from '../../ui';
-import type { Theme } from '../../../styles/theme';
-import { focusRing } from '../../../styles/mixins';
+import { focusRing, visuallyHidden } from '../../../styles/mixins';
 
 const SPINNER_SIZE = '0.875rem';
 const ICON_SIZE = '1.125rem';
 const CHECK_CIRCLE = '3rem';
-const SCROLL_MARGIN = ({ theme }: { theme: Theme }) =>
-  `calc(${theme.layout.navHeight} + ${theme.spacing.md})`;
 
 export const Layout = styled.div`
   display: grid;
@@ -47,7 +44,7 @@ export const IntroTagline = styled.p`
   color: ${({ theme }) => theme.colors.textMuted};
 `;
 
-export const ContactList = styled.ul`
+export const ContactList = styled.ul.attrs({ role: 'list' })`
   margin: ${({ theme }) => theme.spacing.md} 0 0;
   padding: 0;
   list-style: none;
@@ -75,6 +72,7 @@ export const RowLabel = styled.span`
 
 export const RowValue = styled.span`
   display: flex;
+  overflow-wrap: anywhere;
   flex-wrap: wrap;
   max-width: 100%;
   align-items: center;
@@ -82,14 +80,36 @@ export const RowValue = styled.span`
   min-width: 0;
 `;
 
-/** Email stays on one line beside its copy button; smaller type on phones. */
+/**
+ * Email stays on one line beside its copy button on wider screens. Below
+ * 480px it may wrap (at "@" or "." via overflow-wrap) so it never forces
+ * horizontal scrolling at 320px or with increased text spacing.
+ */
 export const EmailLink = styled(TextLink)`
   flex-shrink: 0;
   white-space: nowrap;
+  overflow-wrap: anywhere;
 
   @media (max-width: 480px) {
+    flex-shrink: 1;
+    min-width: 0;
+    max-width: 100%;
+    white-space: normal;
     font-size: ${({ theme }) => theme.typography.fontSize.sm};
   }
+`;
+
+/** Copy status: screen-reader only on success, visible when copying fails. */
+export const CopyNote = styled.span<{ $visible: boolean }>`
+  ${({ $visible, theme }) =>
+    $visible
+      ? css`
+          flex-basis: 100%;
+          font-size: ${theme.typography.fontSize.sm};
+          line-height: ${theme.typography.lineHeight.normal};
+          color: ${theme.colors.errorText};
+        `
+      : visuallyHidden}
 `;
 
 export const CopyButton = styled(Button)`
@@ -111,7 +131,7 @@ export const FormPanel = styled(Card)`
   }
 `;
 
-export const FormTitle = styled.h4`
+export const FormTitle = styled.h3`
   margin: 0 0 ${({ theme }) => theme.spacing.lg};
   font-size: ${({ theme }) => theme.typography.fontSize.xl};
   font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
@@ -130,6 +150,12 @@ export const Honeypot = styled.input`
   left: -9999px;
   opacity: 0;
   pointer-events: none;
+`;
+
+export const RequiredNote = styled.p`
+  margin: 0;
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
+  color: ${({ theme }) => theme.colors.textMuted};
 `;
 
 export const FieldGroup = styled.div`
@@ -155,7 +181,6 @@ const fieldBase = css`
   background: ${({ theme }) => theme.colors.background};
   border: 1px solid ${({ theme }) => theme.colors.borderStrong};
   border-radius: ${({ theme }) => theme.borderRadius.md};
-  scroll-margin-top: ${SCROLL_MARGIN};
   transition: border-color ${({ theme }) => theme.transitions.fast};
 
   &::placeholder {
@@ -247,7 +272,6 @@ export const StatusMessage = styled(motion.p)`
 `;
 
 export const ErrorSummary = styled(motion.div)`
-  scroll-margin-top: ${SCROLL_MARGIN};
   padding: ${({ theme }) => theme.spacing.md};
   border: 1px solid ${({ theme }) => theme.colors.error};
   border-radius: ${({ theme }) => theme.borderRadius.md};
@@ -270,6 +294,9 @@ export const SummaryList = styled.ul`
 `;
 
 export const SummaryLink = styled.a`
+  display: inline-block;
+  min-height: 24px;
+  padding-block: 0.25rem;
   color: ${({ theme }) => theme.colors.errorText};
   text-underline-offset: 0.25em;
   ${focusRing}
@@ -326,7 +353,7 @@ export const SuccessIcon = styled.span`
   }
 `;
 
-export const SuccessTitle = styled.h4`
+export const SuccessTitle = styled.h3`
   margin: 0;
   font-size: ${({ theme }) => theme.typography.fontSize['2xl']};
   font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};

@@ -1,5 +1,11 @@
 import { describe, it, expect, vi, beforeAll, beforeEach } from 'vitest';
-import { act, fireEvent, screen, waitFor } from '@testing-library/react';
+import {
+  act,
+  fireEvent,
+  screen,
+  waitFor,
+  within,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Contact from './Contact';
 import enJson from '../../../i18n/locales/en/translation.json';
@@ -49,6 +55,33 @@ describe('Contact', () => {
     mocks.importFails = false;
     mocks.sendForm.mockReset();
     mocks.sendForm.mockResolvedValue({ text: 'OK' });
+  });
+
+  it('states up front that every field is required', () => {
+    renderWithProviders(<Contact />);
+    expect(screen.getByText('contact.requiredNote')).toBeInTheDocument();
+    ['contact.name', 'contact.email', 'contact.message'].forEach((label) =>
+      expect(screen.getByLabelText(label)).toBeRequired()
+    );
+  });
+
+  it('keeps a sequential heading hierarchy inside the section', () => {
+    renderWithProviders(<Contact />);
+    expect(
+      screen.getByRole('heading', { level: 3, name: 'contact.formTitle' })
+    ).toBeInTheDocument();
+    expect(screen.queryAllByRole('heading', { level: 4 })).toHaveLength(0);
+  });
+
+  it('keeps list semantics on the contact list', () => {
+    renderWithProviders(<Contact />);
+    const list = document.querySelector('ul[role="list"]');
+    expect(list).not.toBeNull();
+    expect(
+      within(list as HTMLElement).getByRole('link', {
+        name: 'fede.lopez89@gmail.com',
+      })
+    ).toBeInTheDocument();
   });
 
   it('renders name, email, and message fields', () => {

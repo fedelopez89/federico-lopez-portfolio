@@ -1,7 +1,7 @@
 import { FC, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useReducedMotion, useScroll, useTransform } from 'framer-motion';
-import { usePointerGlow } from '@hooks';
+import { useMediaQueryHysteresis, usePointerGlow } from '@hooks';
 import { Button, Container, Eyebrow, TextLink } from '../../ui';
 import {
   stackVariants,
@@ -39,6 +39,14 @@ const Hero: FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
+  // Fading the hero text while it is still being read fails contrast and
+  // reflow needs on short or zoomed viewports (WCAG 1.4.3 / 1.4.10), so the
+  // content only scroll-fades when there is room; the backdrop always may.
+  // Enters at 740px and leaves below 700px so it cannot flicker at the edge.
+  const isTall = useMediaQueryHysteresis(
+    '(min-height: 740px)',
+    '(max-height: 699px)'
+  );
 
   usePointerGlow(heroRef, { varsRef: backdropRef });
 
@@ -51,9 +59,10 @@ const Hero: FC = () => {
   const contentOpacity = useTransform(scrollYProgress, [0.35, 0.9], [1, 0]);
   const backdropOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.3]);
 
-  const contentStyle = shouldReduceMotion
-    ? undefined
-    : { y: contentY, opacity: contentOpacity };
+  const contentStyle =
+    shouldReduceMotion || !isTall
+      ? undefined
+      : { y: contentY, opacity: contentOpacity };
   const backdropStyle = shouldReduceMotion
     ? undefined
     : { opacity: backdropOpacity };

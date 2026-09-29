@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { forwardRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { AnimatePresence } from 'framer-motion';
-import { projects } from '../../../data/projects';
+import { AnimatePresence, useIsPresent } from 'framer-motion';
+import { useRevealOnFocus } from '@/hooks';
+import { projects, type Project } from '../../../data/projects';
 import {
   EASE,
   fadeUpVariants,
@@ -44,8 +45,35 @@ function deriveFilters(): string[] {
 
 const TECH_FILTERS = deriveFilters();
 
+/**
+ * Grid cell. While AnimatePresence plays its exit it is inert, so a card that
+ * is fading out cannot take focus or clicks. Also revealed on focus.
+ */
+const ProjectGridItem = forwardRef<HTMLLIElement, { project: Project }>(
+  ({ project }, ref) => {
+    const isPresent = useIsPresent();
+    const reveal = useRevealOnFocus();
+    return (
+      <ProjectItem
+        ref={ref}
+        layout="position"
+        variants={fadeUpVariants}
+        exit={{ opacity: 0, transition: REFLOW }}
+        transition={{ layout: REFLOW }}
+        inert={!isPresent}
+        {...inViewProps}
+        {...reveal()}
+      >
+        <ProjectCard project={project} />
+      </ProjectItem>
+    );
+  }
+);
+ProjectGridItem.displayName = 'ProjectGridItem';
+
 const Projects: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const reveal = useRevealOnFocus();
   const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
 
   const filteredProjects =
@@ -64,7 +92,7 @@ const Projects: React.FC = () => {
         lead={t('projects.subtitle')}
       />
 
-      <Toolbar variants={fadeUpVariants} {...inViewProps}>
+      <Toolbar variants={fadeUpVariants} {...inViewProps} {...reveal()}>
         <FilterRow role="group" aria-label={t('projects.filterLabel')}>
           <FilterButton
             type="button"
@@ -86,7 +114,14 @@ const Projects: React.FC = () => {
             </FilterButton>
           ))}
         </FilterRow>
-        <ResultCount role="status" aria-live="polite" aria-atomic="true">
+        {/* Keyed by language: switching language remounts the region with its
+            text already in place, so only filter changes are announced. */}
+        <ResultCount
+          key={i18n.resolvedLanguage ?? i18n.language}
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        >
           {t('projects.resultCount', { count: filteredProjects.length })}
         </ResultCount>
       </Toolbar>
@@ -95,16 +130,7 @@ const Projects: React.FC = () => {
         <ProjectsGrid>
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => (
-              <ProjectItem
-                key={project.id}
-                layout="position"
-                variants={fadeUpVariants}
-                exit={{ opacity: 0, transition: REFLOW }}
-                transition={{ layout: REFLOW }}
-                {...inViewProps}
-              >
-                <ProjectCard project={project} />
-              </ProjectItem>
+              <ProjectGridItem key={project.id} project={project} />
             ))}
           </AnimatePresence>
         </ProjectsGrid>

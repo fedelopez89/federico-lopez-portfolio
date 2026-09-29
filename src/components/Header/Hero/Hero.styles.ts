@@ -41,6 +41,11 @@ export const BackdropScroll = styled(motion.div)`
     --glow-x: 60vw;
     --glow-y: 34svh;
   }
+
+  /* Purely decorative; forced colors would render it as noise. */
+  @media (forced-colors: active) {
+    display: none;
+  }
 `;
 
 export const BackdropFade = styled(motion.div)`
@@ -62,7 +67,11 @@ export const GridBase = styled.div`
   pointer-events: none;
   ${({ theme }) => gridImage(theme.colors.gridLine)}
   -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 45%, #000 25%, transparent 100%);
-  mask-image: radial-gradient(ellipse 85% 75% at 50% 45%, #000 25%, transparent 100%);
+  mask-image: radial-gradient(
+    ellipse 85% 75% at 50% 45%,
+    #000 25%,
+    transparent 100%
+  );
 `;
 
 const sweep = keyframes`
@@ -82,6 +91,12 @@ export const GlowSweep = styled.div`
 
   @media (hover: none), (pointer: coarse) {
     animation: ${sweep} 1.2s ${({ theme }) => theme.motion.easeCss} 0.6s both;
+
+    /* Reduced motion collapses the duration but not the delay, which would
+       leave the glow parked off-screen for 0.6s. */
+    @media (prefers-reduced-motion: reduce) {
+      animation-delay: 0s;
+    }
   }
 `;
 
@@ -130,7 +145,11 @@ export const GridWindow = styled.div`
     0
   );
   will-change: transform;
-  -webkit-mask-image: radial-gradient(circle closest-side, #000 0%, transparent 100%);
+  -webkit-mask-image: radial-gradient(
+    circle closest-side,
+    #000 0%,
+    transparent 100%
+  );
   mask-image: radial-gradient(circle closest-side, #000 0%, transparent 100%);
 `;
 
@@ -145,8 +164,7 @@ export const GridWindowInner = styled.div`
     calc(-1 * mod(var(--glow-y) - ${HIGHLIGHT_HALF}px, ${GRID_SIZE})),
     0
   );
-  ${({ theme }) =>
-    gridImage(alpha(theme.colors.primary, 55))}
+  ${({ theme }) => gridImage(alpha(theme.colors.primary, 55))}
 `;
 
 export const HeroContent = styled(motion.div)`
@@ -201,6 +219,9 @@ export const Title = styled.h1`
   letter-spacing: ${({ theme }) => theme.typography.tracking.display};
   line-height: 0.95;
   color: ${({ theme }) => theme.colors.text};
+  /* The mask clips overflow, so a long word must wrap rather than be cut off
+     at large default font sizes (WCAG 1.4.4). */
+  overflow-wrap: anywhere;
 `;
 
 export const Tagline = styled.p`
@@ -224,7 +245,7 @@ export const Actions = styled.div`
   }
 `;
 
-export const SocialLinks = styled.ul`
+export const SocialLinks = styled.ul.attrs({ role: 'list' })`
   display: flex;
   flex-wrap: wrap;
   gap: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.lg};

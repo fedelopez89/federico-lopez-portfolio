@@ -111,6 +111,40 @@ describe('ProjectDetail', () => {
     expect(document.title).toBe('Portfolio');
   });
 
+  it('sets a translated not-found document title', async () => {
+    const { unmount } = renderDetail('non-existent-project');
+    expect(document.title).toBe('Project not found | Federico López');
+    unmount();
+    await act(() => i18n.changeLanguage('es'));
+    renderDetail('non-existent-project');
+    expect(document.title).toBe('Proyecto no encontrado | Federico López');
+  });
+
+  it('labels the navbar logo as Home on the page variant', () => {
+    renderDetail('real-evals-gmail');
+    const nav = screen.getByRole('navigation', { name: 'Main navigation' });
+    expect(
+      within(nav).getByRole('link', { name: 'Federico López, Home' })
+    ).toHaveAttribute('href', '/#home');
+  });
+
+  it('remembers the originating card so home can restore focus', () => {
+    sessionStorage.removeItem('portfolio:return-project');
+    renderDetail('real-evals-gmail', {
+      state: { fromPortfolio: true, fromProject: 'real-evals-gmail' },
+    });
+    expect(
+      JSON.parse(sessionStorage.getItem('portfolio:return-project') ?? '{}').id
+    ).toBe('real-evals-gmail');
+    sessionStorage.removeItem('portfolio:return-project');
+  });
+
+  it('does not remember a project when opened directly', () => {
+    sessionStorage.removeItem('portfolio:return-project');
+    renderDetail('real-evals-gmail');
+    expect(sessionStorage.getItem('portfolio:return-project')).toBeNull();
+  });
+
   it('renders the shared navbar with theme and language toggles', () => {
     renderDetail('real-evals-gmail');
     const nav = screen.getByRole('navigation', { name: 'Main navigation' });
@@ -118,7 +152,7 @@ describe('ProjectDetail', () => {
       within(nav).getByRole('button', { name: /switch to dark mode/i })
     ).toBeInTheDocument();
     expect(
-      within(nav).getByRole('button', { name: 'Switch to English' })
+      within(nav).getByRole('button', { name: 'English' })
     ).toBeInTheDocument();
   });
 
@@ -197,6 +231,8 @@ describe('ProjectDetail', () => {
     const list = within(
       screen.getByRole('region', { name: 'Technologies' })
     ).getByRole('list');
+    expect(list).toHaveProperty('tagName', 'UL');
+    expect(list.matches('ul[role="list"]')).toBe(true);
     expect(within(list).getAllByRole('listitem')).toHaveLength(
       first.technologies.length
     );

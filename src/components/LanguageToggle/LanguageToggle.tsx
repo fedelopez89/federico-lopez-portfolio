@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { focusRing } from '../../styles/mixins';
 
 const LanguageToggleWrapper = styled.div`
@@ -37,6 +37,22 @@ const LanguageButton = styled.button<{ $isActive: boolean }>`
     transition: transform ${({ theme }) => theme.transitions.fast};
   }
 
+  /* Backgrounds are replaced in forced colors: mark the active language with
+     a real underline instead. */
+  @media (forced-colors: active) {
+    &::after {
+      display: none;
+    }
+
+    ${({ $isActive }) =>
+      $isActive &&
+      css`
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 0.4em;
+      `}
+  }
+
   &:hover {
     color: ${({ theme }) => theme.colors.text};
   }
@@ -52,7 +68,7 @@ const Separator = styled.span`
 `;
 
 const LanguageToggle = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   // Normalize regional variants such as "en-US" to their base language.
   const current = (i18n.resolvedLanguage ?? i18n.language ?? '').split('-')[0];
@@ -65,12 +81,14 @@ const LanguageToggle = () => {
   };
 
   return (
-    <LanguageToggleWrapper>
+    <LanguageToggleWrapper role="group" aria-label={t('language.label')}>
+      {/* Names stay in their own language (with lang) and contain the visible
+          "EN"/"ES" text, per WCAG 2.5.3. */}
       <LanguageButton
         $isActive={current === 'en'}
         lang="en"
         onClick={() => changeLanguage('en')}
-        aria-label="Switch to English"
+        aria-label="English"
         aria-pressed={current === 'en'}
       >
         EN
@@ -80,7 +98,7 @@ const LanguageToggle = () => {
         $isActive={current === 'es'}
         lang="es"
         onClick={() => changeLanguage('es')}
-        aria-label="Cambiar a Español"
+        aria-label="Español"
         aria-pressed={current === 'es'}
       >
         ES

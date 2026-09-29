@@ -19,8 +19,13 @@ export const Navbar = styled(motion.nav)<{ $isScrolled: boolean }>`
   transition:
     background-color ${({ theme }) => theme.transitions.base},
     border-color ${({ theme }) => theme.transitions.base};
-`;
 
+  /* At 400% zoom or in landscape on phones a fixed bar would cover half the
+     viewport (WCAG 1.4.10): let it scroll away instead. */
+  @media (max-height: 500px) {
+    position: absolute;
+  }
+`;
 export const NavContainer = styled.div`
   max-width: ${({ theme }) => theme.layout.maxWidth.wide};
   margin: 0 auto;
@@ -58,7 +63,7 @@ export const NavActions = styled.div`
   gap: ${({ theme }) => theme.spacing.sm};
 `;
 
-export const NavMenu = styled.ul`
+export const NavMenu = styled.ul.attrs({ role: 'list' })`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.xs};
@@ -102,6 +107,22 @@ export const NavLink = styled(SiteLink)<{ $isActive?: boolean }>`
     transform: scaleX(${({ $isActive }) => ($isActive ? 1 : 0)});
     transform-origin: left;
     transition: transform ${({ theme }) => theme.transitions.base};
+  }
+
+  /* Backgrounds are replaced in forced colors: mark the current section with
+     a real underline instead. */
+  @media (forced-colors: active) {
+    &::after {
+      display: none;
+    }
+
+    ${({ $isActive }) =>
+      $isActive &&
+      css`
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 0.4em;
+      `}
   }
 
   &:hover {
@@ -244,6 +265,19 @@ export const MobileNavLink = styled(SiteLink)<{ $isActive?: boolean }>`
   }
 
   ${focusRing}
+
+  /* The drawer clips overflow: keep the ring inside the link. */
+  &:focus-visible {
+    outline-offset: -2px;
+  }
+
+  /* Transparent borders turn visible in forced colors, so draw the marker
+     explicitly: thick Highlight when active, invisible (Canvas) otherwise. */
+  @media (forced-colors: active) {
+    border-left-width: 4px;
+    border-left-color: ${({ $isActive }) =>
+      $isActive ? 'Highlight' : 'Canvas'};
+  }
 `;
 
 export const MobileMenuFooter = styled.div`

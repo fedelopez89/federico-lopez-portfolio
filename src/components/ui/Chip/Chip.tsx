@@ -29,4 +29,11 @@ export const Chip = styled.span.withConfig({
     variant === 'accent'
       ? theme.colors.primaryText
       : theme.colors.textSecondary};
+
+  @media (prefers-contrast: more) {
+    border-color: ${({ theme, variant }) =>
+      variant === 'accent'
+        ? theme.colors.primaryText
+        : theme.colors.borderStrong};
+  }
 `;

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useHashScroll } from '@/hooks';
+import { useHashScroll, useRestoreProjectFocus } from '@/hooks';
 import { Container, Hairline } from '../ui';
 import { ScrollToTopButton } from '../layout/ScrollToTop';
 import AboutMe from '../Sections/AboutMe/AboutMe';
@@ -23,6 +23,7 @@ const sections: SectionConfig[] = [
 
 const Main: FC = () => {
   useHashScroll();
+  useRestoreProjectFocus();
 
   return (
     <MainContainer

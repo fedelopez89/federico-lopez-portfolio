@@ -38,6 +38,10 @@ const variants = {
       color: ${({ theme }) => theme.colors.text};
       border-color: ${({ theme }) => theme.colors.textSecondary};
     }
+
+    @media (prefers-contrast: more) {
+      border-color: ${({ theme }) => theme.colors.borderStrong};
+    }
   `,
   ghost: css`
     background: transparent;
@@ -134,9 +138,20 @@ export type ButtonProps = AnchorButtonProps | NativeButtonProps;
 
 const NBSP = '\u00A0';
 
-export const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonProps>(
+export const Button = forwardRef<
+  HTMLAnchorElement | HTMLButtonElement,
+  ButtonProps
+>(
   (
-    { variant = 'primary', size = 'md', external, externalLabel, icon, children, ...rest },
+    {
+      variant = 'primary',
+      size = 'md',
+      external,
+      externalLabel,
+      icon,
+      children,
+      ...rest
+    },
     ref
   ) => {
     const content = (

@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll, afterEach } from 'vitest';
-import { screen, waitFor, within } from '@testing-library/react';
+import { act, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import i18n from '../../../i18n/config';
 import Projects from './Projects';
@@ -71,6 +71,50 @@ describe('Projects', () => {
     const status = screen.getByRole('status');
     expect(status).toHaveAttribute('aria-live', 'polite');
     expect(status).toHaveTextContent(`${projects.length} projects`);
+  });
+
+  it('does not re-announce the count when only the language changes', async () => {
+    renderProjects();
+    const before = screen.getByRole('status');
+    await act(() => i18n.changeLanguage('es'));
+    const after = screen.getByRole('status');
+    // A fresh region is inserted with its text already in place: not a change.
+    expect(after).not.toBe(before);
+    expect(after).toHaveTextContent(`${projects.length} proyectos`);
+  });
+
+  it('keeps the same live region when a filter changes so it is announced', async () => {
+    const user = userEvent.setup();
+    renderProjects();
+    const before = screen.getByRole('status');
+    await user.click(screen.getByRole('button', { name: 'Chakra UI' }));
+    expect(screen.getByRole('status')).toBe(before);
+  });
+
+  it('marks the project grid as a list', () => {
+    renderProjects();
+    const grid = document.querySelector('ul[role="list"]') as HTMLElement;
+    expect(grid).not.toBeNull();
+    expect(within(grid).getAllByRole('article')).toHaveLength(projects.length);
+  });
+
+  it('makes cards inert while they fade out', async () => {
+    renderProjects();
+    const kept = projects.filter((p) => p.technologies.includes('Chakra UI'));
+    // Synchronous click: the first waitFor poll runs inside the exit window.
+    act(() => {
+      screen.getByRole('button', { name: 'Chakra UI' }).click();
+    });
+    await waitFor(() =>
+      expect(document.querySelectorAll('li[inert]')).toHaveLength(
+        projects.length - kept.length
+      )
+    );
+    // Once the exit finishes only the matching, non-inert cards remain.
+    await waitFor(() =>
+      expect(screen.getAllByRole('article')).toHaveLength(kept.length)
+    );
+    expect(document.querySelectorAll('li[inert]')).toHaveLength(0);
   });
 
   it('filters projects by technology and updates the live count', async () => {

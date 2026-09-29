@@ -6,7 +6,8 @@ const MARKER = '7px';
 const RAIL_GUTTER = '2rem';
 /** Meta and role first lines share this height so the marker centers on both. */
 const FIRST_LINE = '1.5rem';
-const markerTop = (pad: string) => `calc(${pad} + (${FIRST_LINE} - ${MARKER}) / 2)`;
+const markerTop = (pad: string) =>
+  `calc(${pad} + (${FIRST_LINE} - ${MARKER}) / 2)`;
 
 export const ExperienceContainer = styled(Container)``;
 
@@ -20,12 +21,11 @@ export const Actions = styled(motion.div)`
   }
 `;
 
-export const Timeline = styled.ol`
+export const Timeline = styled.ol.attrs({ role: 'list' })`
   position: relative;
   margin: 0;
   padding: 0;
   list-style: none;
-
 `;
 
 export const TimelineItem = styled(motion.li)<{ $current?: boolean }>`
@@ -33,8 +33,8 @@ export const TimelineItem = styled(motion.li)<{ $current?: boolean }>`
   display: grid;
   grid-template-columns: 13rem minmax(0, 1fr);
   column-gap: ${({ theme }) => theme.spacing.xl};
-  padding: ${({ theme }) => theme.spacing.xl} 0 ${({ theme }) => theme.spacing.xl}
-    ${RAIL_GUTTER};
+  padding: ${({ theme }) => theme.spacing.xl} 0
+    ${({ theme }) => theme.spacing.xl} ${RAIL_GUTTER};
 
   &:last-child {
     padding-bottom: 0;

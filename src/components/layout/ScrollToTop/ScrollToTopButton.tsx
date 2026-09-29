@@ -30,6 +30,10 @@ const StyledButton = styled(motion.a)`
 
   ${focusRing}
 
+  @media (prefers-contrast: more) {
+    border-color: ${({ theme }) => theme.colors.borderStrong};
+  }
+
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     right: ${({ theme }) => theme.spacing.md};
     bottom: ${({ theme }) => theme.spacing.md};

@@ -28,6 +28,10 @@ export const GlobalStyles = createGlobalStyle`
 
   html {
     scroll-behavior: smooth;
+    /* Keeps anchor jumps and focused elements clear of the fixed navbar and
+       the scroll-to-top button (WCAG 2.4.11). One source for every target. */
+    scroll-padding-top: calc(${({ theme }) => theme.layout.navHeight} + 0.5rem);
+    scroll-padding-bottom: 4.5rem;
     scrollbar-gutter: stable;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -98,14 +102,16 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.colors.textSecondary};
   }
 
-  a {
+  /* Zero specificity: component rules (skip link, buttons, summary links)
+     always win over these defaults, including on hover. */
+  :where(a) {
     color: ${({ theme }) => theme.colors.primary};
     text-decoration: none;
     transition: color ${({ theme }) => theme.transitions.fast};
+  }
 
-    &:hover {
-      color: ${({ theme }) => theme.colors.primaryHover};
-    }
+  :where(a:hover) {
+    color: ${({ theme }) => theme.colors.primaryHover};
   }
 
   button {
@@ -156,8 +162,10 @@ export const GlobalStyles = createGlobalStyle`
 
   /* Selection */
   ::selection {
-    background-color: ${({ theme }) => theme.colors.primaryLight};
-    color: ${({ theme }) => theme.colors.primary};
+    /* Body text on a mid primary tint: at least 8.8:1 in both themes. */
+    background-color: ${({ theme }) =>
+      `color-mix(in srgb, ${theme.colors.primary} 30%, ${theme.colors.background})`};
+    color: ${({ theme }) => theme.colors.text};
   }
 
   .skip-link {
@@ -177,6 +185,14 @@ export const GlobalStyles = createGlobalStyle`
   .skip-link:focus {
     top: 1rem;
     left: 1rem;
+  }
+
+  /* Short or heavily zoomed viewports: the navbar scrolls away instead of
+     covering the page (see SiteNav), so nothing needs to be cleared. */
+  @media (max-height: 500px) {
+    html {
+      scroll-padding-top: 0.5rem;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

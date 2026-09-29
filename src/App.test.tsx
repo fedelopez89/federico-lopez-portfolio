@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll, afterEach, vi } from 'vitest';
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { act, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import './i18n/config';
+import i18n from './i18n/config';
 import App from './App';
 import { projects } from './data/projects';
 import { setupTestEnvironment } from './test/renderWithProviders';
@@ -22,7 +22,9 @@ describe('App shell', () => {
     setupTestEnvironment();
   });
 
-  afterEach(() => {
+  afterEach(async () => {
+    await act(() => i18n.changeLanguage('en'));
+    sessionStorage.clear();
     vi.restoreAllMocks();
     window.history.pushState({}, '', '/');
   });
@@ -72,6 +74,50 @@ describe('App shell', () => {
     expect(themeWrites()).toBe(toggledWrites);
     expect(localStorage.getItem(THEME_KEY)).toBe(mode);
   }, 20_000);
+
+  it('sets a translated home title that follows the language', async () => {
+    const user = userEvent.setup();
+    window.history.pushState({}, '', '/');
+    render(<App />);
+    await waitFor(() =>
+      expect(document.title).toBe('Federico López — Senior Frontend Engineer')
+    );
+    const nav = screen.getByRole('navigation', { name: 'Main navigation' });
+    await user.click(within(nav).getByRole('button', { name: 'Español' }));
+    await waitFor(() =>
+      expect(document.title).toBe('Federico López — Ingeniero Frontend Senior')
+    );
+  });
+
+  it('returns focus to the opened project card via the Back button', async () => {
+    const user = userEvent.setup();
+    window.history.pushState({}, '', '/');
+    render(<App />);
+    const timeout = { timeout: 15_000 };
+
+    const target = projects[2];
+    const cardLink = document.querySelector<HTMLAnchorElement>(
+      `a[href="/projects/${target.id}"]`
+    );
+    expect(cardLink).not.toBeNull();
+    await user.click(cardLink as HTMLAnchorElement);
+    await screen.findByRole(
+      'navigation',
+      { name: 'Project navigation' },
+      timeout
+    );
+
+    await user.click(
+      screen.getByRole('button', { name: /back to portfolio/i })
+    );
+    await waitFor(
+      () =>
+        expect(
+          document.querySelector(`a[href="/projects/${target.id}"]`)
+        ).toHaveFocus(),
+      timeout
+    );
+  }, 30_000);
 
   it('keeps a single JSON-LD block and the right title across prev/next and back', async () => {
     const user = userEvent.setup();

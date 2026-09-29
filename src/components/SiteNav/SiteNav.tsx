@@ -203,7 +203,12 @@ const SiteNav: FC<SiteNavProps> = ({ variant = 'home' }) => {
         <NavContainer>
           <Logo hash="#home" variant={variant}>
             {t('header.name')}
-            <VisuallyHidden>, {t('header.a11y.home')}</VisuallyHidden>
+            <VisuallyHidden>
+              ,{' '}
+              {t(
+                variant === 'page' ? 'header.a11y.homePage' : 'header.a11y.home'
+              )}
+            </VisuallyHidden>
           </Logo>
 
           <NavActions>

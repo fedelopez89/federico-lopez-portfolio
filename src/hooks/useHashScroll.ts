@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { sectionTitleId } from '@/components/Sections/shared/sectionTitleId';
+import { pendingProjectReturn } from './useRestoreProjectFocus';
 
 /**
  * Deep links (/#projects) load before React has rendered the target, so the
  * browser's own hash scroll finds nothing. Resolve it once after mount,
- * instantly, honoring the target's scroll-margin-top. Web fonts can shift
+ * instantly, honoring the root's scroll-padding-top (the navbar height). Web fonts can shift
  * layout afterwards, so it re-aligns once fonts are ready, but only if the
  * user has not scrolled in the meantime.
  *
@@ -16,6 +17,9 @@ export const useHashScroll = () => {
   useEffect(() => {
     const raw = window.location.hash.slice(1);
     if (!raw) return;
+    // Returning from a project: useRestoreProjectFocus scrolls to and focuses
+    // the card instead, so this must not move scroll or focus.
+    if (pendingProjectReturn()) return;
 
     let id = raw;
     try {

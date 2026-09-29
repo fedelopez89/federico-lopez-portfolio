@@ -13,7 +13,6 @@ export const MainContainer = styled(motion.main)`
 
 export const Section = styled.section`
   position: relative;
-  scroll-margin-top: ${({ theme }) => theme.layout.navHeight};
 `;
 
 export const SectionBody = styled.div`

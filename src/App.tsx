@@ -13,6 +13,9 @@ import {
   useReducedMotion,
   type Transition,
 } from 'framer-motion';
+import i18n, { type TFunction } from 'i18next';
+import { useTranslation } from 'react-i18next';
+import { useDocumentTitle } from '@/hooks';
 import { ThemeProvider } from './context';
 import { Header, Main, Footer } from '@components';
 import { ProjectDetailSkeleton } from './components/ui';
@@ -45,15 +48,28 @@ function PageTransition({ children }: { children: React.ReactNode }) {
   );
 }
 
-// Captured before any route mutates it (project pages restore it on exit).
-const BASE_TITLE = document.title;
+/** Translated home title, e.g. "Federico López — Senior Frontend Engineer". */
+const homeTitle = (t: TFunction) => `${t('header.name')} — ${t('header.role')}`;
 
 /** Title of the page a path renders, without waiting for the lazy route. */
 const titleForPath = (pathname: string): string => {
   const id = pathname.match(/^\/projects\/([^/]+)/)?.[1];
   const project = projects.find((p) => p.id === id);
-  return project ? `${project.title} | Federico López` : BASE_TITLE;
+  return project ? `${project.title} | Federico López` : homeTitle(i18n.t);
 };
+
+/** Home route content; owns the page title so it follows language changes. */
+function HomePage() {
+  const { t } = useTranslation();
+  useDocumentTitle(homeTitle(t));
+  return (
+    <>
+      <Header />
+      <Main />
+      <Footer />
+    </>
+  );
+}
 
 function PageTracker() {
   const location = useLocation();
@@ -82,9 +98,7 @@ function AppRoutes() {
             path="/"
             element={
               <PageTransition>
-                <Header />
-                <Main />
-                <Footer />
+                <HomePage />
               </PageTransition>
             }
           />

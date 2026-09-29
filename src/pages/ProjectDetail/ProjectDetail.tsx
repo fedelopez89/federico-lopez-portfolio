@@ -1,6 +1,7 @@
 import { useEffect, useRef, type MouseEvent } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useDocumentTitle, rememberProject } from '@/hooks';
 import { projects } from '../../data/projects';
 import { NYT_HREF, NYT_NAME } from '../../data/featured';
 import { SiteNav } from '../../components/SiteNav';
@@ -55,6 +56,7 @@ function ProjectDetail() {
   const location = useLocation();
   const { t } = useTranslation();
   const fromPortfolio = location.state?.fromPortfolio === true;
+  const fromProject: unknown = location.state?.fromProject;
 
   const index = projects.findIndex((p) => p.id === id);
   const project = index === -1 ? undefined : projects[index];
@@ -84,6 +86,21 @@ function ProjectDetail() {
   }, [id]);
 
   useProjectSeo(project, translatedTitle, translatedDesc);
+  // Found projects get their title from useProjectSeo.
+  useDocumentTitle(
+    project
+      ? undefined
+      : `${t('projectDetail.notFoundTitle')} | ${t('header.name')}`
+  );
+
+  // The home route uses this to put focus back on the card that was opened,
+  // for the Back button and the browser's back alike (WCAG 2.4.3).
+  useEffect(() => {
+    if (typeof fromProject !== 'string') return;
+    rememberProject(fromProject);
+    // Refresh on the way out so the marker's age counts from leaving.
+    return () => rememberProject(fromProject);
+  }, [fromProject]);
 
   const handleBack = () => {
     if (fromPortfolio) {

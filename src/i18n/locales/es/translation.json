@@ -12,11 +12,15 @@
     "newTab": "(se abre en una pestaña nueva)",
     "a11y": {
       "home": "Volver al inicio",
+      "homePage": "Inicio",
       "mainNav": "Navegación principal",
       "mobileNav": "Navegación móvil",
       "toggleMenu": "Alternar menú móvil",
       "closeMenu": "Cerrar menú móvil"
     }
+  },
+  "language": {
+    "label": "Idioma"
   },
   "theme": {
     "switchToDark": "Cambiar a modo oscuro",
@@ -192,6 +196,7 @@
     "copyEmail": "Copiar dirección de email",
     "copied": "Copiado",
     "copyFailed": "No se pudo copiar automáticamente. La dirección está seleccionada: presioná Ctrl o Cmd+C.",
+    "requiredNote": "Todos los campos son obligatorios.",
     "messageHint": "Mínimo 40 caracteres",
     "successTitle": "Mensaje enviado",
     "successText": "Gracias por escribirme. Te respondo pronto.",

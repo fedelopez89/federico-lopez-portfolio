@@ -12,11 +12,15 @@
     "newTab": "(opens in a new tab)",
     "a11y": {
       "home": "Back to top",
+      "homePage": "Home",
       "mainNav": "Main navigation",
       "mobileNav": "Mobile navigation",
       "toggleMenu": "Toggle mobile menu",
       "closeMenu": "Close mobile menu"
     }
+  },
+  "language": {
+    "label": "Language"
   },
   "theme": {
     "switchToDark": "Switch to dark mode",
@@ -192,6 +196,7 @@
     "copyEmail": "Copy email address",
     "copied": "Copied",
     "copyFailed": "Couldn't copy automatically. The address is selected: press Ctrl or Cmd+C.",
+    "requiredNote": "All fields are required.",
     "messageHint": "Minimum 40 characters",
     "successTitle": "Message sent",
     "successText": "Thanks for reaching out. I'll get back to you soon.",

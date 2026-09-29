@@ -13,6 +13,10 @@ export const Card = styled.div.withConfig({
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.borderRadius.lg};
 
+  @media (prefers-contrast: more) {
+    border-color: ${({ theme }) => theme.colors.borderStrong};
+  }
+
   ${({ interactive }) =>
     interactive &&
     css`

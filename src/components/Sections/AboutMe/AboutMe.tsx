@@ -3,6 +3,7 @@ import { useTranslation, Trans } from 'react-i18next';
 import experienceHistory from '../../../data/experience.json';
 import type { ExperienceConfig } from '@/types';
 import { NYT_HREF, NYT_NAME } from '@/data/featured';
+import { useRevealOnFocus } from '@/hooks';
 import { calculateYearsExperience } from '@/utils/dateCalculations';
 import { Eyebrow, TextLink } from '../../ui';
 import {
@@ -27,6 +28,7 @@ import { sectionTitleId } from '../shared/sectionTitleId';
 
 const AboutMe: FC = () => {
   const { t } = useTranslation();
+  const reveal = useRevealOnFocus();
   const { experiences } = experienceHistory as ExperienceConfig;
 
   const freelanceJob = experiences.find(
@@ -58,7 +60,7 @@ const AboutMe: FC = () => {
         title={t('sections.aboutme')}
         titleId={sectionTitleId('aboutme')}
       />
-      <AboutMeBody variants={stackVariants} {...inViewProps}>
+      <AboutMeBody variants={stackVariants} {...inViewProps} {...reveal()}>
         <Description variants={fadeUpVariants}>
           <p>
             <Trans i18nKey="aboutMe.intro" />

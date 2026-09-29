@@ -20,6 +20,7 @@ const StyledLink = styled.a`
   text-decoration: underline;
   text-decoration-color: transparent;
   text-underline-offset: 0.3em;
+  overflow-wrap: anywhere;
   transition:
     color ${({ theme }) => theme.transitions.fast},
     text-decoration-color ${({ theme }) => theme.transitions.fast};

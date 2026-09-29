@@ -1,9 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
+import { lightTheme } from '@/styles/theme';
+
+/** Navbar height token (px); the same value drives html scroll-padding-top. */
+const NAV_HEIGHT_PX = parseFloat(lightTheme.layout.navHeight);
 
 interface UseScrollSpyOptions {
   /** Section ids in document order. */
   sectionIds: string[];
-  /** Height of the fixed navbar; the activation line sits below it. */
+  /**
+   * Fallback height of the fixed navbar; the activation line sits below it.
+   * The live value is html's computed scroll-padding-top (navbar height plus
+   * a small gap, or just the gap when the navbar scrolls away on short viewports), so the spy and anchor jumps agree.
+   */
   offset?: number;
 }
 
@@ -74,7 +82,7 @@ const currentHashId = (): string => {
 
 export const useScrollSpy = ({
   sectionIds,
-  offset = 92,
+  offset = NAV_HEIGHT_PX,
 }: UseScrollSpyOptions) => {
   const [activeSection, setActiveSection] = useState('');
   const activeRef = useRef('');
@@ -95,6 +103,8 @@ export const useScrollSpy = ({
       frame = 0;
       const viewportHeight = window.innerHeight;
       const root = document.documentElement;
+      const padding = parseFloat(getComputedStyle(root).scrollPaddingTop);
+      const top = Number.isFinite(padding) ? padding : offset;
       const sections = ids.flatMap((id) => {
         const el = document.getElementById(id);
         return el ? [{ id, top: el.getBoundingClientRect().top }] : [];
@@ -116,7 +126,7 @@ export const useScrollSpy = ({
 
       const next = pickActiveSection({
         sections,
-        line: offset + (viewportHeight - offset) * ACTIVATION_RATIO,
+        line: top + (viewportHeight - top) * ACTIVATION_RATIO,
         atBottom,
         preferred,
       });
