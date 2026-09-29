@@ -1,14 +1,12 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { Container } from '../../ui';
 
-export const AboutMeContainer = styled.div`
+export const AboutMeContainer = styled(Container)``;
+
+/** Keeps copy readable while staying left-aligned to the container edge. */
+export const AboutMeBody = styled.div`
   max-width: 900px;
-  margin: 0 auto;
-  padding: 0 ${({ theme }) => theme.spacing.lg};
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: 0 ${({ theme }) => theme.spacing.md};
-  }
 `;
 
 export const FeaturedBadge = styled(motion.div)`

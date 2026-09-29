@@ -13,9 +13,9 @@
     "newTab": "(se abre en una pestaña nueva)"
   },
   "sections": {
-    "aboutme": "sobre mí",
-    "projects": "proyectos",
-    "experience": "experiencia"
+    "aboutme": "Sobre mí",
+    "projects": "Proyectos",
+    "experience": "Experiencia"
   },
   "buttons": {
     "downloadResume": "DESCARGAR CV",
@@ -141,7 +141,7 @@
     "remote": "Remoto"
   },
   "contact": {
-    "title": "contacto",
+    "title": "Contacto",
     "subtitle": "Trabajemos juntos",
     "panelTagline": "Estoy abierto a roles senior de frontend, proyectos freelance y consultoría técnica. Escribime y te respondo en menos de 24 horas.",
     "formTitle": "Enviame un mensaje",

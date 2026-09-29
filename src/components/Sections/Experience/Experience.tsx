@@ -3,7 +3,8 @@ import { useTranslation } from 'react-i18next';
 import experienceHistory from '../../../data/experience.json';
 import type { ExperienceConfig, Experience as ExperienceType } from '@/types';
 import { calculateDuration } from '@/utils/dateCalculations';
-import { SectionTitle } from '../shared/SectionTitle';
+import { SectionHeader } from '../shared/SectionHeader';
+import { sectionTitleId } from '../shared/sectionTitleId';
 import {
   ExperienceContainer,
   Header,
@@ -36,16 +37,12 @@ const Experience: FC = () => {
   };
 
   return (
-    <ExperienceContainer aria-labelledby="section-experience">
-      <SectionTitle
-        id="section-experience"
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        {t('sections.experience')}
-      </SectionTitle>
+    <ExperienceContainer>
+      <SectionHeader
+        index="03"
+        title={t('sections.experience')}
+        titleId={sectionTitleId('experience')}
+      />
       <Header>
         <DownloadButton
           href="./pdf/Resume_LOPEZ_Federico.pdf"

@@ -13,9 +13,9 @@
     "newTab": "(opens in a new tab)"
   },
   "sections": {
-    "aboutme": "about me",
-    "projects": "projects",
-    "experience": "experience"
+    "aboutme": "About me",
+    "projects": "Projects",
+    "experience": "Experience"
   },
   "buttons": {
     "downloadResume": "DOWNLOAD RESUME",
@@ -141,7 +141,7 @@
     "remote": "Remote"
   },
   "contact": {
-    "title": "contact",
+    "title": "Contact",
     "subtitle": "Let's work together",
     "panelTagline": "I'm open to senior frontend roles, freelance projects, and technical consulting. Drop me a line and I'll get back to you within 24 hours.",
     "formTitle": "Send me a message",

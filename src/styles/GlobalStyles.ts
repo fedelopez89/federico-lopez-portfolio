@@ -44,9 +44,14 @@ export const GlobalStyles = createGlobalStyle`
 
   h1, h2, h3, h4, h5, h6 {
     font-family: ${({ theme }) => theme.typography.fontFamily.secondary};
-    font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
+    font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
     line-height: ${({ theme }) => theme.typography.lineHeight.tight};
     color: ${({ theme }) => theme.colors.text};
+  }
+
+  h1, h2, h3 {
+    font-weight: 650;
+    letter-spacing: ${({ theme }) => theme.typography.tracking.heading};
   }
 
   h1 {

@@ -143,7 +143,7 @@ resume/
 │   │       ├── Projects/
 │   │       ├── Experience/
 │   │       ├── Contact/
-│   │       └── shared/    # SectionTitle and other shared section components
+│   │       └── shared/    # SectionHeader and other shared section components
 │   ├── pages/
 │   │   └── ProjectDetail/ # /projects/:id route — lazy loaded
 │   ├── context/           # ThemeContext

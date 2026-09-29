@@ -3,22 +3,10 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { projects, technologies } from '../../../data/projects';
+import { Container } from '../../ui';
 import ProjectCard from './ProjectCard';
-import {
-  SectionTitle,
-  SectionHeader,
-  SectionSubtitle,
-} from '../shared/SectionTitle';
-
-const Section = styled.section`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 ${({ theme }) => theme.spacing.lg};
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: 0 ${({ theme }) => theme.spacing.md};
-  }
-`;
+import { SectionHeader } from '../shared/SectionHeader';
+import { sectionTitleId } from '../shared/sectionTitleId';
 
 const FilterContainer = styled(motion.div)`
   display: flex;
@@ -102,26 +90,13 @@ const Projects: React.FC = () => {
         );
 
   return (
-    <Section id="projects" aria-labelledby="section-projects">
-      <SectionHeader>
-        <SectionTitle
-          id="section-projects"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          {t('sections.projects')}
-        </SectionTitle>
-        <SectionSubtitle
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
-          {t('projects.subtitle')}
-        </SectionSubtitle>
-      </SectionHeader>
+    <Container>
+      <SectionHeader
+        index="02"
+        title={t('sections.projects')}
+        titleId={sectionTitleId('projects')}
+        lead={t('projects.subtitle')}
+      />
 
       <FilterContainer
         initial={{ opacity: 0, y: 20 }}
@@ -174,7 +149,7 @@ const Projects: React.FC = () => {
           <p>{t('projects.emptyState.description')}</p>
         </EmptyState>
       )}
-    </Section>
+    </Container>
   );
 };
 

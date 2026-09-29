@@ -1,7 +1,8 @@
 import { FC, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import emailjs from '@emailjs/browser';
-import { SectionTitle } from '../shared/SectionTitle';
+import { Container } from '../../ui';
+import { SectionHeader } from '../shared/SectionHeader';
+import { sectionTitleId } from '../shared/sectionTitleId';
 import {
   ContactWrapper,
   ContactPanel,
@@ -67,6 +68,7 @@ const MSG_MAX = 300;
 const Contact: FC = () => {
   const { t } = useTranslation();
   const formRef = useRef<HTMLFormElement>(null);
+  const prefetchedRef = useRef(false);
   const [status, setStatus] = useState<Status>('idle');
   const [errors, setErrors] = useState<FormErrors>({});
   const [msgLength, setMsgLength] = useState(0);
@@ -109,6 +111,8 @@ const Contact: FC = () => {
     setStatus('loading');
 
     try {
+      // Loaded on demand to keep the SDK out of the main bundle.
+      const { default: emailjs } = await import('@emailjs/browser');
       await emailjs.sendForm(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
@@ -121,6 +125,13 @@ const Contact: FC = () => {
     }
   };
 
+  // Warm the emailjs chunk once, on first interaction with the form.
+  const prefetchEmailjs = () => {
+    if (prefetchedRef.current) return;
+    prefetchedRef.current = true;
+    void import('@emailjs/browser');
+  };
+
   const clearError = (field: keyof FormErrors) => {
     if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
   };
@@ -128,18 +139,14 @@ const Contact: FC = () => {
   const isLoading = status === 'loading';
 
   return (
-    <>
-      <SectionTitle
-        id="section-contact"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        {t('contact.title')}
-      </SectionTitle>
+    <Container>
+      <SectionHeader
+        index="04"
+        title={t('contact.title')}
+        titleId={sectionTitleId('contact')}
+      />
 
-      <ContactWrapper aria-labelledby="section-contact">
+      <ContactWrapper>
         <ContactPanel
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -197,6 +204,7 @@ const Contact: FC = () => {
               <Form
                 ref={formRef}
                 onSubmit={handleSubmit}
+                onFocus={prefetchEmailjs}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -326,7 +334,7 @@ const Contact: FC = () => {
           )}
         </FormPanel>
       </ContactWrapper>
-    </>
+    </Container>
   );
 };
 

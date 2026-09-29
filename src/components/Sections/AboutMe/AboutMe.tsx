@@ -5,6 +5,7 @@ import type { ExperienceConfig } from '@/types';
 import { calculateYearsExperience } from '@/utils/dateCalculations';
 import {
   AboutMeContainer,
+  AboutMeBody,
   Description,
   FeaturedBadge,
   StatsContainer,
@@ -12,7 +13,8 @@ import {
   StatNumber,
   StatLabel,
 } from './AboutMe.styles';
-import { SectionTitle } from '../shared/SectionTitle';
+import { SectionHeader } from '../shared/SectionHeader';
+import { sectionTitleId } from '../shared/sectionTitleId';
 
 const NYT_HREF =
   'https://www.linkedin.com/posts/svanweelden_silicon-valley-builds-amazon-and-gmail-copycats-activity-7404333944894398465-CIyW/';
@@ -38,81 +40,79 @@ const AboutMe: FC = () => {
   ];
 
   return (
-    <AboutMeContainer aria-labelledby="section-about">
-      <SectionTitle
-        id="section-about"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        {t('sections.aboutme')}
-      </SectionTitle>
-      <Description
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-      >
-        <p>
-          <Trans i18nKey="aboutMe.intro" />
-        </p>
-        <p>
-          <Trans i18nKey="aboutMe.experience" values={{ years: yearsExp }} />
-        </p>
-        <p>{t('aboutMe.passion')}</p>
-      </Description>
-
-      <StatsContainer
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-      >
-        {stats.map((stat, index) => (
-          <StatBox
-            key={stat.label}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-          >
-            <StatNumber>{stat.number}</StatNumber>
-            <StatLabel>{stat.label}</StatLabel>
-          </StatBox>
-        ))}
-      </StatsContainer>
-
-      <FeaturedBadge
-        initial={{ opacity: 0, scale: 0.9 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.6 }}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          width="20"
-          height="20"
+    <AboutMeContainer>
+      <SectionHeader
+        index="01"
+        title={t('sections.aboutme')}
+        titleId={sectionTitleId('aboutme')}
+      />
+      <AboutMeBody>
+        <Description
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
         >
-          <path d="M12 2L3.5 20.5L13.5 16L21 20.5L12 2Z" />
-        </svg>
-        <span>
-          <Trans
-            i18nKey="aboutMe.featured"
-            components={{
-              nyt: (
-                <a
-                  href={NYT_HREF}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                />
-              ),
-            }}
-          />
-        </span>
-      </FeaturedBadge>
+          <p>
+            <Trans i18nKey="aboutMe.intro" />
+          </p>
+          <p>
+            <Trans i18nKey="aboutMe.experience" values={{ years: yearsExp }} />
+          </p>
+          <p>{t('aboutMe.passion')}</p>
+        </Description>
+
+        <StatsContainer
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          {stats.map((stat, index) => (
+            <StatBox
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
+            >
+              <StatNumber>{stat.number}</StatNumber>
+              <StatLabel>{stat.label}</StatLabel>
+            </StatBox>
+          ))}
+        </StatsContainer>
+
+        <FeaturedBadge
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            width="20"
+            height="20"
+          >
+            <path d="M12 2L3.5 20.5L13.5 16L21 20.5L12 2Z" />
+          </svg>
+          <span>
+            <Trans
+              i18nKey="aboutMe.featured"
+              components={{
+                nyt: (
+                  <a
+                    href={NYT_HREF}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  />
+                ),
+              }}
+            />
+          </span>
+        </FeaturedBadge>
+      </AboutMeBody>
     </AboutMeContainer>
   );
 };

@@ -3,8 +3,6 @@ import { motion } from 'framer-motion';
 
 export const ContactWrapper = styled.div`
   max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 ${({ theme }) => theme.spacing.lg};
   display: grid;
   grid-template-columns: 1fr 1.4fr;
   gap: 0;
@@ -14,7 +12,6 @@ export const ContactWrapper = styled.div`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     grid-template-columns: 1fr;
-    padding: 0 ${({ theme }) => theme.spacing.md};
   }
 `;
 

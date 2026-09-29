@@ -168,7 +168,7 @@ export const lightTheme = {
       content: '60rem', // 960px
       wide: '80rem', // 1280px
     },
-    navHeight: '70px',
+    navHeight: '92px',
   },
 
   motion: {

@@ -1,31 +1,18 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { Container } from '../../ui';
 
-export const ExperienceContainer = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 ${({ theme }) => theme.spacing.lg};
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: 0 ${({ theme }) => theme.spacing.md};
-  }
-`;
+export const ExperienceContainer = styled(Container)``;
 
 export const Header = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   margin-bottom: ${({ theme }) => theme.spacing['3xl']};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     margin-bottom: ${({ theme }) => theme.spacing['2xl']};
   }
-`;
-
-export const Title = styled(motion.h1)`
-  text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.text};
-  margin: 0;
 `;
 
 export const DownloadButton = styled.a`
