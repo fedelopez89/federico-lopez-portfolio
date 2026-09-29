@@ -1,6 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 import { Container, TextLink } from '../../ui';
+import { drawY, popIn, whenScrollDriven } from '../../../styles/scrollDraw';
 
 const MARKER = '7px';
 const RAIL_GUTTER = '2rem';
@@ -74,6 +75,27 @@ export const TimelineItem = styled(motion.li)<{ $current?: boolean }>`
     grid-template-columns: minmax(0, 1fr);
     row-gap: ${({ theme }) => theme.spacing.sm};
   }
+
+  /* The rail draws top to bottom as each item scrolls in; its marker pops as
+     the item's top arrives. Both follow the item's own (untransformed) view
+     timeline, so items already in view on load are fully drawn. */
+  ${whenScrollDriven(css`
+    view-timeline: --exp-item block;
+    view-timeline-inset: 0px 8%;
+
+    &::after {
+      transform-origin: top;
+      animation: ${drawY} linear both;
+      animation-timeline: --exp-item;
+      animation-range: entry 0% entry 100%;
+    }
+
+    &::before {
+      animation: ${popIn} linear both;
+      animation-timeline: --exp-item;
+      animation-range: entry 0% entry 25%;
+    }
+  `)}
 `;
 
 export const FileType = styled.span`
