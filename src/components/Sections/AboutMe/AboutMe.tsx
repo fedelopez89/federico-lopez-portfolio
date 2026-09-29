@@ -3,21 +3,30 @@ import { useTranslation, Trans } from 'react-i18next';
 import experienceHistory from '../../../data/experience.json';
 import type { ExperienceConfig } from '@/types';
 import { calculateYearsExperience } from '@/utils/dateCalculations';
+import { Eyebrow, TextLink } from '../../ui';
+import {
+  stackVariants,
+  fadeUpVariants,
+  inViewProps,
+} from '../../../styles/motion';
 import {
   AboutMeContainer,
   AboutMeBody,
   Description,
-  FeaturedBadge,
-  StatsContainer,
-  StatBox,
-  StatNumber,
-  StatLabel,
+  FeaturedCallout,
+  PublicationName,
+  CalloutContext,
+  FactsList,
+  Fact,
+  FactLabel,
+  FactValue,
 } from './AboutMe.styles';
 import { SectionHeader } from '../shared/SectionHeader';
 import { sectionTitleId } from '../shared/sectionTitleId';
 
 const NYT_HREF =
   'https://www.linkedin.com/posts/svanweelden_silicon-valley-builds-amazon-and-gmail-copycats-activity-7404333944894398465-CIyW/';
+const NYT_NAME = 'The New York Times';
 
 const AboutMe: FC = () => {
   const { t } = useTranslation();
@@ -31,12 +40,18 @@ const AboutMe: FC = () => {
         freelanceJob.start.month,
         freelanceJob.start.year
       )
-    : '7+';
+    : t('aboutMe.stats.yearsFallback');
 
-  const stats = [
-    { number: yearsExp, label: t('aboutMe.stats.yearsExperience') },
-    { number: '7+', label: t('aboutMe.stats.enterpriseClients') },
-    { number: '100%', label: t('aboutMe.stats.remote') },
+  const facts = [
+    { value: yearsExp, label: t('aboutMe.stats.yearsExperience') },
+    {
+      value: t('aboutMe.stats.enterpriseClientsValue'),
+      label: t('aboutMe.stats.enterpriseClients'),
+    },
+    {
+      value: t('aboutMe.stats.remoteValue'),
+      label: t('aboutMe.stats.remote'),
+    },
   ];
 
   return (
@@ -46,13 +61,8 @@ const AboutMe: FC = () => {
         title={t('sections.aboutme')}
         titleId={sectionTitleId('aboutme')}
       />
-      <AboutMeBody>
-        <Description
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
+      <AboutMeBody variants={stackVariants} {...inViewProps}>
+        <Description variants={fadeUpVariants}>
           <p>
             <Trans i18nKey="aboutMe.intro" />
           </p>
@@ -62,56 +72,28 @@ const AboutMe: FC = () => {
           <p>{t('aboutMe.passion')}</p>
         </Description>
 
-        <StatsContainer
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          {stats.map((stat, index) => (
-            <StatBox
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-            >
-              <StatNumber>{stat.number}</StatNumber>
-              <StatLabel>{stat.label}</StatLabel>
-            </StatBox>
-          ))}
-        </StatsContainer>
-
-        <FeaturedBadge
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            width="20"
-            height="20"
+        <FeaturedCallout variants={fadeUpVariants}>
+          <Eyebrow>{t('aboutMe.featuredLabel')}</Eyebrow>
+          <PublicationName>{NYT_NAME}</PublicationName>
+          <CalloutContext>{t('aboutMe.featuredContext')}</CalloutContext>
+          <TextLink
+            href={NYT_HREF}
+            external
+            externalLabel={t('header.newTab')}
+            arrow
           >
-            <path d="M12 2L3.5 20.5L13.5 16L21 20.5L12 2Z" />
-          </svg>
-          <span>
-            <Trans
-              i18nKey="aboutMe.featured"
-              components={{
-                nyt: (
-                  <a
-                    href={NYT_HREF}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  />
-                ),
-              }}
-            />
-          </span>
-        </FeaturedBadge>
+            {t('aboutMe.featuredCta')}
+          </TextLink>
+        </FeaturedCallout>
+
+        <FactsList variants={fadeUpVariants}>
+          {facts.map((fact) => (
+            <Fact key={fact.label}>
+              <FactLabel>{fact.label}</FactLabel>
+              <FactValue>{fact.value}</FactValue>
+            </Fact>
+          ))}
+        </FactsList>
       </AboutMeBody>
     </AboutMeContainer>
   );

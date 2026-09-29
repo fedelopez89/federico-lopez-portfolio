@@ -32,16 +32,19 @@
     "experience": "Experiencia"
   },
   "buttons": {
-    "downloadResume": "DESCARGAR CV",
+    "downloadResume": "Descargar CV",
     "liveDemo": "Ver Demo",
     "code": "Código",
     "viewAll": "Ver Todos los Proyectos",
     "showLess": "Mostrar Menos",
     "viewDetails": "Ver Detalles",
-    "backToPortfolio": "Volver al Portfolio"
+    "backToPortfolio": "Volver al Portfolio",
+    "resumeFileType": "PDF"
   },
   "footer": {
-    "copyright": "© {{year}} Federico López. Todos los derechos reservados."
+    "copyright": "© {{year}} Federico López. Todos los derechos reservados.",
+    "email": "Correo",
+    "links": "Redes y contacto"
   },
   "aboutMe": {
     "intro": "¡Hola! Soy <strong>Federico López</strong>, Ingeniero Frontend Senior especializado en construir aplicaciones web de <strong>alto rendimiento</strong>, <strong>escalables</strong> y <strong>centradas en el usuario</strong> con <strong>React</strong>, <strong>TypeScript</strong> y <strong>Next.js</strong>.",
@@ -50,9 +53,14 @@
     "stats": {
       "yearsExperience": "Años de Experiencia",
       "enterpriseClients": "Clientes Empresariales",
-      "remote": "Remoto"
+      "remote": "Remoto",
+      "enterpriseClientsValue": "7+",
+      "remoteValue": "100%",
+      "yearsFallback": "7+"
     },
-    "featured": "Destacado en <nyt>The New York Times</nyt>"
+    "featuredLabel": "Destacado en",
+    "featuredContext": "Cobertura de REAL Evals, la plataforma de pruebas de IA donde construí clones de aplicaciones de alta fidelidad.",
+    "featuredCta": "Ver la publicación en LinkedIn"
   },
   "projects": {
     "subtitle": "Una selección de mi trabajo, incluyendo proyectos destacados en The New York Times",
@@ -97,62 +105,51 @@
   },
   "experience": {
     "frontendBonzzu": {
-      "role": "ingeniero frontend senior",
-      "company": "bonzzu",
+      "role": "Ingeniero Frontend Senior",
+      "company": "Bonzzu",
       "notes": "Entregando aplicaciones escalables en React/Next.js para Delos Company y RCX Sports. Diseñé sistemas de componentes reutilizables con Material UI, Chakra UI y Shadcn UI. Lideré optimizaciones de rendimiento mediante SSR, división de código y mejoras de eficiencia."
     },
     "fullstackFreelance": {
-      "role": "desarrollador web frontend",
+      "role": "Desarrollador Web Frontend",
       "company": "Freelancer",
       "notes": "Entregué soluciones de alto impacto para clientes internacionales incluyendo Vrio, Wpromote, REAL Evals (destacado por The New York Times) y FactuPro. Especializado en SSR, optimización de rendimiento y arquitecturas escalables."
     },
     "fullstackNisum": {
-      "role": "ingeniero full stack",
-      "company": "nisum (science37)",
+      "role": "Ingeniero Full Stack",
+      "company": "Nisum (Science37)",
       "notes": "Entregué y mantuve interfaces React/Redux para la plataforma de investigación clínica de Science37 usando JavaScript y TypeScript. Desarrollé componentes UI reutilizables con Storybook y colaboré con equipos distribuidos en múltiples zonas horarias en entornos Agile remotos."
     },
     "mainframeICBC": {
-      "role": "desarrollador senior mainframe cobol",
+      "role": "Desarrollador Senior Mainframe COBOL",
       "company": "ICBC (Banco Industrial y Comercial de China)",
       "notes": "Lideré iniciativas Anti-Lavado de Dinero incluyendo análisis de impacto y estimación de esfuerzos. Desarrollé y mantuve aplicaciones COBOL en entornos batch y online (CICS) con DB2, mensajería MQ y archivos VSAM/QSAM. Gestioné incidentes de producción asegurando estabilidad del sistema bajo SLAs estrictos."
     },
     "cobolDeveloper": {
-      "role": "desarrollador cobol",
-      "company": "isban / BBVA / accenture",
+      "role": "Desarrollador COBOL",
+      "company": "Isban / BBVA / Accenture",
       "notes": "Desarrollé componentes COBOL para sistemas financieros y batch de alto volumen en múltiples instituciones bancarias. Realicé análisis de requisitos, mejoras de sistema y diseño técnico. Utilicé DB2, MQ, JCL y CICS para procesamiento de datos empresariales en entornos de misión crítica."
     },
     "frontendConstellation": {
-      "role": "desarrollador frontend",
+      "role": "Desarrollador Frontend",
       "company": "Constellation Software Inc.",
       "notes": "Construí aplicaciones web para clientes empresariales usando React y TypeScript. Colaboré con equipos multifuncionales para entregar funcionalidades de alta calidad a tiempo."
     },
     "softwareQuintica": {
-      "role": "desarrollador de software",
+      "role": "Desarrollador de Software",
       "company": "Quintica Software Solutions",
       "notes": "Desarrollé aplicaciones web full-stack usando frameworks JavaScript modernos. Participé en todas las fases del ciclo de vida del desarrollo de software."
     }
   },
-  "months": {
-    "January": "Enero",
-    "February": "Febrero",
-    "March": "Marzo",
-    "April": "Abril",
-    "May": "Mayo",
-    "June": "Junio",
-    "July": "Julio",
-    "August": "Agosto",
-    "September": "Septiembre",
-    "October": "Octubre",
-    "November": "Noviembre",
-    "December": "Diciembre"
-  },
   "time": {
     "present": "Presente",
-    "year": "año",
-    "years": "años",
-    "month": "mes",
-    "months": "meses",
-    "remote": "Remoto"
+    "remote": "Remoto",
+    "duration": {
+      "years_one": "{{count}} año",
+      "years_other": "{{count}} años",
+      "months_one": "{{count}} mes",
+      "months_other": "{{count}} meses"
+    },
+    "lessThanMonth": "< 1 mes"
   },
   "contact": {
     "title": "Contacto",

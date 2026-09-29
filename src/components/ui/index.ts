@@ -8,6 +8,7 @@ export type { ChipVariant } from './Chip';
 export { Container } from './Container';
 export type { ContainerSize } from './Container';
 export { Eyebrow } from './Eyebrow';
+export { Hairline } from './Hairline';
 export { TextLink } from './TextLink';
 export type { TextLinkProps } from './TextLink';
 export { VisuallyHidden } from './VisuallyHidden';

@@ -1,6 +1,16 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
-import { calculateDuration, calculateYearsExperience } from './dateCalculations';
+import i18n from '../i18n/config';
+import {
+  calculateDuration as calculateDurationWith,
+  calculateYearsExperience,
+  formatMonthYear,
+  toDateTimeValue,
+} from './dateCalculations';
 import type { Experience } from '@/types';
+
+const en = i18n.getFixedT('en');
+const es = i18n.getFixedT('es');
+const calculateDuration = (exp: Experience) => calculateDurationWith(exp, en);
 
 function makeExperience(
   startMonth: string,
@@ -60,6 +70,49 @@ describe('calculateDuration', () => {
     vi.setSystemTime(new Date('2024-01-15'));
     const exp = makeExperience('January', '2022', '', '', true);
     expect(calculateDuration(exp)).toBe('2 yrs');
+  });
+});
+
+describe('calculateDuration (Spanish)', () => {
+  it('uses Spanish plural units', () => {
+    const exp = makeExperience('January', '2020', 'April', '2022');
+    expect(calculateDurationWith(exp, es)).toBe('2 años 3 meses');
+  });
+
+  it('uses Spanish singular units', () => {
+    const exp = makeExperience('January', '2021', 'February', '2022');
+    expect(calculateDurationWith(exp, es)).toBe('1 año 1 mes');
+  });
+
+  it('returns only months in Spanish when under one year', () => {
+    const exp = makeExperience('January', '2023', 'July', '2023');
+    expect(calculateDurationWith(exp, es)).toBe('6 meses');
+  });
+});
+
+describe('formatMonthYear', () => {
+  it('formats a short month and year per locale', () => {
+    expect(formatMonthYear('February', '2022', 'en')).toBe('Feb 2022');
+    expect(formatMonthYear('February', '2022', 'es')).toBe('feb 2022');
+  });
+
+  it('falls back to the year for an unknown month', () => {
+    expect(formatMonthYear('', '2022', 'en')).toBe('2022');
+  });
+
+  it('falls back to English for an invalid locale tag', () => {
+    expect(formatMonthYear('February', '2022', 'not_a_locale!')).toBe('Feb 2022');
+  });
+});
+
+describe('toDateTimeValue', () => {
+  it('returns YYYY-MM', () => {
+    expect(toDateTimeValue('February', '2022')).toBe('2022-02');
+    expect(toDateTimeValue('December', '2015')).toBe('2015-12');
+  });
+
+  it('falls back to the year for an unknown month', () => {
+    expect(toDateTimeValue('', '2022')).toBe('2022');
   });
 });
 

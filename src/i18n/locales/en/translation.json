@@ -32,16 +32,19 @@
     "experience": "Experience"
   },
   "buttons": {
-    "downloadResume": "DOWNLOAD RESUME",
+    "downloadResume": "Download resume",
     "liveDemo": "Live Demo",
     "code": "Code",
     "viewAll": "View All Projects",
     "showLess": "Show Less",
     "viewDetails": "View Details",
-    "backToPortfolio": "Back to Portfolio"
+    "backToPortfolio": "Back to Portfolio",
+    "resumeFileType": "PDF"
   },
   "footer": {
-    "copyright": "© {{year}} Federico López. All rights reserved."
+    "copyright": "© {{year}} Federico López. All rights reserved.",
+    "email": "Email",
+    "links": "Social links"
   },
   "aboutMe": {
     "intro": "Hi! I'm <strong>Federico López</strong>, a Senior Frontend Engineer specializing in building <strong>high-performance</strong>, <strong>scalable</strong>, and <strong>user-centric</strong> web applications with <strong>React</strong>, <strong>TypeScript</strong>, and <strong>Next.js</strong>.",
@@ -50,9 +53,14 @@
     "stats": {
       "yearsExperience": "Years Experience",
       "enterpriseClients": "Enterprise Clients",
-      "remote": "Remote"
+      "remote": "Remote",
+      "enterpriseClientsValue": "7+",
+      "remoteValue": "100%",
+      "yearsFallback": "7+"
     },
-    "featured": "Featured in <nyt>The New York Times</nyt>"
+    "featuredLabel": "Featured in",
+    "featuredContext": "Coverage of REAL Evals, the AI testing platform where I built high-fidelity app clones.",
+    "featuredCta": "See the LinkedIn post"
   },
   "projects": {
     "subtitle": "A selection of my work, including projects featured in The New York Times",
@@ -97,62 +105,51 @@
   },
   "experience": {
     "frontendBonzzu": {
-      "role": "senior frontend engineer",
-      "company": "bonzzu",
+      "role": "Senior Frontend Engineer",
+      "company": "Bonzzu",
       "notes": "Delivering scalable React/Next.js applications for Delos Company and RCX Sports. Designed reusable component systems using Material UI, Chakra UI, and Shadcn UI. Led performance optimizations through SSR, code splitting, and rendering efficiency improvements."
     },
     "fullstackFreelance": {
-      "role": "frontend web developer",
+      "role": "Frontend Web Developer",
       "company": "Freelancer",
       "notes": "Delivered high-impact solutions for international clients including Vrio, Wpromote, REAL Evals (featured by The New York Times), and FactuPro. Specialized in SSR, performance optimization, and scalable component architectures."
     },
     "fullstackNisum": {
-      "role": "full stack engineer",
-      "company": "nisum (science37)",
+      "role": "Full Stack Engineer",
+      "company": "Nisum (Science37)",
       "notes": "Delivered and maintained React/Redux interfaces for Science37's clinical research platform using JavaScript and TypeScript. Developed reusable UI components with Storybook and partnered with distributed teams across multiple time zones in remote Agile environments."
     },
     "mainframeICBC": {
-      "role": "senior mainframe cobol developer",
+      "role": "Senior Mainframe COBOL Developer",
       "company": "ICBC (Industrial and Commercial Bank of China)",
       "notes": "Led Anti-Money Laundering initiatives including impact analysis and effort estimation. Developed and maintained COBOL applications in batch and online (CICS) environments with DB2, MQ messaging, and VSAM/QSAM files. Managed production incidents ensuring system stability under strict SLAs."
     },
     "cobolDeveloper": {
-      "role": "cobol developer",
-      "company": "isban / BBVA / accenture",
+      "role": "COBOL Developer",
+      "company": "Isban / BBVA / Accenture",
       "notes": "Developed COBOL components for financial and high-volume batch systems across multiple banking institutions. Performed requirements analysis, system enhancements, and technical design. Leveraged DB2, MQ, JCL, and CICS for enterprise data processing in mission-critical environments."
     },
     "frontendConstellation": {
-      "role": "frontend developer",
+      "role": "Frontend Developer",
       "company": "Constellation Software Inc.",
       "notes": "Built customer-facing web applications for enterprise clients using React and TypeScript. Collaborated with cross-functional teams to deliver high-quality features on schedule."
     },
     "softwareQuintica": {
-      "role": "software developer",
+      "role": "Software Developer",
       "company": "Quintica Software Solutions",
       "notes": "Developed full-stack web applications using modern JavaScript frameworks. Participated in all phases of software development lifecycle."
     }
   },
-  "months": {
-    "January": "January",
-    "February": "February",
-    "March": "March",
-    "April": "April",
-    "May": "May",
-    "June": "June",
-    "July": "July",
-    "August": "August",
-    "September": "September",
-    "October": "October",
-    "November": "November",
-    "December": "December"
-  },
   "time": {
     "present": "Present",
-    "year": "year",
-    "years": "years",
-    "month": "month",
-    "months": "months",
-    "remote": "Remote"
+    "remote": "Remote",
+    "duration": {
+      "years_one": "{{count}} yr",
+      "years_other": "{{count}} yrs",
+      "months_one": "{{count}} mo",
+      "months_other": "{{count}} mos"
+    },
+    "lessThanMonth": "< 1 mo"
   },
   "contact": {
     "title": "Contact",
