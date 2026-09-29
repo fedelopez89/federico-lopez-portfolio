@@ -5,11 +5,7 @@ import { useMediaQueryHysteresis, usePointerGlow } from '@hooks';
 import { NYT_HREF } from '../../../data/featured';
 import { RESUME_FILENAME, RESUME_HREF } from '../../../data/resume';
 import { Button, Container, Eyebrow, TextLink } from '../../ui';
-import {
-  stackVariants,
-  riseVariants,
-  fadeUpVariants,
-} from '../../../styles/motion';
+import { heroStackVariants, heroItemVariants } from '../../../styles/motion';
 import {
   HeroSection,
   BackdropScroll,
@@ -25,6 +21,7 @@ import {
   Rise,
   FadeBlock,
   TITLE_MASK_MARGIN,
+  TitleWrap,
   Title,
   Tagline,
   Actions,
@@ -80,12 +77,12 @@ const Hero: FC = () => {
         data-testid="hero-backdrop"
         style={backdropStyle}
       >
+        <GridBase />
         <BackdropFade
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
         >
-          <GridBase />
           <GlowSweep>
             <Glow />
             <GridWindow>
@@ -97,30 +94,35 @@ const Hero: FC = () => {
 
       <HeroContent style={contentStyle}>
         <Container>
+          {/* The h1 is the LCP element, so it is deliberately not animated:
+              it must be painted and visible on the first frame (Chrome ignores
+              opacity: 0 and clipped elements for LCP). Its signature reveal is
+              a compositor-only sheen plus a small settle (CSS, transform
+              only). Everything around it rises in with a short stagger. */}
           <HeroStack
-            variants={stackVariants}
+            variants={heroStackVariants}
             initial="hidden"
             animate="visible"
           >
             <Mask>
-              <Rise variants={riseVariants}>
+              <Rise variants={heroItemVariants}>
                 <Eyebrow rule>{t('header.role')}</Eyebrow>
               </Rise>
             </Mask>
 
             <Mask $mt={TITLE_MASK_MARGIN.top} $mb={TITLE_MASK_MARGIN.bottom}>
-              <Rise variants={riseVariants}>
+              <TitleWrap>
                 <Title>{t('header.name')}</Title>
-              </Rise>
+              </TitleWrap>
             </Mask>
 
             <Mask $mt="2rem">
-              <Rise variants={riseVariants}>
+              <Rise variants={heroItemVariants}>
                 <Tagline>{t('header.tagline')}</Tagline>
               </Rise>
             </Mask>
 
-            <FadeBlock $mt="2.5rem" variants={fadeUpVariants}>
+            <FadeBlock $mt="2.5rem" variants={heroItemVariants}>
               <Actions>
                 <Button href="#projects">{t('header.ctaWork')}</Button>
                 <Button
@@ -133,7 +135,7 @@ const Hero: FC = () => {
               </Actions>
             </FadeBlock>
 
-            <FadeBlock $mt="1.5rem" variants={fadeUpVariants}>
+            <FadeBlock $mt="1.5rem" variants={heroItemVariants}>
               <SocialLinks>
                 <li>
                   <TextLink href="#contact">{t('header.ctaContact')}</TextLink>
@@ -153,7 +155,7 @@ const Hero: FC = () => {
               </SocialLinks>
             </FadeBlock>
 
-            <FadeBlock $mt="2.5rem" variants={fadeUpVariants}>
+            <FadeBlock $mt="2.5rem" variants={heroItemVariants}>
               <ProofList aria-label={t('header.proof.label')}>
                 <ProofItem>{t('header.proof.years')}</ProofItem>
                 <ProofItem>{t('header.proof.react')}</ProofItem>

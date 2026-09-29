@@ -7,3 +7,4 @@ export * from './useMediaQuery';
 export * from './useDocumentTitle';
 export * from './useRevealOnFocus';
 export * from './useRestoreProjectFocus';
+export * from './useCardSpotlight';

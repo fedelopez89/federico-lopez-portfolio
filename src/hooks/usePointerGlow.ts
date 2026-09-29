@@ -53,11 +53,24 @@ export const usePointerGlow = <T extends HTMLElement>(
         return { x: rect.width * restX, y: rect.height * restY };
       };
 
+      // Measuring at mount would force layout right after React commits. The
+      // CSS defaults already park the glow at rest, so measure on first use.
+      let ready = false;
+      const ensureReady = () => {
+        if (ready) return;
+        ready = true;
+        current = getRest();
+        target = { ...current };
+      };
+
       const tick = () => {
         const dx = target.x - current.x;
         const dy = target.y - current.y;
 
-        if (Math.abs(dx) < SETTLE_THRESHOLD && Math.abs(dy) < SETTLE_THRESHOLD) {
+        if (
+          Math.abs(dx) < SETTLE_THRESHOLD &&
+          Math.abs(dy) < SETTLE_THRESHOLD
+        ) {
           current = { ...target };
           write();
           frame = 0;
@@ -80,6 +93,7 @@ export const usePointerGlow = <T extends HTMLElement>(
 
       const retarget = () => {
         if (!lastClient) return;
+        ensureReady();
         const rect = el.getBoundingClientRect();
         target = { x: lastClient.x - rect.left, y: lastClient.y - rect.top };
         start();
@@ -99,6 +113,7 @@ export const usePointerGlow = <T extends HTMLElement>(
           event.clientY >= rect.top &&
           event.clientY <= rect.bottom;
         if (stillInside) return;
+        ensureReady();
         lastClient = null;
         target = getRest();
         start();
@@ -110,8 +125,12 @@ export const usePointerGlow = <T extends HTMLElement>(
       const attach = () => {
         if (attached) return;
         attached = true;
-        el.addEventListener('pointermove', handlePointerMove, { passive: true });
-        el.addEventListener('pointerleave', handlePointerLeave, { passive: true });
+        el.addEventListener('pointermove', handlePointerMove, {
+          passive: true,
+        });
+        el.addEventListener('pointerleave', handlePointerLeave, {
+          passive: true,
+        });
         window.addEventListener('scroll', handleScroll, { passive: true });
       };
 
@@ -125,10 +144,6 @@ export const usePointerGlow = <T extends HTMLElement>(
         stop();
       };
 
-      // Start from the resting position so there is no jump on first move.
-      current = getRest();
-      target = { ...current };
-      write();
       attach();
 
       let observer: IntersectionObserver | undefined;

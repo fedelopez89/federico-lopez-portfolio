@@ -10,15 +10,27 @@ export const Navbar = styled(motion.nav)<{ $isScrolled: boolean }>`
   right: 0;
   z-index: ${({ theme }) => theme.zIndex.sticky};
   padding: ${({ theme }) => theme.spacing.lg} 0;
-  background: ${({ $isScrolled, theme }) =>
-    $isScrolled ? alpha(theme.colors.background, 85) : 'transparent'};
   backdrop-filter: ${({ $isScrolled }) => ($isScrolled ? 'blur(8px)' : 'none')};
-  border-bottom: 1px solid
-    ${({ $isScrolled, theme }) =>
-      $isScrolled ? theme.colors.border : 'transparent'};
-  transition:
-    background-color ${({ theme }) => theme.transitions.base},
-    border-color ${({ theme }) => theme.transitions.base};
+  border-bottom: 1px solid transparent;
+
+  /* The scrolled surface (tint and hairline) lives on a pseudo-element that
+     only fades opacity, which runs on the compositor. Animating
+     background-color and border-color would repaint on the main thread. The
+     blur switches instantly; it is not transitioned. */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    z-index: -1;
+    pointer-events: none;
+    background: ${({ theme }) => alpha(theme.colors.background, 85)};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+    opacity: ${({ $isScrolled }) => ($isScrolled ? 1 : 0)};
+    transition: opacity ${({ theme }) => theme.transitions.base};
+  }
 
   /* At 400% zoom or in landscape on phones a fixed bar would cover half the
      viewport (WCAG 1.4.10): let it scroll away instead. */
@@ -94,7 +106,9 @@ export const NavLink = styled(SiteLink)<{ $isActive?: boolean }>`
   color: ${({ theme, $isActive }) =>
     $isActive ? theme.colors.text : theme.colors.textMuted};
   text-decoration: none;
-  transition: color ${({ theme }) => theme.transitions.fast};
+  /* No color transition: scroll-spy flips the active link during scroll and
+     at load, and animated color runs on the main thread. The underline
+     (transform) carries the motion. */
 
   &::after {
     content: '';

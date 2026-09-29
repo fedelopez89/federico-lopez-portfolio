@@ -1,11 +1,21 @@
-import { useId } from 'react';
+import { useId, type MouseEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Chip } from '../../ui';
 import type { Project } from '../../../data/projects';
 import {
+  canUseViewTransition,
+  isPlainClick,
+  navigateWithTransition,
+  projectCardShared,
+} from '../../../utils/viewTransition';
+import {
   CardLink,
   CardSurface,
   ImageFrame,
+  Spotlight,
+  SpotGrid,
+  SpotGlow,
   ProjectImage,
   ImagePlaceholder,
   CardBody,
@@ -26,6 +36,17 @@ const MAX_TECH = 3;
 const IMAGE_WIDTH = 1400;
 const IMAGE_HEIGHT = 740;
 
+/** Route chunk, fetched ahead of the click so the transition rarely waits. */
+const loadProjectDetail = () => import('../../../pages/ProjectDetail');
+let detailPrefetched = false;
+const prefetchProjectDetail = () => {
+  if (detailPrefetched) return;
+  detailPrefetched = true;
+  loadProjectDetail().catch(() => {
+    detailPrefetched = false;
+  });
+};
+
 function preloadImage(url: string) {
   const href = url.startsWith('/') ? url : `/${url}`;
   if (document.querySelector(`link[rel="preload"][href="${href}"]`)) return;
@@ -40,6 +61,7 @@ function preloadImage(url: string) {
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const { t } = useTranslation();
   const titleId = useId();
+  const navigate = useNavigate();
 
   const projectTransKey = project.id.replace(/-/g, '');
   const translatedTitle = t(`projects.${projectTransKey}.title`, {
@@ -49,19 +71,39 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const visibleTech = project.technologies.slice(0, MAX_TECH);
   const extraCount = project.technologies.length - MAX_TECH;
 
-  const handleClick = () => {
+  const to = `/projects/${project.id}`;
+  const state = { fromPortfolio: true, fromProject: project.id };
+
+  const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
     if (project.imageUrl) preloadImage(project.imageUrl);
+    if (!canUseViewTransition() || !isPlainClick(e)) return;
+
+    // Morph this card's screenshot and title into the project page. Only the
+    // clicked card is named, since names must be unique in the document.
+    e.preventDefault();
+    navigateWithTransition(() => navigate(to, { state }), {
+      shared: projectCardShared(e.currentTarget, project.id),
+      // Load the route chunk first so the new snapshot is the real page.
+      prepare: loadProjectDetail,
+    });
   };
 
   return (
     <CardLink
-      to={`/projects/${project.id}`}
-      state={{ fromPortfolio: true, fromProject: project.id }}
+      to={to}
+      state={state}
       aria-labelledby={titleId}
       onClick={handleClick}
+      onPointerEnter={prefetchProjectDetail}
+      onFocus={prefetchProjectDetail}
+      data-spot-card
     >
       <CardSurface>
-        <ImageFrame>
+        <Spotlight aria-hidden="true">
+          <SpotGrid />
+          <SpotGlow />
+        </Spotlight>
+        <ImageFrame data-vt-shot>
           {project.imageUrl ? (
             <ProjectImage
               src={project.imageUrl}
@@ -85,7 +127,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           </MetaRow>
 
           <TitleRow>
-            <Title id={titleId}>{translatedTitle}</Title>
+            <Title id={titleId} data-vt-title>
+              {translatedTitle}
+            </Title>
             <Arrow aria-hidden="true">↗</Arrow>
           </TitleRow>
 

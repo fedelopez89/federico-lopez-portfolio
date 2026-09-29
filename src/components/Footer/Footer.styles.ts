@@ -3,10 +3,17 @@ import { TextLink } from '../ui';
 
 export const FooterRoot = styled.footer`
   background: ${({ theme }) => theme.colors.background};
+  content-visibility: auto;
+  contain-intrinsic-size: auto 160px;
+
+  @media print {
+    content-visibility: visible;
+  }
   /* Lifts content above the fixed scroll-to-top button (44px + offset) at every width. */
   padding-bottom: ${({ theme }) => theme.spacing['4xl']};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    contain-intrinsic-size: auto 220px;
     padding-bottom: ${({ theme }) => `calc(${theme.spacing['2xl']} + 60px)`};
   }
 `;

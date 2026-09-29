@@ -1,4 +1,4 @@
-import { useEffect, useRef, type MouseEvent } from 'react';
+import { useEffect, useRef, useState, type MouseEvent } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDocumentTitle, rememberProject } from '@/hooks';
@@ -13,6 +13,14 @@ import {
   Eyebrow,
   TextLink,
 } from '../../components/ui';
+import {
+  isViewTransitionActive,
+  navigateWithTransition,
+  projectShotName,
+  projectTitleName,
+  signalViewTransitionReady,
+  viewTransitionStyle,
+} from '../../utils/viewTransition';
 import { stackVariants, fadeUpVariants } from '../../styles/motion';
 import { NotFoundView } from '../NotFound/NotFoundView';
 import {
@@ -71,6 +79,9 @@ function ProjectDetail() {
     : { name: '', description: '' };
 
   const titleRef = useRef<HTMLHeadingElement>(null);
+  // Arriving through a view transition: the snapshot needs the final layout,
+  // so the entrance animation is skipped (decided once, on first render).
+  const [skipEntrance] = useState(isViewTransitionActive);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -80,6 +91,8 @@ function ProjectDetail() {
       titleRef.current?.focus({ preventScroll: true });
     }
     // Only a project change should move focus, not a location state update.
+    // Scroll is settled: a running view transition can take its new snapshot.
+    signalViewTransitionReady();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
@@ -104,9 +117,9 @@ function ProjectDetail() {
 
   const handleBack = () => {
     if (fromPortfolio) {
-      navigate(-1);
+      navigateWithTransition(() => navigate(-1));
     } else {
-      navigate('/#projects');
+      navigateWithTransition(() => navigate('/#projects'));
     }
   };
 
@@ -163,7 +176,11 @@ function ProjectDetail() {
             {t('buttons.backToPortfolio')}
           </BackButton>
 
-          <Stack variants={stackVariants} initial="hidden" animate="visible">
+          <Stack
+            variants={stackVariants}
+            initial={skipEntrance ? false : 'hidden'}
+            animate="visible"
+          >
             <Intro variants={fadeUpVariants}>
               <MetaRow>
                 <Eyebrow rule>
@@ -173,7 +190,14 @@ function ProjectDetail() {
                   <Chip variant="accent">{t('projects.nytBadge')}</Chip>
                 )}
               </MetaRow>
-              <Title ref={titleRef} tabIndex={-1}>
+              <Title
+                ref={titleRef}
+                tabIndex={-1}
+                style={viewTransitionStyle(
+                  projectTitleName(project.id),
+                  'title'
+                )}
+              >
                 {translatedTitle}
               </Title>
               <Lead>{translatedDesc}</Lead>
@@ -208,7 +232,10 @@ function ProjectDetail() {
               )}
             </Intro>
 
-            <ScreenshotFrame variants={fadeUpVariants}>
+            <ScreenshotFrame
+              variants={fadeUpVariants}
+              style={viewTransitionStyle(projectShotName(project.id), 'shot')}
+            >
               {project.imageUrl ? (
                 <Screenshot
                   src={project.imageUrl}

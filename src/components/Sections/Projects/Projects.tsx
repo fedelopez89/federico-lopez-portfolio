@@ -1,5 +1,6 @@
+import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useRevealOnFocus } from '@/hooks';
+import { useCardSpotlight, useRevealOnFocus } from '@/hooks';
 import {
   PROJECT_GROUPS,
   projects,
@@ -7,6 +8,7 @@ import {
   type ProjectGroup,
 } from '../../../data/projects';
 import { fadeUpVariants, inViewProps } from '../../../styles/motion';
+import { isViewTransitionActive } from '../../../utils/viewTransition';
 import ProjectCard from './ProjectCard';
 import { SectionHeader } from '../shared/SectionHeader';
 import { sectionTitleId } from '../shared/sectionTitleId';
@@ -23,8 +25,15 @@ import {
 /** Grid cell revealed on scroll and, as a keyboard safety net, on focus. */
 const ProjectGridItem: React.FC<{ project: Project }> = ({ project }) => {
   const reveal = useRevealOnFocus();
+  // Returning through a view transition: the card must already be visible.
+  const [skipReveal] = useState(isViewTransitionActive);
   return (
-    <ProjectItem variants={fadeUpVariants} {...inViewProps} {...reveal()}>
+    <ProjectItem
+      variants={fadeUpVariants}
+      {...inViewProps}
+      {...(skipReveal && { initial: false })}
+      {...reveal()}
+    >
       <ProjectCard project={project} />
     </ProjectItem>
   );
@@ -53,9 +62,11 @@ const ProjectGroupSection: React.FC<{
 
 const Projects: React.FC = () => {
   const { t } = useTranslation();
+  const containerRef = useRef<HTMLDivElement>(null);
+  useCardSpotlight(containerRef);
 
   return (
-    <ProjectsContainer>
+    <ProjectsContainer ref={containerRef}>
       <SectionHeader
         index="02"
         title={t('sections.projects')}

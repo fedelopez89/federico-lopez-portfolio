@@ -1,6 +1,11 @@
 {
   "cleanUrls": true,
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "rewrites": [
+    {
+      "source": "/((?!assets/|fonts/|images/|pdf/)(?:[^/]+/)*[^/.]*)",
+      "destination": "/"
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",

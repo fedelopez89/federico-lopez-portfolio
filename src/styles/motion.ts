@@ -11,12 +11,6 @@ export const stackVariants: Variants = {
   visible: { transition: { staggerChildren: stagger, delayChildren: 0.1 } },
 };
 
-/** Rises out of a clipping mask (parent needs overflow: hidden). */
-export const riseVariants: Variants = {
-  hidden: { y: '100%' },
-  visible: { y: 0, transition: { duration: duration.slow, ease: EASE } },
-};
-
 export const fadeUpVariants: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: {
@@ -33,7 +27,7 @@ export const fadeVariants: Variants = {
 };
 
 /** Tween used by overlays and drawers that enter and leave the tree. */
-export const overlayTransition = { duration: 0.3, ease: EASE };
+export const overlayTransition = { duration: 0.38, ease: EASE };
 
 /**
  * Spread on a motion element to animate it once when scrolled into view.
@@ -46,3 +40,21 @@ export const inViewProps = {
   whileInView: 'visible',
   viewport: { once: true, margin: '0px' },
 } as const;
+
+/**
+ * Hero entrance: a snappy, choreographed rise for everything around the h1
+ * (which is not animated, see Hero). 5 items settle in about 580ms.
+ */
+export const heroStackVariants: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.05 } },
+};
+
+export const heroItemVariants: Variants = {
+  hidden: { opacity: 0, y: 18 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.38, ease: EASE },
+  },
+};
