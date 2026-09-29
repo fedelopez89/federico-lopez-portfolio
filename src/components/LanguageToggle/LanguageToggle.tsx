@@ -23,7 +23,7 @@ const LanguageButton = styled.button<{ $isActive: boolean }>`
   font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
   letter-spacing: ${({ theme }) => theme.typography.tracking.eyebrow};
   text-transform: uppercase;
-  transition: color ${({ theme }) => theme.transitions.fast};
+  /* No color transition (main-thread); the underline scales on the compositor. */
 
   &::after {
     content: '';
