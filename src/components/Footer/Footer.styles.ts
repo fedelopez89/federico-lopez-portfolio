@@ -3,6 +3,12 @@ import { TextLink } from '../ui';
 
 export const FooterRoot = styled.footer`
   background: ${({ theme }) => theme.colors.background};
+  content-visibility: auto;
+  contain-intrinsic-size: auto 240px;
+
+  @media print {
+    content-visibility: visible;
+  }
   /* Lifts content above the fixed scroll-to-top button (44px + offset) at every width. */
   padding-bottom: ${({ theme }) => theme.spacing['4xl']};
 

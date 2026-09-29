@@ -25,14 +25,28 @@ const fakeMetric = (overrides: Partial<Metric> = {}): Metric =>
     ...overrides,
   }) as Metric;
 
+// Registration is deferred to idle time after load; run idle work immediately.
+Object.defineProperty(window, 'requestIdleCallback', {
+  configurable: true,
+  value: (cb: () => void) => {
+    cb();
+    return 0;
+  },
+});
+
+const init = async () => {
+  initWebVitals();
+  await vi.waitFor(() => expect(onTTFB).toHaveBeenCalled());
+};
+
 describe('initWebVitals', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     delete window.gtag;
   });
 
-  it('registers a callback with each of the five web-vitals observers', () => {
-    initWebVitals();
+  it('registers a callback with each of the five web-vitals observers', async () => {
+    await init();
     expect(onCLS).toHaveBeenCalledOnce();
     expect(onINP).toHaveBeenCalledOnce();
     expect(onFCP).toHaveBeenCalledOnce();
@@ -40,8 +54,8 @@ describe('initWebVitals', () => {
     expect(onTTFB).toHaveBeenCalledOnce();
   });
 
-  it('passes a function as the callback to each observer', () => {
-    initWebVitals();
+  it('passes a function as the callback to each observer', async () => {
+    await init();
     for (const fn of [onCLS, onINP, onFCP, onLCP, onTTFB]) {
       expect((fn as Mock).mock.calls[0][0]).toBeTypeOf('function');
     }
@@ -53,11 +67,11 @@ describe('reportMetric callback', () => {
     vi.clearAllMocks();
   });
 
-  it('calls window.gtag with the correct event payload when gtag is defined', () => {
+  it('calls window.gtag with the correct event payload when gtag is defined', async () => {
     const gtag = vi.fn();
     window.gtag = gtag;
 
-    initWebVitals();
+    await init();
     const callback = (onLCP as Mock).mock.calls[0][0] as (m: Metric) => void;
     callback(fakeMetric({ name: 'LCP', value: 2500, id: 'v3-1', delta: 2500 }));
 
@@ -72,11 +86,11 @@ describe('reportMetric callback', () => {
     delete window.gtag;
   });
 
-  it('rounds CLS value multiplied by 1000 when reporting to gtag', () => {
+  it('rounds CLS value multiplied by 1000 when reporting to gtag', async () => {
     const gtag = vi.fn();
     window.gtag = gtag;
 
-    initWebVitals();
+    await init();
     const callback = (onCLS as Mock).mock.calls[0][0] as (m: Metric) => void;
     callback(fakeMetric({ name: 'CLS', value: 0.1, id: 'v3-2', delta: 0.1 }));
 
@@ -89,11 +103,13 @@ describe('reportMetric callback', () => {
     delete window.gtag;
   });
 
-  it('does not throw when window.gtag is not defined', () => {
+  it('does not throw when window.gtag is not defined', async () => {
     delete window.gtag;
-    initWebVitals();
+    await init();
 
     const callback = (onFCP as Mock).mock.calls[0][0] as (m: Metric) => void;
-    expect(() => callback(fakeMetric({ name: 'FCP', value: 1000 }))).not.toThrow();
+    expect(() =>
+      callback(fakeMetric({ name: 'FCP', value: 1000 }))
+    ).not.toThrow();
   });
 });

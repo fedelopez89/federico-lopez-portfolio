@@ -99,11 +99,23 @@ export const useScrollSpy = ({
       ? Date.now() + INITIAL_HASH_GRACE_MS
       : 0;
 
+    // Computed style is read once and again on resize (media queries can change
+    // it), not on every scroll frame, to avoid forcing style recalculation.
+    let cachedPadding: number | null = null;
+    const readPadding = () => {
+      if (cachedPadding === null) {
+        cachedPadding = parseFloat(
+          getComputedStyle(document.documentElement).scrollPaddingTop
+        );
+      }
+      return cachedPadding;
+    };
+
     const update = (force = false) => {
       frame = 0;
       const viewportHeight = window.innerHeight;
       const root = document.documentElement;
-      const padding = parseFloat(getComputedStyle(root).scrollPaddingTop);
+      const padding = readPadding();
       const top = Number.isFinite(padding) ? padding : offset;
       const sections = ids.flatMap((id) => {
         const el = document.getElementById(id);
@@ -156,6 +168,11 @@ export const useScrollSpy = ({
       }, SETTLE_MS);
     };
 
+    const onResize = () => {
+      cachedPadding = null;
+      onScroll();
+    };
+
     const onScroll = () => {
       if (suppressed) suppress();
       else if (!frame) frame = requestAnimationFrame(() => update());
@@ -165,19 +182,24 @@ export const useScrollSpy = ({
       if ((e.target as Element | null)?.closest?.('a[href^="#"]')) suppress();
     };
 
-    update();
-    isFirstRun = false;
+    // Measure after the first paint instead of inside the mount effect, where
+    // it would force layout on freshly committed DOM.
+    const initialFrame = requestAnimationFrame(() => {
+      update();
+      isFirstRun = false;
+    });
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    window.addEventListener('resize', onResize);
     document.addEventListener('click', onClick);
     window.addEventListener('hashchange', suppress);
 
     return () => {
       window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
+      window.removeEventListener('resize', onResize);
       document.removeEventListener('click', onClick);
       window.removeEventListener('hashchange', suppress);
       window.clearTimeout(settleTimer);
+      cancelAnimationFrame(initialFrame);
       if (frame) cancelAnimationFrame(frame);
     };
   }, [idsKey, offset]);

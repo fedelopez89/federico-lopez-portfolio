@@ -67,6 +67,8 @@ describe('useScrollSpy initial hash grace', () => {
     renderHook(() =>
       useScrollSpy({ sectionIds: ['home', 'projects', 'experience'] })
     );
+    // The spy takes its first measurement on the next frame.
+    vi.advanceTimersByTime(20);
     // A scroll from the hash alignment lands on a different section.
     projects.getBoundingClientRect = () => ({ top: 2000 }) as DOMRect;
   };

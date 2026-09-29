@@ -11,8 +11,21 @@ export const MainContainer = styled(motion.main)`
   }
 `;
 
-export const Section = styled.section`
+/**
+ * Below-the-fold sections skip rendering until they approach the viewport
+ * (content-visibility). `auto <n>px` reserves an estimate and then remembers
+ * the real height once rendered. Anchors, focus and find-in-page still force
+ * rendering; print renders everything.
+ */
+export const Section = styled.section<{ $intrinsicHeight?: number }>`
   position: relative;
+  content-visibility: auto;
+  contain-intrinsic-size: auto
+    ${({ $intrinsicHeight = 900 }) => $intrinsicHeight}px;
+
+  @media print {
+    content-visibility: visible;
+  }
 `;
 
 export const SectionBody = styled.div`
