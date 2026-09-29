@@ -8,3 +8,4 @@ export * from './useDocumentTitle';
 export * from './useRevealOnFocus';
 export * from './useRestoreProjectFocus';
 export * from './useCardSpotlight';
+export * from './usePointerParallax';
