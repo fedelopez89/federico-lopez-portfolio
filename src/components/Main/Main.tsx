@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useHashScroll } from '@/hooks';
 import { Container } from '../ui';
 import { ScrollToTopButton } from '../layout/ScrollToTop';
 import AboutMe from '../Sections/AboutMe/AboutMe';
@@ -21,6 +22,8 @@ const sections: SectionConfig[] = [
 ];
 
 const Main: FC = () => {
+  useHashScroll();
+
   return (
     <MainContainer
       id="main-content"

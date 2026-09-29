@@ -19,8 +19,21 @@ export const riseVariants: Variants = {
 
 export const fadeUpVariants: Variants = {
   hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: duration.slow, ease: EASE } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: duration.slow, ease: EASE },
+  },
 };
+
+/** Single quiet opacity fade, no movement. */
+export const fadeVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: duration.base, ease: EASE } },
+};
+
+/** Tween used by overlays and drawers that enter and leave the tree. */
+export const overlayTransition = { duration: 0.3, ease: EASE };
 
 /** Spread on a motion element to animate it once when scrolled into view. */
 export const inViewProps = {

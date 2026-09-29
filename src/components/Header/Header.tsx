@@ -1,23 +1,40 @@
-import { FC, useState, useRef, useEffect } from 'react';
+import {
+  FC,
+  ReactNode,
+  Ref,
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+} from 'react';
+import { createPortal } from 'react-dom';
+import { AnimatePresence, useIsPresent } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useNavbarScroll, useScrollSpy } from '@/hooks';
 import { LanguageToggle } from '@/components/LanguageToggle';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { Eyebrow, VisuallyHidden } from '@/components/ui';
+import { sectionTitleId } from '@/components/Sections/shared/sectionTitleId';
+import { fadeVariants, overlayTransition } from '@/styles/motion';
 import Hero from './Hero';
 import {
   HeaderContainer,
   Navbar,
   NavContainer,
   Logo,
+  NavActions,
   NavMenu,
-  NavItem,
   NavLink,
   MobileMenuButton,
+  MobileLayer,
   MobileMenuOverlay,
   MobileMenu,
   MobileMenuHeader,
   MobileMenuTitle,
+  MobileMenuName,
   MobileCloseButton,
   MobileNavLinks,
+  MobileNavIndex,
   MobileNavLink,
   MobileMenuFooter,
 } from './Header.styles';
@@ -26,53 +43,122 @@ const navItems = [
   { href: '#aboutme', labelKey: 'header.about', id: 'aboutme' },
   { href: '#projects', labelKey: 'header.projects', id: 'projects' },
   { href: '#experience', labelKey: 'header.experience', id: 'experience' },
-{ href: '#contact', labelKey: 'header.contact', id: 'contact' },
+  { href: '#contact', labelKey: 'header.contact', id: 'contact' },
 ];
+
+const SECTION_IDS = ['home', ...navItems.map((item) => item.id)];
+const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex="0"]';
+const DRAWER_TITLE_ID = 'mobile-menu-title';
+const MOBILE_QUERY = '(max-width: 768px)';
+
+/** Keeps the layer out of reach (focus, taps, AT) while its exit animation plays. */
+const DrawerLayer: FC<{
+  layerRef: Ref<HTMLDivElement>;
+  children: ReactNode;
+}> = ({ layerRef, children }) => {
+  const isPresent = useIsPresent();
+  return (
+    <MobileLayer
+      ref={layerRef}
+      inert={!isPresent}
+      aria-hidden={!isPresent || undefined}
+      style={isPresent ? undefined : { pointerEvents: 'none' }}
+    >
+      {children}
+    </MobileLayer>
+  );
+};
+
+/**
+ * Where focus goes when the drawer closes: the hamburger (default), nothing
+ * (viewport grew, hamburger hidden), or the section a link pointed at.
+ */
+type FocusAfterClose =
+  | { to: 'hamburger' }
+  | { to: 'none' }
+  | { to: 'section'; id: string };
 
 const Header: FC = () => {
   const { t } = useTranslation();
   const { isScrolled } = useNavbarScroll(100);
-  const activeSection = useScrollSpy({
-    sectionIds: ['home', ...navItems.map((item) => item.id)],
-  });
+  const activeSection = useScrollSpy({ sectionIds: SECTION_IDS });
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
+  const layerRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
+  const focusAfterClose = useRef<FocusAfterClose>({ to: 'hamburger' });
+
+  const closeMenu = useCallback(() => setIsMobileMenuOpen(false), []);
+  const handleLinkClick = (id: string) => {
+    focusAfterClose.current = { to: 'section', id };
+    closeMenu();
+  };
+
+  // While the drawer is open: lock page scroll, make everything outside it
+  // inert (no focus, no clicks, hidden from assistive tech), close on Escape
+  // or when the viewport grows past the mobile breakpoint, and hand focus
+  // back to the hamburger on the way out.
   useEffect(() => {
     if (!isMobileMenuOpen) return;
+
+    const hamburger = hamburgerRef.current;
+    const rootStyle = document.documentElement.style;
+    const previousOverflow = rootStyle.getPropertyValue('overflow');
+    rootStyle.setProperty('overflow', 'hidden');
+
+    const inerted = Array.from(document.body.children).filter(
+      (el): el is HTMLElement =>
+        el instanceof HTMLElement &&
+        el.tagName !== 'SCRIPT' &&
+        !el.contains(layerRef.current) &&
+        !el.hasAttribute('inert')
+    );
+    inerted.forEach((el) => el.setAttribute('inert', ''));
+
+    mobileMenuRef.current
+      ?.querySelector<HTMLElement>(FOCUSABLE)
+      ?.focus({ preventScroll: true });
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setIsMobileMenuOpen(false);
-        hamburgerRef.current?.focus();
-      }
+      if (e.key === 'Escape') closeMenu();
     };
     document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isMobileMenuOpen]);
 
-  useEffect(() => {
-    if (!isMobileMenuOpen) return;
-    const firstFocusable = mobileMenuRef.current?.querySelector<HTMLElement>(
-      'a, button, [tabindex="0"]'
-    );
-    firstFocusable?.focus();
-  }, [isMobileMenuOpen]);
+    const media = window.matchMedia?.(MOBILE_QUERY);
+    const handleViewport = (e: MediaQueryListEvent) => {
+      if (e.matches) return;
+      focusAfterClose.current = { to: 'none' };
+      closeMenu();
+    };
+    media?.addEventListener('change', handleViewport);
 
-  const handleMobileMenuToggle = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  const handleMobileLinkClick = () => {
-    setIsMobileMenuOpen(false);
-    hamburgerRef.current?.focus();
-  };
+    return () => {
+      rootStyle.setProperty('overflow', previousOverflow);
+      inerted.forEach((el) => el.removeAttribute('inert'));
+      document.removeEventListener('keydown', handleKeyDown);
+      media?.removeEventListener('change', handleViewport);
+      // Inert is lifted first so focus can move back into the page.
+      const target = focusAfterClose.current;
+      focusAfterClose.current = { to: 'hamburger' };
+      if (target.to === 'hamburger') {
+        hamburger?.focus();
+      } else if (target.to === 'section') {
+        // The fragment navigation scrolls; we only move focus to the heading.
+        const heading = document.getElementById(sectionTitleId(target.id));
+        if (heading) {
+          heading.setAttribute('tabindex', '-1');
+          heading.style.outline = 'none';
+          heading.focus({ preventScroll: true });
+        }
+      }
+    };
+  }, [isMobileMenuOpen, closeMenu]);
 
   const handleMenuKeyDown = (e: React.KeyboardEvent) => {
     if (e.key !== 'Tab') return;
-    const focusables = mobileMenuRef.current?.querySelectorAll<HTMLElement>(
-      'a, button, [tabindex="0"]'
-    );
+    const focusables =
+      mobileMenuRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE);
     if (!focusables || focusables.length === 0) return;
     const first = focusables[0];
     const last = focusables[focusables.length - 1];
@@ -86,123 +172,143 @@ const Header: FC = () => {
   };
 
   return (
-    <HeaderContainer id="home" as="header" role="banner">
+    <HeaderContainer id="home">
+      <a href="#main-content" className="skip-link">
+        {t('a11y.skipToContent')}
+      </a>
+
       <Navbar
-        as="nav"
-        role="navigation"
-        aria-label="Main navigation"
+        aria-label={t('header.a11y.mainNav')}
         $isScrolled={isScrolled}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
+        variants={fadeVariants}
+        initial="hidden"
+        animate="visible"
       >
         <NavContainer>
-          <Logo
-            href="#home"
-            aria-label="Home"
-            whileTap={{ scale: 0.95 }}
-          >
-            {t('header.home')}
+          <Logo href="#home">
+            {t('header.name')}
+            <VisuallyHidden>, {t('header.a11y.home')}</VisuallyHidden>
           </Logo>
 
-          <MobileMenuButton
-            ref={hamburgerRef}
-            onClick={handleMobileMenuToggle}
-            aria-label="Toggle mobile menu"
-            aria-expanded={isMobileMenuOpen}
-          >
-            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" />
-            </svg>
-          </MobileMenuButton>
+          <NavActions>
+            <NavMenu>
+              {navItems.map((item) => (
+                <li key={item.href}>
+                  <NavLink
+                    href={item.href}
+                    aria-current={
+                      activeSection === item.id ? 'location' : undefined
+                    }
+                    $isActive={activeSection === item.id}
+                  >
+                    {t(item.labelKey)}
+                  </NavLink>
+                </li>
+              ))}
+              <li>
+                <LanguageToggle />
+              </li>
+            </NavMenu>
 
-          <NavMenu
-            as="ul"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-          >
-            {navItems.map((item, index) => (
-              <NavItem
-                as="li"
-                key={item.href}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index }}
-              >
-                <NavLink
-                  href={item.href}
-                  aria-current={activeSection === item.id ? 'true' : undefined}
-                  $isActive={activeSection === item.id}
-                >
-                  {t(item.labelKey)}
-                </NavLink>
-              </NavItem>
-            ))}
-            <NavItem
-              as="li"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 * navItems.length }}
+            <ThemeToggle />
+
+            <MobileMenuButton
+              ref={hamburgerRef}
+              type="button"
+              onClick={() => setIsMobileMenuOpen((open) => !open)}
+              aria-label={t('header.a11y.toggleMenu')}
+              aria-expanded={isMobileMenuOpen}
             >
-              <LanguageToggle />
-            </NavItem>
-          </NavMenu>
+              <svg
+                width="24"
+                height="24"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" />
+              </svg>
+            </MobileMenuButton>
+          </NavActions>
         </NavContainer>
       </Navbar>
 
-      {/* Mobile Menu Overlay */}
-      <MobileMenuOverlay
-        $isOpen={isMobileMenuOpen}
-        onClick={handleMobileLinkClick}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isMobileMenuOpen ? 1 : 0 }}
-        transition={{ duration: 0.3 }}
-        style={{ pointerEvents: isMobileMenuOpen ? 'auto' : 'none' }}
-      />
+      {/* Mounted only while open so a closed drawer is never focusable. */}
+      {createPortal(
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <DrawerLayer key="layer" layerRef={layerRef}>
+              <MobileMenuOverlay
+                aria-hidden="true"
+                onClick={closeMenu}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={overlayTransition}
+              />
+              <MobileMenu
+                ref={mobileMenuRef}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby={DRAWER_TITLE_ID}
+                initial={{ x: '100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '100%' }}
+                transition={overlayTransition}
+                onKeyDown={handleMenuKeyDown}
+              >
+                <MobileMenuHeader>
+                  <MobileMenuTitle>
+                    <MobileMenuName id={DRAWER_TITLE_ID}>
+                      {t('header.name')}
+                    </MobileMenuName>
+                    <Eyebrow as="span">{t('header.role')}</Eyebrow>
+                  </MobileMenuTitle>
+                  <MobileCloseButton
+                    type="button"
+                    onClick={closeMenu}
+                    aria-label={t('header.a11y.closeMenu')}
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                    </svg>
+                  </MobileCloseButton>
+                </MobileMenuHeader>
 
-      {/* Mobile Menu */}
-      <MobileMenu
-        ref={mobileMenuRef}
-        $isOpen={isMobileMenuOpen}
-        initial={{ x: '100%' }}
-        animate={{ x: isMobileMenuOpen ? 0 : '100%' }}
-        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-        onKeyDown={handleMenuKeyDown}
-      >
-        <MobileMenuHeader>
-          <MobileMenuTitle>
-            <span>Federico López</span>
-            <span>{t('header.role')}</span>
-          </MobileMenuTitle>
-          <MobileCloseButton
-            onClick={handleMobileMenuToggle}
-            aria-label="Close mobile menu"
-          >
-            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
-            </svg>
-          </MobileCloseButton>
-        </MobileMenuHeader>
+                <MobileNavLinks aria-label={t('header.a11y.mobileNav')}>
+                  {navItems.map((item, index) => (
+                    <MobileNavLink
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => handleLinkClick(item.id)}
+                      aria-current={
+                        activeSection === item.id ? 'location' : undefined
+                      }
+                      $isActive={activeSection === item.id}
+                    >
+                      <MobileNavIndex aria-hidden="true">
+                        {String(index + 1).padStart(2, '0')}
+                      </MobileNavIndex>
+                      {t(item.labelKey)}
+                    </MobileNavLink>
+                  ))}
+                </MobileNavLinks>
 
-        <MobileNavLinks role="navigation" aria-label="Mobile navigation">
-          {navItems.map((item) => (
-            <MobileNavLink
-              key={item.href}
-              href={item.href}
-              onClick={handleMobileLinkClick}
-              $isActive={activeSection === item.id}
-            >
-              {t(item.labelKey)}
-            </MobileNavLink>
-          ))}
-        </MobileNavLinks>
-
-        <MobileMenuFooter>
-          <span>{t('header.home')}</span>
-          <LanguageToggle />
-        </MobileMenuFooter>
-      </MobileMenu>
+                <MobileMenuFooter>
+                  <LanguageToggle />
+                </MobileMenuFooter>
+              </MobileMenu>
+            </DrawerLayer>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
 
       <Hero />
     </HeaderContainer>

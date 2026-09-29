@@ -2,7 +2,7 @@ import { FC, lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence, MotionConfig, motion, useReducedMotion, type Transition } from 'framer-motion';
 import { ThemeProvider } from './context';
-import { Header, Main, Footer, ThemeToggle } from '@components';
+import { Header, Main, Footer } from '@components';
 import { ProjectDetailSkeleton } from './components/ui';
 
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
@@ -60,7 +60,6 @@ function AppRoutes() {
                   <Header />
                   <Main />
                   <Footer />
-                  <ThemeToggle />
                 </ThemeProvider>
               </PageTransition>
             }

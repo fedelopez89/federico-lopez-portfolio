@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
+import { alpha, focusRing } from '../../styles/mixins';
 
 export const HeaderContainer = styled.header`
   position: relative;
@@ -7,11 +8,7 @@ export const HeaderContainer = styled.header`
   flex-direction: column;
 `;
 
-interface NavbarProps {
-  $isScrolled: boolean;
-}
-
-export const Navbar = styled(motion.nav)<NavbarProps>`
+export const Navbar = styled(motion.nav)<{ $isScrolled: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -19,19 +16,18 @@ export const Navbar = styled(motion.nav)<NavbarProps>`
   z-index: ${({ theme }) => theme.zIndex.sticky};
   padding: ${({ theme }) => theme.spacing.lg} 0;
   background: ${({ $isScrolled, theme }) =>
-    $isScrolled ? theme.colors.background : 'transparent'};
-  backdrop-filter: ${({ $isScrolled }) =>
-    $isScrolled ? 'blur(10px)' : 'none'};
-  box-shadow: ${({ $isScrolled, theme }) =>
-    $isScrolled ? theme.shadows.md : 'none'};
+    $isScrolled ? alpha(theme.colors.background, 85) : 'transparent'};
+  backdrop-filter: ${({ $isScrolled }) => ($isScrolled ? 'blur(8px)' : 'none')};
+  border-bottom: 1px solid
+    ${({ $isScrolled, theme }) =>
+      $isScrolled ? theme.colors.border : 'transparent'};
   transition:
     background-color ${({ theme }) => theme.transitions.base},
-    backdrop-filter ${({ theme }) => theme.transitions.base},
-    box-shadow ${({ theme }) => theme.transitions.base};
+    border-color ${({ theme }) => theme.transitions.base};
 `;
 
 export const NavContainer = styled.div`
-  max-width: 1280px;
+  max-width: ${({ theme }) => theme.layout.maxWidth.wide};
   margin: 0 auto;
   padding: 0 ${({ theme }) => theme.spacing.lg};
   display: flex;
@@ -43,28 +39,34 @@ export const NavContainer = styled.div`
   }
 `;
 
-export const Logo = styled(motion.a)`
-  font-size: ${({ theme }) => theme.typography.fontSize.xl};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
+export const Logo = styled.a`
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: ${({ theme }) => theme.typography.fontSize.lg};
+  font-weight: 650;
+  letter-spacing: ${({ theme }) => theme.typography.tracking.heading};
   color: ${({ theme }) => theme.colors.text};
   text-decoration: none;
-  letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wide};
   transition: color ${({ theme }) => theme.transitions.fast};
 
   &:hover {
     color: ${({ theme }) => theme.colors.primary};
   }
 
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.primary};
-    outline-offset: 3px;
-    border-radius: 3px;
-  }
+  ${focusRing}
 `;
 
-export const NavMenu = styled(motion.ul)`
+export const NavActions = styled.div`
   display: flex;
-  gap: ${({ theme }) => theme.spacing.xl};
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.sm};
+`;
+
+export const NavMenu = styled.ul`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.xs};
   list-style: none;
   margin: 0;
   padding: 0;
@@ -74,110 +76,143 @@ export const NavMenu = styled(motion.ul)`
   }
 `;
 
-export const MobileMenuButton = styled.button`
-  display: none;
-  background: none;
-  border: none;
-  color: ${({ theme }) => theme.colors.text};
-  font-size: ${({ theme }) => theme.typography.fontSize['2xl']};
-  cursor: pointer;
-  padding: ${({ theme }) => theme.spacing.sm};
+const monoLabel = css`
+  font-family: ${({ theme }) => theme.typography.fontFamily.mono};
+  font-size: ${({ theme }) => theme.typography.fontSize.xs};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
+  letter-spacing: ${({ theme }) => theme.typography.tracking.eyebrow};
+  text-transform: uppercase;
+`;
+
+export const NavLink = styled.a<{ $isActive?: boolean }>`
+  ${monoLabel}
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 ${({ theme }) => theme.spacing.md};
+  color: ${({ theme, $isActive }) =>
+    $isActive ? theme.colors.text : theme.colors.textMuted};
+  text-decoration: none;
   transition: color ${({ theme }) => theme.transitions.fast};
-  z-index: ${({ theme }) => theme.zIndex.modal + 1};
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: ${({ theme }) => theme.spacing.md};
+    right: ${({ theme }) => theme.spacing.md};
+    bottom: 6px;
+    height: 1px;
+    background: ${({ theme }) => theme.colors.primary};
+    transform: scaleX(${({ $isActive }) => ($isActive ? 1 : 0)});
+    transform-origin: left;
+    transition: transform ${({ theme }) => theme.transitions.base};
+  }
 
   &:hover {
-    color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.text};
   }
 
+  ${focusRing}
+`;
+
+export const MobileMenuButton = styled.button`
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  color: ${({ theme }) => theme.colors.text};
+  cursor: pointer;
+  transition:
+    border-color ${({ theme }) => theme.transitions.fast},
+    color ${({ theme }) => theme.transitions.fast};
+
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.border};
+  }
+
+  ${focusRing}
+
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    display: block;
+    display: inline-flex;
   }
 `;
 
-export const MobileMenuOverlay = styled(motion.div)<{ $isOpen: boolean }>`
-  display: none;
+export const MobileLayer = styled.div`
+  @media (min-width: ${({ theme }) => `calc(${theme.breakpoints.md} + 1px)`}) {
+    display: none;
+  }
+`;
+
+export const MobileMenuOverlay = styled(motion.div)`
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: ${({ theme }) => theme.zIndex.modal};
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    display: block;
-  }
+  inset: 0;
+  background: ${({ theme }) => theme.colors.overlay};
+  z-index: ${({ theme }) => theme.zIndex.modalBackdrop};
 `;
 
-export const MobileMenu = styled(motion.div)<{ $isOpen: boolean }>`
-  display: none;
+export const MobileMenu = styled(motion.div)`
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   width: 80%;
   max-width: 320px;
-  background: ${({ theme }) => theme.colors.background};
-  box-shadow: ${({ theme }) => theme.shadows['2xl']};
-  z-index: ${({ theme }) => theme.zIndex.modal + 1};
+  display: flex;
+  flex-direction: column;
+  background: ${({ theme }) => theme.colors.surface};
+  border-left: 1px solid ${({ theme }) => theme.colors.border};
+  z-index: ${({ theme }) => theme.zIndex.modal};
   overflow-y: auto;
   overflow-x: hidden;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    display: flex;
-    flex-direction: column;
-  }
+  overscroll-behavior: contain;
 `;
 
 export const MobileMenuHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: ${({ theme }) => `${theme.spacing.lg} ${theme.spacing.xl}`};
-  background: linear-gradient(
-    135deg,
-    ${({ theme }) => theme.colors.primary} 0%,
-    ${({ theme }) => theme.colors.secondary} 100%
-  );
+  gap: ${({ theme }) => theme.spacing.md};
+  padding: ${({ theme }) => `${theme.spacing.lg} ${theme.spacing.lg}`};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 export const MobileMenuTitle = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: ${({ theme }) => theme.spacing.xs};
+`;
 
-  span:first-child {
-    font-size: ${({ theme }) => theme.typography.fontSize.base};
-    font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
-    color: white;
-    letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wide};
-  }
-
-  span:last-child {
-    font-size: ${({ theme }) => theme.typography.fontSize.xs};
-    color: rgba(255, 255, 255, 0.75);
-    letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wider};
-    text-transform: uppercase;
-  }
+export const MobileMenuName = styled.span`
+  font-size: ${({ theme }) => theme.typography.fontSize.lg};
+  font-weight: 650;
+  letter-spacing: ${({ theme }) => theme.typography.tracking.heading};
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export const MobileCloseButton = styled.button`
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: ${({ theme }) => theme.borderRadius.full};
-  color: white;
-  width: 36px;
-  height: 36px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition: background-color ${({ theme }) => theme.transitions.fast};
   flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  color: ${({ theme }) => theme.colors.text};
+  cursor: pointer;
+  transition: border-color ${({ theme }) => theme.transitions.fast};
 
   &:hover {
-    background: rgba(255, 255, 255, 0.25);
+    border-color: ${({ theme }) => theme.colors.border};
   }
+
+  ${focusRing}
 `;
 
 export const MobileNavLinks = styled.nav`
@@ -187,94 +222,38 @@ export const MobileNavLinks = styled.nav`
   flex: 1;
 `;
 
+export const MobileNavIndex = styled.span`
+  ${monoLabel}
+  color: ${({ theme }) => theme.colors.textMuted};
+`;
+
 export const MobileNavLink = styled.a<{ $isActive?: boolean }>`
   display: flex;
-  align-items: center;
-  color: ${({ theme, $isActive }) =>
-    $isActive ? theme.colors.primary : theme.colors.text};
-  text-decoration: none;
-  font-size: ${({ theme }) => theme.typography.fontSize.sm};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
-  letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wider};
-  text-transform: uppercase;
-  padding: ${({ theme }) => `${theme.spacing.md} ${theme.spacing.xl}`};
-  border-left: 3px solid
+  align-items: baseline;
+  gap: ${({ theme }) => theme.spacing.md};
+  min-height: 56px;
+  padding: ${({ theme }) => `${theme.spacing.md} ${theme.spacing.lg}`};
+  border-left: 1px solid
     ${({ theme, $isActive }) =>
       $isActive ? theme.colors.primary : 'transparent'};
-  background: ${({ $isActive, theme }) =>
-    $isActive ? theme.colors.primaryLight : 'transparent'};
-  transition:
-    color ${({ theme }) => theme.transitions.fast},
-    border-color ${({ theme }) => theme.transitions.fast},
-    background-color ${({ theme }) => theme.transitions.fast},
-    padding-left ${({ theme }) => theme.transitions.fast};
+  color: ${({ theme, $isActive }) =>
+    $isActive ? theme.colors.text : theme.colors.textMuted};
+  text-decoration: none;
+  font-size: ${({ theme }) => theme.typography.fontSize.xl};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
+  letter-spacing: ${({ theme }) => theme.typography.tracking.heading};
+  transition: color ${({ theme }) => theme.transitions.fast};
 
   &:hover {
-    color: ${({ theme }) => theme.colors.primary};
-    border-left-color: ${({ theme }) => theme.colors.primary};
-    background: ${({ theme }) => theme.colors.primaryLight};
-    padding-left: calc(${({ theme }) => theme.spacing.xl} + 4px);
+    color: ${({ theme }) => theme.colors.text};
   }
 
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.primary};
-    outline-offset: 3px;
-    border-radius: 3px;
-  }
+  ${focusRing}
 `;
 
 export const MobileMenuFooter = styled.div`
-  padding: ${({ theme }) => `${theme.spacing.md} ${theme.spacing.xl}`};
-  border-top: 1px solid ${({ theme }) => theme.colors.border};
   display: flex;
   align-items: center;
-  justify-content: space-between;
-
-  span {
-    font-size: ${({ theme }) => theme.typography.fontSize.xs};
-    color: ${({ theme }) => theme.colors.textTertiary};
-    text-transform: uppercase;
-    letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wider};
-  }
-`;
-
-export const NavItem = styled(motion.li)``;
-
-export const NavLink = styled.a<{ $isActive?: boolean }>`
-  color: ${({ theme }) => theme.colors.text};
-  text-decoration: none;
-  font-size: ${({ theme }) => theme.typography.fontSize.sm};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
-  letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wide};
-  text-transform: uppercase;
-  padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.md}`};
-  border-radius: ${({ theme }) => theme.borderRadius.base};
-  transition: color ${({ theme }) => theme.transitions.fast};
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: ${({ $isActive }) => ($isActive ? '80%' : '0')};
-    height: 2px;
-    background: ${({ theme }) => theme.colors.primary};
-    transition: width ${({ theme }) => theme.transitions.fast};
-  }
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.primary};
-
-    &::after {
-      width: 80%;
-    }
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.primary};
-    outline-offset: 3px;
-    border-radius: 3px;
-  }
+  padding: ${({ theme }) => `${theme.spacing.md} ${theme.spacing.md}`};
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
 `;

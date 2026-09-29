@@ -1,6 +1,5 @@
 {
   "header": {
-    "home": "HOME",
     "about": "ABOUT ME",
     "projects": "PROJECTS",
     "experience": "EXPERIENCE",
@@ -10,7 +9,22 @@
     "tagline": "I build fast, accessible interfaces for products people actually use.",
     "ctaWork": "View work",
     "ctaContact": "Get in touch",
-    "newTab": "(opens in a new tab)"
+    "newTab": "(opens in a new tab)",
+    "a11y": {
+      "home": "Back to top",
+      "mainNav": "Main navigation",
+      "mobileNav": "Mobile navigation",
+      "toggleMenu": "Toggle mobile menu",
+      "closeMenu": "Close mobile menu"
+    }
+  },
+  "theme": {
+    "switchToDark": "Switch to dark mode",
+    "switchToLight": "Switch to light mode"
+  },
+  "a11y": {
+    "skipToContent": "Skip to main content",
+    "scrollToTop": "Scroll to top"
   },
   "sections": {
     "aboutme": "About me",

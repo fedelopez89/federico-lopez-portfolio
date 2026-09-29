@@ -2,7 +2,10 @@ import { describe, it, expect, vi, beforeAll, beforeEach } from 'vitest';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import LanguageToggle from './LanguageToggle';
-import { renderWithProviders, setupTestEnvironment } from '../../test/renderWithProviders';
+import {
+  renderWithProviders,
+  setupTestEnvironment,
+} from '../../test/renderWithProviders';
 
 let mockLanguage = 'en';
 const mockChangeLanguage = vi.fn();
@@ -64,21 +67,45 @@ describe('LanguageToggle', () => {
   it('clicking ES sets document.documentElement.lang to es', async () => {
     const user = userEvent.setup();
     renderWithProviders(<LanguageToggle />);
-    await user.click(screen.getByRole('button', { name: /cambiar a español/i }));
+    await user.click(
+      screen.getByRole('button', { name: /cambiar a español/i })
+    );
     expect(document.documentElement.lang).toBe('es');
   });
 
   it('clicking ES calls i18n.changeLanguage with es', async () => {
     const user = userEvent.setup();
     renderWithProviders(<LanguageToggle />);
-    await user.click(screen.getByRole('button', { name: /cambiar a español/i }));
+    await user.click(
+      screen.getByRole('button', { name: /cambiar a español/i })
+    );
     expect(mockChangeLanguage).toHaveBeenCalledWith('es');
   });
 
   it('does not call changeLanguage when clicking the already active language button', async () => {
     const user = userEvent.setup();
     renderWithProviders(<LanguageToggle />);
-    await user.click(screen.getByRole('button', { name: /switch to english/i }));
+    await user.click(
+      screen.getByRole('button', { name: /switch to english/i })
+    );
     expect(mockChangeLanguage).not.toHaveBeenCalled();
+  });
+
+  it('treats a regional variant like en-US as English', () => {
+    mockLanguage = 'en-US';
+    renderWithProviders(<LanguageToggle />);
+    expect(
+      screen.getByRole('button', { name: /switch to english/i })
+    ).toHaveAttribute('aria-pressed', 'true');
+  });
+
+  it('marks each button with its own language', () => {
+    renderWithProviders(<LanguageToggle />);
+    expect(
+      screen.getByRole('button', { name: /switch to english/i })
+    ).toHaveAttribute('lang', 'en');
+    expect(
+      screen.getByRole('button', { name: /cambiar a español/i })
+    ).toHaveAttribute('lang', 'es');
   });
 });

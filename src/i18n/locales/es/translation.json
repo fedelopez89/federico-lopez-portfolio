@@ -1,6 +1,5 @@
 {
   "header": {
-    "home": "INICIO",
     "about": "SOBRE MÍ",
     "projects": "PROYECTOS",
     "experience": "EXPERIENCIA",
@@ -10,7 +9,22 @@
     "tagline": "Construyo interfaces rápidas y accesibles para productos que la gente realmente usa.",
     "ctaWork": "Ver proyectos",
     "ctaContact": "Contactar",
-    "newTab": "(se abre en una pestaña nueva)"
+    "newTab": "(se abre en una pestaña nueva)",
+    "a11y": {
+      "home": "Volver al inicio",
+      "mainNav": "Navegación principal",
+      "mobileNav": "Navegación móvil",
+      "toggleMenu": "Alternar menú móvil",
+      "closeMenu": "Cerrar menú móvil"
+    }
+  },
+  "theme": {
+    "switchToDark": "Cambiar a modo oscuro",
+    "switchToLight": "Cambiar a modo claro"
+  },
+  "a11y": {
+    "skipToContent": "Saltar al contenido principal",
+    "scrollToTop": "Volver arriba"
   },
   "sections": {
     "aboutme": "Sobre mí",
