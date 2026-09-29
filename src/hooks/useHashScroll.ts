@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { sectionTitleId } from '@/components/Sections/shared/sectionTitleId';
 
 /**
  * Deep links (/#projects) load before React has rendered the target, so the
@@ -6,6 +7,10 @@ import { useEffect } from 'react';
  * instantly, honoring the target's scroll-margin-top. Web fonts can shift
  * layout afterwards, so it re-aligns once fonts are ready, but only if the
  * user has not scrolled in the meantime.
+ *
+ * Once aligned, focus moves to the section heading (as a native fragment
+ * navigation would), so keyboard and screen reader users land where the page
+ * scrolled, on deep links and on client-side navigation from another route.
  */
 export const useHashScroll = () => {
   useEffect(() => {
@@ -23,16 +28,27 @@ export const useHashScroll = () => {
     let settledY: number | null = null;
 
     const align = () => {
-      document
-        .getElementById(id)
-        ?.scrollIntoView?.({
-          behavior: 'instant' as ScrollBehavior,
-          block: 'start',
-        });
+      document.getElementById(id)?.scrollIntoView?.({
+        behavior: 'instant' as ScrollBehavior,
+        block: 'start',
+      });
       settledY = window.scrollY;
     };
 
-    const frame = requestAnimationFrame(align);
+    const focusHeading = () => {
+      const heading = document.getElementById(sectionTitleId(id));
+      if (!heading) return;
+      if (!heading.hasAttribute('tabindex')) {
+        heading.setAttribute('tabindex', '-1');
+      }
+      heading.style.outline = 'none';
+      heading.focus({ preventScroll: true });
+    };
+
+    const frame = requestAnimationFrame(() => {
+      align();
+      focusHeading();
+    });
 
     document.fonts?.ready.then(() => {
       if (cancelled || settledY === null) return;

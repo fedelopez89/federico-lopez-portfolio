@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 import experienceHistory from '../../../data/experience.json';
 import type { ExperienceConfig } from '@/types';
+import { NYT_HREF, NYT_NAME } from '@/data/featured';
 import { calculateYearsExperience } from '@/utils/dateCalculations';
 import { Eyebrow, TextLink } from '../../ui';
 import {
@@ -23,10 +24,6 @@ import {
 } from './AboutMe.styles';
 import { SectionHeader } from '../shared/SectionHeader';
 import { sectionTitleId } from '../shared/sectionTitleId';
-
-const NYT_HREF =
-  'https://www.linkedin.com/posts/svanweelden_silicon-valley-builds-amazon-and-gmail-copycats-activity-7404333944894398465-CIyW/';
-const NYT_NAME = 'The New York Times';
 
 const AboutMe: FC = () => {
   const { t } = useTranslation();

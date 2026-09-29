@@ -10,6 +10,9 @@ interface UseScrollSpyOptions {
 /** Fraction of the visible area (below the navbar) at which a section activates. */
 const ACTIVATION_RATIO = 0.4;
 
+/** After mounting on a deep link, the URL is left alone while the hash is resolved. */
+const INITIAL_HASH_GRACE_MS = 300;
+
 /** Quiet time after an anchor jump before the spy resumes control of the URL. */
 const SETTLE_MS = 150;
 
@@ -84,6 +87,9 @@ export const useScrollSpy = ({
     let isFirstRun = true;
     let suppressed = false;
     let settleTimer = 0;
+    const syncBlockedUntil = currentHashId()
+      ? Date.now() + INITIAL_HASH_GRACE_MS
+      : 0;
 
     const update = (force = false) => {
       frame = 0;
@@ -123,7 +129,10 @@ export const useScrollSpy = ({
       }
       // The first run happens before a deep link (/#projects) is scrolled to;
       // rewriting the URL then would erase the hash being resolved.
-      if (!isFirstRun && (changed || force)) syncUrl(next);
+      // Scrolls caused by the initial hash alignment must not rewrite it either.
+      if (!isFirstRun && (changed || force) && Date.now() >= syncBlockedUntil) {
+        syncUrl(next);
+      }
     };
 
     // After an anchor jump, stay out of the way until scrolling settles so the

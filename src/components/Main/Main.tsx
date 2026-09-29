@@ -27,6 +27,7 @@ const Main: FC = () => {
   return (
     <MainContainer
       id="main-content"
+      tabIndex={-1}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}

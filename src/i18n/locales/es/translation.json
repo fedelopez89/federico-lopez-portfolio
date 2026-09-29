@@ -65,7 +65,6 @@
   "projects": {
     "subtitle": "Una selección de mi trabajo, incluyendo proyectos destacados en The New York Times",
     "filterAll": "Todos",
-    "nytLabel": "Destacado en The New York Times",
     "nytBadge": "Destacado NYT",
     "filterLabel": "Filtrar proyectos por tecnología",
     "resultCount_one": "{{count}} proyecto",
@@ -205,5 +204,15 @@
       "remaining_other": "Quedan {{count}} caracteres.",
       "limit": "Límite de caracteres alcanzado."
     }
+  },
+  "projectDetail": {
+    "technologies": "Tecnologías",
+    "notFoundTitle": "Proyecto no encontrado",
+    "notFoundText": "El proyecto que buscas no existe.",
+    "notFoundCta": "Volver a proyectos",
+    "navLabel": "Navegación de proyectos",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "loading": "Cargando proyecto…"
   }
 }

@@ -136,7 +136,6 @@ resume/
 │   │   ├── layout/
 │   │   │   └── ScrollToTop/
 │   │   ├── ui/            # Shared UI primitives
-│   │   │   ├── LoadingSpinner.tsx
 │   │   │   └── ProjectDetailSkeleton.tsx
 │   │   └── Sections/
 │   │       ├── AboutMe/

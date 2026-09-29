@@ -5,6 +5,10 @@ export const MainContainer = styled(motion.main)`
   min-height: 100vh;
   background: ${({ theme }) => theme.colors.background};
   position: relative;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const Section = styled.section`

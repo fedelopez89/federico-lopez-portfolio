@@ -65,7 +65,6 @@
   "projects": {
     "subtitle": "A selection of my work, including projects featured in The New York Times",
     "filterAll": "All",
-    "nytLabel": "Featured in The New York Times",
     "nytBadge": "NYT feature",
     "filterLabel": "Filter projects by technology",
     "resultCount_one": "{{count}} project",
@@ -205,5 +204,15 @@
       "remaining_other": "{{count}} characters remaining.",
       "limit": "Character limit reached."
     }
+  },
+  "projectDetail": {
+    "technologies": "Technologies",
+    "notFoundTitle": "Project not found",
+    "notFoundText": "The project you are looking for does not exist.",
+    "notFoundCta": "Back to projects",
+    "navLabel": "Project navigation",
+    "previous": "Previous",
+    "next": "Next",
+    "loading": "Loading project…"
   }
 }
