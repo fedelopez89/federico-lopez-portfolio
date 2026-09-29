@@ -1,4 +1,4 @@
-import { FC, lazy, Suspense, useEffect, useState } from 'react';
+import { FC, lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import {
   AnimatePresence,
@@ -101,14 +101,22 @@ function AppRoutes() {
     current = { path: location.pathname, skip: isViewTransitionActive() };
     setRoute(current);
   }
+  // The first paint must not sit under the route fade's opacity: 0. Chrome
+  // ignores content painted under a fully transparent ancestor for LCP, so on
+  // the initial load the page renders in place; later navigations still fade.
+  const isInitialLoad = useRef(true);
+  useEffect(() => {
+    isInitialLoad.current = false;
+  }, []);
   const { skip } = current;
+  const noEnterFade = skip || isInitialLoad.current;
 
   const routes = (
     <Routes location={location} key={location.pathname}>
       <Route
         path="/"
         element={
-          <PageTransition skip={skip}>
+          <PageTransition skip={noEnterFade}>
             <HomePage />
           </PageTransition>
         }
@@ -116,7 +124,7 @@ function AppRoutes() {
       <Route
         path="/projects/:id"
         element={
-          <PageTransition skip={skip}>
+          <PageTransition skip={noEnterFade}>
             <Suspense fallback={<ProjectDetailSkeleton />}>
               <ProjectDetail />
             </Suspense>
@@ -126,7 +134,7 @@ function AppRoutes() {
       <Route
         path="*"
         element={
-          <PageTransition skip={skip}>
+          <PageTransition skip={noEnterFade}>
             <NotFound />
           </PageTransition>
         }
