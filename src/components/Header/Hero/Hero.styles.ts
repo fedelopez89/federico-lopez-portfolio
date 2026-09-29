@@ -84,19 +84,20 @@ const sweep = keyframes`
   }
 `;
 
-/** Shared transform source for the glow blob and the highlight window. */
+/**
+ * Shared transform source for the glow blob and the highlight window. On touch
+ * devices the glow sweeps in once (transform only, no delay).
+ */
 export const GlowSweep = styled.div`
   position: absolute;
   inset: 0;
   pointer-events: none;
 
   @media (hover: none), (pointer: coarse) {
-    animation: ${sweep} 1.2s ${({ theme }) => theme.motion.easeCss} 0.6s both;
+    animation: ${sweep} 0.8s ${({ theme }) => theme.motion.easeCss} both;
 
-    /* Reduced motion collapses the duration but not the delay, which would
-       leave the glow parked off-screen for 0.6s. */
     @media (prefers-reduced-motion: reduce) {
-      animation-delay: 0s;
+      animation: none;
     }
   }
 `;
@@ -186,12 +187,11 @@ export const HeroStack = styled(motion.div)`
 `;
 
 /**
- * Clips its child so it can rise into view from behind an edge. The padding
- * and negative margin keep focus rings from being clipped without affecting
- * layout.
+ * Spacing wrapper. The padding and negative margin give text room for accents,
+ * descenders and focus rings without affecting layout. It must not clip: the
+ * h1 inside is the LCP element.
  */
 export const Mask = styled.div<{ $mt?: string; $mb?: string }>`
-  overflow: hidden;
   padding: 8px;
   margin: calc(${({ $mt }) => $mt ?? '0px'} - 8px) -8px
     calc(${({ $mb }) => $mb ?? '0px'} - 8px);
@@ -200,7 +200,7 @@ export const Mask = styled.div<{ $mt?: string; $mb?: string }>`
 
 export const Rise = styled(motion.div)``;
 
-/** Un-clipped block that fades and slides in (used where shadows must not be cut). */
+/** Block that fades and slides in. */
 export const FadeBlock = styled(motion.div)<{ $mt?: string }>`
   margin-top: ${({ $mt }) => $mt ?? '0px'};
   max-width: 100%;
@@ -211,17 +211,75 @@ export const TITLE_MASK_MARGIN = {
   bottom: `calc(-0.2 * ${TITLE_SIZE})`,
 };
 
+const settle = keyframes`
+  from {
+    transform: translateY(10px);
+  }
+  to {
+    transform: translateY(0);
+  }
+`;
+
+const sheen = keyframes`
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(260%);
+  }
+`;
+
+/**
+ * Hosts the one-time sheen over the name. The band is a pseudo-element moved by
+ * transform only, and the h1 stays fully painted underneath (LCP). It clips the
+ * band, never the text: the h1 fits entirely inside.
+ */
+export const TitleWrap = styled.div`
+  position: relative;
+  overflow: clip;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 40%;
+    pointer-events: none;
+    background: linear-gradient(
+      100deg,
+      transparent 0%,
+      ${({ theme }) => alpha(theme.colors.primary, 38)} 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: ${sheen} 0.85s ${({ theme }) => theme.motion.easeCss} 0.2s both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::after {
+      display: none;
+    }
+  }
+`;
+
 export const Title = styled.h1`
   margin: 0;
-  /* Room for accents and descenders inside the clipping mask */
+  animation: ${settle} 0.5s ${({ theme }) => theme.motion.easeCss} both;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+
+  /* Room for accents and descenders */
   padding: 0.08em 0 0.2em;
   font-size: ${({ theme }) => theme.typography.display.hero};
   font-weight: ${({ theme }) => theme.typography.display.weight};
   letter-spacing: ${({ theme }) => theme.typography.tracking.display};
   line-height: 0.95;
   color: ${({ theme }) => theme.colors.text};
-  /* The mask clips overflow, so a long word must wrap rather than be cut off
-     at large default font sizes (WCAG 1.4.4). */
+  /* A long word must wrap rather than overflow at large default font sizes
+     (WCAG 1.4.4). */
   overflow-wrap: anywhere;
 `;
 
