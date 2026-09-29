@@ -198,8 +198,6 @@ export const Mask = styled.div<{ $mt?: string; $mb?: string }>`
   max-width: 100%;
 `;
 
-export const Rise = styled(motion.div)``;
-
 /** Block that fades and slides in. */
 export const FadeBlock = styled(motion.div)<{ $mt?: string }>`
   margin-top: ${({ $mt }) => $mt ?? '0px'};
@@ -217,6 +215,15 @@ const settle = keyframes`
   }
   to {
     transform: translateY(0);
+  }
+`;
+
+/** Eyebrow wrapper: settles by transform only, never fades (LCP candidate). */
+export const Rise = styled.div`
+  animation: ${settle} 0.5s ${({ theme }) => theme.motion.easeCss} both;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
   }
 `;
 
@@ -289,6 +296,12 @@ export const Tagline = styled.p`
   font-size: clamp(1.25rem, 2vw, 1.5rem);
   line-height: ${({ theme }) => theme.typography.lineHeight.normal};
   color: ${({ theme }) => theme.colors.textMuted};
+  /* Large text block, so an LCP candidate: transform only, never fades. */
+  animation: ${settle} 0.5s ${({ theme }) => theme.motion.easeCss} 0.1s both;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
 `;
 
 export const Actions = styled.div`

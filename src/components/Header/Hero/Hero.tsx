@@ -94,18 +94,19 @@ const Hero: FC = () => {
 
       <HeroContent style={contentStyle}>
         <Container>
-          {/* The h1 is the LCP element, so it is deliberately not animated:
+          {/* The eyebrow, h1 and tagline are the LCP candidates, so they are
+              deliberately not faded:
               it must be painted and visible on the first frame (Chrome ignores
-              opacity: 0 and clipped elements for LCP). Its signature reveal is
-              a compositor-only sheen plus a small settle (CSS, transform
-              only). Everything around it rises in with a short stagger. */}
+              opacity: 0 and clipped elements for LCP). Their reveal is a
+              small settle (CSS, transform only), plus a compositor-only sheen
+              over the name. Everything around it rises in with a short stagger. */}
           <HeroStack
             variants={heroStackVariants}
             initial="hidden"
             animate="visible"
           >
             <Mask>
-              <Rise variants={heroItemVariants}>
+              <Rise>
                 <Eyebrow rule>{t('header.role')}</Eyebrow>
               </Rise>
             </Mask>
@@ -117,9 +118,7 @@ const Hero: FC = () => {
             </Mask>
 
             <Mask $mt="2rem">
-              <Rise variants={heroItemVariants}>
-                <Tagline>{t('header.tagline')}</Tagline>
-              </Rise>
+              <Tagline>{t('header.tagline')}</Tagline>
             </Mask>
 
             <FadeBlock $mt="2.5rem" variants={heroItemVariants}>
