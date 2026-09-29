@@ -24,6 +24,8 @@ export const lightTheme = {
     // Border colors
     border: '#e5e7eb',
     borderLight: '#f3f4f6',
+    // Form control boundaries (WCAG 1.4.11); `border` stays for decorative hairlines.
+    borderStrong: '#6b7280',
 
     // Status colors
     success: '#10b981',
@@ -45,6 +47,8 @@ export const lightTheme = {
     // Primary as text on a primary tint (accent chips); 5.8:1 on the tint.
     primaryText: '#1d4ed8',
     textMuted: '#4b5563',
+    // Error as text on surface/background; 6.5:1 on white (the base error is 3.8:1).
+    errorText: '#b91c1c',
   },
 
   typography: {
@@ -220,6 +224,7 @@ export const darkTheme = {
     // Border colors
     border: '#334155',
     borderLight: '#1e293b',
+    borderStrong: '#94a3b8',
 
     // Status colors (adjusted for dark)
     success: '#22c55e',
@@ -240,6 +245,7 @@ export const darkTheme = {
     onPrimary: '#0b1020',
     primaryText: '#93c5fd',
     textMuted: '#cbd5e1',
+    errorText: '#fca5a5',
   },
 };
 

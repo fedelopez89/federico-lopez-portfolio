@@ -180,16 +180,30 @@
     "emailPlaceholder": "your@email.com",
     "messagePlaceholder": "Tell me about your project or opportunity...",
     "send": "Send Message",
-    "sending": "Sending...",
-    "success": "Message sent! I'll get back to you soon.",
-    "error": "Something went wrong. Please try again or email me directly.",
+    "sending": "Sending…",
+    "error": "Your message couldn't be sent. Your text is still here, so please try again or email me directly.",
     "validation": {
       "nameRequired": "Please enter your name.",
       "emailRequired": "Please enter your email address.",
       "emailInvalid": "Please enter a valid email address.",
       "messageRequired": "Please enter a message.",
-      "messageTooShort": "Message must be at least 40 characters.",
-      "messageTooLong": "Message cannot exceed 300 characters."
+      "messageTooShort": "Message must be at least 40 characters."
+    },
+    "eyebrow": "Available for work",
+    "copyEmail": "Copy email address",
+    "copied": "Copied",
+    "copyFailed": "Couldn't copy automatically. The address is selected: press Ctrl or Cmd+C.",
+    "messageHint": "Minimum 40 characters",
+    "successTitle": "Message sent",
+    "successText": "Thanks for reaching out. I'll get back to you soon.",
+    "sendAnother": "Send another message",
+    "errorSummary_one": "Please fix 1 field:",
+    "errorSummary_other": "Please fix {{count}} fields:",
+    "charNote": {
+      "minReached": "Minimum length reached.",
+      "remaining_one": "{{count}} character remaining.",
+      "remaining_other": "{{count}} characters remaining.",
+      "limit": "Character limit reached."
     }
   }
 }
