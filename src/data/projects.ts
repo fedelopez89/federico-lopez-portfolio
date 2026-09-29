@@ -1,3 +1,10 @@
+export const PROJECT_GROUPS = [
+  'real-evals',
+  'rcx-sports',
+  'independent',
+] as const;
+export type ProjectGroup = (typeof PROJECT_GROUPS)[number];
+
 export interface Project {
   id: string;
   title: string;
@@ -7,8 +14,11 @@ export interface Project {
   repoUrl?: string;
   imageUrl?: string;
   featured?: boolean;
-  featuredLabel?: string;
+  /** The demo URL lands on a login page, so the CTA says so. */
+  demoRequiresLogin?: boolean;
   category: 'freelance' | 'personal' | 'professional';
+  /** Body of work the project belongs to; drives the grouping on the home page. */
+  group: ProjectGroup;
 }
 
 const getImageUrl = (path: string) =>
@@ -19,13 +29,13 @@ export const projects: Project[] = [
     id: 'real-evals-gmail',
     title: 'Gmail Clone - REAL Evals',
     description:
-      'Production-ready Gmail replica built for AI evaluation platform. Featured in The New York Times for innovative AI testing approach. Pixel-perfect recreation implementing email management, compose functionality, labels, folders, and advanced search. Built with Next.js and Material UI for optimal performance and accessibility.',
+      'Production-ready Gmail replica built for AI evaluation platform. Pixel-perfect recreation implementing email management, compose functionality, labels, folders, and advanced search. Built with Next.js and Material UI for optimal performance and accessibility.',
     technologies: ['React', 'TypeScript', 'Next.js', 'Material UI', 'Redux'],
     demoUrl: 'https://real-gomail.vercel.app/',
     imageUrl: getImageUrl('/images/projects/gmail-clone-opt.webp'),
     featured: true,
-    featuredLabel: 'Featured in The New York Times',
     category: 'freelance',
+    group: 'real-evals',
   },
   {
     id: 'real-evals-dashdish',
@@ -36,20 +46,20 @@ export const projects: Project[] = [
     demoUrl: 'https://real-dashdish.vercel.app/',
     imageUrl: getImageUrl('/images/projects/dashdish-clone-opt.webp'),
     featured: true,
-    featuredLabel: 'Featured in The New York Times',
     category: 'freelance',
+    group: 'real-evals',
   },
   {
     id: 'real-evals-uber',
     title: 'Uber Clone - REAL Evals',
     description:
-      'Comprehensive ride-sharing platform clone with real-time map integration, route calculation, pricing estimates, and driver matching simulation. Featured in The New York Times as part of REAL Evals AI testing platform. Built with Next.js and Material UI.',
+      'Comprehensive ride-sharing platform clone with real-time map integration, route calculation, pricing estimates, and driver matching simulation. Built with Next.js and Material UI.',
     technologies: ['React', 'TypeScript', 'Next.js', 'Material UI', 'Redux'],
     demoUrl: 'https://real-udriver.vercel.app/',
     imageUrl: getImageUrl('/images/projects/uber-clone-opt.webp'),
     featured: true,
-    featuredLabel: 'Featured in The New York Times',
     category: 'freelance',
+    group: 'real-evals',
   },
   {
     id: 'real-evals-united',
@@ -60,8 +70,8 @@ export const projects: Project[] = [
     demoUrl: 'https://real-flyunified.vercel.app/',
     imageUrl: getImageUrl('/images/projects/united-clone-opt.webp'),
     featured: true,
-    featuredLabel: 'Featured in The New York Times',
     category: 'freelance',
+    group: 'real-evals',
   },
   {
     id: 'nfl-league-finder',
@@ -73,7 +83,6 @@ export const projects: Project[] = [
       'TypeScript',
       'Next.js',
       'Context API',
-      'Context API',
       'REST API',
       'Google Maps API',
       'Chakra UI',
@@ -81,6 +90,7 @@ export const projects: Project[] = [
     demoUrl: 'https://nfl.playrcx.com/',
     imageUrl: getImageUrl('/images/projects/nfl-finder-opt.webp'),
     category: 'professional',
+    group: 'rcx-sports',
   },
   {
     id: 'nba-league-finder',
@@ -99,6 +109,7 @@ export const projects: Project[] = [
     demoUrl: 'https://jrnba.playrcx.com/',
     imageUrl: getImageUrl('/images/projects/nba-finder-opt.webp'),
     category: 'professional',
+    group: 'rcx-sports',
   },
   {
     id: 'nhl-league-finder',
@@ -117,6 +128,7 @@ export const projects: Project[] = [
     demoUrl: 'https://street.playrcx.com/',
     imageUrl: getImageUrl('/images/projects/nhl-finder-opt.webp'),
     category: 'professional',
+    group: 'rcx-sports',
   },
   {
     id: 'mls-league-finder',
@@ -135,6 +147,7 @@ export const projects: Project[] = [
     demoUrl: 'https://go.playrcx.com/',
     imageUrl: getImageUrl('/images/projects/mls-finder-opt.webp'),
     category: 'professional',
+    group: 'rcx-sports',
   },
   {
     id: 'factupro',
@@ -153,24 +166,9 @@ export const projects: Project[] = [
       'CI/CD',
     ],
     demoUrl: 'https://app.factupro.es/login?from=%2F',
+    demoRequiresLogin: true,
     imageUrl: getImageUrl('/images/projects/factupro-opt.webp'),
     category: 'freelance',
+    group: 'independent',
   },
-];
-
-export const technologies = [
-  'All',
-  'React',
-  'TypeScript',
-  'Next.js',
-  'Redux',
-  'Material UI',
-  'Chakra UI',
-  'Context API',
-  'REST API',
-  'Google Maps API',
-  'Shadcn UI',
-  'React Hook Form',
-  'Tailwind CSS',
-  'CI/CD',
 ];

@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeAll } from 'vitest';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import '../../i18n/config';
 import { ThemeToggle } from './ThemeToggle';
 import { renderWithProviders, setupTestEnvironment } from '../../test/renderWithProviders';
 

@@ -40,11 +40,20 @@ export default defineConfig({
     cssMinify: true,
     rollupOptions: {
       output: {
-        manualChunks: {
-          'vendor-react': ['react', 'react-dom'],
-          'vendor-motion': ['framer-motion'],
-          'vendor-styled': ['styled-components'],
-          'vendor-i18n': ['i18next', 'react-i18next'],
+        // Object-form entries only match the bare package entry point, so
+        // react-dom (a subpath import) ended up in the main chunk. Match by
+        // package directory instead.
+        manualChunks(id) {
+          if (!id.includes('/node_modules/')) return undefined;
+          const inPackage = (...names: string[]) =>
+            names.some((name) => id.includes(`/node_modules/${name}/`));
+          if (inPackage('react', 'react-dom', 'scheduler'))
+            return 'vendor-react';
+          if (inPackage('framer-motion', 'motion-dom', 'motion-utils'))
+            return 'vendor-motion';
+          if (inPackage('styled-components')) return 'vendor-styled';
+          if (inPackage('i18next', 'react-i18next')) return 'vendor-i18n';
+          return undefined;
         },
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name?.split('.') || [];

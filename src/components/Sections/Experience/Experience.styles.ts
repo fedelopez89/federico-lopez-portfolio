@@ -1,171 +1,141 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { Container, TextLink } from '../../ui';
 
-export const ExperienceContainer = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 ${({ theme }) => theme.spacing.lg};
+const MARKER = '7px';
+const RAIL_GUTTER = '2rem';
+/** Meta and role first lines share this height so the marker centers on both. */
+const FIRST_LINE = '1.5rem';
+const markerTop = (pad: string) =>
+  `calc(${pad} + (${FIRST_LINE} - ${MARKER}) / 2)`;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: 0 ${({ theme }) => theme.spacing.md};
-  }
-`;
+export const ExperienceContainer = styled(Container)``;
 
-export const Header = styled.div`
+export const Actions = styled(motion.div)`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
   margin-bottom: ${({ theme }) => theme.spacing['3xl']};
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     margin-bottom: ${({ theme }) => theme.spacing['2xl']};
   }
 `;
 
-export const Title = styled(motion.h1)`
-  text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.text};
-  margin: 0;
-`;
-
-export const DownloadButton = styled.a`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: ${({ theme }) => theme.colors.primary};
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background-color, transform 0.2s ease;
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.primaryHover};
-    color: white;
-    transform: translateY(-2px);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.primary};
-    outline-offset: 2px;
-  }
-
-  i {
-    font-size: 16px;
-  }
-`;
-
-export const Timeline = styled.div`
+export const Timeline = styled.ol.attrs({ role: 'list' })`
   position: relative;
-  padding-left: ${({ theme }) => theme.spacing['2xl']};
+  margin: 0;
+  padding: 0;
+  list-style: none;
+`;
 
-  &::before {
+export const TimelineItem = styled(motion.li)<{ $current?: boolean }>`
+  position: relative;
+  display: grid;
+  grid-template-columns: 13rem minmax(0, 1fr);
+  column-gap: ${({ theme }) => theme.spacing.xl};
+  padding: ${({ theme }) => theme.spacing.xl} 0
+    ${({ theme }) => theme.spacing.xl} ${RAIL_GUTTER};
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+
+  /* Rail segment from this marker down to the next item; none after the last. */
+  &::after {
     content: '';
     position: absolute;
-    left: 0;
-    top: 0;
+    left: calc((${MARKER} - 1px) / 2);
+    top: ${({ theme }) => markerTop(theme.spacing.xl)};
     bottom: 0;
-    width: 2px;
+    width: 1px;
     background: ${({ theme }) => theme.colors.border};
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding-left: ${({ theme }) => theme.spacing.lg};
+  &:last-child::after {
+    display: none;
   }
-`;
-
-export const ExperienceCard = styled(motion.div)`
-  position: relative;
-  margin-bottom: ${({ theme }) => theme.spacing['2xl']};
-  padding-left: ${({ theme }) => theme.spacing.xl};
 
   &::before {
     content: '';
     position: absolute;
-    left: -${({ theme }) => theme.spacing['2xl']};
-    top: ${({ theme }) => theme.spacing.sm};
-    width: 16px;
-    height: 16px;
-    border-radius: ${({ theme }) => theme.borderRadius.full};
-    background: ${({ theme }) => theme.colors.primary};
-    border: 3px solid ${({ theme }) => theme.colors.background};
-    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.border};
     z-index: 1;
+    left: 0;
+    top: ${({ theme }) => markerTop(theme.spacing.xl)};
+    width: ${MARKER};
+    height: ${MARKER};
+    background: ${({ theme, $current }) =>
+      $current ? theme.colors.primary : theme.colors.background};
+    border: 1px solid
+      ${({ theme, $current }) =>
+        $current ? theme.colors.primary : theme.colors.textTertiary};
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding-left: ${({ theme }) => theme.spacing.md};
-
-    &::before {
-      left: -${({ theme }) => theme.spacing.lg};
-    }
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: ${({ theme }) => theme.spacing.sm};
   }
 `;
 
-export const DateAndLocation = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacing.sm};
+export const FileType = styled.span`
+  font-family: ${({ theme }) => theme.typography.fontFamily.mono};
+  font-size: ${({ theme }) => theme.typography.fontSize.xs};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
+  letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wider};
+  color: ${({ theme }) => theme.colors.textMuted};
+`;
 
-  p {
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: ${({ theme }) => theme.typography.fontSize.sm};
-    font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
-    margin: 0 0 ${({ theme }) => theme.spacing.xs} 0;
-  }
+export const Meta = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-family: ${({ theme }) => theme.typography.fontFamily.mono};
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
+  letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wide};
+  line-height: ${FIRST_LINE};
+  color: ${({ theme }) => theme.colors.textTertiary};
+`;
 
-  p:last-child {
-    color: ${({ theme }) => theme.colors.textTertiary};
-    font-weight: ${({ theme }) => theme.typography.fontWeight.regular};
-    margin: 0;
-  }
+export const MetaDates = styled.p`
+  margin: 0;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.textMuted};
+`;
+
+export const MetaLine = styled.p`
+  margin: 0;
 `;
 
 export const Details = styled.div`
-  background: ${({ theme }) => theme.colors.surface};
-  padding: ${({ theme }) => theme.spacing.lg};
-  border-radius: ${({ theme }) => theme.borderRadius.lg};
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  transition: box-shadow, transform ${({ theme }) => theme.transitions.base};
+  min-width: 0;
+`;
 
-  &:hover {
-    box-shadow: ${({ theme }) => theme.shadows.md};
-    transform: translateX(4px);
-  }
+export const Role = styled.h3`
+  margin: 0;
+  font-size: ${({ theme }) => theme.typography.fontSize.xl};
+  line-height: ${FIRST_LINE};
+  color: ${({ theme }) => theme.colors.text};
+`;
 
-  h3 {
-    color: ${({ theme }) => theme.colors.text};
-    font-size: ${({ theme }) => theme.typography.fontSize.xl};
-    margin: 0 0 ${({ theme }) => theme.spacing.xs} 0;
-    text-transform: capitalize;
-  }
+export const CompanyLink = styled(TextLink)`
+  font-size: ${({ theme }) => theme.typography.fontSize.lg};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
+  color: ${({ theme }) => theme.colors.textMuted};
+`;
 
-  h4 {
-    margin: 0 0 ${({ theme }) => theme.spacing.md} 0;
+export const CompanyName = styled.span`
+  display: inline-block;
+  padding: 0.5rem 0;
+  font-size: ${({ theme }) => theme.typography.fontSize.lg};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
+  color: ${({ theme }) => theme.colors.textMuted};
+`;
 
-    a {
-      color: ${({ theme }) => theme.colors.primary};
-      text-decoration: none;
-      text-transform: capitalize;
-      font-size: ${({ theme }) => theme.typography.fontSize.lg};
-      font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
-      transition: color ${({ theme }) => theme.transitions.fast};
+export const Company = styled.p`
+  margin: 0 0 ${({ theme }) => theme.spacing.xs};
+`;
 
-      &:hover {
-        color: ${({ theme }) => theme.colors.primaryHover};
-      }
-    }
-  }
-
-  p {
-    color: ${({ theme }) => theme.colors.textSecondary};
-    line-height: ${({ theme }) => theme.typography.lineHeight.relaxed};
-    margin: 0;
-  }
+export const Notes = styled.p`
+  max-width: ${({ theme }) => theme.layout.maxWidth.prose};
+  margin: 0;
+  line-height: ${({ theme }) => theme.typography.lineHeight.relaxed};
+  color: ${({ theme }) => theme.colors.textSecondary};
 `;

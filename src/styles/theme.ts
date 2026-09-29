@@ -24,6 +24,8 @@ export const lightTheme = {
     // Border colors
     border: '#e5e7eb',
     borderLight: '#f3f4f6',
+    // Form control boundaries (WCAG 1.4.11); `border` stays for decorative hairlines.
+    borderStrong: '#6b7280',
 
     // Status colors
     success: '#10b981',
@@ -37,15 +39,26 @@ export const lightTheme = {
 
     // Overlay
     overlay: 'rgba(0, 0, 0, 0.5)',
+
+    // Hero
+    heroBackground: '#ffffff',
+    gridLine: 'rgba(17, 24, 39, 0.06)',
+    onPrimary: '#ffffff',
+    // Primary as text on a primary tint (accent chips); 5.8:1 on the tint.
+    primaryText: '#1d4ed8',
+    textMuted: '#4b5563',
+    // Error as text on surface/background; 6.5:1 on white (the base error is 3.8:1).
+    errorText: '#b91c1c',
   },
 
   typography: {
     // Font families
     fontFamily: {
       primary:
-        "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif",
-      secondary: "'Poppins', sans-serif",
-      mono: "'Fira Code', 'Courier New', monospace",
+        "'Inter', 'Inter Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif",
+      secondary:
+        "'Inter', 'Inter Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif",
+      mono: 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
     },
 
     // Font sizes
@@ -78,6 +91,20 @@ export const lightTheme = {
       normal: 1.5,
       relaxed: 1.75,
       loose: 2,
+    },
+
+    // Display sizes (fluid) and weights
+    display: {
+      hero: 'clamp(3rem, 9vw, 8rem)',
+      section: 'clamp(2rem, 4.5vw, 3.5rem)',
+      weight: 680,
+    },
+
+    // Named tracking for display type, headings and eyebrows
+    tracking: {
+      display: '-0.04em',
+      heading: '-0.03em',
+      eyebrow: '0.16em',
     },
 
     // Letter spacing
@@ -141,6 +168,22 @@ export const lightTheme = {
     slower: '500ms cubic-bezier(0.4, 0, 0.2, 1)',
   },
 
+  layout: {
+    maxWidth: {
+      prose: '42rem', // 672px
+      content: '60rem', // 960px
+      wide: '80rem', // 1280px
+    },
+    navHeight: '92px',
+  },
+
+  motion: {
+    ease: [0.22, 1, 0.36, 1] as const,
+    easeCss: 'cubic-bezier(0.22, 1, 0.36, 1)',
+    duration: { fast: 0.2, base: 0.4, slow: 0.7 }, // seconds
+    stagger: 0.09,
+  },
+
   zIndex: {
     dropdown: 1000,
     sticky: 1020,
@@ -181,6 +224,7 @@ export const darkTheme = {
     // Border colors
     border: '#334155',
     borderLight: '#1e293b',
+    borderStrong: '#94a3b8',
 
     // Status colors (adjusted for dark)
     success: '#22c55e',
@@ -194,6 +238,14 @@ export const darkTheme = {
 
     // Overlay
     overlay: 'rgba(0, 0, 0, 0.7)',
+
+    // Hero
+    heroBackground: '#0f172a',
+    gridLine: 'rgba(241, 245, 249, 0.06)',
+    onPrimary: '#0b1020',
+    primaryText: '#93c5fd',
+    textMuted: '#cbd5e1',
+    errorText: '#fca5a5',
   },
 };
 

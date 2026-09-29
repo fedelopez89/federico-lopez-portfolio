@@ -1,66 +1,44 @@
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { TextLink } from '../ui';
 
-export const FooterContainer = styled(motion.footer)`
+export const FooterRoot = styled.footer`
   background: ${({ theme }) => theme.colors.background};
-  border-top: 1px solid ${({ theme }) => theme.colors.border};
-  padding: ${({ theme }) => `${theme.spacing['2xl']} 0`};
-`;
-
-export const FooterContent = styled.div`
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 ${({ theme }) => theme.spacing.lg};
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.xl};
+  /* Lifts content above the fixed scroll-to-top button (44px + offset) at every width. */
+  padding-bottom: ${({ theme }) => theme.spacing['4xl']};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: 0 ${({ theme }) => theme.spacing.md};
+    padding-bottom: ${({ theme }) => `calc(${theme.spacing['2xl']} + 60px)`};
   }
 `;
 
-export const Copyright = styled(motion.p)`
-  font-size: ${({ theme }) => theme.typography.fontSize.sm};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.regular};
-  color: ${({ theme }) => theme.colors.textSecondary};
-  text-align: center;
-  margin: 0;
-`;
-
-export const SocialLinks = styled(motion.ul)`
+export const FooterBar = styled.div`
   display: flex;
-  gap: ${({ theme }) => theme.spacing.lg};
-  list-style: none;
-  padding: 0;
-  margin: 0;
   flex-wrap: wrap;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  gap: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.xl}`};
+  padding-top: ${({ theme }) => theme.spacing.lg};
 `;
 
-export const SocialItem = styled(motion.li)``;
+export const Copyright = styled.p`
+  margin: 0;
+  font-family: ${({ theme }) => theme.typography.fontFamily.mono};
+  font-size: ${({ theme }) => theme.typography.fontSize.xs};
+  letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wide};
+  color: ${({ theme }) => theme.colors.textMuted};
+`;
 
-export const SocialLink = styled(motion.a)`
+export const FooterLinks = styled.ul.attrs({ role: 'list' })`
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: ${({ theme }) => theme.borderRadius.full};
-  background: ${({ theme }) => theme.colors.surfaceAlt};
-  color: ${({ theme }) => theme.colors.text};
-  transition: background-color, color, border-color, transform ${({ theme }) => theme.transitions.fast};
-  border: 1px solid ${({ theme }) => theme.colors.border};
+  flex-wrap: wrap;
+  gap: ${({ theme }) => `0 ${theme.spacing.lg}`};
+  margin: 0;
+  padding: 0;
+  list-style: none;
+`;
 
-  &:hover {
-    background: ${({ theme }) => theme.colors.primary};
-    color: ${({ theme }) => theme.colors.background};
-    border-color: ${({ theme }) => theme.colors.primary};
-    transform: translateY(-4px);
-  }
-
-  i {
-    font-size: ${({ theme }) => theme.typography.fontSize.xl};
-  }
+export const FooterLink = styled(TextLink)`
+  font-family: ${({ theme }) => theme.typography.fontFamily.mono};
+  font-size: ${({ theme }) => theme.typography.fontSize.xs};
+  letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wide};
 `;

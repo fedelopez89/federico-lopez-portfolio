@@ -1,84 +1,105 @@
 import { useTranslation } from 'react-i18next';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { focusRing } from '../../styles/mixins';
 
-interface LanguageToggleProps {
-  isScrolled?: boolean;
-}
-
-const LanguageToggleWrapper = styled.div<{ $isScrolled?: boolean }>`
+const LanguageToggleWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.1rem 1rem;
-  border-radius: ${({ theme }) => theme.borderRadius.base};
-  color: ${({ theme, $isScrolled }) =>
-    $isScrolled ? theme.colors.text : theme.colors.background};
-  transition: color ${({ theme }) => theme.transitions.fast};
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 const LanguageButton = styled.button<{ $isActive: boolean }>`
+  position: relative;
+  min-width: 36px;
+  min-height: 40px;
+  padding: 0 ${({ theme }) => theme.spacing.sm};
   background: transparent;
   border: none;
-  color: inherit;
-  padding: 0;
-  margin: 0;
+  color: ${({ theme, $isActive }) =>
+    $isActive ? theme.colors.text : theme.colors.textMuted};
   cursor: pointer;
-  font-size: ${({ theme }) => theme.typography.fontSize.sm};
+  font-family: ${({ theme }) => theme.typography.fontFamily.mono};
+  font-size: ${({ theme }) => theme.typography.fontSize.xs};
   font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
-  letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wide};
+  letter-spacing: ${({ theme }) => theme.typography.tracking.eyebrow};
   text-transform: uppercase;
-  transition: all ${({ theme }) => theme.transitions.fast};
-  position: relative;
+  transition: color ${({ theme }) => theme.transitions.fast};
 
   &::after {
     content: '';
     position: absolute;
-    bottom: -2px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: currentColor;
-    transform: scaleX(${({ $isActive }) => ($isActive ? '1' : '0')});
+    bottom: 6px;
+    left: ${({ theme }) => theme.spacing.sm};
+    right: ${({ theme }) => theme.spacing.sm};
+    height: 1px;
+    background: ${({ theme }) => theme.colors.primary};
+    transform: scaleX(${({ $isActive }) => ($isActive ? 1 : 0)});
     transition: transform ${({ theme }) => theme.transitions.fast};
   }
 
-  &:hover::after {
-    transform: scaleX(1);
+  /* Backgrounds are replaced in forced colors: mark the active language with
+     a real underline instead. */
+  @media (forced-colors: active) {
+    &::after {
+      display: none;
+    }
+
+    ${({ $isActive }) =>
+      $isActive &&
+      css`
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 0.4em;
+      `}
   }
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.text};
+  }
+
+  ${focusRing}
 `;
 
 const Separator = styled.span`
-  font-size: ${({ theme }) => theme.typography.fontSize.sm};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.light};
+  font-family: ${({ theme }) => theme.typography.fontFamily.mono};
+  font-size: ${({ theme }) => theme.typography.fontSize.xs};
+  color: ${({ theme }) => theme.colors.textMuted};
   opacity: 0.5;
 `;
 
-const LanguageToggle = ({ isScrolled = false }: LanguageToggleProps) => {
-  const { i18n } = useTranslation();
+const LanguageToggle = () => {
+  const { t, i18n } = useTranslation();
+
+  // Normalize regional variants such as "en-US" to their base language.
+  const current = (i18n.resolvedLanguage ?? i18n.language ?? '').split('-')[0];
 
   const changeLanguage = (lang: string) => {
-    if (i18n.language !== lang) {
+    if (current !== lang) {
       i18n.changeLanguage(lang);
       document.documentElement.lang = lang;
     }
   };
 
   return (
-    <LanguageToggleWrapper $isScrolled={isScrolled}>
+    <LanguageToggleWrapper role="group" aria-label={t('language.label')}>
+      {/* Names stay in their own language (with lang) and contain the visible
+          "EN"/"ES" text, per WCAG 2.5.3. */}
       <LanguageButton
-        $isActive={i18n.language === 'en'}
+        $isActive={current === 'en'}
+        lang="en"
         onClick={() => changeLanguage('en')}
-        aria-label="Switch to English"
-        aria-pressed={i18n.language === 'en'}
+        aria-label="English"
+        aria-pressed={current === 'en'}
       >
         EN
       </LanguageButton>
-      <Separator>/</Separator>
+      <Separator aria-hidden="true">/</Separator>
       <LanguageButton
-        $isActive={i18n.language === 'es'}
+        $isActive={current === 'es'}
+        lang="es"
         onClick={() => changeLanguage('es')}
-        aria-label="Cambiar a Español"
-        aria-pressed={i18n.language === 'es'}
+        aria-label="Español"
+        aria-pressed={current === 'es'}
       >
         ES
       </LanguageButton>

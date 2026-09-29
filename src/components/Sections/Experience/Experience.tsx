@@ -2,31 +2,51 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import experienceHistory from '../../../data/experience.json';
 import type { ExperienceConfig, Experience as ExperienceType } from '@/types';
-import { calculateDuration } from '@/utils/dateCalculations';
-import { SectionTitle } from '../shared/SectionTitle';
+import {
+  calculateDuration,
+  formatMonthYear,
+  toDateTimeValue,
+} from '@/utils/dateCalculations';
+import { useRevealOnFocus } from '@/hooks';
+import { RESUME_FILENAME, RESUME_HREF } from '../../../data/resume';
+import { Button } from '../../ui';
+import { fadeUpVariants, inViewProps } from '../../../styles/motion';
+import { SectionHeader } from '../shared/SectionHeader';
+import { sectionTitleId } from '../shared/sectionTitleId';
 import {
   ExperienceContainer,
-  Header,
-  DownloadButton,
+  Actions,
   Timeline,
-  ExperienceCard,
-  DateAndLocation,
+  TimelineItem,
+  Meta,
+  MetaDates,
+  MetaLine,
   Details,
+  Role,
+  Company,
+  CompanyLink,
+  CompanyName,
+  Notes,
+  FileType,
 } from './Experience.styles';
 
-const Experience: FC = () => {
-  const { t } = useTranslation();
-  const { experiences } = experienceHistory as ExperienceConfig;
+const DownloadIcon = () => (
+  <svg
+    width="18"
+    height="18"
+    fill="currentColor"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+  </svg>
+);
 
-  const getDateRange = (exp: ExperienceType): string => {
-    const { start, end } = exp;
-    const startMonth = t(`months.${start.month}`);
-    const endDate = end.active
-      ? t('time.present')
-      : `${t(`months.${end.month}`)} ${end.year}`;
-    const duration = calculateDuration(exp);
-    return `${startMonth} ${start.year} - ${endDate} (${duration})`;
-  };
+const Experience: FC = () => {
+  const { t, i18n } = useTranslation();
+  const reveal = useRevealOnFocus();
+  const locale = i18n.resolvedLanguage ?? i18n.language;
+  const { experiences } = experienceHistory as ExperienceConfig;
 
   const getLocation = (exp: ExperienceType): string => {
     const { place } = exp;
@@ -35,71 +55,83 @@ const Experience: FC = () => {
       : `${place.province}, ${place.country}`;
   };
 
+  const renderDates = ({ start, end }: ExperienceType) => (
+    <>
+      <time dateTime={toDateTimeValue(start.month, start.year)}>
+        {formatMonthYear(start.month, start.year, locale)}
+      </time>
+      {' – '}
+      {end.active ? (
+        <span>{t('time.present')}</span>
+      ) : (
+        <time dateTime={toDateTimeValue(end.month, end.year)}>
+          {formatMonthYear(end.month, end.year, locale)}
+        </time>
+      )}
+    </>
+  );
+
   return (
-    <ExperienceContainer aria-labelledby="section-experience">
-      <SectionTitle
-        id="section-experience"
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
+    <ExperienceContainer>
+      <SectionHeader
+        index="03"
+        title={t('sections.experience')}
+        titleId={sectionTitleId('experience')}
+      />
+      <Actions
+        variants={fadeUpVariants}
+        {...inViewProps}
+        {...reveal('actions')}
       >
-        {t('sections.experience')}
-      </SectionTitle>
-      <Header>
-        <DownloadButton
-          href="./pdf/Resume_LOPEZ_Federico.pdf"
-          download="Resume_LOPEZ_Federico.pdf"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Download Resume PDF"
+        <Button
+          variant="secondary"
+          size="md"
+          href={RESUME_HREF}
+          download={RESUME_FILENAME}
+          icon={<DownloadIcon />}
         >
-          <svg
-            width="20"
-            height="20"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
-          </svg>
           {t('buttons.downloadResume')}
-        </DownloadButton>
-      </Header>
+          <FileType>{t('buttons.resumeFileType')}</FileType>
+        </Button>
+      </Actions>
       <Timeline>
-        {experiences.map((experience, index) => {
-          const { id, company } = experience;
+        {experiences.map((experience) => {
+          const { id, company, end } = experience;
+          const companyName = t(`experience.${id}.company`);
           return (
-            <ExperienceCard
+            <TimelineItem
               key={id}
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              $current={end.active}
+              variants={fadeUpVariants}
+              {...inViewProps}
+              {...reveal(id)}
             >
-              <DateAndLocation>
-                <p>{getDateRange(experience)}</p>
-                <p>{getLocation(experience)}</p>
-              </DateAndLocation>
+              <Meta>
+                <MetaDates>{renderDates(experience)}</MetaDates>
+                <MetaLine>
+                  {calculateDuration(experience, t) || t('time.lessThanMonth')}
+                </MetaLine>
+                <MetaLine>{getLocation(experience)}</MetaLine>
+              </Meta>
               <Details>
-                <h3>{t(`experience.${id}.role`)}</h3>
-                <h4>
+                <Role>{t(`experience.${id}.role`)}</Role>
+                <Company>
                   {company.href ? (
-                    <a
+                    <CompanyLink
                       href={company.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={`${t(`experience.${id}.company`)} (opens in new tab)`}
+                      external
+                      externalLabel={t('header.newTab')}
+                      arrow
                     >
-                      {t(`experience.${id}.company`)}
-                    </a>
+                      {companyName}
+                    </CompanyLink>
                   ) : (
-                    t(`experience.${id}.company`)
+                    <CompanyName>{companyName}</CompanyName>
                   )}
-                </h4>
-                <p>{t(`experience.${id}.notes`)}</p>
+                </Company>
+                <Notes>{t(`experience.${id}.notes`)}</Notes>
               </Details>
-            </ExperienceCard>
+            </TimelineItem>
           );
         })}
       </Timeline>

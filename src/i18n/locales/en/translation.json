@@ -1,29 +1,64 @@
 {
+  "meta": {
+    "homeTitle": "Federico López — Senior Frontend Engineer (React)"
+  },
   "header": {
-    "home": "HOME",
     "about": "ABOUT ME",
     "projects": "PROJECTS",
     "experience": "EXPERIENCE",
     "contact": "CONTACT",
     "name": "Federico López",
-    "role": "Senior Frontend Engineer"
+    "role": "Senior Frontend Engineer",
+    "tagline": "I build fast, accessible interfaces for products people actually use.",
+    "ctaWork": "View work",
+    "ctaContact": "Get in touch",
+    "ctaResume": "Resume (PDF)",
+    "proof": {
+      "label": "Highlights",
+      "years": "16+ years in IT",
+      "react": "7+ years in React / Next.js",
+      "featured": "Featured in The New York Times"
+    },
+    "newTab": "(opens in a new tab)",
+    "a11y": {
+      "home": "Back to top",
+      "homePage": "Home",
+      "mainNav": "Main navigation",
+      "mobileNav": "Mobile navigation",
+      "toggleMenu": "Toggle mobile menu",
+      "closeMenu": "Close mobile menu"
+    }
+  },
+  "language": {
+    "label": "Language"
+  },
+  "theme": {
+    "switchToDark": "Switch to dark mode",
+    "switchToLight": "Switch to light mode"
+  },
+  "a11y": {
+    "skipToContent": "Skip to main content",
+    "scrollToTop": "Scroll to top"
   },
   "sections": {
-    "aboutme": "about me",
-    "projects": "projects",
-    "experience": "experience"
+    "aboutme": "About me",
+    "projects": "Projects",
+    "experience": "Experience"
   },
   "buttons": {
-    "downloadResume": "DOWNLOAD RESUME",
-    "liveDemo": "Live Demo",
+    "downloadResume": "Download resume",
+    "liveDemo": "Open live demo",
     "code": "Code",
-    "viewAll": "View All Projects",
-    "showLess": "Show Less",
-    "viewDetails": "View Details",
-    "backToPortfolio": "Back to Portfolio"
+    "viewDetails": "View details",
+    "backToPortfolio": "Back to portfolio",
+    "resumeFileType": "PDF",
+    "openApp": "Open app (login required)"
   },
   "footer": {
-    "copyright": "© {{year}} Federico López. All rights reserved."
+    "copyright": "© {{year}} Federico López",
+    "email": "Email",
+    "links": "Social links",
+    "resume": "Resume (PDF)"
   },
   "aboutMe": {
     "intro": "Hi! I'm <strong>Federico López</strong>, a Senior Frontend Engineer specializing in building <strong>high-performance</strong>, <strong>scalable</strong>, and <strong>user-centric</strong> web applications with <strong>React</strong>, <strong>TypeScript</strong>, and <strong>Next.js</strong>.",
@@ -32,17 +67,30 @@
     "stats": {
       "yearsExperience": "Years Experience",
       "enterpriseClients": "Enterprise Clients",
-      "remote": "Remote"
+      "remote": "Remote since 2021",
+      "enterpriseClientsValue": "7+",
+      "remoteValue": "100%",
+      "yearsFallback": "7+"
     },
-    "featured": "Featured in <nyt>The New York Times</nyt>"
+    "featuredLabel": "Featured in",
+    "featuredContext": "Coverage of REAL Evals, the AI testing platform where I built high-fidelity app clones.",
+    "featuredCta": "See the LinkedIn post"
   },
   "projects": {
     "subtitle": "A selection of my work, including projects featured in The New York Times",
-    "filterAll": "All",
-    "nytLabel": "Featured in The New York Times",
+    "nytBadge": "NYT feature",
+    "technologiesUsed": "Technologies used",
+    "moreTechnologies_one": "+{{count}} more technology",
+    "moreTechnologies_other": "+{{count}} more technologies",
+    "imageAlt": "Screenshot of {{title}}",
+    "categories": {
+      "freelance": "Freelance",
+      "personal": "Personal",
+      "professional": "Professional"
+    },
     "realevalsgmail": {
       "title": "Gmail Clone - REAL Evals",
-      "description": "Production-ready Gmail replica built for AI evaluation platform. Featured in The New York Times for innovative AI testing approach. Pixel-perfect recreation implementing email management, compose functionality, labels, folders, and advanced search. Built with Next.js and Material UI for optimal performance and accessibility."
+      "description": "Production-ready Gmail replica built for AI evaluation platform. Pixel-perfect recreation implementing email management, compose functionality, labels, folders, and advanced search. Built with Next.js and Material UI for optimal performance and accessibility."
     },
     "realevalsdashdish": {
       "title": "DoorDash Clone - REAL Evals",
@@ -50,7 +98,7 @@
     },
     "realevalsuber": {
       "title": "Uber Clone - REAL Evals",
-      "description": "Comprehensive ride-sharing platform clone with real-time map integration, route calculation, pricing estimates, and driver matching simulation. Featured in The New York Times as part of REAL Evals AI testing platform. Built with Next.js and Material UI."
+      "description": "Comprehensive ride-sharing platform clone with real-time map integration, route calculation, pricing estimates, and driver matching simulation. Built with Next.js and Material UI."
     },
     "realevalsunited": {
       "title": "United Airlines Clone - REAL Evals",
@@ -75,69 +123,71 @@
     "factupro": {
       "title": "FactuPro - Invoice Management",
       "description": "Complete invoice and billing management system for SMBs. Implemented invoice generation, payment tracking, client management, and automated reminders with responsive design and accessibility compliance."
+    },
+    "groups": {
+      "real-evals": {
+        "title": "REAL Evals",
+        "lead": "High-fidelity app clones built for AI evaluation, featured in The New York Times."
+      },
+      "rcx-sports": {
+        "title": "RCX Sports",
+        "lead": "League finder apps for RCX Sports across four leagues: NFL, NBA, NHL and MLS."
+      },
+      "independent": {
+        "title": "Independent"
+      }
     }
   },
   "experience": {
     "frontendBonzzu": {
-      "role": "senior frontend engineer",
-      "company": "bonzzu",
+      "role": "Senior Frontend Engineer",
+      "company": "Bonzzu",
       "notes": "Delivering scalable React/Next.js applications for Delos Company and RCX Sports. Designed reusable component systems using Material UI, Chakra UI, and Shadcn UI. Led performance optimizations through SSR, code splitting, and rendering efficiency improvements."
     },
     "fullstackFreelance": {
-      "role": "frontend web developer",
+      "role": "Frontend Web Developer",
       "company": "Freelancer",
       "notes": "Delivered high-impact solutions for international clients including Vrio, Wpromote, REAL Evals (featured by The New York Times), and FactuPro. Specialized in SSR, performance optimization, and scalable component architectures."
     },
     "fullstackNisum": {
-      "role": "full stack engineer",
-      "company": "nisum (science37)",
+      "role": "Full Stack Engineer",
+      "company": "Nisum (Science37)",
       "notes": "Delivered and maintained React/Redux interfaces for Science37's clinical research platform using JavaScript and TypeScript. Developed reusable UI components with Storybook and partnered with distributed teams across multiple time zones in remote Agile environments."
     },
     "mainframeICBC": {
-      "role": "senior mainframe cobol developer",
+      "role": "Senior Mainframe COBOL Developer",
       "company": "ICBC (Industrial and Commercial Bank of China)",
       "notes": "Led Anti-Money Laundering initiatives including impact analysis and effort estimation. Developed and maintained COBOL applications in batch and online (CICS) environments with DB2, MQ messaging, and VSAM/QSAM files. Managed production incidents ensuring system stability under strict SLAs."
     },
     "cobolDeveloper": {
-      "role": "cobol developer",
-      "company": "isban / BBVA / accenture",
+      "role": "COBOL Developer",
+      "company": "Isban / BBVA / Accenture",
       "notes": "Developed COBOL components for financial and high-volume batch systems across multiple banking institutions. Performed requirements analysis, system enhancements, and technical design. Leveraged DB2, MQ, JCL, and CICS for enterprise data processing in mission-critical environments."
     },
     "frontendConstellation": {
-      "role": "frontend developer",
+      "role": "Frontend Developer",
       "company": "Constellation Software Inc.",
       "notes": "Built customer-facing web applications for enterprise clients using React and TypeScript. Collaborated with cross-functional teams to deliver high-quality features on schedule."
     },
     "softwareQuintica": {
-      "role": "software developer",
+      "role": "Software Developer",
       "company": "Quintica Software Solutions",
       "notes": "Developed full-stack web applications using modern JavaScript frameworks. Participated in all phases of software development lifecycle."
     }
   },
-  "months": {
-    "January": "January",
-    "February": "February",
-    "March": "March",
-    "April": "April",
-    "May": "May",
-    "June": "June",
-    "July": "July",
-    "August": "August",
-    "September": "September",
-    "October": "October",
-    "November": "November",
-    "December": "December"
-  },
   "time": {
     "present": "Present",
-    "year": "year",
-    "years": "years",
-    "month": "month",
-    "months": "months",
-    "remote": "Remote"
+    "remote": "Remote",
+    "duration": {
+      "years_one": "{{count}} yr",
+      "years_other": "{{count}} yrs",
+      "months_one": "{{count}} mo",
+      "months_other": "{{count}} mos"
+    },
+    "lessThanMonth": "< 1 mo"
   },
   "contact": {
-    "title": "contact",
+    "title": "Contact",
     "subtitle": "Let's work together",
     "panelTagline": "I'm open to senior frontend roles, freelance projects, and technical consulting. Drop me a line and I'll get back to you within 24 hours.",
     "formTitle": "Send me a message",
@@ -147,17 +197,47 @@
     "namePlaceholder": "Your name",
     "emailPlaceholder": "your@email.com",
     "messagePlaceholder": "Tell me about your project or opportunity...",
-    "send": "Send Message",
-    "sending": "Sending...",
-    "success": "Message sent! I'll get back to you soon.",
-    "error": "Something went wrong. Please try again or email me directly.",
+    "send": "Send message",
+    "sending": "Sending…",
+    "error": "Your message couldn't be sent. Your text is still here, so please try again or email me directly.",
     "validation": {
       "nameRequired": "Please enter your name.",
       "emailRequired": "Please enter your email address.",
       "emailInvalid": "Please enter a valid email address.",
       "messageRequired": "Please enter a message.",
-      "messageTooShort": "Message must be at least 40 characters.",
-      "messageTooLong": "Message cannot exceed 300 characters."
+      "messageTooShort": "Message must be at least 10 characters."
+    },
+    "eyebrow": "Available for work",
+    "copyEmail": "Copy email address",
+    "copied": "Copied",
+    "copyFailed": "Couldn't copy automatically. The address is selected: press Ctrl or Cmd+C.",
+    "requiredNote": "All fields are required.",
+    "messageHint": "Minimum 10 characters",
+    "successTitle": "Message sent",
+    "successText": "Thanks for reaching out. I'll get back to you soon.",
+    "sendAnother": "Send another message",
+    "errorSummary_one": "Please fix 1 field:",
+    "errorSummary_other": "Please fix {{count}} fields:",
+    "charNote": {
+      "minReached": "Minimum length reached.",
+      "remaining_one": "{{count}} character remaining.",
+      "remaining_other": "{{count}} characters remaining.",
+      "limit": "Character limit reached."
     }
+  },
+  "projectDetail": {
+    "technologies": "Technologies",
+    "notFoundTitle": "Project not found",
+    "notFoundText": "The project you are looking for does not exist.",
+    "notFoundCta": "Back to projects",
+    "navLabel": "Project navigation",
+    "previous": "Previous",
+    "next": "Next",
+    "loading": "Loading project…"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "The page you are looking for does not exist.",
+    "cta": "Back to home"
   }
 }

@@ -124,8 +124,7 @@ resume/
 │   ├── pdf/               # Resume PDF download
 │   ├── ga.js              # Google Analytics (external, CSP-safe)
 │   ├── llms.txt           # AI crawler profile (AEO/GEO)
-│   ├── robots.txt
-│   └── sitemap.xml
+│   └── robots.txt         # sitemap.xml is generated into dist/ at build
 ├── src/
 │   ├── components/
 │   │   ├── Header/        # Navigation + hero section
@@ -136,14 +135,13 @@ resume/
 │   │   ├── layout/
 │   │   │   └── ScrollToTop/
 │   │   ├── ui/            # Shared UI primitives
-│   │   │   ├── LoadingSpinner.tsx
 │   │   │   └── ProjectDetailSkeleton.tsx
 │   │   └── Sections/
 │   │       ├── AboutMe/
 │   │       ├── Projects/
 │   │       ├── Experience/
 │   │       ├── Contact/
-│   │       └── shared/    # SectionTitle and other shared section components
+│   │       └── shared/    # SectionHeader and other shared section components
 │   ├── pages/
 │   │   └── ProjectDetail/ # /projects/:id route — lazy loaded
 │   ├── context/           # ThemeContext

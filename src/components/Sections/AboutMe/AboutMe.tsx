@@ -2,23 +2,33 @@ import { FC } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 import experienceHistory from '../../../data/experience.json';
 import type { ExperienceConfig } from '@/types';
+import { NYT_HREF, NYT_NAME } from '@/data/featured';
+import { useRevealOnFocus } from '@/hooks';
 import { calculateYearsExperience } from '@/utils/dateCalculations';
+import { Eyebrow, TextLink } from '../../ui';
+import {
+  stackVariants,
+  fadeUpVariants,
+  inViewProps,
+} from '../../../styles/motion';
 import {
   AboutMeContainer,
+  AboutMeBody,
   Description,
-  FeaturedBadge,
-  StatsContainer,
-  StatBox,
-  StatNumber,
-  StatLabel,
+  FeaturedCallout,
+  PublicationName,
+  CalloutContext,
+  FactsList,
+  Fact,
+  FactLabel,
+  FactValue,
 } from './AboutMe.styles';
-import { SectionTitle } from '../shared/SectionTitle';
-
-const NYT_HREF =
-  'https://www.linkedin.com/posts/svanweelden_silicon-valley-builds-amazon-and-gmail-copycats-activity-7404333944894398465-CIyW/';
+import { SectionHeader } from '../shared/SectionHeader';
+import { sectionTitleId } from '../shared/sectionTitleId';
 
 const AboutMe: FC = () => {
   const { t } = useTranslation();
+  const reveal = useRevealOnFocus();
   const { experiences } = experienceHistory as ExperienceConfig;
 
   const freelanceJob = experiences.find(
@@ -29,90 +39,61 @@ const AboutMe: FC = () => {
         freelanceJob.start.month,
         freelanceJob.start.year
       )
-    : '7+';
+    : t('aboutMe.stats.yearsFallback');
 
-  const stats = [
-    { number: yearsExp, label: t('aboutMe.stats.yearsExperience') },
-    { number: '7+', label: t('aboutMe.stats.enterpriseClients') },
-    { number: '100%', label: t('aboutMe.stats.remote') },
+  const facts = [
+    { value: yearsExp, label: t('aboutMe.stats.yearsExperience') },
+    {
+      value: t('aboutMe.stats.enterpriseClientsValue'),
+      label: t('aboutMe.stats.enterpriseClients'),
+    },
+    {
+      value: t('aboutMe.stats.remoteValue'),
+      label: t('aboutMe.stats.remote'),
+    },
   ];
 
   return (
-    <AboutMeContainer aria-labelledby="section-about">
-      <SectionTitle
-        id="section-about"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        {t('sections.aboutme')}
-      </SectionTitle>
-      <Description
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-      >
-        <p>
-          <Trans i18nKey="aboutMe.intro" />
-        </p>
-        <p>
-          <Trans i18nKey="aboutMe.experience" values={{ years: yearsExp }} />
-        </p>
-        <p>{t('aboutMe.passion')}</p>
-      </Description>
+    <AboutMeContainer>
+      <SectionHeader
+        index="01"
+        title={t('sections.aboutme')}
+        titleId={sectionTitleId('aboutme')}
+      />
+      <AboutMeBody variants={stackVariants} {...inViewProps} {...reveal()}>
+        <Description variants={fadeUpVariants}>
+          <p>
+            <Trans i18nKey="aboutMe.intro" />
+          </p>
+          <p>
+            <Trans i18nKey="aboutMe.experience" values={{ years: yearsExp }} />
+          </p>
+          <p>{t('aboutMe.passion')}</p>
+        </Description>
 
-      <StatsContainer
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-      >
-        {stats.map((stat, index) => (
-          <StatBox
-            key={stat.label}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
+        <FeaturedCallout variants={fadeUpVariants}>
+          <Eyebrow>{t('aboutMe.featuredLabel')}</Eyebrow>
+          <PublicationName>{NYT_NAME}</PublicationName>
+          <CalloutContext>{t('aboutMe.featuredContext')}</CalloutContext>
+          <TextLink
+            href={NYT_HREF}
+            external
+            externalLabel={t('header.newTab')}
+            arrow
           >
-            <StatNumber>{stat.number}</StatNumber>
-            <StatLabel>{stat.label}</StatLabel>
-          </StatBox>
-        ))}
-      </StatsContainer>
+            {t('aboutMe.featuredCta')}
+          </TextLink>
+        </FeaturedCallout>
 
-      <FeaturedBadge
-        initial={{ opacity: 0, scale: 0.9 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.6 }}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          width="20"
-          height="20"
-        >
-          <path d="M12 2L3.5 20.5L13.5 16L21 20.5L12 2Z" />
-        </svg>
-        <span>
-          <Trans
-            i18nKey="aboutMe.featured"
-            components={{
-              nyt: (
-                <a
-                  href={NYT_HREF}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                />
-              ),
-            }}
-          />
-        </span>
-      </FeaturedBadge>
+        <FactsList variants={fadeUpVariants}>
+          {facts.map((fact) => (
+            <Fact key={fact.label}>
+              <FactLabel>{fact.label}</FactLabel>
+              <FactValue>{fact.value}</FactValue>
+            </Fact>
+          ))}
+        </FactsList>
+      </AboutMeBody>
     </AboutMeContainer>
   );
 };

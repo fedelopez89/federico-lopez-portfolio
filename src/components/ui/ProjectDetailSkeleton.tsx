@@ -1,101 +1,121 @@
 import styled, { keyframes } from 'styled-components';
+import { useTranslation } from 'react-i18next';
+import { Container } from './Container';
+import { VisuallyHidden } from './VisuallyHidden';
 
-const shimmer = keyframes`
-  0%   { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+const pulse = keyframes`
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 `;
 
-const Bone = styled.div<{ $h?: string; $w?: string; $radius?: string }>`
-  position: relative;
-  overflow: hidden;
+const Bone = styled.div<{ $h?: string; $w?: string; $round?: boolean }>`
   height: ${({ $h }) => $h ?? '1rem'};
   width: ${({ $w }) => $w ?? '100%'};
-  border-radius: ${({ $radius }) => $radius ?? '6px'};
+  max-width: 100%;
+  flex-shrink: 0;
+  border-radius: ${({ theme, $round }) =>
+    $round ? theme.borderRadius.full : theme.borderRadius.md};
   background: ${({ theme }) => theme.colors.surfaceAlt};
+  animation: ${pulse} 1.6s ease-in-out infinite;
 
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    transform: translateX(-100%);
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      ${({ theme }) => theme.colors.border} 50%,
-      transparent 100%
-    );
-    animation: ${shimmer} 1.6s ease-in-out infinite;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
   }
 `;
 
-const TopBarSkeleton = styled.div`
+const NavSkeleton = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 56px;
-  background: ${({ theme }) => theme.colors.background}cc;
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border}80;
+  z-index: ${({ theme }) => theme.zIndex.sticky};
   display: flex;
   align-items: center;
-  padding: 0 1.5rem;
-  z-index: ${({ theme }) => theme.zIndex.fixed};
+  height: ${({ theme }) => theme.layout.navHeight};
 `;
 
-const HeroSkeleton = styled.div`
-  width: 100%;
-  height: 62vh;
-  min-height: 340px;
-  max-height: 600px;
-  background: ${({ theme }) => theme.colors.surfaceAlt};
+const NavRow = styled(Container)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
-const ContentSkeleton = styled.div`
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 3rem 1.5rem;
+const Page = styled.div`
+  padding: ${({ theme }) =>
+    `calc(${theme.layout.navHeight} + ${theme.spacing.lg}) 0 ${theme.spacing['4xl']}`};
+`;
+
+const Column = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  align-items: flex-start;
+  gap: ${({ theme }) => theme.spacing.lg};
+`;
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: 4rem 2rem;
-  }
+const Intro = styled(Column)`
+  margin-top: ${({ theme }) => theme.spacing.lg};
 `;
 
 const Row = styled.div`
   display: flex;
-  gap: 0.5rem;
+  flex-wrap: wrap;
+  gap: ${({ theme }) => theme.spacing.md};
 `;
 
+const Frame = styled.div`
+  width: 100%;
+  margin-top: ${({ theme }) => theme.spacing['2xl']};
+  aspect-ratio: 1400 / 740;
+  max-width: ${({ theme }) => theme.layout.maxWidth.content};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  background: ${({ theme }) => theme.colors.surfaceAlt};
+  animation: ${pulse} 1.6s ease-in-out infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+`;
+
+/** Mirrors the project detail layout while its chunk loads. */
 export function ProjectDetailSkeleton() {
+  const { t } = useTranslation();
+
   return (
     <>
-      <TopBarSkeleton>
-        <Bone $h="14px" $w="140px" $radius="4px" />
-      </TopBarSkeleton>
+      {/* Outside the busy region so the status is still announced. */}
+      <VisuallyHidden role="status">
+        {t('projectDetail.loading')}
+      </VisuallyHidden>
 
-      <HeroSkeleton />
+      <div aria-busy="true">
+        <NavSkeleton aria-hidden="true">
+          <NavRow>
+            <Bone $h="1.25rem" $w="9rem" />
+            <Bone $h="1.5rem" $w="15rem" />
+          </NavRow>
+        </NavSkeleton>
 
-      <ContentSkeleton>
-        <Bone $h="28px" $w="75%" />
-        <Bone $h="16px" $w="100%" />
-        <Bone $h="16px" $w="95%" />
-        <Bone $h="16px" $w="80%" />
-        <Bone $h="1px" $w="100%" $radius="0" style={{ margin: '0.5rem 0' }} />
-        <Bone $h="12px" $w="100px" />
-        <Row>
-          <Bone $h="30px" $w="80px" $radius="999px" />
-          <Bone $h="30px" $w="90px" $radius="999px" />
-          <Bone $h="30px" $w="70px" $radius="999px" />
-        </Row>
-        <Bone $h="1px" $w="100%" $radius="0" style={{ margin: '0.5rem 0' }} />
-        <Row>
-          <Bone $h="44px" $w="140px" $radius="8px" />
-          <Bone $h="44px" $w="120px" $radius="8px" />
-        </Row>
-      </ContentSkeleton>
+        <Page aria-hidden="true">
+          <Container>
+            <Bone $h="1rem" $w="10rem" />
+            <Intro>
+              <Bone $h="0.875rem" $w="7rem" />
+              <Column>
+                <Bone $h="3rem" $w="80%" />
+                <Bone $h="3rem" $w="45%" />
+              </Column>
+              <Bone $h="1.25rem" $w="42rem" />
+              <Bone $h="1.25rem" $w="36rem" />
+              <Row>
+                <Bone $h="3rem" $w="9rem" />
+                <Bone $h="3rem" $w="7rem" />
+              </Row>
+            </Intro>
+            <Frame />
+          </Container>
+        </Page>
+      </div>
     </>
   );
 }

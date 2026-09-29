@@ -1,6 +1,25 @@
 import { createGlobalStyle } from 'styled-components';
+import { focusRing } from './mixins';
 
 export const GlobalStyles = createGlobalStyle`
+  @font-face {
+    font-family: 'Inter';
+    src: url('/fonts/inter-latin-wght-normal.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  /* Metric-adjusted fallback to reduce layout shift while Inter loads */
+  @font-face {
+    font-family: 'Inter Fallback';
+    src: local('Arial');
+    size-adjust: 107%;
+    ascent-override: 90%;
+    descent-override: 22.43%;
+    line-gap-override: 0%;
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -9,6 +28,11 @@ export const GlobalStyles = createGlobalStyle`
 
   html {
     scroll-behavior: smooth;
+    /* Keeps anchor jumps and focused elements clear of the fixed navbar and
+       the scroll-to-top button (WCAG 2.4.11). One source for every target. */
+    scroll-padding-top: calc(${({ theme }) => theme.layout.navHeight} + 0.5rem);
+    scroll-padding-bottom: 4.5rem;
+    scrollbar-gutter: stable;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -25,9 +49,14 @@ export const GlobalStyles = createGlobalStyle`
 
   h1, h2, h3, h4, h5, h6 {
     font-family: ${({ theme }) => theme.typography.fontFamily.secondary};
-    font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
+    font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
     line-height: ${({ theme }) => theme.typography.lineHeight.tight};
     color: ${({ theme }) => theme.colors.text};
+  }
+
+  h1, h2, h3 {
+    font-weight: 650;
+    letter-spacing: ${({ theme }) => theme.typography.tracking.heading};
   }
 
   h1 {
@@ -73,14 +102,16 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.colors.textSecondary};
   }
 
-  a {
+  /* Zero specificity: component rules (skip link, buttons, summary links)
+     always win over these defaults, including on hover. */
+  :where(a) {
     color: ${({ theme }) => theme.colors.primary};
     text-decoration: none;
     transition: color ${({ theme }) => theme.transitions.fast};
+  }
 
-    &:hover {
-      color: ${({ theme }) => theme.colors.primaryHover};
-    }
+  :where(a:hover) {
+    color: ${({ theme }) => theme.colors.primaryHover};
   }
 
   button {
@@ -131,8 +162,10 @@ export const GlobalStyles = createGlobalStyle`
 
   /* Selection */
   ::selection {
-    background-color: ${({ theme }) => theme.colors.primaryLight};
-    color: ${({ theme }) => theme.colors.primary};
+    /* Body text on a mid primary tint: at least 8.8:1 in both themes. */
+    background-color: ${({ theme }) =>
+      `color-mix(in srgb, ${theme.colors.primary} 30%, ${theme.colors.background})`};
+    color: ${({ theme }) => theme.colors.text};
   }
 
   .skip-link {
@@ -140,17 +173,26 @@ export const GlobalStyles = createGlobalStyle`
     top: -9999px;
     left: -9999px;
     padding: 0.75rem 1.5rem;
-    background: #2563eb;
-    color: white;
+    background: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.onPrimary};
     font-weight: 600;
     border-radius: 0 0 8px 8px;
     z-index: 9999;
     text-decoration: none;
+    ${focusRing}
   }
 
   .skip-link:focus {
     top: 1rem;
     left: 1rem;
+  }
+
+  /* Short or heavily zoomed viewports: the navbar scrolls away instead of
+     covering the page (see SiteNav), so nothing needs to be cleared. */
+  @media (max-height: 500px) {
+    html {
+      scroll-padding-top: 0.5rem;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
