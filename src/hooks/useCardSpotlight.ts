@@ -3,13 +3,15 @@ import { useEffect, type RefObject } from 'react';
 const CARD_SELECTOR = '[data-spot-card]';
 const FINE_POINTER_QUERY = '(hover: hover) and (pointer: fine)';
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
+/** Longer than the spotlight's opacity fade-out, so the glow does not snap to centre while fading. */
+const RELEASE_DELAY_MS = 500;
 
 /**
  * One delegated `pointermove` listener on a container drives the card
  * spotlight. Per frame (rAF-throttled) it writes `--spot-x` / `--spot-y` on
  * the hovered card only: the pointer's offset from the card's centre, so a
  * card without the vars (keyboard focus) is centred by CSS. No React state.
- * Inactive on touch and under reduced motion (re-evaluated on change).
+ * A card's vars are released only after the fade-out finishes. Inactive on touch and under reduced motion (re-evaluated on change).
  */
 export const useCardSpotlight = <T extends HTMLElement>(
   ref: RefObject<T | null>
@@ -27,9 +29,29 @@ export const useCardSpotlight = <T extends HTMLElement>(
       let x = 0;
       let y = 0;
 
-      const clear = (el: HTMLElement | null) => {
-        el?.style.removeProperty('--spot-x');
-        el?.style.removeProperty('--spot-y');
+      const releaseTimers = new Map<HTMLElement, number>();
+
+      const clear = (el: HTMLElement) => {
+        el.style.removeProperty('--spot-x');
+        el.style.removeProperty('--spot-y');
+      };
+
+      const release = (el: HTMLElement | null) => {
+        if (!el || releaseTimers.has(el)) return;
+        releaseTimers.set(
+          el,
+          window.setTimeout(() => {
+            releaseTimers.delete(el);
+            clear(el);
+          }, RELEASE_DELAY_MS)
+        );
+      };
+
+      const hold = (el: HTMLElement) => {
+        const timer = releaseTimers.get(el);
+        if (timer === undefined) return;
+        window.clearTimeout(timer);
+        releaseTimers.delete(el);
       };
 
       const write = () => {
@@ -53,10 +75,11 @@ export const useCardSpotlight = <T extends HTMLElement>(
             ? event.target.closest<HTMLElement>(CARD_SELECTOR)
             : null;
         if (next !== card) {
-          clear(card);
+          release(card);
           card = next;
         }
         if (!card) return;
+        hold(card);
         x = event.clientX;
         y = event.clientY;
         if (!frame) frame = requestAnimationFrame(write);
@@ -65,7 +88,7 @@ export const useCardSpotlight = <T extends HTMLElement>(
       const stop = () => {
         if (frame) cancelAnimationFrame(frame);
         frame = 0;
-        clear(card);
+        release(card);
         card = null;
       };
 
@@ -76,6 +99,11 @@ export const useCardSpotlight = <T extends HTMLElement>(
         container.removeEventListener('pointermove', handleMove);
         container.removeEventListener('pointerleave', stop);
         stop();
+        releaseTimers.forEach((timer, el) => {
+          window.clearTimeout(timer);
+          clear(el);
+        });
+        releaseTimers.clear();
       };
     };
 

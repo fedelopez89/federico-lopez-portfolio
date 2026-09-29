@@ -82,11 +82,35 @@ describe('useCardSpotlight', () => {
     await flushFrame();
     move('b');
     await flushFrame();
+    // The previous card keeps its position while its glow fades out.
+    expect(getByTestId('a').style.getPropertyValue('--spot-x')).not.toBe('');
+    await vi.advanceTimersByTimeAsync(600);
     expect(getByTestId('a').style.getPropertyValue('--spot-x')).toBe('');
     expect(getByTestId('b').style.getPropertyValue('--spot-x')).not.toBe('');
 
     fireEvent.pointerLeave(getByTestId('grid'));
+    expect(getByTestId('b').style.getPropertyValue('--spot-x')).not.toBe('');
+    await vi.advanceTimersByTimeAsync(600);
     expect(getByTestId('b').style.getPropertyValue('--spot-x')).toBe('');
+  });
+
+  it('keeps the vars if the pointer re-enters before the release', async () => {
+    mockMedia();
+    const { getByTestId } = render(<Grid />);
+    const move = () =>
+      fireEvent.pointerMove(getByTestId('a'), {
+        clientX: 150,
+        clientY: 60,
+        pointerType: 'mouse',
+      });
+
+    move();
+    await flushFrame();
+    fireEvent.pointerLeave(getByTestId('grid'));
+    await vi.advanceTimersByTimeAsync(200);
+    move();
+    await vi.advanceTimersByTimeAsync(600);
+    expect(getByTestId('a').style.getPropertyValue('--spot-x')).not.toBe('');
   });
 
   it('ignores touch pointers', async () => {
