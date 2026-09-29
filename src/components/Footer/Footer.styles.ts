@@ -4,7 +4,7 @@ import { TextLink } from '../ui';
 export const FooterRoot = styled.footer`
   background: ${({ theme }) => theme.colors.background};
   content-visibility: auto;
-  contain-intrinsic-size: auto 240px;
+  contain-intrinsic-size: auto 160px;
 
   @media print {
     content-visibility: visible;
@@ -13,6 +13,7 @@ export const FooterRoot = styled.footer`
   padding-bottom: ${({ theme }) => theme.spacing['4xl']};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    contain-intrinsic-size: auto 220px;
     padding-bottom: ${({ theme }) => `calc(${theme.spacing['2xl']} + 60px)`};
   }
 `;
