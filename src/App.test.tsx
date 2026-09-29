@@ -1,3 +1,4 @@
+import { forwardRef, type ComponentProps } from 'react';
 import { describe, it, expect, beforeAll, afterEach, vi } from 'vitest';
 import { act, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -7,10 +8,28 @@ import { projects } from './data/projects';
 import { setupTestEnvironment } from './test/renderWithProviders';
 
 // jsdom has no Web Animations API, which scroll-linked motion values rely on.
+// The route fade wrapper (the only motion.div with an exit prop) records the
+// `initial` it renders with so the fade can be asserted without timing.
+const pageInitials = vi.hoisted(() => [] as unknown[]);
+
 vi.mock('framer-motion', async (importOriginal) => {
   const actual = await importOriginal<typeof import('framer-motion')>();
+  const RealDiv = actual.motion.div;
+  const RecordingDiv = forwardRef<
+    HTMLDivElement,
+    ComponentProps<typeof RealDiv>
+  >((props, ref) => {
+    if (props.exit === 'exit') pageInitials.push(props.initial);
+    return <RealDiv ref={ref} {...props} />;
+  });
+  RecordingDiv.displayName = 'RecordingDiv';
+  const motion = new Proxy(actual.motion, {
+    get: (target, prop, receiver) =>
+      prop === 'div' ? RecordingDiv : Reflect.get(target, prop, receiver),
+  });
   return {
     ...actual,
+    motion,
     useScroll: () => ({ scrollYProgress: actual.motionValue(0) }),
   };
 });
@@ -26,6 +45,7 @@ describe('App shell', () => {
   }, 60_000);
 
   afterEach(async () => {
+    pageInitials.length = 0;
     await act(() => i18n.changeLanguage('en'));
     sessionStorage.clear();
     vi.restoreAllMocks();
@@ -69,6 +89,29 @@ describe('App shell', () => {
     expect(window.location.hash).toBe('#projects');
     expect(themeWrites()).toBe(toggledWrites);
     expect(localStorage.getItem(THEME_KEY)).toBe(mode);
+  });
+
+  it('renders the first page in place, without the opacity fade (LCP)', () => {
+    window.history.pushState({}, '', '/');
+    render(<App />);
+    expect(pageInitials.length).toBeGreaterThan(0);
+    expect(pageInitials.every((initial) => initial === false)).toBe(true);
+  });
+
+  it('fades the page in on later navigations', async () => {
+    const user = userEvent.setup();
+    window.history.pushState({}, '', '/');
+    render(<App />);
+    pageInitials.length = 0;
+
+    const cardLink = document.querySelector<HTMLAnchorElement>(
+      'a[href^="/projects/"]'
+    );
+    expect(cardLink).not.toBeNull();
+    await user.click(cardLink as HTMLAnchorElement);
+    await screen.findByRole('navigation', { name: 'Project navigation' });
+
+    expect(pageInitials).toContain('initial');
   });
 
   it('sets a translated home title that follows the language', async () => {
