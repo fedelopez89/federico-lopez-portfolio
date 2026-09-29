@@ -120,6 +120,66 @@ describe('ProjectDetail', () => {
     expect(document.title).toBe('Proyecto no encontrado | Federico López');
   });
 
+  it('injects CreativeWork and BreadcrumbList JSON-LD and removes them on unmount', () => {
+    const { unmount } = renderDetail('real-evals-gmail');
+    const read = (id: string) =>
+      JSON.parse(document.getElementById(id)?.textContent ?? 'null');
+    const work = read('project-jsonld');
+    const url = 'https://federicoglopez.dev/projects/real-evals-gmail';
+    expect(work['@type']).toBe('CreativeWork');
+    expect(work['@id']).toBe(`${url}#work`);
+    expect(work.mainEntityOfPage).toBe(url);
+    expect(work.url).toBe(first.demoUrl);
+    expect(work.sameAs).toBeUndefined();
+    expect(work.author).toEqual({
+      '@id': 'https://federicoglopez.dev/#person',
+    });
+    expect(work.keywords).toBe(first.technologies.join(', '));
+    const crumbs = read('project-breadcrumb-jsonld');
+    expect(crumbs['@type']).toBe('BreadcrumbList');
+    expect(crumbs.itemListElement.map((i: { item: string }) => i.item)).toEqual(
+      [
+        'https://federicoglopez.dev/',
+        'https://federicoglopez.dev/#projects',
+        url,
+      ]
+    );
+    unmount();
+    expect(document.getElementById('project-jsonld')).toBeNull();
+    expect(document.getElementById('project-breadcrumb-jsonld')).toBeNull();
+  });
+
+  it('marks the not-found state noindex and restores robots on unmount', () => {
+    const meta = document.createElement('meta');
+    meta.name = 'robots';
+    meta.content = 'index, follow';
+    document.head.appendChild(meta);
+    const { unmount } = renderDetail('non-existent-project');
+    expect(meta.getAttribute('content')).toBe('noindex');
+    unmount();
+    expect(meta.getAttribute('content')).toBe('index, follow');
+    meta.remove();
+  });
+
+  it('adds and removes a robots meta when none exists', () => {
+    const { unmount } = renderDetail('non-existent-project');
+    expect(
+      document.querySelector('meta[name="robots"]')?.getAttribute('content')
+    ).toBe('noindex');
+    unmount();
+    expect(document.querySelector('meta[name="robots"]')).toBeNull();
+  });
+
+  it('does not set noindex for a valid project', () => {
+    const meta = document.createElement('meta');
+    meta.name = 'robots';
+    meta.content = 'index, follow';
+    document.head.appendChild(meta);
+    renderDetail('real-evals-gmail');
+    expect(meta.getAttribute('content')).toBe('index, follow');
+    meta.remove();
+  });
+
   it('labels the navbar logo as Home on the page variant', () => {
     renderDetail('real-evals-gmail');
     const nav = screen.getByRole('navigation', { name: 'Main navigation' });

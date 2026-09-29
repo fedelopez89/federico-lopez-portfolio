@@ -15,6 +15,7 @@ import {
 } from '../../components/ui';
 import { stackVariants, fadeUpVariants } from '../../styles/motion';
 import { useProjectSeo } from './useProjectSeo';
+import { useNoindex } from './useNoindex';
 import {
   PageHeader,
   PageMain,
@@ -86,6 +87,7 @@ function ProjectDetail() {
   }, [id]);
 
   useProjectSeo(project, translatedTitle, translatedDesc);
+  useNoindex(!project);
   // Found projects get their title from useProjectSeo.
   useDocumentTitle(
     project

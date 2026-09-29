@@ -15,12 +15,18 @@ vi.mock('framer-motion', async (importOriginal) => {
   };
 });
 
+// Safety net for cold jsdom/transform starts; tests should not rely on it.
+vi.setConfig({ testTimeout: 30_000 });
+
 const THEME_KEY = 'portfolio-theme-mode';
 
 describe('App shell', () => {
-  beforeAll(() => {
+  beforeAll(async () => {
     setupTestEnvironment();
-  });
+    // Warm the lazy route chunk so cold-start transforms don't land inside a
+    // test body and blow its timeout.
+    await import('./pages/ProjectDetail');
+  }, 60_000);
 
   afterEach(async () => {
     await act(() => i18n.changeLanguage('en'));
@@ -80,12 +86,16 @@ describe('App shell', () => {
     window.history.pushState({}, '', '/');
     render(<App />);
     await waitFor(() =>
-      expect(document.title).toBe('Federico López — Senior Frontend Engineer')
+      expect(document.title).toBe(
+        'Federico López — Senior Frontend Engineer (React)'
+      )
     );
     const nav = screen.getByRole('navigation', { name: 'Main navigation' });
     await user.click(within(nav).getByRole('button', { name: 'Español' }));
     await waitFor(() =>
-      expect(document.title).toBe('Federico López — Ingeniero Frontend Senior')
+      expect(document.title).toBe(
+        'Federico López — Ingeniero Frontend Senior (React)'
+      )
     );
   });
 
@@ -119,13 +129,14 @@ describe('App shell', () => {
     );
   }, 30_000);
 
-  it('keeps a single JSON-LD block and the right title across prev/next and back', async () => {
+  it('keeps exactly one project and one breadcrumb JSON-LD block and the right title across prev/next and back', async () => {
     const user = userEvent.setup();
     window.history.pushState({}, '', `/projects/${projects[0].id}`);
     render(<App />);
 
     const title = (i: number) => `${projects[i].title} | Federico López`;
-    const jsonLd = () => document.querySelectorAll('#project-jsonld');
+    const jsonLd = () =>
+      document.querySelectorAll('#project-jsonld, #project-breadcrumb-jsonld');
     const timeout = { timeout: 15_000 };
 
     await screen.findByRole(
@@ -134,14 +145,14 @@ describe('App shell', () => {
       timeout
     );
     await waitFor(() => expect(document.title).toBe(title(0)));
-    expect(jsonLd()).toHaveLength(1);
+    expect(jsonLd()).toHaveLength(2);
 
     await user.click(screen.getByRole('link', { name: /Next/ }));
     await waitFor(() => expect(document.title).toBe(title(1)), timeout);
-    expect(jsonLd()).toHaveLength(1);
+    expect(jsonLd()).toHaveLength(2);
 
     await user.click(screen.getByRole('link', { name: /Previous/ }));
     await waitFor(() => expect(document.title).toBe(title(0)), timeout);
-    expect(jsonLd()).toHaveLength(1);
+    expect(jsonLd()).toHaveLength(2);
   }, 30_000);
 });

@@ -48,8 +48,11 @@ function PageTransition({ children }: { children: React.ReactNode }) {
   );
 }
 
-/** Translated home title, e.g. "Federico López — Senior Frontend Engineer". */
-const homeTitle = (t: TFunction) => `${t('header.name')} — ${t('header.role')}`;
+/**
+ * Translated home title. In English it must match the <title> in index.html
+ * so the pre-hydration and runtime titles are identical.
+ */
+const homeTitle = (t: TFunction) => t('meta.homeTitle');
 
 /** Title of the page a path renders, without waiting for the lazy route. */
 const titleForPath = (pathname: string): string => {

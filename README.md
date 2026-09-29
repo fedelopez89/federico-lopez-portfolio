@@ -124,8 +124,7 @@ resume/
 │   ├── pdf/               # Resume PDF download
 │   ├── ga.js              # Google Analytics (external, CSP-safe)
 │   ├── llms.txt           # AI crawler profile (AEO/GEO)
-│   ├── robots.txt
-│   └── sitemap.xml
+│   └── robots.txt         # sitemap.xml is generated into dist/ at build
 ├── src/
 │   ├── components/
 │   │   ├── Header/        # Navigation + hero section

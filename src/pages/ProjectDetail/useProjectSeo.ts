@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import type { Project } from '../../data/projects';
 
+export const JSONLD_ID = 'project-jsonld';
+export const BREADCRUMB_JSONLD_ID = 'project-breadcrumb-jsonld';
+
 /**
  * Applies project-specific title, meta tags, canonical and JSON-LD while the
  * page is mounted, and restores the originals on unmount.
@@ -33,9 +36,9 @@ export function useProjectSeo(
       ogDesc: getMeta('meta[property="og:description"]'),
       ogUrl: getMeta('meta[property="og:url"]'),
       ogImage: getMeta('meta[property="og:image"]'),
-      twTitle: getMeta('meta[property="twitter:title"]'),
-      twDesc: getMeta('meta[property="twitter:description"]'),
-      twUrl: getMeta('meta[property="twitter:url"]'),
+      twTitle: getMeta('meta[name="twitter:title"]'),
+      twDesc: getMeta('meta[name="twitter:description"]'),
+      twUrl: getMeta('meta[name="twitter:url"]'),
       canonical:
         document.querySelector('link[rel="canonical"]')?.getAttribute('href') ??
         '',
@@ -49,35 +52,63 @@ export function useProjectSeo(
     setMeta('meta[property="og:description"]', shortDesc);
     setMeta('meta[property="og:url"]', projectUrl);
     setMeta('meta[property="og:image"]', imageUrl);
-    setMeta('meta[property="twitter:title"]', pageTitle);
-    setMeta('meta[property="twitter:description"]', shortDesc);
-    setMeta('meta[property="twitter:url"]', projectUrl);
+    setMeta('meta[name="twitter:title"]', pageTitle);
+    setMeta('meta[name="twitter:description"]', shortDesc);
+    setMeta('meta[name="twitter:url"]', projectUrl);
     document
       .querySelector('link[rel="canonical"]')
       ?.setAttribute('href', projectUrl);
 
     // ── Inject project JSON-LD ─────────────────────────────────────
-    const JSONLD_ID = 'project-jsonld';
-    document.getElementById(JSONLD_ID)?.remove();
-    const script = document.createElement('script');
-    script.id = JSONLD_ID;
-    script.type = 'application/ld+json';
-    script.textContent = JSON.stringify({
+    const workId = `${projectUrl}#work`;
+    const injectJsonLd = (id: string, data: Record<string, unknown>) => {
+      document.getElementById(id)?.remove();
+      const script = document.createElement('script');
+      script.id = id;
+      script.type = 'application/ld+json';
+      script.textContent = JSON.stringify(data);
+      document.head.appendChild(script);
+    };
+
+    injectJsonLd(JSONLD_ID, {
       '@context': 'https://schema.org',
-      '@type': 'SoftwareApplication',
-      '@id': projectUrl,
+      '@type': 'CreativeWork',
+      '@id': workId,
+      mainEntityOfPage: projectUrl,
       name: translatedTitle,
       description: translatedDesc,
-      url: projectUrl,
-      applicationCategory: 'WebApplication',
       author: { '@id': `${BASE_URL}/#person` },
       keywords: project.technologies.join(', '),
-      ...(project.demoUrl && { sameAs: project.demoUrl }),
+      ...(project.demoUrl && { url: project.demoUrl }),
       ...(project.imageUrl && {
         image: { '@type': 'ImageObject', url: imageUrl },
       }),
     });
-    document.head.appendChild(script);
+
+    injectJsonLd(BREADCRUMB_JSONLD_ID, {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: `${BASE_URL}/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Projects',
+          item: `${BASE_URL}/#projects`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: translatedTitle,
+          item: projectUrl,
+        },
+      ],
+    });
 
     // ── Restore on unmount ─────────────────────────────────────────
     return () => {
@@ -87,13 +118,14 @@ export function useProjectSeo(
       setMeta('meta[property="og:description"]', orig.ogDesc);
       setMeta('meta[property="og:url"]', orig.ogUrl);
       setMeta('meta[property="og:image"]', orig.ogImage);
-      setMeta('meta[property="twitter:title"]', orig.twTitle);
-      setMeta('meta[property="twitter:description"]', orig.twDesc);
-      setMeta('meta[property="twitter:url"]', orig.twUrl);
+      setMeta('meta[name="twitter:title"]', orig.twTitle);
+      setMeta('meta[name="twitter:description"]', orig.twDesc);
+      setMeta('meta[name="twitter:url"]', orig.twUrl);
       document
         .querySelector('link[rel="canonical"]')
         ?.setAttribute('href', orig.canonical);
       document.getElementById(JSONLD_ID)?.remove();
+      document.getElementById(BREADCRUMB_JSONLD_ID)?.remove();
     };
   }, [project, translatedTitle, translatedDesc]);
 }
