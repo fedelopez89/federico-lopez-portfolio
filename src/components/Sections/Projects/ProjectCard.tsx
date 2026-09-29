@@ -13,6 +13,9 @@ import {
   CardLink,
   CardSurface,
   ImageFrame,
+  Spotlight,
+  SpotGrid,
+  SpotGlow,
   ProjectImage,
   ImagePlaceholder,
   CardBody,
@@ -93,8 +96,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       onClick={handleClick}
       onPointerEnter={prefetchProjectDetail}
       onFocus={prefetchProjectDetail}
+      data-spot-card
     >
       <CardSurface>
+        <Spotlight aria-hidden="true">
+          <SpotGrid />
+          <SpotGlow />
+        </Spotlight>
         <ImageFrame data-vt-shot>
           {project.imageUrl ? (
             <ProjectImage

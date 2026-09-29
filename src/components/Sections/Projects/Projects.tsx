@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useRevealOnFocus } from '@/hooks';
+import { useCardSpotlight, useRevealOnFocus } from '@/hooks';
 import {
   PROJECT_GROUPS,
   projects,
@@ -62,9 +62,11 @@ const ProjectGroupSection: React.FC<{
 
 const Projects: React.FC = () => {
   const { t } = useTranslation();
+  const containerRef = useRef<HTMLDivElement>(null);
+  useCardSpotlight(containerRef);
 
   return (
-    <ProjectsContainer>
+    <ProjectsContainer ref={containerRef}>
       <SectionHeader
         index="02"
         title={t('sections.projects')}

@@ -6,6 +6,8 @@ import { alpha, focusRing } from '../../../styles/mixins';
 const IMAGE_SCALE = 1.02;
 const ARROW_SHIFT = '2px';
 const GRID_CELL = '1.5rem';
+const SPOT_SIZE = 360;
+const SPOT_HALF = SPOT_SIZE / 2;
 
 export const CardLink = styled(RouterLink)`
   display: flex;
@@ -18,6 +20,7 @@ export const CardLink = styled(RouterLink)`
 `;
 
 export const CardSurface = styled(Card).attrs({ as: 'article' })`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -82,7 +85,88 @@ export const ImagePlaceholder = styled.div`
   background-size: ${GRID_CELL} ${GRID_CELL};
 `;
 
+/**
+ * Pointer spotlight: the hero's glow and precision grid, continued into the
+ * card. Sits under the content (first in DOM; the image frame and body are
+ * positioned) and never carries a view-transition-name. `--spot-x/--spot-y`
+ * are offsets from the card centre written by useCardSpotlight; unset (keyboard
+ * focus) they centre the effect. Hidden on touch, reduced motion, forced colors.
+ */
+export const Spotlight = styled.div`
+  display: none;
+
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    display: block;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity ${({ theme }) => theme.motion.duration.base}s
+      ${({ theme }) => theme.motion.easeCss};
+
+    ${CardLink}:hover &,
+    ${CardLink}:focus-visible & {
+      opacity: 1;
+    }
+  }
+
+  @media (forced-colors: active), (prefers-contrast: more) {
+    display: none;
+  }
+`;
+
+/** Faint 1px grid, revealed only inside the glow radius. */
+export const SpotGrid = styled.div`
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(
+      to right,
+      ${({ theme }) => theme.colors.gridLine} 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      ${({ theme }) => theme.colors.gridLine} 1px,
+      transparent 1px
+    );
+  background-size: ${GRID_CELL} ${GRID_CELL};
+  -webkit-mask-image: radial-gradient(
+    circle ${SPOT_HALF - 40}px at calc(50% + var(--spot-x, 0px))
+      calc(50% + var(--spot-y, 0px)),
+    #000 0%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle ${SPOT_HALF - 40}px at calc(50% + var(--spot-x, 0px))
+      calc(50% + var(--spot-y, 0px)),
+    #000 0%,
+    transparent 100%
+  );
+`;
+
+/** Fixed-size glow moved by transform only, like the hero's Glow. */
+export const SpotGlow = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: ${SPOT_SIZE}px;
+  height: ${SPOT_SIZE}px;
+  margin: -${SPOT_HALF}px 0 0 -${SPOT_HALF}px;
+  border-radius: 50%;
+  transform: translate3d(var(--spot-x, 0px), var(--spot-y, 0px), 0);
+  will-change: transform;
+  background: radial-gradient(
+    circle,
+    ${({ theme }) => alpha(theme.colors.primary, 14)} 0%,
+    ${({ theme }) => alpha(theme.colors.secondary, 8)} 40%,
+    transparent 70%
+  );
+`;
+
 export const CardBody = styled.div`
+  position: relative;
   display: flex;
   flex: 1;
   flex-direction: column;
