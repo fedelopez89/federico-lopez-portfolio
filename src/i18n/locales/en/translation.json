@@ -66,6 +66,23 @@
     "subtitle": "A selection of my work, including projects featured in The New York Times",
     "filterAll": "All",
     "nytLabel": "Featured in The New York Times",
+    "nytBadge": "NYT feature",
+    "filterLabel": "Filter projects by technology",
+    "resultCount_one": "{{count}} project",
+    "resultCount_other": "{{count}} projects",
+    "technologiesUsed": "Technologies used",
+    "moreTechnologies_one": "+{{count}} more technology",
+    "moreTechnologies_other": "+{{count}} more technologies",
+    "imageAlt": "Screenshot of {{title}}",
+    "categories": {
+      "freelance": "Freelance",
+      "personal": "Personal",
+      "professional": "Professional"
+    },
+    "emptyState": {
+      "title": "No projects found",
+      "description": "Try a different technology filter."
+    },
     "realevalsgmail": {
       "title": "Gmail Clone - REAL Evals",
       "description": "Production-ready Gmail replica built for AI evaluation platform. Featured in The New York Times for innovative AI testing approach. Pixel-perfect recreation implementing email management, compose functionality, labels, folders, and advanced search. Built with Next.js and Material UI for optimal performance and accessibility."

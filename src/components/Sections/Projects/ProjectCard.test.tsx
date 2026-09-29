@@ -1,14 +1,12 @@
-import { describe, it, expect, vi, beforeAll } from 'vitest';
+import { describe, it, expect, beforeAll } from 'vitest';
 import { screen } from '@testing-library/react';
+import '../../../i18n/config';
 import ProjectCard from './ProjectCard';
-import { renderWithProviders, setupTestEnvironment } from '../../../test/renderWithProviders';
+import {
+  renderWithProviders,
+  setupTestEnvironment,
+} from '../../../test/renderWithProviders';
 import type { Project } from '../../../data/projects';
-
-vi.mock('react-i18next', () => ({
-  useTranslation: () => ({
-    t: (key: string, opts?: { defaultValue?: string }) => opts?.defaultValue ?? key,
-  }),
-}));
 
 const baseProject: Project = {
   id: 'test-project',
@@ -24,28 +22,31 @@ describe('ProjectCard', () => {
   });
 
   it('renders the project title', () => {
-    renderWithProviders(<ProjectCard project={baseProject} index={0} />, {
+    renderWithProviders(<ProjectCard project={baseProject} />, {
       withRouter: true,
     });
     expect(screen.getByText('Test Project')).toBeInTheDocument();
   });
 
   it('link href points to /projects/{id}', () => {
-    renderWithProviders(<ProjectCard project={baseProject} index={0} />, {
+    renderWithProviders(<ProjectCard project={baseProject} />, {
       withRouter: true,
     });
-    expect(screen.getByRole('link')).toHaveAttribute('href', '/projects/test-project');
+    expect(screen.getByRole('link')).toHaveAttribute(
+      'href',
+      '/projects/test-project'
+    );
   });
 
-  it('CardLink aria-label contains the project title', () => {
-    renderWithProviders(<ProjectCard project={baseProject} index={0} />, {
+  it('link accessible name comes from the project title', () => {
+    renderWithProviders(<ProjectCard project={baseProject} />, {
       withRouter: true,
     });
-    expect(screen.getByRole('link')).toHaveAccessibleName(/test project/i);
+    expect(screen.getByRole('link')).toHaveAccessibleName('Test Project');
   });
 
   it('renders all three tech badges when technologies count equals MAX_TECH', () => {
-    renderWithProviders(<ProjectCard project={baseProject} index={0} />, {
+    renderWithProviders(<ProjectCard project={baseProject} />, {
       withRouter: true,
     });
     expect(screen.getByText('React')).toBeInTheDocument();
@@ -54,7 +55,7 @@ describe('ProjectCard', () => {
   });
 
   it('does not render a MoreBadge when technologies count equals MAX_TECH', () => {
-    renderWithProviders(<ProjectCard project={baseProject} index={0} />, {
+    renderWithProviders(<ProjectCard project={baseProject} />, {
       withRouter: true,
     });
     expect(screen.queryByText(/^\+\d/)).not.toBeInTheDocument();
@@ -65,7 +66,7 @@ describe('ProjectCard', () => {
       ...baseProject,
       technologies: ['React', 'TypeScript', 'Next.js', 'Redux', 'Material UI'],
     };
-    renderWithProviders(<ProjectCard project={project} index={0} />, {
+    renderWithProviders(<ProjectCard project={project} />, {
       withRouter: true,
     });
     expect(screen.getByText('+2')).toBeInTheDocument();
@@ -76,27 +77,52 @@ describe('ProjectCard', () => {
       ...baseProject,
       technologies: ['React', 'TypeScript', 'Next.js', 'Redux'],
     };
-    renderWithProviders(<ProjectCard project={project} index={0} />, {
+    renderWithProviders(<ProjectCard project={project} />, {
       withRouter: true,
     });
     expect(screen.getByText('+1')).toHaveAttribute('role', 'listitem');
   });
 
-  it('renders an image with the project title as alt text when imageUrl is provided', () => {
+  it('renders an image with a translated alt containing the title when imageUrl is provided', () => {
     const project: Project = {
       ...baseProject,
       imageUrl: '/images/test-project.webp',
     };
-    renderWithProviders(<ProjectCard project={project} index={0} />, {
+    renderWithProviders(<ProjectCard project={project} />, {
       withRouter: true,
     });
-    expect(screen.getByRole('img', { name: 'Test Project' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('img', { name: 'Screenshot of Test Project' })
+    ).toBeInTheDocument();
   });
 
   it('renders a placeholder (no img element) when no imageUrl is provided', () => {
-    renderWithProviders(<ProjectCard project={baseProject} index={0} />, {
+    renderWithProviders(<ProjectCard project={baseProject} />, {
       withRouter: true,
     });
     expect(screen.queryByRole('img')).not.toBeInTheDocument();
+  });
+
+  it('gives the +N item a label that starts with the visible text', () => {
+    const project: Project = {
+      ...baseProject,
+      technologies: ['React', 'TypeScript', 'Next.js', 'Redux', 'Material UI'],
+    };
+    renderWithProviders(<ProjectCard project={project} />, {
+      withRouter: true,
+    });
+    expect(screen.getByText('+2')).toHaveAccessibleName('+2 more technologies');
+  });
+
+  it('shows a translated NYT badge only for featured projects', () => {
+    const { rerender } = renderWithProviders(
+      <ProjectCard project={baseProject} />,
+      {
+        withRouter: true,
+      }
+    );
+    expect(screen.queryByText('NYT feature')).not.toBeInTheDocument();
+    rerender(<ProjectCard project={{ ...baseProject, featured: true }} />);
+    expect(screen.getByText('NYT feature')).toBeInTheDocument();
   });
 });

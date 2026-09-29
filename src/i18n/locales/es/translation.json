@@ -66,6 +66,23 @@
     "subtitle": "Una selección de mi trabajo, incluyendo proyectos destacados en The New York Times",
     "filterAll": "Todos",
     "nytLabel": "Destacado en The New York Times",
+    "nytBadge": "Destacado NYT",
+    "filterLabel": "Filtrar proyectos por tecnología",
+    "resultCount_one": "{{count}} proyecto",
+    "resultCount_other": "{{count}} proyectos",
+    "technologiesUsed": "Tecnologías utilizadas",
+    "moreTechnologies_one": "+{{count}} tecnología más",
+    "moreTechnologies_other": "+{{count}} tecnologías más",
+    "imageAlt": "Captura de pantalla de {{title}}",
+    "categories": {
+      "freelance": "Freelance",
+      "personal": "Personal",
+      "professional": "Profesional"
+    },
+    "emptyState": {
+      "title": "No se encontraron proyectos",
+      "description": "Prueba con otro filtro de tecnología."
+    },
     "realevalsgmail": {
       "title": "Clon de Gmail - REAL Evals",
       "description": "Réplica de Gmail lista para producción construida para plataforma de evaluación de IA. Destacado en The New York Times por enfoque innovador en pruebas de IA. Recreación pixel-perfect implementando gestión de correos, funcionalidad de redacción, etiquetas, carpetas y búsqueda avanzada. Construido con Next.js y Material UI para rendimiento y accesibilidad óptimos."

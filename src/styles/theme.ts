@@ -42,6 +42,8 @@ export const lightTheme = {
     heroBackground: '#ffffff',
     gridLine: 'rgba(17, 24, 39, 0.06)',
     onPrimary: '#ffffff',
+    // Primary as text on a primary tint (accent chips); 5.8:1 on the tint.
+    primaryText: '#1d4ed8',
     textMuted: '#4b5563',
   },
 
@@ -236,6 +238,7 @@ export const darkTheme = {
     heroBackground: '#0f172a',
     gridLine: 'rgba(241, 245, 249, 0.06)',
     onPrimary: '#0b1020',
+    primaryText: '#93c5fd',
     textMuted: '#cbd5e1',
   },
 };

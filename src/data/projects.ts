@@ -7,7 +7,6 @@ export interface Project {
   repoUrl?: string;
   imageUrl?: string;
   featured?: boolean;
-  featuredLabel?: string;
   category: 'freelance' | 'personal' | 'professional';
 }
 
@@ -24,7 +23,6 @@ export const projects: Project[] = [
     demoUrl: 'https://real-gomail.vercel.app/',
     imageUrl: getImageUrl('/images/projects/gmail-clone-opt.webp'),
     featured: true,
-    featuredLabel: 'Featured in The New York Times',
     category: 'freelance',
   },
   {
@@ -36,7 +34,6 @@ export const projects: Project[] = [
     demoUrl: 'https://real-dashdish.vercel.app/',
     imageUrl: getImageUrl('/images/projects/dashdish-clone-opt.webp'),
     featured: true,
-    featuredLabel: 'Featured in The New York Times',
     category: 'freelance',
   },
   {
@@ -48,7 +45,6 @@ export const projects: Project[] = [
     demoUrl: 'https://real-udriver.vercel.app/',
     imageUrl: getImageUrl('/images/projects/uber-clone-opt.webp'),
     featured: true,
-    featuredLabel: 'Featured in The New York Times',
     category: 'freelance',
   },
   {
@@ -60,7 +56,6 @@ export const projects: Project[] = [
     demoUrl: 'https://real-flyunified.vercel.app/',
     imageUrl: getImageUrl('/images/projects/united-clone-opt.webp'),
     featured: true,
-    featuredLabel: 'Featured in The New York Times',
     category: 'freelance',
   },
   {
@@ -156,21 +151,4 @@ export const projects: Project[] = [
     imageUrl: getImageUrl('/images/projects/factupro-opt.webp'),
     category: 'freelance',
   },
-];
-
-export const technologies = [
-  'All',
-  'React',
-  'TypeScript',
-  'Next.js',
-  'Redux',
-  'Material UI',
-  'Chakra UI',
-  'Context API',
-  'REST API',
-  'Google Maps API',
-  'Shadcn UI',
-  'React Hook Form',
-  'Tailwind CSS',
-  'CI/CD',
 ];

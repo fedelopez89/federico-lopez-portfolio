@@ -1,96 +1,62 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import { projects, technologies } from '../../../data/projects';
-import { Container } from '../../ui';
+import { AnimatePresence } from 'framer-motion';
+import { projects } from '../../../data/projects';
+import {
+  EASE,
+  fadeUpVariants,
+  fadeVariants,
+  inViewProps,
+} from '../../../styles/motion';
 import ProjectCard from './ProjectCard';
 import { SectionHeader } from '../shared/SectionHeader';
 import { sectionTitleId } from '../shared/sectionTitleId';
+import {
+  ProjectsContainer,
+  Toolbar,
+  FilterRow,
+  FilterButton,
+  ResultCount,
+  ProjectsGrid,
+  ProjectItem,
+  EmptyState,
+  EmptyTitle,
+  EmptyText,
+} from './Projects.styles';
 
-const FilterContainer = styled(motion.div)`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  justify-content: center;
-  margin-bottom: 3rem;
-  padding: 0 1rem;
-`;
+/** Techs used by fewer projects than this are not offered as filters. */
+const MIN_PROJECTS_PER_FILTER = 2;
+const REFLOW = { duration: 0.3, ease: EASE };
 
-const FilterButton = styled.button<{ $isActive: boolean }>`
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  border: 1px solid
-    ${({ theme, $isActive }) =>
-      $isActive ? theme.colors.primary : theme.colors.border};
-  background: ${({ theme, $isActive }) =>
-    $isActive ? theme.colors.primary : 'transparent'};
-  color: ${({ theme, $isActive }) => ($isActive ? 'white' : theme.colors.text)};
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
+/** Unique technologies, most used first, ties in order of first appearance. */
+function deriveFilters(): string[] {
+  const counts = new Map<string, number>();
+  projects.forEach((project) =>
+    new Set(project.technologies).forEach((tech) =>
+      counts.set(tech, (counts.get(tech) ?? 0) + 1)
+    )
+  );
+  return [...counts.entries()]
+    .filter(([, count]) => count >= MIN_PROJECTS_PER_FILTER)
+    .sort((a, b) => b[1] - a[1]) // stable sort keeps first-appearance order on ties
+    .map(([tech]) => tech);
+}
 
-  &:hover {
-    background: ${({ theme, $isActive }) =>
-      $isActive ? theme.colors.primaryHover : theme.colors.primary}15;
-    border-color: ${({ theme }) => theme.colors.primary};
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.primary};
-    outline-offset: 2px;
-  }
-`;
-
-const ProjectsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 2rem;
-  padding: 0 1rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-`;
-
-const EmptyState = styled(motion.div)`
-  text-align: center;
-  padding: 4rem 1rem;
-  color: ${({ theme }) => theme.colors.textSecondary};
-
-  svg {
-    width: 64px;
-    height: 64px;
-    margin-bottom: 1rem;
-    opacity: 0.3;
-  }
-
-  h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-    color: ${({ theme }) => theme.colors.text};
-  }
-
-  p {
-    font-size: 0.9375rem;
-  }
-`;
+const TECH_FILTERS = deriveFilters();
 
 const Projects: React.FC = () => {
   const { t } = useTranslation();
-  const [selectedFilter, setSelectedFilter] = useState<string>('All');
+  const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
 
   const filteredProjects =
-    selectedFilter === 'All'
+    selectedFilter === null
       ? projects
       : projects.filter((project) =>
           project.technologies.includes(selectedFilter)
         );
 
   return (
-    <Container>
+    <ProjectsContainer>
       <SectionHeader
         index="02"
         title={t('sections.projects')}
@@ -98,58 +64,57 @@ const Projects: React.FC = () => {
         lead={t('projects.subtitle')}
       />
 
-      <FilterContainer
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        role="group"
-        aria-label={t('projects.filterLabel')}
-      >
-        {technologies.map((tech) => (
+      <Toolbar variants={fadeUpVariants} {...inViewProps}>
+        <FilterRow role="group" aria-label={t('projects.filterLabel')}>
           <FilterButton
-            key={tech}
-            $isActive={selectedFilter === tech}
-            onClick={() => setSelectedFilter(tech)}
-            aria-pressed={selectedFilter === tech}
-            aria-label={`Filter by ${tech}`}
+            type="button"
+            $active={selectedFilter === null}
+            aria-pressed={selectedFilter === null}
+            onClick={() => setSelectedFilter(null)}
           >
-            {tech}
+            {t('projects.filterAll')}
           </FilterButton>
-        ))}
-      </FilterContainer>
+          {TECH_FILTERS.map((tech) => (
+            <FilterButton
+              key={tech}
+              type="button"
+              $active={selectedFilter === tech}
+              aria-pressed={selectedFilter === tech}
+              onClick={() => setSelectedFilter(tech)}
+            >
+              {tech}
+            </FilterButton>
+          ))}
+        </FilterRow>
+        <ResultCount role="status" aria-live="polite" aria-atomic="true">
+          {t('projects.resultCount', { count: filteredProjects.length })}
+        </ResultCount>
+      </Toolbar>
 
       {filteredProjects.length > 0 ? (
         <ProjectsGrid>
-          {filteredProjects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
-          ))}
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project) => (
+              <ProjectItem
+                key={project.id}
+                layout="position"
+                variants={fadeUpVariants}
+                exit={{ opacity: 0, transition: REFLOW }}
+                transition={{ layout: REFLOW }}
+                {...inViewProps}
+              >
+                <ProjectCard project={project} />
+              </ProjectItem>
+            ))}
+          </AnimatePresence>
         </ProjectsGrid>
       ) : (
-        <EmptyState
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          <svg
-            aria-hidden="true"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          <h3>{t('projects.emptyState.title')}</h3>
-          <p>{t('projects.emptyState.description')}</p>
+        <EmptyState variants={fadeVariants} {...inViewProps}>
+          <EmptyTitle>{t('projects.emptyState.title')}</EmptyTitle>
+          <EmptyText>{t('projects.emptyState.description')}</EmptyText>
         </EmptyState>
       )}
-    </Container>
+    </ProjectsContainer>
   );
 };
 

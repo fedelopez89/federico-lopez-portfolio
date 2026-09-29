@@ -13,7 +13,9 @@ export const Chip = styled.span.withConfig({
   padding: 0 ${({ theme }) => theme.spacing.sm};
   border: 1px solid
     ${({ theme, variant }) =>
-      variant === 'accent' ? alpha(theme.colors.primary, 40) : theme.colors.border};
+      variant === 'accent'
+        ? alpha(theme.colors.primary, 40)
+        : theme.colors.border};
   border-radius: ${({ theme }) => theme.borderRadius.md};
   background: ${({ theme, variant }) =>
     variant === 'accent' ? alpha(theme.colors.primary, 10) : 'transparent'};
@@ -24,5 +26,7 @@ export const Chip = styled.span.withConfig({
   text-transform: uppercase;
   white-space: nowrap;
   color: ${({ theme, variant }) =>
-    variant === 'accent' ? theme.colors.primary : theme.colors.textSecondary};
+    variant === 'accent'
+      ? theme.colors.primaryText
+      : theme.colors.textSecondary};
 `;
