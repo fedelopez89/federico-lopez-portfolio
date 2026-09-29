@@ -1,12 +1,13 @@
 import { FC, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  useReducedMotion,
-  useScroll,
-  useTransform,
-  type Variants,
-} from 'framer-motion';
+import { useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { usePointerGlow } from '@hooks';
+import { Button, Container, Eyebrow, TextLink } from '../../ui';
+import {
+  stackVariants,
+  riseVariants,
+  fadeUpVariants,
+} from '../../../styles/motion';
 import {
   HeroSection,
   BackdropScroll,
@@ -22,34 +23,11 @@ import {
   Rise,
   FadeBlock,
   TITLE_MASK_MARGIN,
-  Eyebrow,
   Title,
   Tagline,
   Actions,
-  PrimaryCta,
-  SecondaryCta,
   SocialLinks,
-  SocialLink,
-  Arrow,
-  VisuallyHidden,
 } from './Hero.styles';
-
-const EASE = [0.22, 1, 0.36, 1] as const;
-
-const stackVariants: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.09, delayChildren: 0.1 } },
-};
-
-const riseVariants: Variants = {
-  hidden: { y: '100%' },
-  show: { y: 0, transition: { duration: 0.7, ease: EASE } },
-};
-
-const fadeVariants: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
-};
 
 const socialLinks = [
   { href: 'https://github.com/fedelopez89', label: 'GitHub' },
@@ -104,46 +82,57 @@ const Hero: FC = () => {
       </BackdropScroll>
 
       <HeroContent style={contentStyle}>
-        <HeroStack variants={stackVariants} initial="hidden" animate="show">
-          <Mask>
-            <Rise variants={riseVariants}>
-              <Eyebrow>{t('header.role')}</Eyebrow>
-            </Rise>
-          </Mask>
+        <Container>
+          <HeroStack
+            variants={stackVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <Mask>
+              <Rise variants={riseVariants}>
+                <Eyebrow rule>{t('header.role')}</Eyebrow>
+              </Rise>
+            </Mask>
 
-          <Mask $mt={TITLE_MASK_MARGIN.top} $mb={TITLE_MASK_MARGIN.bottom}>
-            <Rise variants={riseVariants}>
-              <Title>{t('header.name')}</Title>
-            </Rise>
-          </Mask>
+            <Mask $mt={TITLE_MASK_MARGIN.top} $mb={TITLE_MASK_MARGIN.bottom}>
+              <Rise variants={riseVariants}>
+                <Title>{t('header.name')}</Title>
+              </Rise>
+            </Mask>
 
-          <Mask $mt="2rem">
-            <Rise variants={riseVariants}>
-              <Tagline>{t('header.tagline')}</Tagline>
-            </Rise>
-          </Mask>
+            <Mask $mt="2rem">
+              <Rise variants={riseVariants}>
+                <Tagline>{t('header.tagline')}</Tagline>
+              </Rise>
+            </Mask>
 
-          <FadeBlock $mt="2.5rem" variants={fadeVariants}>
-            <Actions>
-              <PrimaryCta href="#projects">{t('header.ctaWork')}</PrimaryCta>
-              <SecondaryCta href="#contact">{t('header.ctaContact')}</SecondaryCta>
-            </Actions>
-          </FadeBlock>
+            <FadeBlock $mt="2.5rem" variants={fadeUpVariants}>
+              <Actions>
+                <Button href="#projects">{t('header.ctaWork')}</Button>
+                <Button href="#contact" variant="secondary">
+                  {t('header.ctaContact')}
+                </Button>
+              </Actions>
+            </FadeBlock>
 
-          <FadeBlock $mt="1.5rem" variants={fadeVariants}>
-            <SocialLinks>
-              {socialLinks.map((link) => (
-                <li key={link.href}>
-                  <SocialLink href={link.href} target="_blank" rel="noreferrer">
-                    {link.label}
-                    <Arrow aria-hidden="true">↗</Arrow>
-                    <VisuallyHidden> {t('header.newTab')}</VisuallyHidden>
-                  </SocialLink>
-                </li>
-              ))}
-            </SocialLinks>
-          </FadeBlock>
-        </HeroStack>
+            <FadeBlock $mt="1.5rem" variants={fadeUpVariants}>
+              <SocialLinks>
+                {socialLinks.map((link) => (
+                  <li key={link.href}>
+                    <TextLink
+                      href={link.href}
+                      arrow
+                      external
+                      externalLabel={t('header.newTab')}
+                    >
+                      {link.label}
+                    </TextLink>
+                  </li>
+                ))}
+              </SocialLinks>
+            </FadeBlock>
+          </HeroStack>
+        </Container>
       </HeroContent>
     </HeroSection>
   );

@@ -42,7 +42,7 @@ export const lightTheme = {
     heroBackground: '#ffffff',
     gridLine: 'rgba(17, 24, 39, 0.06)',
     onPrimary: '#ffffff',
-    heroTextSecondary: '#4b5563',
+    textMuted: '#4b5563',
   },
 
   typography: {
@@ -52,7 +52,7 @@ export const lightTheme = {
         "'Inter', 'Inter Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif",
       secondary:
         "'Inter', 'Inter Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif",
-      mono: "'Fira Code', 'Courier New', monospace",
+      mono: 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
     },
 
     // Font sizes
@@ -85,6 +85,20 @@ export const lightTheme = {
       normal: 1.5,
       relaxed: 1.75,
       loose: 2,
+    },
+
+    // Display sizes (fluid) and weights
+    display: {
+      hero: 'clamp(3rem, 9vw, 8rem)',
+      section: 'clamp(2rem, 4.5vw, 3.5rem)',
+      weight: 680,
+    },
+
+    // Named tracking for display type, headings and eyebrows
+    tracking: {
+      display: '-0.04em',
+      heading: '-0.03em',
+      eyebrow: '0.16em',
     },
 
     // Letter spacing
@@ -148,6 +162,22 @@ export const lightTheme = {
     slower: '500ms cubic-bezier(0.4, 0, 0.2, 1)',
   },
 
+  layout: {
+    maxWidth: {
+      prose: '42rem', // 672px
+      content: '60rem', // 960px
+      wide: '80rem', // 1280px
+    },
+    navHeight: '70px',
+  },
+
+  motion: {
+    ease: [0.22, 1, 0.36, 1] as const,
+    easeCss: 'cubic-bezier(0.22, 1, 0.36, 1)',
+    duration: { fast: 0.2, base: 0.4, slow: 0.7 }, // seconds
+    stagger: 0.09,
+  },
+
   zIndex: {
     dropdown: 1000,
     sticky: 1020,
@@ -206,7 +236,7 @@ export const darkTheme = {
     heroBackground: '#0f172a',
     gridLine: 'rgba(241, 245, 249, 0.06)',
     onPrimary: '#0b1020',
-    heroTextSecondary: '#cbd5e1',
+    textMuted: '#cbd5e1',
   },
 };
 

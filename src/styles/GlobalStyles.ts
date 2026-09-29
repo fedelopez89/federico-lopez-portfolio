@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { focusRing } from './mixins';
 
 export const GlobalStyles = createGlobalStyle`
   @font-face {
@@ -158,12 +159,13 @@ export const GlobalStyles = createGlobalStyle`
     top: -9999px;
     left: -9999px;
     padding: 0.75rem 1.5rem;
-    background: #2563eb;
-    color: white;
+    background: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.onPrimary};
     font-weight: 600;
     border-radius: 0 0 8px 8px;
     z-index: 9999;
     text-decoration: none;
+    ${focusRing}
   }
 
   .skip-link:focus {
