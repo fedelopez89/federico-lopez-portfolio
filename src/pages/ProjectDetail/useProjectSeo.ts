@@ -1,131 +1,46 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { Project } from '../../data/projects';
+import { applyHead, projectHead } from '../../seo/applyHead';
+import {
+  buildProjectMeta,
+  BREADCRUMB_JSONLD_ID,
+  JSONLD_ID,
+  type Translate,
+} from '../../seo/projectMeta';
 
-export const JSONLD_ID = 'project-jsonld';
-export const BREADCRUMB_JSONLD_ID = 'project-breadcrumb-jsonld';
+export { BREADCRUMB_JSONLD_ID, JSONLD_ID };
 
 /**
  * Applies project-specific title, meta tags, canonical and JSON-LD while the
- * page is mounted, and restores the originals on unmount.
+ * page is mounted and removes the JSON-LD on unmount.
  */
-export function useProjectSeo(
-  project: Project | undefined,
-  translatedTitle: string,
-  translatedDesc: string
-) {
+export function useProjectSeo(project: Project | undefined) {
+  const { t, i18n } = useTranslation();
+  const language = i18n.language;
+
   useEffect(() => {
     if (!project) return;
 
-    const BASE_URL = 'https://federicoglopez.dev';
-    const projectUrl = `${BASE_URL}/projects/${project.id}`;
-    const imageUrl = project.imageUrl
-      ? `${BASE_URL}${project.imageUrl.startsWith('/') ? '' : '/'}${project.imageUrl}`
-      : `${BASE_URL}/images/og-image.png`;
-    const shortDesc = translatedDesc.slice(0, 160);
+    const meta = buildProjectMeta(project, t as unknown as Translate);
+    document.title = meta.title;
+    applyHead(projectHead(meta));
 
-    const getMeta = (sel: string) =>
-      document.querySelector(sel)?.getAttribute('content') ?? '';
-    const setMeta = (sel: string, val: string) =>
-      document.querySelector(sel)?.setAttribute('content', val);
-
-    // ── Store originals ────────────────────────────────────────────
-    const orig = {
-      title: document.title,
-      desc: getMeta('meta[name="description"]'),
-      ogTitle: getMeta('meta[property="og:title"]'),
-      ogDesc: getMeta('meta[property="og:description"]'),
-      ogUrl: getMeta('meta[property="og:url"]'),
-      ogImage: getMeta('meta[property="og:image"]'),
-      twTitle: getMeta('meta[name="twitter:title"]'),
-      twDesc: getMeta('meta[name="twitter:description"]'),
-      twUrl: getMeta('meta[name="twitter:url"]'),
-      canonical:
-        document.querySelector('link[rel="canonical"]')?.getAttribute('href') ??
-        '',
-    };
-
-    // ── Apply project-specific meta ────────────────────────────────
-    const pageTitle = `${translatedTitle} | Federico López`;
-    document.title = pageTitle;
-    setMeta('meta[name="description"]', shortDesc);
-    setMeta('meta[property="og:title"]', pageTitle);
-    setMeta('meta[property="og:description"]', shortDesc);
-    setMeta('meta[property="og:url"]', projectUrl);
-    setMeta('meta[property="og:image"]', imageUrl);
-    setMeta('meta[name="twitter:title"]', pageTitle);
-    setMeta('meta[name="twitter:description"]', shortDesc);
-    setMeta('meta[name="twitter:url"]', projectUrl);
-    document
-      .querySelector('link[rel="canonical"]')
-      ?.setAttribute('href', projectUrl);
-
-    // ── Inject project JSON-LD ─────────────────────────────────────
-    const workId = `${projectUrl}#work`;
-    const injectJsonLd = (id: string, data: Record<string, unknown>) => {
+    for (const { id, data } of meta.jsonLd) {
       document.getElementById(id)?.remove();
       const script = document.createElement('script');
       script.id = id;
       script.type = 'application/ld+json';
       script.textContent = JSON.stringify(data);
       document.head.appendChild(script);
-    };
+    }
 
-    injectJsonLd(JSONLD_ID, {
-      '@context': 'https://schema.org',
-      '@type': 'CreativeWork',
-      '@id': workId,
-      mainEntityOfPage: projectUrl,
-      name: translatedTitle,
-      description: translatedDesc,
-      author: { '@id': `${BASE_URL}/#person` },
-      keywords: project.technologies.join(', '),
-      ...(project.demoUrl && { url: project.demoUrl }),
-      ...(project.imageUrl && {
-        image: { '@type': 'ImageObject', url: imageUrl },
-      }),
-    });
-
-    injectJsonLd(BREADCRUMB_JSONLD_ID, {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: 'Home',
-          item: `${BASE_URL}/`,
-        },
-        {
-          '@type': 'ListItem',
-          position: 2,
-          name: 'Projects',
-          item: `${BASE_URL}/#projects`,
-        },
-        {
-          '@type': 'ListItem',
-          position: 3,
-          name: translatedTitle,
-          item: projectUrl,
-        },
-      ],
-    });
-
-    // ── Restore on unmount ─────────────────────────────────────────
+    // The next route (Home, another project, 404) applies its own head, so
+    // nothing is restored from the DOM: after a prerendered deep link the DOM
+    // holds this project's values, not the home page's.
     return () => {
-      document.title = orig.title;
-      setMeta('meta[name="description"]', orig.desc);
-      setMeta('meta[property="og:title"]', orig.ogTitle);
-      setMeta('meta[property="og:description"]', orig.ogDesc);
-      setMeta('meta[property="og:url"]', orig.ogUrl);
-      setMeta('meta[property="og:image"]', orig.ogImage);
-      setMeta('meta[name="twitter:title"]', orig.twTitle);
-      setMeta('meta[name="twitter:description"]', orig.twDesc);
-      setMeta('meta[name="twitter:url"]', orig.twUrl);
-      document
-        .querySelector('link[rel="canonical"]')
-        ?.setAttribute('href', orig.canonical);
-      document.getElementById(JSONLD_ID)?.remove();
-      document.getElementById(BREADCRUMB_JSONLD_ID)?.remove();
+      for (const { id } of meta.jsonLd) document.getElementById(id)?.remove();
     };
-  }, [project, translatedTitle, translatedDesc]);
+    // `language` re-runs the effect when the translations change.
+  }, [project, t, language]);
 }

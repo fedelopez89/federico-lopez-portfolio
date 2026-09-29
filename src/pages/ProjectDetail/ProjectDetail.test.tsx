@@ -105,10 +105,12 @@ describe('ProjectDetail', () => {
     expect(document.title).toContain('Federico López');
   });
 
-  it('restores the original document.title on unmount', () => {
+  it('leaves the head to the next route on unmount instead of restoring captured DOM values', () => {
     const { unmount } = renderDetail('real-evals-gmail');
     unmount();
-    expect(document.title).toBe('Portfolio');
+    // After a prerendered deep link the "original" DOM values are the
+    // project's own, so restoring them would leak them onto Home.
+    expect(document.title).toContain('Gmail Clone');
   });
 
   it('sets a translated not-found document title', async () => {

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDocumentTitle } from '@/hooks';
 import { useNoindex } from '../ProjectDetail/useNoindex';
+import { useNotFoundSeo } from '../../seo/useNotFoundSeo';
 import { NotFoundView } from './NotFoundView';
 
 /** Catch-all route: served with HTTP 200 by the SPA rewrite, so it opts out of indexing. */
@@ -11,6 +12,7 @@ function NotFound() {
   const navigate = useNavigate();
 
   useNoindex(true);
+  useNotFoundSeo();
   useDocumentTitle(`${t('notFound.title')} | ${t('header.name')}`);
 
   const goHome = (e: MouseEvent<HTMLAnchorElement>) => {

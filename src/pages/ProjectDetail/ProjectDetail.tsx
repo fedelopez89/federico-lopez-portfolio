@@ -15,6 +15,12 @@ import {
 } from '../../components/ui';
 import { stackVariants, fadeUpVariants } from '../../styles/motion';
 import { NotFoundView } from '../NotFound/NotFoundView';
+import {
+  projectKey,
+  translateProject,
+  type Translate,
+} from '../../seo/projectMeta';
+import { useNotFoundSeo } from '../../seo/useNotFoundSeo';
 import { useProjectSeo } from './useProjectSeo';
 import { useNoindex } from './useNoindex';
 import {
@@ -49,8 +55,6 @@ import {
 const IMAGE_WIDTH = 1400;
 const IMAGE_HEIGHT = 740;
 
-const projectKey = (id: string) => id.replace(/-/g, '');
-
 function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -62,16 +66,9 @@ function ProjectDetail() {
   const index = projects.findIndex((p) => p.id === id);
   const project = index === -1 ? undefined : projects[index];
 
-  const translatedTitle = project
-    ? t(`projects.${projectKey(project.id)}.title`, {
-        defaultValue: project.title,
-      })
-    : '';
-  const translatedDesc = project
-    ? t(`projects.${projectKey(project.id)}.description`, {
-        defaultValue: project.description,
-      })
-    : '';
+  const { name: translatedTitle, description: translatedDesc } = project
+    ? translateProject(project, t as unknown as Translate)
+    : { name: '', description: '' };
 
   const titleRef = useRef<HTMLHeadingElement>(null);
 
@@ -86,8 +83,9 @@ function ProjectDetail() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  useProjectSeo(project, translatedTitle, translatedDesc);
+  useProjectSeo(project);
   useNoindex(!project);
+  useNotFoundSeo(!project);
   // Found projects get their title from useProjectSeo.
   useDocumentTitle(
     project

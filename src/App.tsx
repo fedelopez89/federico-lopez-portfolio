@@ -9,7 +9,7 @@ import {
 } from 'framer-motion';
 import { type TFunction } from 'i18next';
 import { useTranslation } from 'react-i18next';
-import { useDocumentTitle } from '@/hooks';
+import { useHomeSeo } from './seo/useHomeSeo';
 import { ThemeProvider } from './context';
 import { Header, Main, Footer } from '@components';
 import { ProjectDetailSkeleton } from './components/ui';
@@ -49,10 +49,10 @@ function PageTransition({ children }: { children: React.ReactNode }) {
  */
 const homeTitle = (t: TFunction) => t('meta.homeTitle');
 
-/** Home route content; owns the page title so it follows language changes. */
+/** Home route content; owns the page head so it follows language changes. */
 function HomePage() {
   const { t } = useTranslation();
-  useDocumentTitle(homeTitle(t));
+  useHomeSeo(homeTitle(t));
   return (
     <>
       <Header />

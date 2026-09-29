@@ -15,9 +15,6 @@ vi.mock('framer-motion', async (importOriginal) => {
   };
 });
 
-// Safety net for cold jsdom/transform starts; tests should not rely on it.
-vi.setConfig({ testTimeout: 30_000 });
-
 const THEME_KEY = 'portfolio-theme-mode';
 
 describe('App shell', () => {
@@ -58,28 +55,21 @@ describe('App shell', () => {
     expect(cardLink).not.toBeNull();
     await user.click(cardLink as HTMLAnchorElement);
 
-    // The route is lazy: the first import can be slow on a cold transform.
-    const detailNav = await screen.findByRole(
-      'navigation',
-      { name: 'Project navigation' },
-      { timeout: 15_000 }
-    );
+    const detailNav = await screen.findByRole('navigation', {
+      name: 'Project navigation',
+    });
     expect(detailNav).toBeInTheDocument();
     expect(window.location.pathname).toMatch(/^\/projects\//);
     expect(themeWrites()).toBe(toggledWrites);
 
     const nav = screen.getByRole('navigation', { name: 'Main navigation' });
     await user.click(within(nav).getByRole('link', { name: 'PROJECTS' }));
-    await screen.findByRole(
-      'heading',
-      { level: 2, name: /projects/i },
-      { timeout: 5_000 }
-    );
+    await screen.findByRole('heading', { level: 2, name: /projects/i });
     expect(window.location.pathname).toBe('/');
     expect(window.location.hash).toBe('#projects');
     expect(themeWrites()).toBe(toggledWrites);
     expect(localStorage.getItem(THEME_KEY)).toBe(mode);
-  }, 20_000);
+  });
 
   it('sets a translated home title that follows the language', async () => {
     const user = userEvent.setup();
@@ -103,7 +93,6 @@ describe('App shell', () => {
     const user = userEvent.setup();
     window.history.pushState({}, '', '/');
     render(<App />);
-    const timeout = { timeout: 15_000 };
 
     const target = projects[2];
     const cardLink = document.querySelector<HTMLAnchorElement>(
@@ -111,23 +100,17 @@ describe('App shell', () => {
     );
     expect(cardLink).not.toBeNull();
     await user.click(cardLink as HTMLAnchorElement);
-    await screen.findByRole(
-      'navigation',
-      { name: 'Project navigation' },
-      timeout
-    );
+    await screen.findByRole('navigation', { name: 'Project navigation' });
 
     await user.click(
       screen.getByRole('button', { name: /back to portfolio/i })
     );
-    await waitFor(
-      () =>
-        expect(
-          document.querySelector(`a[href="/projects/${target.id}"]`)
-        ).toHaveFocus(),
-      timeout
+    await waitFor(() =>
+      expect(
+        document.querySelector(`a[href="/projects/${target.id}"]`)
+      ).toHaveFocus()
     );
-  }, 30_000);
+  });
 
   it('keeps exactly one project and one breadcrumb JSON-LD block and the right title across prev/next and back', async () => {
     const user = userEvent.setup();
@@ -137,24 +120,19 @@ describe('App shell', () => {
     const title = (i: number) => `${projects[i].title} | Federico López`;
     const jsonLd = () =>
       document.querySelectorAll('#project-jsonld, #project-breadcrumb-jsonld');
-    const timeout = { timeout: 15_000 };
 
-    await screen.findByRole(
-      'navigation',
-      { name: 'Project navigation' },
-      timeout
-    );
+    await screen.findByRole('navigation', { name: 'Project navigation' });
     await waitFor(() => expect(document.title).toBe(title(0)));
     expect(jsonLd()).toHaveLength(2);
 
     await user.click(screen.getByRole('link', { name: /Next/ }));
-    await waitFor(() => expect(document.title).toBe(title(1)), timeout);
+    await waitFor(() => expect(document.title).toBe(title(1)));
     expect(jsonLd()).toHaveLength(2);
 
     await user.click(screen.getByRole('link', { name: /Previous/ }));
-    await waitFor(() => expect(document.title).toBe(title(0)), timeout);
+    await waitFor(() => expect(document.title).toBe(title(0)));
     expect(jsonLd()).toHaveLength(2);
-  }, 30_000);
+  });
 
   it.each(['/projects/', '/projects/x/y'])(
     'renders the site 404 for %s',
