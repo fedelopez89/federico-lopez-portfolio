@@ -47,6 +47,37 @@ export const GlobalStyles = createGlobalStyle`
                 color ${({ theme }) => theme.transitions.base};
   }
 
+  /* Card to project page morph (see utils/viewTransition). Shared elements are
+     named only while a transition runs; the root just cross-fades. */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.2s;
+    animation-timing-function: ${({ theme }) => theme.motion.easeCss};
+  }
+
+  ::view-transition-group(*.project-shared) {
+    animation-duration: 0.4s;
+    animation-timing-function: ${({ theme }) => theme.motion.easeCss};
+  }
+
+  /* Screenshots only: fill the morphing box instead of keeping each snapshot's
+     own aspect ratio, cropped from the top-left like the images themselves.
+     Titles keep the default group animation (no crop). */
+  ::view-transition-old(*.project-shot),
+  ::view-transition-new(*.project-shot) {
+    height: 100%;
+    object-fit: cover;
+    object-position: top left;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+      animation: none;
+    }
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: ${({ theme }) => theme.typography.fontFamily.secondary};
     font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useHashScroll, useRestoreProjectFocus } from '@/hooks';
 import { Container, Hairline } from '../ui';
 import { ScrollToTopButton } from '../layout/ScrollToTop';
@@ -6,6 +6,7 @@ import AboutMe from '../Sections/AboutMe/AboutMe';
 import Projects from '../Sections/Projects/Projects';
 import Experience from '../Sections/Experience/Experience';
 import Contact from '../Sections/Contact/Contact';
+import { isViewTransitionActive } from '../../utils/viewTransition';
 import { sectionTitleId } from '../Sections/shared/sectionTitleId';
 import { MainContainer, Section, SectionBody } from './Main.styles';
 
@@ -26,12 +27,14 @@ const sections: SectionConfig[] = [
 const Main: FC = () => {
   useHashScroll();
   useRestoreProjectFocus();
+  // Returning through a view transition: no entrance fade over the snapshot.
+  const [skipEntrance] = useState(isViewTransitionActive);
 
   return (
     <MainContainer
       id="main-content"
       tabIndex={-1}
-      initial={{ opacity: 0 }}
+      initial={skipEntrance ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >

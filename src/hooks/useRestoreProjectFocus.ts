@@ -1,4 +1,11 @@
 import { useEffect } from 'react';
+import {
+  findProjectLink,
+  isViewTransitionActive,
+  markSharedElements,
+  projectCardShared,
+  signalViewTransitionReady,
+} from '../utils/viewTransition';
 
 const RETURN_KEY = 'portfolio:return-project';
 /** A marker older than this belongs to an earlier visit, not to a back navigation. */
@@ -74,9 +81,64 @@ export const pendingProjectReturn = (): string | null => {
   return hash === '' || hash === RETURN_HASH ? id : null;
 };
 
+/** Frames to let content-visibility estimates settle; timer covers paused rAF. */
+const SETTLE_FALLBACK_MS = 120;
+const MAX_RESCROLLS = 2;
+
+/**
+ * While a view transition waits for this page, bring the returning card into
+ * view once layout has settled (off-screen sections use content-visibility
+ * estimates that change after the first render), name it, then signal ready.
+ */
+const settleForTransition = (id: string | null) => {
+  let done = false;
+  const frames: number[] = [];
+
+  const settle = () => {
+    if (done) return;
+    done = true;
+    const card = id ? findProjectLink(id) : undefined;
+    if (id && card) {
+      const scroll = () =>
+        card.scrollIntoView?.({
+          behavior: 'instant' as ScrollBehavior,
+          block: 'center',
+        });
+      scroll();
+      // Force layout; if the card moved once the section rendered, re-scroll.
+      for (let i = 0; i < MAX_RESCROLLS; i++) {
+        const before = card.getBoundingClientRect().top;
+        scroll();
+        if (card.getBoundingClientRect().top === before) break;
+      }
+      markSharedElements(projectCardShared(card, id));
+    }
+    signalViewTransitionReady();
+  };
+
+  frames.push(
+    requestAnimationFrame(() => {
+      frames.push(requestAnimationFrame(settle));
+    })
+  );
+  const timer = setTimeout(settle, SETTLE_FALLBACK_MS);
+
+  return () => {
+    frames.forEach(cancelAnimationFrame);
+    clearTimeout(timer);
+  };
+};
+
 export const useRestoreProjectFocus = () => {
   useEffect(() => {
     const id = pendingProjectReturn();
+
+    // Returning through a view transition: bring the card into view and name
+    // it now, before the new snapshot, so the project page morphs back into it.
+    const cancelTransitionWork = isViewTransitionActive()
+      ? settleForTransition(id)
+      : undefined;
+
     if (!id) {
       // Unrelated deep link: the marker is stale for this visit.
       forgetProject();
@@ -88,9 +150,7 @@ export const useRestoreProjectFocus = () => {
     // pending), so the card wins over the section heading.
     const frame = requestAnimationFrame(() => {
       forgetProject();
-      const link = Array.from(
-        document.querySelectorAll<HTMLAnchorElement>('a[href^="/projects/"]')
-      ).find((a) => a.getAttribute('href') === `/projects/${id}`);
+      const link = findProjectLink(id);
       if (link) {
         link.scrollIntoView?.({
           behavior: 'instant' as ScrollBehavior,
@@ -102,6 +162,9 @@ export const useRestoreProjectFocus = () => {
       }
     });
 
-    return () => cancelAnimationFrame(frame);
+    return () => {
+      cancelAnimationFrame(frame);
+      cancelTransitionWork?.();
+    };
   }, []);
 };
