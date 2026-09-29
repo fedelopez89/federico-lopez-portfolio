@@ -1,6 +1,24 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
+  @font-face {
+    font-family: 'Inter';
+    src: url('/fonts/inter-latin-wght-normal.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  /* Metric-adjusted fallback to reduce layout shift while Inter loads */
+  @font-face {
+    font-family: 'Inter Fallback';
+    src: local('Arial');
+    size-adjust: 107%;
+    ascent-override: 90%;
+    descent-override: 22.43%;
+    line-gap-override: 0%;
+  }
+
   * {
     margin: 0;
     padding: 0;

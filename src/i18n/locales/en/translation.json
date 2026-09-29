@@ -6,7 +6,11 @@
     "experience": "EXPERIENCE",
     "contact": "CONTACT",
     "name": "Federico López",
-    "role": "Senior Frontend Engineer"
+    "role": "Senior Frontend Engineer",
+    "tagline": "I build fast, accessible interfaces for products people actually use.",
+    "ctaWork": "View work",
+    "ctaContact": "Get in touch",
+    "newTab": "(opens in a new tab)"
   },
   "sections": {
     "aboutme": "about me",

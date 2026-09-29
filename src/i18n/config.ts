@@ -5,6 +5,14 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import enTranslations from './locales/en/translation.json';
 import esTranslations from './locales/es/translation.json';
 
+const syncHtmlLang = () => {
+  const lng = i18n.resolvedLanguage ?? i18n.language;
+  if (typeof document === 'undefined' || !lng) return;
+  document.documentElement.lang = lng.split('-')[0];
+};
+
+i18n.on('languageChanged', syncHtmlLang);
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -26,6 +34,7 @@ i18n
       order: ['localStorage', 'navigator'],
       caches: ['localStorage'],
     },
-  });
+  })
+  .then(syncHtmlLang);
 
 export default i18n;

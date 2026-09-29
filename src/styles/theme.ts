@@ -37,14 +37,21 @@ export const lightTheme = {
 
     // Overlay
     overlay: 'rgba(0, 0, 0, 0.5)',
+
+    // Hero
+    heroBackground: '#ffffff',
+    gridLine: 'rgba(17, 24, 39, 0.06)',
+    onPrimary: '#ffffff',
+    heroTextSecondary: '#4b5563',
   },
 
   typography: {
     // Font families
     fontFamily: {
       primary:
-        "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif",
-      secondary: "'Poppins', sans-serif",
+        "'Inter', 'Inter Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif",
+      secondary:
+        "'Inter', 'Inter Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif",
       mono: "'Fira Code', 'Courier New', monospace",
     },
 
@@ -194,6 +201,12 @@ export const darkTheme = {
 
     // Overlay
     overlay: 'rgba(0, 0, 0, 0.7)',
+
+    // Hero
+    heroBackground: '#0f172a',
+    gridLine: 'rgba(241, 245, 249, 0.06)',
+    onPrimary: '#0b1020',
+    heroTextSecondary: '#cbd5e1',
   },
 };
 

@@ -1,18 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-interface LanguageToggleProps {
-  isScrolled?: boolean;
-}
-
-const LanguageToggleWrapper = styled.div<{ $isScrolled?: boolean }>`
+const LanguageToggleWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 0.4rem;
   padding: 0.1rem 1rem;
   border-radius: ${({ theme }) => theme.borderRadius.base};
-  color: ${({ theme, $isScrolled }) =>
-    $isScrolled ? theme.colors.text : theme.colors.background};
+  color: ${({ theme }) => theme.colors.text};
   transition: color ${({ theme }) => theme.transitions.fast};
 `;
 
@@ -53,7 +48,7 @@ const Separator = styled.span`
   opacity: 0.5;
 `;
 
-const LanguageToggle = ({ isScrolled = false }: LanguageToggleProps) => {
+const LanguageToggle = () => {
   const { i18n } = useTranslation();
 
   const changeLanguage = (lang: string) => {
@@ -64,7 +59,7 @@ const LanguageToggle = ({ isScrolled = false }: LanguageToggleProps) => {
   };
 
   return (
-    <LanguageToggleWrapper $isScrolled={isScrolled}>
+    <LanguageToggleWrapper>
       <LanguageButton
         $isActive={i18n.language === 'en'}
         onClick={() => changeLanguage('en')}

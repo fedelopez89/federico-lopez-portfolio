@@ -1,6 +1,6 @@
 import { FC, lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion, useReducedMotion, type Transition } from 'framer-motion';
+import { AnimatePresence, MotionConfig, motion, useReducedMotion, type Transition } from 'framer-motion';
 import { ThemeProvider } from './context';
 import { Header, Main, Footer, ThemeToggle } from '@components';
 import { ProjectDetailSkeleton } from './components/ui';
@@ -85,9 +85,11 @@ function AppRoutes() {
 }
 
 const App: FC = () => (
-  <BrowserRouter>
-    <AppRoutes />
-  </BrowserRouter>
+  <MotionConfig reducedMotion="user">
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  </MotionConfig>
 );
 
 export default App;
