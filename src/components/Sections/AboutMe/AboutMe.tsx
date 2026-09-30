@@ -68,7 +68,9 @@ const AboutMe: FC = () => {
           <p>
             <Trans i18nKey="aboutMe.experience" values={{ years: yearsExp }} />
           </p>
-          <p>{t('aboutMe.passion')}</p>
+          <p>
+            <Trans i18nKey="aboutMe.passion" />
+          </p>
         </Description>
 
         <FeaturedCallout variants={fadeUpVariants}>
