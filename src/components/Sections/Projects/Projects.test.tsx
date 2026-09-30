@@ -85,8 +85,7 @@ describe('Projects', () => {
     renderProjects();
     PROJECT_GROUPS.forEach((group) => {
       const title = i18n.t(`projects.groups.${group}.title`);
-      const heading = screen.getByRole('heading', { level: 3, name: title });
-      const region = heading.parentElement?.parentElement as HTMLElement;
+      const region = screen.getByRole('list', { name: title });
       const expected = projects.filter((p) => p.group === group);
       expect(within(region).getAllByRole('article')).toHaveLength(
         expected.length
@@ -135,6 +134,43 @@ describe('Projects', () => {
   it('lists each technology once per project', () => {
     projects.forEach((p) =>
       expect(new Set(p.technologies).size).toBe(p.technologies.length)
+    );
+  });
+
+  it('leads the REAL Evals group with one featured card and regular cards below', () => {
+    renderProjects();
+    const region = screen.getByRole('list', { name: 'REAL Evals' });
+    const cta = within(region).getAllByText('View project');
+    expect(cta).toHaveLength(1);
+    expect(document.querySelectorAll('ul[role="list"] > li')).toHaveLength(
+      projects.length
+    );
+
+    const items = within(region).getAllByRole('listitem', { hidden: false });
+    const first = items.find((el) => el.tagName === 'LI') as HTMLElement;
+    const link = within(first).getByRole('link');
+    expect(link).toHaveAttribute('href', '/projects/real-evals-gmail');
+    expect(within(first).getAllByRole('link')).toHaveLength(1);
+    expect(cta[0].closest('a')).toBe(link);
+    expect(within(first).getByRole('heading', { level: 4 })).toHaveTextContent(
+      'Gmail Clone - REAL Evals'
+    );
+
+    // The other groups have no highlighted project.
+    expect(screen.getAllByText('View project')).toHaveLength(1);
+  });
+
+  it('translates the featured call to action to Spanish', async () => {
+    await act(() => i18n.changeLanguage('es'));
+    renderProjects();
+    expect(screen.getAllByText('Ver el proyecto')).toHaveLength(1);
+  });
+
+  it('marks at most one project per group as highlighted', () => {
+    PROJECT_GROUPS.forEach((group) =>
+      expect(
+        projects.filter((p) => p.group === group && p.highlight).length
+      ).toBeLessThanOrEqual(1)
     );
   });
 });

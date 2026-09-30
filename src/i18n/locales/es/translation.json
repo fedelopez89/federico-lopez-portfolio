@@ -79,6 +79,7 @@
   "projects": {
     "subtitle": "Una selección de mi trabajo, incluyendo proyectos destacados en The New York Times",
     "nytBadge": "Destacado NYT",
+    "featuredCta": "Ver el proyecto",
     "technologiesUsed": "Tecnologías utilizadas",
     "moreTechnologies_one": "+{{count}} tecnología más",
     "moreTechnologies_other": "+{{count}} tecnologías más",

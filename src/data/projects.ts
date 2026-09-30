@@ -14,6 +14,10 @@ export interface Project {
   repoUrl?: string;
   imageUrl?: string;
   featured?: boolean;
+  /** Lead item of its group: rendered as a wide card above the others. One per group. */
+  highlight?: boolean;
+  /** Text shown in the wide card's window chrome, e.g. 'real-evals / gmail'. Omitted: dots only. */
+  windowLabel?: string;
   /** The demo URL lands on a login page, so the CTA says so. */
   demoRequiresLogin?: boolean;
   category: 'freelance' | 'personal' | 'professional';
@@ -34,6 +38,8 @@ export const projects: Project[] = [
     demoUrl: 'https://real-gomail.vercel.app/',
     imageUrl: getImageUrl('/images/projects/gmail-clone-opt.webp'),
     featured: true,
+    highlight: true,
+    windowLabel: 'real-evals / gmail',
     category: 'freelance',
     group: 'real-evals',
   },

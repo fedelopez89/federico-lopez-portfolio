@@ -67,13 +67,28 @@ export const findProjectLink = (id: string): HTMLAnchorElement | undefined =>
     document.querySelectorAll<HTMLAnchorElement>('a[href^="/projects/"]')
   ).find((a) => a.getAttribute('href') === `/projects/${id}`);
 
-/** The card's screenshot frame and title, the two elements that morph. */
+/** Matches the card's `md` breakpoint, where the wide card shows its window. */
+const WIDE_WINDOW_QUERY = '(min-width: 768px)';
+
+/**
+ * The element that morphs as the screenshot. On the wide card at md and up it
+ * is the whole window (chrome + image); otherwise, and on regular cards, just
+ * the image frame. Only one is ever named, so names stay unique.
+ */
+const pickShot = (link: Element | undefined) => {
+  const windowEl = link?.querySelector('[data-vt-shot-window]');
+  if (windowEl && window.matchMedia?.(WIDE_WINDOW_QUERY).matches)
+    return windowEl;
+  return link?.querySelector('[data-vt-shot]');
+};
+
+/** The card's screenshot and title, the two elements that morph. */
 export const projectCardShared = (
   link: Element | undefined,
   id: string
 ): SharedElement[] => [
   {
-    element: link?.querySelector('[data-vt-shot]'),
+    element: pickShot(link),
     name: projectShotName(id),
     kind: 'shot',
   },

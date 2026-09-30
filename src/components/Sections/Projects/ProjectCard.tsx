@@ -12,6 +12,10 @@ import {
 import {
   CardLink,
   CardSurface,
+  WideWindow,
+  WindowBar,
+  WindowDot,
+  WindowLabel,
   ImageFrame,
   Spotlight,
   SpotGrid,
@@ -24,14 +28,19 @@ import {
   TitleRow,
   Title,
   Arrow,
+  Description,
+  Cta,
   TechRow,
 } from './ProjectCard.styles';
 
 interface ProjectCardProps {
   project: Project;
+  /** Wide lead card for a group's highlighted project (stacked below md). */
+  variant?: 'default' | 'wide';
 }
 
 const MAX_TECH = 3;
+const MAX_TECH_WIDE = 4;
 /** Intrinsic size of the screenshots; reserves space and matches the 16/10 crop. */
 const IMAGE_WIDTH = 1400;
 const IMAGE_HEIGHT = 740;
@@ -58,7 +67,11 @@ function preloadImage(url: string) {
   document.head.appendChild(link);
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({
+  project,
+  variant = 'default',
+}) => {
+  const wide = variant === 'wide';
   const { t } = useTranslation();
   const titleId = useId();
   const navigate = useNavigate();
@@ -68,8 +81,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     defaultValue: project.title,
   });
 
-  const visibleTech = project.technologies.slice(0, MAX_TECH);
-  const extraCount = project.technologies.length - MAX_TECH;
+  const translatedDescription = t(`projects.${projectTransKey}.description`, {
+    defaultValue: project.description,
+  });
+
+  const maxTech = wide ? MAX_TECH_WIDE : MAX_TECH;
+  const visibleTech = project.technologies.slice(0, maxTech);
+  const extraCount = project.technologies.length - maxTech;
 
   const to = `/projects/${project.id}`;
   const state = { fromPortfolio: true, fromProject: project.id };
@@ -98,27 +116,39 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       onFocus={prefetchProjectDetail}
       data-spot-card
     >
-      <CardSurface>
+      <CardSurface $wide={wide}>
         <Spotlight aria-hidden="true">
-          <SpotGrid />
-          <SpotGlow />
+          <SpotGrid $wide={wide} />
+          <SpotGlow $wide={wide} />
         </Spotlight>
-        <ImageFrame data-vt-shot>
-          {project.imageUrl ? (
-            <ProjectImage
-              src={project.imageUrl}
-              alt={t('projects.imageAlt', { title: translatedTitle })}
-              width={IMAGE_WIDTH}
-              height={IMAGE_HEIGHT}
-              loading="lazy"
-              decoding="async"
-            />
-          ) : (
-            <ImagePlaceholder aria-hidden="true" />
+        <WideWindow data-vt-shot-window>
+          {wide && (
+            <WindowBar aria-hidden="true">
+              <WindowDot />
+              <WindowDot />
+              <WindowDot />
+              {project.windowLabel && (
+                <WindowLabel>{project.windowLabel}</WindowLabel>
+              )}
+            </WindowBar>
           )}
-        </ImageFrame>
+          <ImageFrame data-vt-shot $wide={wide}>
+            {project.imageUrl ? (
+              <ProjectImage
+                src={project.imageUrl}
+                alt={t('projects.imageAlt', { title: translatedTitle })}
+                width={IMAGE_WIDTH}
+                height={IMAGE_HEIGHT}
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <ImagePlaceholder aria-hidden="true" />
+            )}
+          </ImageFrame>
+        </WideWindow>
 
-        <CardBody>
+        <CardBody $wide={wide}>
           <MetaRow>
             <Category>{t(`projects.categories.${project.category}`)}</Category>
             {project.featured && (
@@ -127,11 +157,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           </MetaRow>
 
           <TitleRow>
-            <Title id={titleId} data-vt-title>
+            <Title id={titleId} data-vt-title $wide={wide}>
               {translatedTitle}
             </Title>
-            <Arrow aria-hidden="true">↗</Arrow>
+            <Arrow aria-hidden="true" $wide={wide}>
+              ↗
+            </Arrow>
           </TitleRow>
+
+          {wide && <Description>{translatedDescription}</Description>}
 
           <TechRow role="list" aria-label={t('projects.technologiesUsed')}>
             {visibleTech.map((tech) => (
@@ -150,6 +184,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
               </Chip>
             )}
           </TechRow>
+
+          {wide && (
+            <Cta>
+              {t('projects.featuredCta')}
+              <span aria-hidden="true">→</span>
+            </Cta>
+          )}
         </CardBody>
       </CardSurface>
     </CardLink>
