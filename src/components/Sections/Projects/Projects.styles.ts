@@ -30,6 +30,7 @@ export const GroupLead = styled.p`
   margin: 0;
   max-width: ${({ theme }) => theme.layout.maxWidth.prose};
   color: ${({ theme }) => theme.colors.textMuted};
+  text-wrap: pretty;
 `;
 
 export const ProjectsGrid = styled.ul.attrs({ role: 'list' })`
