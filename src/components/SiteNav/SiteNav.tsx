@@ -17,6 +17,7 @@ import { Eyebrow, VisuallyHidden } from '@/components/ui';
 import { sectionTitleId } from '@/components/Sections/shared/sectionTitleId';
 import { fadeVariants, overlayTransition } from '@/styles/motion';
 import type { SiteNavVariant } from './SiteLink';
+import SectionRail from './SectionRail';
 import {
   Navbar,
   NavContainer,
@@ -254,6 +255,14 @@ const SiteNav: FC<SiteNavProps> = ({ variant = 'home' }) => {
           </NavActions>
         </NavContainer>
       </Navbar>
+
+      {variant === 'home' && (
+        <SectionRail
+          items={navItems}
+          activeSection={activeSection}
+          suppressed={isMobileMenuOpen}
+        />
+      )}
 
       {/* Mounted only while open so a closed drawer is never focusable. */}
       {createPortal(

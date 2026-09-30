@@ -45,6 +45,8 @@ export const ProjectsGrid = styled.ul.attrs({ role: 'list' })`
   }
 `;
 
-export const ProjectItem = styled(motion.li)`
+export const ProjectItem = styled(motion.li)<{ $wide?: boolean }>`
   min-width: 0;
+
+  ${({ $wide }) => $wide && 'grid-column: 1 / -1;'}
 `;

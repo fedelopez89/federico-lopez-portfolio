@@ -119,6 +119,14 @@ export const usePointerGlow = <T extends HTMLElement>(
         start();
       };
 
+      // Leaving the window does not always fire pointerleave on the element.
+      const handleWindowLeave = () => {
+        ensureReady();
+        lastClient = null;
+        target = getRest();
+        start();
+      };
+
       // Keeps the light under a stationary cursor while the page scrolls.
       const handleScroll = () => retarget();
 
@@ -132,6 +140,11 @@ export const usePointerGlow = <T extends HTMLElement>(
           passive: true,
         });
         window.addEventListener('scroll', handleScroll, { passive: true });
+        document.documentElement.addEventListener(
+          'pointerleave',
+          handleWindowLeave,
+          { passive: true }
+        );
       };
 
       const detach = () => {
@@ -140,6 +153,10 @@ export const usePointerGlow = <T extends HTMLElement>(
         el.removeEventListener('pointermove', handlePointerMove);
         el.removeEventListener('pointerleave', handlePointerLeave);
         window.removeEventListener('scroll', handleScroll);
+        document.documentElement.removeEventListener(
+          'pointerleave',
+          handleWindowLeave
+        );
         lastClient = null;
         stop();
       };

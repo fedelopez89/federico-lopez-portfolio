@@ -1,4 +1,4 @@
-import { FC, lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { FC, lazy, Suspense, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import {
   AnimatePresence,
@@ -95,21 +95,26 @@ function AppRoutes() {
   // false at any later render.
   // Decided once per pathname change, so later re-renders (hash updates) do not
   // swap the wrapper and remount the page. Unsupported browsers never set it.
-  const [route, setRoute] = useState({ path: location.pathname, skip: false });
+  const [route, setRoute] = useState({
+    path: location.pathname,
+    skip: false,
+    navigated: false,
+  });
   let current = route;
   if (route.path !== location.pathname) {
-    current = { path: location.pathname, skip: isViewTransitionActive() };
+    current = {
+      path: location.pathname,
+      skip: isViewTransitionActive(),
+      navigated: true,
+    };
     setRoute(current);
   }
   // The first paint must not sit under the route fade's opacity: 0. Chrome
   // ignores content painted under a fully transparent ancestor for LCP, so on
-  // the initial load the page renders in place; later navigations still fade.
-  const isInitialLoad = useRef(true);
-  useEffect(() => {
-    isInitialLoad.current = false;
-  }, []);
+  // the initial load the page renders in place; once a navigation has happened
+  // (`navigated`), later routes still fade.
   const { skip } = current;
-  const noEnterFade = skip || isInitialLoad.current;
+  const noEnterFade = skip || !current.navigated;
 
   const routes = (
     <Routes location={location} key={location.pathname}>

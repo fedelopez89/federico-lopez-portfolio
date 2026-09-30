@@ -135,4 +135,36 @@ describe('ProjectCard', () => {
     rerender(<ProjectCard project={{ ...baseProject, featured: true }} />);
     expect(screen.getByText('NYT feature')).toBeInTheDocument();
   });
+
+  it('only the wide variant shows the description and the CTA', () => {
+    const { unmount } = renderWithProviders(
+      <ProjectCard project={baseProject} />,
+      { withRouter: true }
+    );
+    expect(screen.queryByText('View project')).not.toBeInTheDocument();
+    unmount();
+    renderWithProviders(<ProjectCard project={baseProject} variant="wide" />, {
+      withRouter: true,
+    });
+    expect(screen.getByText('View project')).toBeInTheDocument();
+    expect(screen.getByText(baseProject.description)).toBeInTheDocument();
+    expect(screen.getAllByRole('link')).toHaveLength(1);
+    expect(document.querySelector('[data-vt-shot]')).not.toBeNull();
+    expect(document.querySelector('[data-vt-shot-window]')).not.toBeNull();
+    // No windowLabel on the project: dots only, no label text.
+    expect(screen.queryByText(/\//)).not.toBeInTheDocument();
+    expect(document.querySelector('[data-vt-title]')).not.toBeNull();
+    expect(document.querySelector('[data-spot-card]')).not.toBeNull();
+  });
+
+  it('renders the window label only when the project provides one', () => {
+    renderWithProviders(
+      <ProjectCard
+        project={{ ...baseProject, windowLabel: 'group / name' }}
+        variant="wide"
+      />,
+      { withRouter: true }
+    );
+    expect(screen.getByText('group / name')).toBeInTheDocument();
+  });
 });

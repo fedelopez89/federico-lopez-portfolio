@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useId, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useCardSpotlight, useRevealOnFocus } from '@/hooks';
 import {
@@ -10,6 +10,7 @@ import {
 import { fadeUpVariants, inViewProps } from '../../../styles/motion';
 import { isViewTransitionActive } from '../../../utils/viewTransition';
 import ProjectCard from './ProjectCard';
+import { orderGroupItems } from './orderGroupItems';
 import { SectionHeader } from '../shared/SectionHeader';
 import { sectionTitleId } from '../shared/sectionTitleId';
 import {
@@ -23,18 +24,22 @@ import {
 } from './Projects.styles';
 
 /** Grid cell revealed on scroll and, as a keyboard safety net, on focus. */
-const ProjectGridItem: React.FC<{ project: Project }> = ({ project }) => {
+const ProjectGridItem: React.FC<{ project: Project; wide?: boolean }> = ({
+  project,
+  wide = false,
+}) => {
   const reveal = useRevealOnFocus();
   // Returning through a view transition: the card must already be visible.
   const [skipReveal] = useState(isViewTransitionActive);
   return (
     <ProjectItem
+      $wide={wide}
       variants={fadeUpVariants}
       {...inViewProps}
       {...(skipReveal && { initial: false })}
       {...reveal()}
     >
-      <ProjectCard project={project} />
+      <ProjectCard project={project} variant={wide ? 'wide' : 'default'} />
     </ProjectItem>
   );
 };
@@ -44,16 +49,24 @@ const ProjectGroupSection: React.FC<{
   items: Project[];
 }> = ({ group, items }) => {
   const { t } = useTranslation();
+  const titleId = useId();
+  const { ordered, highlighted } = orderGroupItems(items);
   const lead = t(`projects.groups.${group}.lead`, { defaultValue: '' });
   return (
     <Group>
       <GroupHeader variants={fadeUpVariants} {...inViewProps}>
-        <GroupTitle>{t(`projects.groups.${group}.title`)}</GroupTitle>
+        <GroupTitle id={titleId}>
+          {t(`projects.groups.${group}.title`)}
+        </GroupTitle>
         {lead && <GroupLead>{lead}</GroupLead>}
       </GroupHeader>
-      <ProjectsGrid>
-        {items.map((project) => (
-          <ProjectGridItem key={project.id} project={project} />
+      <ProjectsGrid aria-labelledby={titleId}>
+        {ordered.map((project) => (
+          <ProjectGridItem
+            key={project.id}
+            project={project}
+            wide={project === highlighted}
+          />
         ))}
       </ProjectsGrid>
     </Group>

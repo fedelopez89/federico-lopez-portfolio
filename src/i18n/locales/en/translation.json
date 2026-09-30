@@ -20,11 +20,16 @@
       "featured": "Featured in The New York Times"
     },
     "newTab": "(opens in a new tab)",
+    "scrollCue": {
+      "label": "Scroll",
+      "aria": "Scroll to About"
+    },
     "a11y": {
       "home": "Back to top",
       "homePage": "Home",
       "mainNav": "Main navigation",
       "mobileNav": "Mobile navigation",
+      "sectionIndex": "Section index",
       "toggleMenu": "Toggle mobile menu",
       "closeMenu": "Close mobile menu"
     }
@@ -79,6 +84,7 @@
   "projects": {
     "subtitle": "A selection of my work, including projects featured in The New York Times",
     "nytBadge": "NYT feature",
+    "featuredCta": "View project",
     "technologiesUsed": "Technologies used",
     "moreTechnologies_one": "+{{count}} more technology",
     "moreTechnologies_other": "+{{count}} more technologies",

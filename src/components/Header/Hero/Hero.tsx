@@ -1,11 +1,23 @@
-import { FC, useRef } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useReducedMotion, useScroll, useTransform } from 'framer-motion';
-import { useMediaQueryHysteresis, usePointerGlow } from '@hooks';
+import {
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from 'framer-motion';
+import {
+  useMediaQueryHysteresis,
+  usePointerGlow,
+  usePointerParallax,
+} from '@hooks';
 import { NYT_HREF } from '../../../data/featured';
 import { RESUME_FILENAME, RESUME_HREF } from '../../../data/resume';
 import { Button, Container, Eyebrow, TextLink } from '../../ui';
 import { heroStackVariants, heroItemVariants } from '../../../styles/motion';
+import ScrollCue from './ScrollCue';
+import WorkStack from './WorkStack';
+import { STACK_BREAKPOINTS } from './WorkStack.styles';
 import {
   HeroSection,
   BackdropScroll,
@@ -36,10 +48,14 @@ const socialLinks = [
   { href: 'https://www.linkedin.com/in/federicoglopez/', label: 'LinkedIn' },
 ];
 
+/** Hero scroll progress past which the scroll cue fades out. */
+const CUE_HIDE_PROGRESS = 0.15;
+
 const Hero: FC = () => {
   const { t } = useTranslation();
   const heroRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
+  const stackRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
   // Fading the hero text while it is still being read fails contrast and
   // reflow needs on short or zoomed viewports (WCAG 1.4.3 / 1.4.10), so the
@@ -50,12 +66,31 @@ const Hero: FC = () => {
     '(max-height: 699px)'
   );
 
+  // Only mounted on wide screens so the screenshots are never requested
+  // elsewhere (display: none would still download them).
+  // Hysteresis so resizing around the threshold does not remount the stack.
+  const showStack = useMediaQueryHysteresis(
+    `(min-width: ${STACK_BREAKPOINTS.min}px)`,
+    `(max-width: ${STACK_BREAKPOINTS.min - STACK_BREAKPOINTS.hysteresis - 1}px)`
+  );
+
   usePointerGlow(heroRef, { varsRef: backdropRef });
+  usePointerParallax(heroRef, stackRef, showStack);
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ['start start', 'end start'],
   });
+  // The scroll cue leaves once the hero is 15% scrolled. A boolean state (it
+  // changes only when crossing the threshold) works under reduced motion too.
+  const [cueHidden, setCueHidden] = useState(false);
+  useMotionValueEvent(scrollYProgress, 'change', (value) =>
+    setCueHidden(value > CUE_HIDE_PROGRESS)
+  );
+  // Reloads can restore a scrolled position before any change event fires.
+  useEffect(() => {
+    setCueHidden(scrollYProgress.get() > CUE_HIDE_PROGRESS);
+  }, [scrollYProgress]);
   // Content stays fully visible until the user has clearly scrolled past it.
   const contentY = useTransform(scrollYProgress, [0.35, 0.9], [0, -60]);
   const contentOpacity = useTransform(scrollYProgress, [0.35, 0.9], [1, 0]);
@@ -65,6 +100,12 @@ const Hero: FC = () => {
     shouldReduceMotion || !isTall
       ? undefined
       : { y: contentY, opacity: contentOpacity };
+  // The stack leaves with the content but drifts up more slowly.
+  const stackY = useTransform(scrollYProgress, [0.2, 0.9], [0, -40]);
+  const stackOpacity = useTransform(scrollYProgress, [0.3, 0.85], [1, 0]);
+  const stackStyle = shouldReduceMotion
+    ? undefined
+    : { y: stackY, opacity: stackOpacity };
   const backdropStyle = shouldReduceMotion
     ? undefined
     : { opacity: backdropOpacity };
@@ -91,6 +132,8 @@ const Hero: FC = () => {
           </GlowSweep>
         </BackdropFade>
       </BackdropScroll>
+
+      {showStack && <WorkStack stackRef={stackRef} style={stackStyle} />}
 
       <HeroContent style={contentStyle}>
         <Container>
@@ -172,6 +215,8 @@ const Hero: FC = () => {
           </HeroStack>
         </Container>
       </HeroContent>
+
+      <ScrollCue hidden={cueHidden} />
     </HeroSection>
   );
 };

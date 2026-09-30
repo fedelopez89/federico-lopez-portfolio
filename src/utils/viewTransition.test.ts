@@ -96,6 +96,27 @@ describe('navigateWithTransition', () => {
     await vi.waitFor(() => expect(name(a, '[data-vt-shot]')).toBe(''));
   });
 
+  it('names the whole window on the wide card at md and up, the frame below', () => {
+    document.body.innerHTML = `
+      <a id="a"><div data-vt-shot-window><div data-vt-shot></div></div><h4 data-vt-title></h4></a>`;
+    const a = document.getElementById('a')!;
+    const setWide = (matches: boolean) =>
+      vi.stubGlobal('matchMedia', (query: string) => ({
+        matches: matches && query === '(min-width: 768px)',
+        media: query,
+      }));
+
+    setWide(true);
+    expect(projectCardShared(a, 'one')[0].element).toBe(
+      a.querySelector('[data-vt-shot-window]')
+    );
+    setWide(false);
+    expect(projectCardShared(a, 'one')[0].element).toBe(
+      a.querySelector('[data-vt-shot]')
+    );
+    vi.unstubAllGlobals();
+  });
+
   it('ignores a second navigation while one is running', () => {
     const { start } = mockStartViewTransition();
     const first = vi.fn();
