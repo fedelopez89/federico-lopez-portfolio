@@ -156,6 +156,23 @@ export const projects: Project[] = [
     group: 'rcx-sports',
   },
   {
+    id: 'magic-hour',
+    title: 'Magic Hour — AI Creation Tools',
+    description:
+      'Built frontend features for AI image and video generation, editing workflows, and responsive product interfaces. Integrated generation jobs, asset validation, error handling, and backend APIs into the Next.js application.',
+    technologies: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'PlanetScale',
+      'Google Cloud',
+    ],
+    demoUrl: 'https://magichour.ai/products/ai-image-generator',
+    imageUrl: getImageUrl('/images/projects/magichour-opt.webp'),
+    category: 'freelance',
+    group: 'independent',
+  },
+  {
     id: 'factupro',
     title: 'FactuPro - Invoice Management',
     description:

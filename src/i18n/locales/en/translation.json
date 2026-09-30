@@ -110,6 +110,10 @@
       "title": "United Airlines Clone - REAL Evals",
       "description": "Full-featured airline booking platform clone replicating United Airlines flight search, seat selection, booking flow, and trip management. Implements complex multi-step forms, real-time availability, and responsive design with Next.js and Material UI."
     },
+    "magichour": {
+      "title": "Magic Hour — AI Creation Tools",
+      "description": "Built frontend features for AI image and video generation, editing workflows, and responsive product interfaces. Integrated generation jobs, asset validation, error handling, and backend APIs into the Next.js application."
+    },
     "nflleaguefinder": {
       "title": "NFL League Finder - RCX Sports",
       "description": "Advanced search and discovery platform for NFL fantasy leagues. Features comprehensive filtering, real-time league data, team rosters, player stats, and league settings explorer. Built for RCX Sports platform to enhance league discovery experience."
