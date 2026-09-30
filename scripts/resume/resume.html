@@ -1,0 +1,531 @@
+<!doctype html>
+<!--
+  Source for public/pdf/Resume_LOPEZ_Federico.pdf (one A4 page).
+
+  Layout: one two-column grid for the whole page. The left rail holds the
+  monogram and section labels; every piece of content starts on the same
+  vertical axis. Multi-column rows (figures, selected work, education) share
+  the same three tracks so their edges line up.
+
+  ATS rules for this file:
+  - Single DOM order, read top to bottom. No positioned boxes around text
+    (Chrome moves positioned content to the end of the PDF text layer).
+  - Letter-spacing stays at 0.06em or less, or words extract as "E X P".
+  Preview: open this file in Chrome (Cmd+P shows the real page).
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Federico López — Senior Frontend Engineer — Resume</title>
+    <meta name="author" content="Federico Gabriel López" />
+    <style>
+      /* Static Inter instances (Google Fonts, OFL). The variable woff2 used by
+         the site makes some PDF parsers split words ("Fron t end"). */
+      @font-face {
+        font-family: 'Inter';
+        src: url('fonts/inter-400.ttf') format('truetype');
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: 'Inter';
+        src: url('fonts/inter-500.ttf') format('truetype');
+        font-weight: 500;
+      }
+      @font-face {
+        font-family: 'Inter';
+        src: url('fonts/inter-600.ttf') format('truetype');
+        font-weight: 600;
+      }
+      @font-face {
+        font-family: 'Inter';
+        src: url('fonts/inter-700.ttf') format('truetype');
+        font-weight: 700;
+      }
+
+      @page {
+        size: A4;
+        margin: 14mm 16mm;
+      }
+
+      :root {
+        --ink: #0f172a;
+        --text: #1e293b;
+        --muted: #475569;
+        --subtle: #64748b;
+        --faint: #94a3b8;
+        --hairline: #dde3ea;
+        --accent: #1d4ed8;
+        --paper: #ffffff;
+        --desk: #d9dee5;
+
+        /* Grid: rail | gutter | content. Content splits into 3 tracks. */
+        --rail: 28mm;
+        --gutter: 6mm;
+        --track-gap: 6mm;
+
+        /* Vertical rhythm: every gap is a step of this scale. */
+        --s1: 2px;
+        --s2: 4px;
+        --s3: 8px;
+        --s4: 12px;
+        --s5: 16px;
+        --s6: 20px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        background: var(--desk);
+      }
+
+      body {
+        font-family: 'Inter', system-ui, sans-serif;
+        font-size: 9pt;
+        line-height: 1.5;
+        color: var(--text);
+        font-feature-settings: 'cv11', 'ss01';
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .sheet {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 24px auto;
+        padding: 14mm 16mm;
+        background: var(--paper);
+        box-shadow: 0 2px 18px rgb(0 0 0 / 0.14);
+      }
+
+      @media print {
+        html {
+          background: none;
+        }
+        .sheet {
+          width: auto;
+          min-height: 0;
+          margin: 0;
+          padding: 0;
+          box-shadow: none;
+        }
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      /* ---------- The grid ---------- */
+
+      .row {
+        display: grid;
+        grid-template-columns: var(--rail) 1fr;
+        column-gap: var(--gutter);
+        align-items: baseline;
+      }
+
+      header .row {
+        align-items: start;
+      }
+
+      .tracks {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: var(--track-gap);
+      }
+
+      /* ---------- Header ---------- */
+
+      .mark {
+        display: block;
+        width: 12mm;
+        height: 12mm;
+        margin-top: 1.2mm;
+      }
+
+      h1 {
+        font-size: 24pt;
+        font-weight: 700;
+        line-height: 1.05;
+        letter-spacing: -0.035em;
+        color: var(--ink);
+      }
+
+      .role-line {
+        margin-top: var(--s3);
+        font-size: 10.5pt;
+        font-weight: 500;
+        color: var(--text);
+      }
+
+      /* Contact: 2 x 2 grid so icons and text line up in columns.
+         Icons are SVG with no text, so ATS still reads plain values. */
+      .contact {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        justify-content: start;
+        gap: 3px 22px;
+        margin-top: var(--s3);
+        font-size: 8pt;
+        color: var(--muted);
+      }
+
+      .contact li {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .contact svg {
+        flex: none;
+        width: 9.5px;
+        height: 9.5px;
+        fill: none;
+        stroke: var(--accent);
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      /* Key figures share the three content tracks. */
+      .figures {
+        margin-top: var(--s5);
+      }
+
+      .figures dt {
+        font-size: 18pt;
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        color: var(--ink);
+      }
+
+      .figures dt span {
+        color: var(--accent);
+      }
+
+      .figures dd {
+        margin-top: var(--s2);
+        font-size: 7.8pt;
+        line-height: 1.4;
+        color: var(--subtle);
+        text-wrap: balance;
+      }
+
+      /* ---------- Sections ---------- */
+
+      section {
+        margin-top: var(--s5);
+        padding-top: var(--s4);
+        border-top: 1px solid var(--hairline);
+      }
+
+      .section-first {
+        margin-top: var(--s5);
+      }
+
+      h2 {
+        font-size: 7.4pt;
+        font-weight: 600;
+        line-height: 1.6;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--subtle);
+      }
+
+      .summary {
+        font-size: 9.4pt;
+        line-height: 1.55;
+        color: var(--muted);
+        text-wrap: pretty;
+      }
+
+      .summary strong {
+        font-weight: 600;
+        color: var(--ink);
+      }
+
+      /* ---------- Roles ---------- */
+
+      /* Gap between roles is larger than a text line, so each reads as a block. */
+      .role + .role {
+        margin-top: var(--s6);
+      }
+
+
+      h3 {
+        font-size: 9.8pt;
+        font-weight: 600;
+        line-height: 1.4;
+        color: var(--ink);
+      }
+
+      h3 .at {
+        font-weight: 600;
+        color: var(--accent);
+      }
+
+      .next-title {
+        margin-top: var(--s2);
+      }
+
+      h3 .sep {
+        font-weight: 400;
+        color: var(--faint);
+      }
+
+      h3 .note {
+        font-weight: 400;
+        color: var(--muted);
+      }
+
+      /* Dates sit right under the title they belong to, not across the page. */
+      .when {
+        margin-top: 1px;
+        font-size: 8pt;
+        font-variant-numeric: tabular-nums;
+        color: var(--subtle);
+      }
+
+      .when span + span::before {
+        content: '·';
+        margin: 0 6px;
+        color: var(--faint);
+      }
+
+      .points {
+        margin-top: var(--s2);
+        color: var(--muted);
+      }
+
+      /* Hanging dash: wrapped lines align with the text, not the dash. */
+      .points li {
+        padding-left: 11px;
+        text-indent: -11px;
+        text-wrap: pretty;
+      }
+
+      .points li + li {
+        margin-top: var(--s1);
+      }
+
+      /* Stack keywords: present for ATS and skimmers, quiet for readers. */
+      .tech {
+        font-size: 7.8pt;
+        color: var(--faint);
+        white-space: nowrap;
+      }
+
+      .tech::before {
+        content: ' · ';
+      }
+
+      .points li::before {
+        content: '–';
+        display: inline-block;
+        width: 11px;
+        text-indent: 0;
+        color: var(--faint);
+      }
+
+      .points strong {
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      /* ---------- Skills ---------- */
+
+      .skills div {
+        display: grid;
+        grid-template-columns: 20mm 1fr;
+        column-gap: 3mm;
+      }
+
+      .skills div + div {
+        margin-top: var(--s1);
+      }
+
+      .skills dt {
+        color: var(--subtle);
+      }
+
+      .skills dd {
+        color: var(--muted);
+      }
+
+
+      /* ---------- Education ---------- */
+
+      .edu b {
+        display: block;
+        font-weight: 600;
+        color: var(--ink);
+      }
+
+      .edu span {
+        color: var(--muted);
+      }
+
+      .edu .span-2 {
+        grid-column: span 2;
+      }
+
+      .edu li {
+        text-wrap: balance;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="sheet">
+      <header>
+        <div class="row">
+          <svg class="mark" viewBox="0 0 100 100" aria-hidden="true">
+            <rect x="1" y="1" width="98" height="98" rx="22" fill="#0f172a" />
+            <g fill="#f8fafc">
+              <rect x="20" y="22" width="10" height="46" />
+              <rect x="20" y="22" width="28" height="10" />
+              <rect x="20" y="41" width="23" height="9" />
+              <rect x="54" y="22" width="10" height="46" />
+              <rect x="54" y="58" width="26" height="10" />
+            </g>
+            <rect x="20" y="77" width="24" height="5" fill="#3b82f6" />
+          </svg>
+          <div>
+            <h1>Federico López</h1>
+            <p class="role-line">
+              Senior Frontend Engineer · React, Next.js, TypeScript
+            </p>
+            <ul class="contact">
+              <li>
+                <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" /><path d="M1.5 8h13M8 1.5c2 2 2.8 4.2 2.8 6.5S10 12.5 8 14.5M8 1.5C6 3.5 5.2 5.7 5.2 8S6 12.5 8 14.5" /></svg>
+                <a href="https://federicoglopez.dev">federicoglopez.dev</a>
+              </li>
+              <li>
+                <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3" width="13" height="10" rx="1.5" /><path d="m2 4 6 5 6-5" /></svg>
+                <a href="mailto:fede.lopez89@gmail.com">fede.lopez89@gmail.com</a>
+              </li>
+              <li>
+                <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5" /><path d="M5 7v4.5M5 4.8v.01M8 11.5V7m0 2.2c0-1.3.9-2.2 2-2.2s1.8.8 1.8 2v2.5" /></svg>
+                <a href="https://www.linkedin.com/in/federicoglopez">linkedin.com/in/federicoglopez</a>
+              </li>
+              <li>
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s5-4.3 5-8.2A5 5 0 0 0 3 6.3c0 3.9 5 8.2 5 8.2Z" /><circle cx="8" cy="6.3" r="1.8" /></svg>
+                Buenos Aires, Argentina (UTC-3)
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row">
+          <span></span>
+          <dl class="figures tracks">
+            <div>
+              <dt>16<span>+</span></dt>
+              <dd>years in software, from banking systems to modern frontend</dd>
+            </div>
+            <div>
+              <dt>7<span>+</span></dt>
+              <dd>years shipping production React and Next.js</dd>
+            </div>
+            <div>
+              <dt>NYT</dt>
+              <dd>featured REAL Evals, where I built the app clones</dd>
+            </div>
+          </dl>
+        </div>
+      </header>
+
+      <section class="row section-first" aria-labelledby="profile">
+        <h2 id="profile">Profile</h2>
+        <p class="summary">
+          Frontend engineer who owns <strong>the interface layer</strong>:
+          component systems, performance, and accessibility, working closely
+          with product and design. Fully remote since 2021, shipping products
+          for international teams, from youth sports leagues to AI
+          creation tools.
+        </p>
+      </section>
+
+      <section class="row" aria-labelledby="experience">
+        <h2 id="experience">Experience</h2>
+        <div>
+          <article class="role">
+            <div>
+              <h3>Senior Frontend Engineer <span class="sep">·</span> <span class="at">Bonzzu</span></h3>
+              </div>
+            <p class="when"><span>Feb 2022 – Present</span><span>Remote</span><span>Clients: RCX Sports, Delos</span></p>
+            <ul class="points">
+              <li>Built <strong>RCX Sports</strong>' public League Finder for NFL FLAG, Jr. NBA/WNBA, NHL Street, and MLS GO, plus the League Central operator platform</li>
+              <li>Designed reusable component systems and led performance work (SSR, code splitting)</li>
+              <li>Integrated Contentful CMS so non-technical teams publish content on their own</li>
+            </ul>
+          </article>
+
+          <article class="role">
+            <div>
+              <h3>Frontend Engineer <span class="sep">·</span> <span class="at">Freelance</span></h3>
+              </div>
+            <p class="when"><span>Jan 2019 – Present</span><span>Remote</span></p>
+            <ul class="points">
+              <li><strong>Magic Hour</strong>: building frontend features for AI image and video tools<span class="tech">Next.js, TypeScript</span></li>
+              <li><strong>REAL Evals</strong>: built high-fidelity clones of Gmail, DoorDash, Uber, and United Airlines used to evaluate AI agents; featured by The New York Times<span class="tech">Next.js, Material UI, Redux</span></li>
+              <li><strong>FactuPro</strong>: built a production invoicing SaaS for clients in Spain<span class="tech">Next.js, Tailwind CSS</span></li>
+              <li>Built a payment portal (<strong>Vrio</strong>) and storefront interfaces (<strong>Wpromote</strong>)<span class="tech">React, TypeScript</span></li>
+            </ul>
+          </article>
+
+          <article class="role">
+            <div>
+              <h3>Full Stack Engineer <span class="sep">·</span> <span class="at">Nisum</span></h3>
+              </div>
+            <p class="when"><span>Aug 2021 – Apr 2022</span><span>Remote</span><span>Client: Science 37</span></p>
+            <ul class="points">
+              <li>Built React / Redux interfaces and Storybook components for a clinical research platform</li>
+            </ul>
+          </article>
+
+          <article class="role">
+            <div>
+              <h3>Senior Mainframe COBOL Developer <span class="sep">·</span> <span class="at">ICBC</span></h3>
+              </div>
+            <p class="when"><span>Feb 2015 – Aug 2021</span><span>Buenos Aires</span></p>
+            <h3 class="next-title">COBOL Developer <span class="sep">·</span> <span class="at">BBVA</span> <span class="note">via ISBAN / Accenture</span></h3>
+            <p class="when"><span>Mar 2010 – Jan 2015</span><span>Buenos Aires</span></p>
+            <ul class="points">
+              <li>Banking systems that couldn't go down, including Anti-Money Laundering work under strict SLAs. It's why I design for edge cases and failure states.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+
+      <section class="row" aria-labelledby="skills">
+        <h2 id="skills">Skills</h2>
+        <dl class="skills">
+          <div><dt>Core</dt><dd>React, Next.js, TypeScript, JavaScript, HTML, CSS</dd></div>
+          <div><dt>UI</dt><dd>Design systems, Tailwind CSS, Shadcn UI, Material UI, Chakra UI</dd></div>
+          <div><dt>State &amp; Data</dt><dd>Redux Toolkit, React Query, React Hook Form, REST APIs</dd></div>
+          <div><dt>Engineering</dt><dd>Frontend architecture, SSR, performance, accessibility (WCAG), testing</dd></div>
+          <div><dt>Tools</dt><dd>Git, Jest, Vitest, Storybook, Contentful, CI/CD, Docker</dd></div>
+        </dl>
+      </section>
+
+      <section class="row" aria-labelledby="education">
+        <h2 id="education">Education</h2>
+        <ul class="edu tracks">
+          <li class="span-2"><b>Computer Systems Engineering</b><span>UTN, National University of Technology · 2008 – 2013</span></li>
+          <li><b>Languages</b><span>Spanish (native)<br />English (advanced)</span></li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
