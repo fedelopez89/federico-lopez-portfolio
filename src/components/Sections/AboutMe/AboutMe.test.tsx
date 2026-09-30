@@ -38,13 +38,13 @@ describe('AboutMe', () => {
     const values = [...container.querySelectorAll('dd')].map(
       (el) => el.textContent
     );
-    expect(values).toEqual(['7+', '7+', '100%']);
+    expect(values).toEqual(['7+', '9+', '100%']);
   });
 
   it('shows translated fact values and labels', () => {
     renderWithProviders(<AboutMe />);
     expect(screen.getByText('100%')).toBeInTheDocument();
-    expect(screen.getByText('Enterprise Clients')).toBeInTheDocument();
+    expect(screen.getByText('Companies & products')).toBeInTheDocument();
   });
 
   it('links the New York Times feature externally with a safe rel', () => {

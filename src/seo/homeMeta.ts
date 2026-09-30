@@ -13,10 +13,10 @@ import {
  */
 export const HOME_META = {
   description:
-    'Senior Frontend Engineer with 16+ years in IT, specializing in React, TypeScript and Next.js. Work featured in The New York Times. Remote.',
+    'Senior Frontend Engineer with 16+ years in IT, specializing in React, TypeScript and Next.js. Worked on REAL Evals, a project featured in The New York Times. Remote.',
   canonical: `${SITE_ORIGIN}/`,
   socialTitle:
-    'Federico López — Senior Frontend Engineer | Featured in The New York Times',
+    'Federico López — Senior Frontend Engineer | REAL Evals, featured in The New York Times',
   image: `${SITE_ORIGIN}${FALLBACK_OG_IMAGE}`,
   imageType: 'image/png',
   imageWidth: OG_IMAGE_WIDTH,

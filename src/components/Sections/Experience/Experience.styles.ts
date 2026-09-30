@@ -160,4 +160,9 @@ export const Notes = styled.p`
   margin: 0;
   line-height: ${({ theme }) => theme.typography.lineHeight.relaxed};
   color: ${({ theme }) => theme.colors.textSecondary};
+
+  strong {
+    font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
+    color: ${({ theme }) => theme.colors.text};
+  }
 `;

@@ -71,10 +71,10 @@ describe('Hero', () => {
     ).toEqual([
       '16+ years in IT',
       '7+ years in React / Next.js',
-      'Featured in The New York Times (opens in a new tab)',
+      'REAL Evals · featured in The New York Times (opens in a new tab)',
     ]);
     expect(list.textContent?.replace(/\s+/g, ' ').trim()).toBe(
-      '16+ years in IT7+ years in React / Next.jsFeatured in The New York Times (opens in a new tab)'
+      '16+ years in IT7+ years in React / Next.jsREAL Evals · featured in The New York Times (opens in a new tab)'
     );
     const nyt = within(list).getByRole('link', {
       name: /featured in the new york times/i,

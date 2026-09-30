@@ -36,7 +36,7 @@ describe('Projects', () => {
       'nhl-league-finder',
       'mls-league-finder',
     ]);
-    expect(byGroup('independent')).toEqual(['factupro']);
+    expect(byGroup('independent')).toEqual(['magic-hour', 'factupro']);
   });
 
   it('renders the three groups in order as h3 headings', () => {
@@ -67,10 +67,28 @@ describe('Projects', () => {
     ).toBeInTheDocument();
     expect(
       screen.getByText(
-        'League finder apps for RCX Sports across four leagues: NFL, NBA, NHL and MLS.'
+        'League discovery for NFL FLAG, Jr. NBA/WNBA, NHL Street and MLS GO, helping families find local youth sports programs by location.'
       )
     ).toBeInTheDocument();
     expect(screen.queryByText(/end to end/i)).not.toBeInTheDocument();
+  });
+
+  it('lists Magic Hour as freelance work in the Independent group, before FactuPro', () => {
+    const magic = projects.find((p) => p.id === 'magic-hour');
+    expect(magic?.category).toBe('freelance');
+    expect(magic?.demoUrl).toBe(
+      'https://magichour.ai/products/ai-image-generator'
+    );
+    expect(magic?.demoRequiresLogin).toBeFalsy();
+    expect(magic?.repoUrl).toBeUndefined();
+    renderProjects();
+    const region = screen.getByRole('list', { name: 'Independent' });
+    const titles = within(region)
+      .getAllByRole('heading', { level: 4 })
+      .map((h) => h.textContent);
+    expect(titles).toHaveLength(2);
+    expect(titles[0]).toMatch(/Magic Hour/);
+    expect(titles[1]).toMatch(/FactuPro/);
   });
 
   it('keeps the outline section h2 > group h3 > card h4', () => {
