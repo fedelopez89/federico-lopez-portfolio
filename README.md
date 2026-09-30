@@ -10,7 +10,7 @@
 
 **Modern, high-performance portfolio built with cutting-edge technologies**
 
-_Showcasing 16 years of IT experience with 7+ years specializing in modern frontend development_
+_Showcasing 16+ years of IT experience with 7+ years specializing in modern frontend development_
 
 [View Live](https://federicoglopez.dev) • [Report Bug](https://github.com/fedelopez89/federico-lopez-portfolio/issues)
 
@@ -21,10 +21,10 @@ _Showcasing 16 years of IT experience with 7+ years specializing in modern front
 ## Highlights
 
 - **REAL Evals** - Frontend engineering on a project featured in The New York Times
-- **Lighthouse 97/100 Desktop** - Performance, Accessibility, Best Practices and SEO all 100
-- **Lighthouse 83/100 Mobile** - Optimized for real devices on slow networks
+- **Lighthouse 98+ Desktop** - Accessibility, Best Practices and SEO at 100
+- **Lighthouse 87+ Mobile** - Optimized for real devices on slow networks
 - **Multilingual** - English/Spanish i18n with automatic browser detection
-- **Accessible** - WCAG 2.1 AA compliant, Lighthouse Accessibility 100/100
+- **Accessible** - Built against WCAG 2.2 AA, Lighthouse Accessibility 100/100
 - **Responsive** - Mobile-first design with custom hamburger menu
 - **Theme Support** - Smooth dark/light mode with system preference detection
 
@@ -56,12 +56,16 @@ Production-ready replicas built for REAL Evals AI testing platform:
 
 ### RCX Sports League Finders
 
-League discovery for NFL FLAG, Jr. NBA/WNBA, NHL Street and MLS GO, helping families find local youth sports programs by location:
+Youth league finders for NFL FLAG, Jr. NBA/WNBA, NHL Street and MLS GO:
 
 - **NFL League Finder** - [nfl.playrcx.com](https://nfl.playrcx.com/)
 - **NBA League Finder** - [jrnba.playrcx.com](https://jrnba.playrcx.com/)
 - **NHL League Finder** - [street.playrcx.com](https://street.playrcx.com/)
 - **MLS League Finder** - [go.playrcx.com](https://go.playrcx.com/)
+
+### Magic Hour - AI Creation Tools
+
+Frontend features for AI image and video generation in a Next.js product. [Visit](https://magichour.ai)
 
 ### FactuPro - Invoice Management SaaS
 
@@ -73,13 +77,13 @@ Complete billing system for SMBs. [Live Demo](https://app.factupro.es/login)
 
 ```
 Lighthouse Desktop (federicoglopez.dev):
-  Performance:     97/100
+  Performance:     98/100
   Accessibility:  100/100
   Best Practices: 100/100
   SEO:            100/100
 
 Lighthouse Mobile (Slow 4G):
-  Performance:     83/100
+  Performance:     87/100
   Accessibility:  100/100
   Best Practices: 100/100
   SEO:            100/100
@@ -112,6 +116,15 @@ Open http://localhost:5173
 | `npm run type-check` | TypeScript check (no emit) |
 | `npm run deploy` | Deploy to Vercel |
 
+### Manual scripts
+
+Run these when the source changes; their output is committed.
+
+| Command | Description |
+|---|---|
+| `node scripts/resume/render-resume.mjs` | Render `scripts/resume/resume.html` to `public/pdf/Resume_LOPEZ_Federico.pdf` (one A4 page, headless Chrome) |
+| `node scripts/og/render-og.mjs` | Render `scripts/og/home.html` to `public/images/og-image.png` (1200×630) |
+
 ---
 
 ## Project Structure
@@ -121,7 +134,7 @@ resume/
 ├── public/
 │   ├── images/
 │   │   └── projects/      # WebP optimized project screenshots
-│   ├── pdf/               # Resume PDF download
+│   ├── pdf/               # Resume PDF (generated from scripts/resume)
 │   ├── ga.js              # Google Analytics (external, CSP-safe)
 │   ├── llms.txt           # AI crawler profile (AEO/GEO)
 │   └── robots.txt         # sitemap.xml is generated into dist/ at build
@@ -151,6 +164,11 @@ resume/
 │   ├── styles/            # theme.ts, GlobalStyles.ts
 │   ├── types/
 │   └── utils/             # reportWebVitals.ts, dateCalculations.ts
+├── scripts/
+│   ├── og/                # OG image source + renderer
+│   ├── resume/            # Resume HTML source, static Inter fonts + PDF renderer
+│   ├── prerender-heads.mjs # Per-project static HTML heads (build)
+│   └── generate-sitemap.mjs # sitemap.xml (build)
 ├── vercel.json            # SPA rewrites + security headers
 ├── .npmrc                 # legacy-peer-deps=true
 └── NAMING_CONVENTIONS.md
