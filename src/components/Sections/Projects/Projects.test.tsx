@@ -67,7 +67,7 @@ describe('Projects', () => {
     ).toBeInTheDocument();
     expect(
       screen.getByText(
-        'League discovery for NFL FLAG, Jr. NBA/WNBA, NHL Street and MLS GO, helping families find local youth sports programs by location.'
+        'Youth league finders for NFL FLAG, Jr. NBA/WNBA, NHL Street and MLS GO.'
       )
     ).toBeInTheDocument();
     expect(screen.queryByText(/end to end/i)).not.toBeInTheDocument();

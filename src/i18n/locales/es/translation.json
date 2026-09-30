@@ -66,9 +66,9 @@
     "resume": "CV (PDF)"
   },
   "aboutMe": {
-    "intro": "¡Hola! Soy <strong>Federico López</strong>, Ingeniero Frontend Senior especializado en construir aplicaciones web de <strong>alto rendimiento</strong>, <strong>escalables</strong> y <strong>centradas en el usuario</strong> con <strong>React</strong>, <strong>TypeScript</strong> y <strong>Next.js</strong>.",
-    "experience": "Con <strong>más de 16 años de experiencia en TI</strong> y <strong>más de 7 años enfocado en desarrollo frontend moderno</strong>, entregué software en producción para deportes, salud, comercio y evaluación de IA.",
-    "passion": "Apasionado por arquitectura limpia, componentes reutilizables y resolver desafíos UX complejos. Prospero en entornos remotos Agile, colaborando con equipos multifuncionales para impulsar la excelencia del producto.",
+    "intro": "Soy frontend engineer y me enfoco en la capa de interfaz: sistemas de componentes, performance, accesibilidad y los detalles que hacen que un producto se sienta terminado. Trabajo principalmente con <strong>React</strong>, <strong>Next.js</strong> y <strong>TypeScript</strong>, muy de cerca con producto y diseño.",
+    "experience": "Empecé en 2010 escribiendo COBOL para sistemas bancarios en <strong>ICBC</strong> y <strong>BBVA</strong>, software que no podía caerse. Eso sigue marcando cómo construyo para la web: pienso en casos borde, estados de error y en lo que pasa en producción, no solo en la demo.",
+    "passion": "Desde 2021 trabajo 100% remoto en productos en producción: descubrimiento de ligas deportivas juveniles para <strong>RCX Sports</strong>, clones de aplicaciones de alta fidelidad para <strong>REAL Evals</strong>, destacado por The New York Times, y herramientas de creación con IA en <strong>Magic Hour</strong>.",
     "stats": {
       "yearsExperience": "Años en frontend",
       "companies": "Empresas y productos",
@@ -141,7 +141,7 @@
       },
       "rcx-sports": {
         "title": "RCX Sports",
-        "lead": "Descubrimiento de ligas para NFL FLAG, Jr. NBA/WNBA, NHL Street y MLS GO, que ayuda a las familias a encontrar programas deportivos juveniles cerca de su ubicación."
+        "lead": "Buscadores de ligas juveniles para NFL FLAG, Jr. NBA/WNBA, NHL Street y MLS GO."
       },
       "independent": {
         "title": "Independientes"

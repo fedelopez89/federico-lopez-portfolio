@@ -66,9 +66,9 @@
     "resume": "Resume (PDF)"
   },
   "aboutMe": {
-    "intro": "Hi! I'm <strong>Federico López</strong>, a Senior Frontend Engineer specializing in building <strong>high-performance</strong>, <strong>scalable</strong>, and <strong>user-centric</strong> web applications with <strong>React</strong>, <strong>TypeScript</strong>, and <strong>Next.js</strong>.",
-    "experience": "With <strong>16+ years of IT experience</strong> and <strong>7+ years focused on modern frontend development</strong>, I've delivered production software across sports, healthcare, commerce, and AI evaluation.",
-    "passion": "Passionate about clean architecture, reusable components, and solving complex UX challenges. I thrive in remote Agile environments, collaborating with cross-functional teams to drive product excellence.",
+    "intro": "I'm a frontend engineer focused on the interface layer: component systems, performance, accessibility, and the details that make a product feel finished. I work mostly with <strong>React</strong>, <strong>Next.js</strong>, and <strong>TypeScript</strong>, closely with product and design.",
+    "experience": "I started in 2010 writing COBOL for banking systems at <strong>ICBC</strong> and <strong>BBVA</strong>, software that couldn't go down. That still shapes how I build for the web: I think about edge cases, failure states, and what happens in production, not just in the demo.",
+    "passion": "Since 2021 I've worked fully remote on production products: youth sports league discovery for <strong>RCX Sports</strong>, high-fidelity app clones for <strong>REAL Evals</strong>, featured by The New York Times, and AI creation tools at <strong>Magic Hour</strong>.",
     "stats": {
       "yearsExperience": "Years in frontend",
       "companies": "Companies & products",
@@ -141,7 +141,7 @@
       },
       "rcx-sports": {
         "title": "RCX Sports",
-        "lead": "League discovery for NFL FLAG, Jr. NBA/WNBA, NHL Street and MLS GO, helping families find local youth sports programs by location."
+        "lead": "Youth league finders for NFL FLAG, Jr. NBA/WNBA, NHL Street and MLS GO."
       },
       "independent": {
         "title": "Independent"
