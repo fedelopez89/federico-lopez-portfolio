@@ -20,11 +20,16 @@
       "featured": "Featured in The New York Times"
     },
     "newTab": "(opens in a new tab)",
+    "scrollCue": {
+      "label": "Scroll",
+      "aria": "Scroll to About"
+    },
     "a11y": {
       "home": "Back to top",
       "homePage": "Home",
       "mainNav": "Main navigation",
       "mobileNav": "Mobile navigation",
+      "sectionIndex": "Section index",
       "toggleMenu": "Toggle mobile menu",
       "closeMenu": "Close mobile menu"
     }

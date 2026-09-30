@@ -20,11 +20,16 @@
       "featured": "Destacado en The New York Times"
     },
     "newTab": "(se abre en una pestaña nueva)",
+    "scrollCue": {
+      "label": "Deslizá",
+      "aria": "Deslizá hasta Sobre mí"
+    },
     "a11y": {
       "home": "Volver al inicio",
       "homePage": "Inicio",
       "mainNav": "Navegación principal",
       "mobileNav": "Navegación móvil",
+      "sectionIndex": "Índice de secciones",
       "toggleMenu": "Alternar menú móvil",
       "closeMenu": "Cerrar menú móvil"
     }
