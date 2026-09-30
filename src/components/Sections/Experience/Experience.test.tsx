@@ -1,4 +1,12 @@
-import { describe, it, expect, beforeAll, beforeEach, afterEach, vi } from 'vitest';
+import {
+  describe,
+  it,
+  expect,
+  beforeAll,
+  beforeEach,
+  afterEach,
+  vi,
+} from 'vitest';
 import { act, screen, within } from '@testing-library/react';
 import i18n from '../../../i18n/config';
 import Experience from './Experience';
@@ -86,5 +94,19 @@ describe('Experience', () => {
     expect(link).toHaveTextContent(/^Download resume\s*PDF$/);
     expect(link).toHaveAttribute('download');
     expect(link).not.toHaveAttribute('aria-label');
+  });
+
+  it('highlights company names in notes with <strong> but not technologies', () => {
+    renderWithProviders(<Experience />);
+    const name = screen.getByText('Magic Hour');
+    expect(name.tagName).toBe('STRONG');
+    const strongTexts = Array.from(document.querySelectorAll('strong')).map(
+      (el) => el.textContent
+    );
+    expect(strongTexts).toEqual(
+      expect.arrayContaining(['Vrio', 'Wpromote', 'REAL Evals', 'FactuPro'])
+    );
+    expect(strongTexts).not.toContain('React');
+    expect(strongTexts).not.toContain('The New York Times');
   });
 });

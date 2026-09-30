@@ -70,10 +70,10 @@
     "experience": "With <strong>16+ years of IT experience</strong> and <strong>7+ years focused on modern frontend development</strong>, I've delivered impactful solutions for global companies in wellness, sports, fintech, and healthcare—reaching millions of users worldwide.",
     "passion": "Passionate about clean architecture, reusable components, and solving complex UX challenges. I thrive in remote Agile environments, collaborating with cross-functional teams to drive product excellence.",
     "stats": {
-      "yearsExperience": "Years Experience",
-      "enterpriseClients": "Enterprise Clients",
+      "yearsExperience": "Years in frontend",
+      "companies": "Companies & products",
       "remote": "Remote since 2021",
-      "enterpriseClientsValue": "7+",
+      "companiesValue": "9+",
       "remoteValue": "100%",
       "yearsFallback": "7+"
     },
@@ -148,17 +148,17 @@
     "frontendBonzzu": {
       "role": "Senior Frontend Engineer",
       "company": "Bonzzu",
-      "notes": "Delivering scalable React/Next.js applications for Delos Company and RCX Sports. Designed reusable component systems using Material UI, Chakra UI, and Shadcn UI. Led performance optimizations through SSR, code splitting, and rendering efficiency improvements."
+      "notes": "Delivering scalable React/Next.js applications for <strong>Delos Company</strong> and <strong>RCX Sports</strong>. Designed reusable component systems using Material UI, Chakra UI, and Shadcn UI. Led performance optimizations through SSR, code splitting, and rendering efficiency improvements."
     },
     "fullstackFreelance": {
       "role": "Frontend Web Developer",
       "company": "Freelancer",
-      "notes": "Delivered high-impact solutions for international clients including Vrio, Wpromote, REAL Evals (featured by The New York Times), and FactuPro. Specialized in SSR, performance optimization, and scalable component architectures."
+      "notes": "Delivered high-impact solutions for international clients including <strong>Vrio</strong>, <strong>Wpromote</strong>, <strong>REAL Evals</strong> (featured by The New York Times), and <strong>FactuPro</strong>. Currently building frontend features for <strong>Magic Hour</strong>'s AI image and video creation tools with Next.js, React, and TypeScript. Specialized in SSR, performance optimization, and scalable component architectures."
     },
     "fullstackNisum": {
       "role": "Full Stack Engineer",
       "company": "Nisum (Science37)",
-      "notes": "Delivered and maintained React/Redux interfaces for Science37's clinical research platform using JavaScript and TypeScript. Developed reusable UI components with Storybook and partnered with distributed teams across multiple time zones in remote Agile environments."
+      "notes": "Delivered and maintained React/Redux interfaces for <strong>Science37</strong>'s clinical research platform using JavaScript and TypeScript. Developed reusable UI components with Storybook and partnered with distributed teams across multiple time zones in remote Agile environments."
     },
     "mainframeICBC": {
       "role": "Senior Mainframe COBOL Developer",

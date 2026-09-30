@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 import experienceHistory from '../../../data/experience.json';
 import type { ExperienceConfig, Experience as ExperienceType } from '@/types';
 import {
@@ -129,7 +129,9 @@ const Experience: FC = () => {
                     <CompanyName>{companyName}</CompanyName>
                   )}
                 </Company>
-                <Notes>{t(`experience.${id}.notes`)}</Notes>
+                <Notes>
+                  <Trans i18nKey={`experience.${id}.notes`} />
+                </Notes>
               </Details>
             </TimelineItem>
           );

@@ -44,8 +44,8 @@ const AboutMe: FC = () => {
   const facts = [
     { value: yearsExp, label: t('aboutMe.stats.yearsExperience') },
     {
-      value: t('aboutMe.stats.enterpriseClientsValue'),
-      label: t('aboutMe.stats.enterpriseClients'),
+      value: t('aboutMe.stats.companiesValue'),
+      label: t('aboutMe.stats.companies'),
     },
     {
       value: t('aboutMe.stats.remoteValue'),
