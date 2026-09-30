@@ -17,7 +17,7 @@
       "label": "Highlights",
       "years": "16+ years in IT",
       "react": "7+ years in React / Next.js",
-      "featured": "Featured in The New York Times"
+      "featured": "REAL Evals · featured in The New York Times"
     },
     "newTab": "(opens in a new tab)",
     "scrollCue": {
@@ -67,7 +67,7 @@
   },
   "aboutMe": {
     "intro": "Hi! I'm <strong>Federico López</strong>, a Senior Frontend Engineer specializing in building <strong>high-performance</strong>, <strong>scalable</strong>, and <strong>user-centric</strong> web applications with <strong>React</strong>, <strong>TypeScript</strong>, and <strong>Next.js</strong>.",
-    "experience": "With <strong>16+ years of IT experience</strong> and <strong>7+ years focused on modern frontend development</strong>, I've delivered impactful solutions for global companies in wellness, sports, fintech, and healthcare—reaching millions of users worldwide.",
+    "experience": "With <strong>16+ years of IT experience</strong> and <strong>7+ years focused on modern frontend development</strong>, I've delivered production software across sports, healthcare, commerce, and AI evaluation.",
     "passion": "Passionate about clean architecture, reusable components, and solving complex UX challenges. I thrive in remote Agile environments, collaborating with cross-functional teams to drive product excellence.",
     "stats": {
       "yearsExperience": "Years in frontend",
@@ -78,7 +78,7 @@
       "yearsFallback": "7+"
     },
     "featuredLabel": "Featured in",
-    "featuredContext": "Coverage of REAL Evals, the AI testing platform where I built high-fidelity app clones.",
+    "featuredContext": "REAL Evals was featured by The New York Times; I contributed frontend engineering to the project.",
     "featuredCta": "See the LinkedIn post"
   },
   "projects": {
@@ -116,19 +116,19 @@
     },
     "nflleaguefinder": {
       "title": "NFL League Finder - RCX Sports",
-      "description": "Advanced search and discovery platform for NFL fantasy leagues. Features comprehensive filtering, real-time league data, team rosters, player stats, and league settings explorer. Built for RCX Sports platform to enhance league discovery experience."
+      "description": "NFL FLAG league finder: families search local youth flag football programs and seasons by location and continue to registration. Integrated directly into nflflag.playrcx.com."
     },
     "nbaleaguefinder": {
       "title": "NBA League Finder - RCX Sports",
-      "description": "Search and discovery tool for NBA fantasy leagues with advanced filtering capabilities. Displays league information, team details, player rosters, and real-time statistics. Optimized for performance with thousands of leagues."
+      "description": "Jr. NBA/WNBA league finder: families search local youth basketball programs and seasons by location and continue to registration."
     },
     "nhlleaguefinder": {
       "title": "NHL League Finder - RCX Sports",
-      "description": "Comprehensive NHL fantasy league browser with filtering by league type, size, and settings. Features team analysis, player statistics, and league standings. Built with responsive design for seamless mobile and desktop experience."
+      "description": "NHL Street league finder: families search local youth street hockey programs and seasons by location and continue to registration."
     },
     "mlsleaguefinder": {
       "title": "MLS League Finder - RCX Sports",
-      "description": "Soccer fantasy league discovery platform for MLS leagues. Enables users to search, filter, and explore leagues with detailed team rosters, player stats, and league configurations. Implements real-time data updates and intuitive navigation."
+      "description": "MLS GO league finder: families search local youth soccer programs and seasons by location and continue to registration."
     },
     "factupro": {
       "title": "FactuPro - Invoice Management",
@@ -141,7 +141,7 @@
       },
       "rcx-sports": {
         "title": "RCX Sports",
-        "lead": "League finder apps for RCX Sports across four leagues: NFL, NBA, NHL and MLS."
+        "lead": "League discovery for NFL FLAG, Jr. NBA/WNBA, NHL Street and MLS GO, helping families find local youth sports programs by location."
       },
       "independent": {
         "title": "Independent"
@@ -152,12 +152,12 @@
     "frontendBonzzu": {
       "role": "Senior Frontend Engineer",
       "company": "Bonzzu",
-      "notes": "Delivering scalable React/Next.js applications for <strong>Delos Company</strong> and <strong>RCX Sports</strong>. Designed reusable component systems using Material UI, Chakra UI, and Shadcn UI. Led performance optimizations through SSR, code splitting, and rendering efficiency improvements."
+      "notes": "Delivering scalable React/Next.js applications for <strong>Delos Company</strong> and <strong>RCX Sports</strong>, including RCX's public League Finder and the League Central operator platform. Designed reusable component systems using Material UI, Chakra UI, and Shadcn UI. Led performance optimizations through SSR, code splitting, and rendering efficiency improvements."
     },
     "fullstackFreelance": {
       "role": "Frontend Web Developer",
       "company": "Freelancer",
-      "notes": "Delivered high-impact solutions for international clients including <strong>Vrio</strong>, <strong>Wpromote</strong>, <strong>REAL Evals</strong> (featured by The New York Times), and <strong>FactuPro</strong>. Currently building frontend features for <strong>Magic Hour</strong>'s AI image and video creation tools with Next.js, React, and TypeScript. Specialized in SSR, performance optimization, and scalable component architectures."
+      "notes": "Delivered solutions for international clients including <strong>Vrio</strong>, <strong>Wpromote</strong>, <strong>REAL Evals</strong> (featured by The New York Times), and <strong>FactuPro</strong>. Currently building frontend features for <strong>Magic Hour</strong>'s AI image and video creation tools with Next.js, React, and TypeScript. Specialized in SSR, performance optimization, and scalable component architectures."
     },
     "fullstackNisum": {
       "role": "Full Stack Engineer",

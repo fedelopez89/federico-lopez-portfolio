@@ -1,12 +1,12 @@
 # Federico López — Senior Frontend Engineer
 
-> Senior Frontend Engineer with 16+ years of IT experience. Specializes in React, TypeScript, and Next.js. Based in Argentina. Available for remote opportunities worldwide. Work featured in The New York Times.
+> Senior Frontend Engineer with 16+ years of IT experience. Specializes in React, TypeScript, and Next.js. Based in Argentina. Available for remote opportunities worldwide. Worked on REAL Evals, a project featured in The New York Times.
 
 ## About
 
-Federico López is a Senior Frontend Engineer with 16+ years of total IT experience and 7+ years focused on modern frontend development. He builds high-performance, scalable, and accessible web applications for global companies in wellness, sports, fintech, and healthcare sectors — reaching millions of users worldwide.
+Federico López is a Senior Frontend Engineer with 16+ years of total IT experience and 7+ years focused on modern frontend development. He builds high-performance, scalable, and accessible web applications and has delivered production software across sports, healthcare, commerce, and AI evaluation.
 
-His work was featured in The New York Times for building production-ready AI evaluation applications used to benchmark large language models at REAL Evals.
+He contributed frontend engineering to REAL Evals, an AI evaluation project featured by The New York Times, building production-ready applications used to benchmark large language models.
 
 ## Core Skills
 
@@ -31,7 +31,7 @@ His work was featured in The New York Times for building production-ready AI eva
 - **Gmail Clone (REAL Evals)**: Production-ready Gmail replica for AI evaluation. Featured in The New York Times. Built with Next.js and Material UI.
 - **DoorDash Clone (REAL Evals)**: High-fidelity food delivery platform clone. Next.js + Material UI.
 - **Uber Clone (REAL Evals)**: Ride-sharing platform with real-time map integration. Featured in The New York Times.
-- **NFL / NBA / NHL / MLS League Finder (RCX Sports)**: Fantasy league discovery platforms with advanced filtering and real-time data.
+- **NFL / NBA / NHL / MLS League Finder (RCX Sports)**: League discovery for NFL FLAG, Jr. NBA/WNBA, NHL Street and MLS GO, helping families find local youth sports programs by location.
 - **FactuPro**: Invoice and billing management system for SMBs.
 
 ## Education

@@ -20,7 +20,7 @@ _Showcasing 16 years of IT experience with 7+ years specializing in modern front
 
 ## Highlights
 
-- **Featured in The New York Times** - Recognized for exceptional frontend engineering contributions
+- **REAL Evals** - Frontend engineering on a project featured in The New York Times
 - **Lighthouse 97/100 Desktop** - Performance, Accessibility, Best Practices and SEO all 100
 - **Lighthouse 83/100 Mobile** - Optimized for real devices on slow networks
 - **Multilingual** - English/Spanish i18n with automatic browser detection
@@ -56,7 +56,7 @@ Production-ready replicas built for REAL Evals AI testing platform:
 
 ### RCX Sports League Finders
 
-Enterprise search platforms for fantasy sports leagues:
+League discovery for NFL FLAG, Jr. NBA/WNBA, NHL Street and MLS GO, helping families find local youth sports programs by location:
 
 - **NFL League Finder** - [nfl.playrcx.com](https://nfl.playrcx.com/)
 - **NBA League Finder** - [jrnba.playrcx.com](https://jrnba.playrcx.com/)
@@ -163,7 +163,7 @@ resume/
 **Federico López** — Senior Frontend Engineer
 
 - 16 years IT experience, 7+ years modern frontend
-- Featured in The New York Times for AI evaluation platform work
+- Worked on REAL Evals, an AI evaluation project featured in The New York Times
 - 100% Remote | Working with global clients across 3 continents
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-federicoglopez-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/federicoglopez/)

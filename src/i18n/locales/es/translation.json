@@ -17,7 +17,7 @@
       "label": "Datos destacados",
       "years": "Más de 16 años en TI",
       "react": "Más de 7 años en React / Next.js",
-      "featured": "Destacado en The New York Times"
+      "featured": "REAL Evals · destacado en The New York Times"
     },
     "newTab": "(se abre en una pestaña nueva)",
     "scrollCue": {
@@ -67,7 +67,7 @@
   },
   "aboutMe": {
     "intro": "¡Hola! Soy <strong>Federico López</strong>, Ingeniero Frontend Senior especializado en construir aplicaciones web de <strong>alto rendimiento</strong>, <strong>escalables</strong> y <strong>centradas en el usuario</strong> con <strong>React</strong>, <strong>TypeScript</strong> y <strong>Next.js</strong>.",
-    "experience": "Con <strong>más de 16 años de experiencia en TI</strong> y <strong>más de 7 años enfocado en desarrollo frontend moderno</strong>, he entregado soluciones impactantes para compañías globales en bienestar, deportes, fintech y salud, alcanzando millones de usuarios en todo el mundo.",
+    "experience": "Con <strong>más de 16 años de experiencia en TI</strong> y <strong>más de 7 años enfocado en desarrollo frontend moderno</strong>, entregué software en producción para deportes, salud, comercio y evaluación de IA.",
     "passion": "Apasionado por arquitectura limpia, componentes reutilizables y resolver desafíos UX complejos. Prospero en entornos remotos Agile, colaborando con equipos multifuncionales para impulsar la excelencia del producto.",
     "stats": {
       "yearsExperience": "Años en frontend",
@@ -78,7 +78,7 @@
       "yearsFallback": "7+"
     },
     "featuredLabel": "Destacado en",
-    "featuredContext": "Cobertura de REAL Evals, la plataforma de pruebas de IA donde construí clones de aplicaciones de alta fidelidad.",
+    "featuredContext": "REAL Evals fue destacado por The New York Times; aporté ingeniería frontend al proyecto.",
     "featuredCta": "Ver la publicación en LinkedIn"
   },
   "projects": {
@@ -116,19 +116,19 @@
     },
     "nflleaguefinder": {
       "title": "Buscador de Ligas NFL - RCX Sports",
-      "description": "Plataforma avanzada de búsqueda y descubrimiento para ligas de fantasía NFL. Incluye filtrado completo, datos de ligas en tiempo real, plantillas de equipos, estadísticas de jugadores y explorador de configuraciones de liga. Construido para la plataforma RCX Sports para mejorar la experiencia de descubrimiento de ligas."
+      "description": "Buscador de ligas de NFL FLAG: las familias encuentran programas y temporadas de flag football juvenil cerca de su ubicación y continúan a la inscripción. Integrado directamente en nflflag.playrcx.com."
     },
     "nbaleaguefinder": {
       "title": "Buscador de Ligas NBA - RCX Sports",
-      "description": "Herramienta de búsqueda y descubrimiento para ligas de fantasía NBA con capacidades avanzadas de filtrado. Muestra información de ligas, detalles de equipos, plantillas de jugadores y estadísticas en tiempo real. Optimizado para rendimiento con miles de ligas."
+      "description": "Buscador de ligas de Jr. NBA/WNBA: las familias encuentran programas y temporadas de básquet juvenil cerca de su ubicación y continúan a la inscripción."
     },
     "nhlleaguefinder": {
       "title": "Buscador de Ligas NHL - RCX Sports",
-      "description": "Navegador integral de ligas de fantasía NHL con filtrado por tipo de liga, tamaño y configuraciones. Incluye análisis de equipos, estadísticas de jugadores y clasificaciones de liga. Construido con diseño responsive para experiencia fluida en móvil y escritorio."
+      "description": "Buscador de ligas de NHL Street: las familias encuentran programas y temporadas de street hockey juvenil cerca de su ubicación y continúan a la inscripción."
     },
     "mlsleaguefinder": {
       "title": "Buscador de Ligas MLS - RCX Sports",
-      "description": "Plataforma de descubrimiento de ligas de fantasía de fútbol para ligas MLS. Permite a los usuarios buscar, filtrar y explorar ligas con plantillas detalladas de equipos, estadísticas de jugadores y configuraciones de liga. Implementa actualizaciones de datos en tiempo real y navegación intuitiva."
+      "description": "Buscador de ligas de MLS GO: las familias encuentran programas y temporadas de fútbol juvenil cerca de su ubicación y continúan a la inscripción."
     },
     "factupro": {
       "title": "FactuPro - Gestión de Facturas",
@@ -141,7 +141,7 @@
       },
       "rcx-sports": {
         "title": "RCX Sports",
-        "lead": "Aplicaciones de búsqueda de ligas para RCX Sports en cuatro ligas: NFL, NBA, NHL y MLS."
+        "lead": "Descubrimiento de ligas para NFL FLAG, Jr. NBA/WNBA, NHL Street y MLS GO, que ayuda a las familias a encontrar programas deportivos juveniles cerca de su ubicación."
       },
       "independent": {
         "title": "Independientes"
@@ -152,12 +152,12 @@
     "frontendBonzzu": {
       "role": "Ingeniero Frontend Senior",
       "company": "Bonzzu",
-      "notes": "Entregando aplicaciones escalables en React/Next.js para <strong>Delos Company</strong> y <strong>RCX Sports</strong>. Diseñé sistemas de componentes reutilizables con Material UI, Chakra UI y Shadcn UI. Lideré optimizaciones de rendimiento mediante SSR, división de código y mejoras de eficiencia."
+      "notes": "Entregando aplicaciones escalables en React/Next.js para <strong>Delos Company</strong> y <strong>RCX Sports</strong>, incluyendo el League Finder público de RCX y la plataforma de operadores League Central. Diseñé sistemas de componentes reutilizables con Material UI, Chakra UI y Shadcn UI. Lideré optimizaciones de rendimiento mediante SSR, división de código y mejoras de eficiencia."
     },
     "fullstackFreelance": {
       "role": "Desarrollador Web Frontend",
       "company": "Freelancer",
-      "notes": "Entregué soluciones de alto impacto para clientes internacionales incluyendo <strong>Vrio</strong>, <strong>Wpromote</strong>, <strong>REAL Evals</strong> (destacado por The New York Times) y <strong>FactuPro</strong>. Actualmente construyo funcionalidades frontend para las herramientas de creación de imágenes y video con IA de <strong>Magic Hour</strong>, con Next.js, React y TypeScript. Especializado en SSR, optimización de rendimiento y arquitecturas escalables."
+      "notes": "Entregué soluciones para clientes internacionales incluyendo <strong>Vrio</strong>, <strong>Wpromote</strong>, <strong>REAL Evals</strong> (destacado por The New York Times) y <strong>FactuPro</strong>. Actualmente construyo funcionalidades frontend para las herramientas de creación de imágenes y video con IA de <strong>Magic Hour</strong>, con Next.js, React y TypeScript. Especializado en SSR, optimización de rendimiento y arquitecturas escalables."
     },
     "fullstackNisum": {
       "role": "Ingeniero Full Stack",

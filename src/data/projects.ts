@@ -83,7 +83,7 @@ export const projects: Project[] = [
     id: 'nfl-league-finder',
     title: 'NFL League Finder - RCX Sports',
     description:
-      'Advanced search and discovery platform for NFL fantasy leagues. Features comprehensive filtering, real-time league data, team rosters, player stats, and league settings explorer. Built for RCX Sports platform to enhance league discovery experience.',
+      'NFL FLAG league finder: families search local youth flag football programs and seasons by location and continue to registration. Integrated directly into nflflag.playrcx.com.',
     technologies: [
       'React',
       'TypeScript',
@@ -91,6 +91,7 @@ export const projects: Project[] = [
       'Context API',
       'REST API',
       'Google Maps API',
+      'MapLibre',
       'Chakra UI',
     ],
     demoUrl: 'https://nfl.playrcx.com/',
@@ -102,7 +103,7 @@ export const projects: Project[] = [
     id: 'nba-league-finder',
     title: 'NBA League Finder - RCX Sports',
     description:
-      'Search and discovery tool for NBA fantasy leagues with advanced filtering capabilities. Displays league information, team details, player rosters, and real-time statistics. Optimized for performance with thousands of leagues.',
+      'Jr. NBA/WNBA league finder: families search local youth basketball programs and seasons by location and continue to registration.',
     technologies: [
       'React',
       'TypeScript',
@@ -110,6 +111,7 @@ export const projects: Project[] = [
       'Context API',
       'REST API',
       'Google Maps API',
+      'MapLibre',
       'Chakra UI',
     ],
     demoUrl: 'https://jrnba.playrcx.com/',
@@ -121,7 +123,7 @@ export const projects: Project[] = [
     id: 'nhl-league-finder',
     title: 'NHL League Finder - RCX Sports',
     description:
-      'Comprehensive NHL fantasy league browser with filtering by league type, size, and settings. Features team analysis, player statistics, and league standings. Built with responsive design for seamless mobile and desktop experience.',
+      'NHL Street league finder: families search local youth street hockey programs and seasons by location and continue to registration.',
     technologies: [
       'React',
       'TypeScript',
@@ -129,6 +131,7 @@ export const projects: Project[] = [
       'Context API',
       'REST API',
       'Google Maps API',
+      'MapLibre',
       'Chakra UI',
     ],
     demoUrl: 'https://street.playrcx.com/',
@@ -140,7 +143,7 @@ export const projects: Project[] = [
     id: 'mls-league-finder',
     title: 'MLS League Finder - RCX Sports',
     description:
-      'Soccer fantasy league discovery platform for MLS leagues. Enables users to search, filter, and explore leagues with detailed team rosters, player stats, and league configurations. Implements real-time data updates and intuitive navigation.',
+      'MLS GO league finder: families search local youth soccer programs and seasons by location and continue to registration.',
     technologies: [
       'React',
       'TypeScript',
@@ -148,6 +151,7 @@ export const projects: Project[] = [
       'Context API',
       'REST API',
       'Google Maps API',
+      'MapLibre',
       'Chakra UI',
     ],
     demoUrl: 'https://go.playrcx.com/',

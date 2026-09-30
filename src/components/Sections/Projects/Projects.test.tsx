@@ -67,7 +67,7 @@ describe('Projects', () => {
     ).toBeInTheDocument();
     expect(
       screen.getByText(
-        'League finder apps for RCX Sports across four leagues: NFL, NBA, NHL and MLS.'
+        'League discovery for NFL FLAG, Jr. NBA/WNBA, NHL Street and MLS GO, helping families find local youth sports programs by location.'
       )
     ).toBeInTheDocument();
     expect(screen.queryByText(/end to end/i)).not.toBeInTheDocument();
