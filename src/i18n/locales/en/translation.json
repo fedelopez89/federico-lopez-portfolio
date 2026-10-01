@@ -96,23 +96,23 @@
     },
     "realevalsgmail": {
       "title": "Gmail Clone - REAL Evals",
-      "description": "Production-ready Gmail replica built for AI evaluation platform. Pixel-perfect recreation implementing email management, compose functionality, labels, folders, and advanced search. Built with Next.js and Material UI for optimal performance and accessibility."
+      "description": "Gmail clone I built for REAL Evals, where AI agents are evaluated against realistic apps. It covers email management, compose, labels, folders and search."
     },
     "realevalsdashdish": {
       "title": "DoorDash Clone - REAL Evals",
-      "description": "High-fidelity food delivery platform clone featuring restaurant browsing, menu exploration, cart management, and checkout flow. Built with Next.js and Material UI to replicate DoorDash user experience with responsive design and smooth interactions."
+      "description": "DoorDash clone I built for REAL Evals. It covers restaurant browsing, menus, cart and checkout."
     },
     "realevalsuber": {
       "title": "Uber Clone - REAL Evals",
-      "description": "Comprehensive ride-sharing platform clone with real-time map integration, route calculation, pricing estimates, and driver matching simulation. Built with Next.js and Material UI."
+      "description": "Uber clone I built for REAL Evals. It covers map integration, route calculation, price estimates and a simulated driver match."
     },
     "realevalsunited": {
       "title": "United Airlines Clone - REAL Evals",
-      "description": "Full-featured airline booking platform clone replicating United Airlines flight search, seat selection, booking flow, and trip management. Implements complex multi-step forms, real-time availability, and responsive design with Next.js and Material UI."
+      "description": "United Airlines clone I built for REAL Evals. It covers flight search, seat selection, booking and trip management through multi-step forms."
     },
     "magichour": {
       "title": "Magic Hour — AI Creation Tools",
-      "description": "Built frontend features for AI image and video generation, editing workflows, and responsive product interfaces. Integrated generation jobs, asset validation, error handling, and backend APIs into the Next.js application."
+      "description": "I built frontend features for Magic Hour's AI image and video generation and editing tools. The work included connecting generation jobs, asset validation, error handling and backend APIs in the Next.js app."
     },
     "nflleaguefinder": {
       "title": "NFL League Finder - RCX Sports",
@@ -132,7 +132,7 @@
     },
     "factupro": {
       "title": "FactuPro - Invoice Management",
-      "description": "Complete invoice and billing management system for SMBs. Implemented invoice generation, payment tracking, client management, and automated reminders with responsive design and accessibility compliance."
+      "description": "Invoice and billing app for small businesses. I built invoice generation, payment tracking, client management and automated reminders."
     },
     "groups": {
       "real-evals": {
@@ -145,6 +145,18 @@
       },
       "independent": {
         "title": "Independent"
+      }
+    },
+    "leagueFinders": {
+      "title": "RCX Sports League Finders",
+      "description": "One league finder for each of NFL FLAG, Jr. NBA/WNBA, NHL Street and MLS GO, built with Next.js and Chakra UI. Families search youth programs and seasons near them on a map and continue to registration.",
+      "linksLabel": "Open a league finder",
+      "linkLabel": "{{league}} league finder",
+      "leagues": {
+        "nfl-league-finder": "NFL FLAG",
+        "nba-league-finder": "Jr. NBA/WNBA",
+        "nhl-league-finder": "NHL Street",
+        "mls-league-finder": "MLS GO"
       }
     }
   },

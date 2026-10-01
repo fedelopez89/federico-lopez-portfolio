@@ -96,23 +96,23 @@
     },
     "realevalsgmail": {
       "title": "Clon de Gmail - REAL Evals",
-      "description": "Réplica de Gmail lista para producción construida para plataforma de evaluación de IA. Recreación pixel-perfect implementando gestión de correos, funcionalidad de redacción, etiquetas, carpetas y búsqueda avanzada. Construido con Next.js y Material UI para rendimiento y accesibilidad óptimos."
+      "description": "Clon de Gmail que construí para REAL Evals, donde se evalúan agentes de IA contra aplicaciones realistas. Cubre gestión de correos, redacción, etiquetas, carpetas y búsqueda."
     },
     "realevalsdashdish": {
       "title": "Clon de DoorDash - REAL Evals",
-      "description": "Clon de alta fidelidad de plataforma de entrega de comida con navegación de restaurantes, exploración de menús, gestión de carrito y flujo de compra. Construido con Next.js y Material UI para replicar la experiencia de usuario de DoorDash con diseño responsive e interacciones fluidas."
+      "description": "Clon de DoorDash que construí para REAL Evals. Cubre navegación de restaurantes, menús, carrito y compra."
     },
     "realevalsuber": {
       "title": "Clon de Uber - REAL Evals",
-      "description": "Clon integral de plataforma de viajes compartidos con integración de mapas en tiempo real, cálculo de rutas, estimaciones de precios y simulación de emparejamiento de conductores. Construido con Next.js y Material UI."
+      "description": "Clon de Uber que construí para REAL Evals. Cubre integración de mapas, cálculo de rutas, estimaciones de precio y una simulación de asignación de conductor."
     },
     "realevalsunited": {
       "title": "Clon de United Airlines - REAL Evals",
-      "description": "Clon completo de plataforma de reservas de aerolínea replicando búsqueda de vuelos de United Airlines, selección de asientos, flujo de reserva y gestión de viajes. Implementa formularios multi-paso complejos, disponibilidad en tiempo real y diseño responsive con Next.js y Material UI."
+      "description": "Clon de United Airlines que construí para REAL Evals. Cubre búsqueda de vuelos, selección de asientos, reserva y gestión de viajes con formularios de varios pasos."
     },
     "magichour": {
       "title": "Magic Hour — Herramientas de creación con IA",
-      "description": "Construí funcionalidades frontend para generación y edición de imágenes y videos con IA, junto con interfaces responsive del producto. Integré jobs de generación, validación de assets, manejo de errores y APIs backend en la aplicación Next.js."
+      "description": "Construí funcionalidades frontend para las herramientas de generación y edición de imágenes y videos con IA de Magic Hour. El trabajo incluyó conectar jobs de generación, validación de assets, manejo de errores y APIs backend en la aplicación Next.js."
     },
     "nflleaguefinder": {
       "title": "Buscador de Ligas NFL - RCX Sports",
@@ -132,7 +132,7 @@
     },
     "factupro": {
       "title": "FactuPro - Gestión de Facturas",
-      "description": "Sistema completo de gestión de facturación y cobros para PYMEs. Implementa generación de facturas, seguimiento de pagos, gestión de clientes y recordatorios automatizados con diseño responsive y cumplimiento de accesibilidad."
+      "description": "Aplicación de facturación y cobros para pequeños negocios. Construí la generación de facturas, el seguimiento de pagos, la gestión de clientes y los recordatorios automáticos."
     },
     "groups": {
       "real-evals": {
@@ -145,6 +145,18 @@
       },
       "independent": {
         "title": "Independientes"
+      }
+    },
+    "leagueFinders": {
+      "title": "Buscadores de Ligas de RCX Sports",
+      "description": "Un buscador de ligas para cada una de NFL FLAG, Jr. NBA/WNBA, NHL Street y MLS GO, construidos con Next.js y Chakra UI. Las familias buscan programas y temporadas juveniles cerca de su ubicación en un mapa y continúan a la inscripción.",
+      "linksLabel": "Abrir un buscador de ligas",
+      "linkLabel": "Buscador de ligas de {{league}}",
+      "leagues": {
+        "nfl-league-finder": "NFL FLAG",
+        "nba-league-finder": "Jr. NBA/WNBA",
+        "nhl-league-finder": "NHL Street",
+        "mls-league-finder": "MLS GO"
       }
     }
   },

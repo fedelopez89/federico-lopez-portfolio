@@ -5,6 +5,13 @@ export const PROJECT_GROUPS = [
 ] as const;
 export type ProjectGroup = (typeof PROJECT_GROUPS)[number];
 
+/**
+ * Groups rendered as a single combined card instead of one card per project.
+ * Every project keeps its own entry and /projects/<id> page; the card links
+ * to each and shows the first project's screenshot.
+ */
+export const COMBINED_GROUPS: readonly ProjectGroup[] = ['rcx-sports'];
+
 export interface Project {
   id: string;
   title: string;
@@ -33,7 +40,7 @@ export const projects: Project[] = [
     id: 'real-evals-gmail',
     title: 'Gmail Clone - REAL Evals',
     description:
-      'Production-ready Gmail replica built for AI evaluation platform. Pixel-perfect recreation implementing email management, compose functionality, labels, folders, and advanced search. Built with Next.js and Material UI for optimal performance and accessibility.',
+      'Gmail clone I built for REAL Evals, where AI agents are evaluated against realistic apps. It covers email management, compose, labels, folders and search.',
     technologies: ['React', 'TypeScript', 'Next.js', 'Material UI', 'Redux'],
     demoUrl: 'https://real-gomail.vercel.app/',
     imageUrl: getImageUrl('/images/projects/gmail-clone-opt.webp'),
@@ -47,7 +54,7 @@ export const projects: Project[] = [
     id: 'real-evals-dashdish',
     title: 'DoorDash Clone - REAL Evals',
     description:
-      'High-fidelity food delivery platform clone featuring restaurant browsing, menu exploration, cart management, and checkout flow. Built with Next.js and Material UI to replicate DoorDash user experience with responsive design and smooth interactions.',
+      'DoorDash clone I built for REAL Evals. It covers restaurant browsing, menus, cart and checkout.',
     technologies: ['React', 'TypeScript', 'Next.js', 'Material UI', 'Redux'],
     demoUrl: 'https://real-dashdish.vercel.app/',
     imageUrl: getImageUrl('/images/projects/dashdish-clone-opt.webp'),
@@ -59,7 +66,7 @@ export const projects: Project[] = [
     id: 'real-evals-uber',
     title: 'Uber Clone - REAL Evals',
     description:
-      'Comprehensive ride-sharing platform clone with real-time map integration, route calculation, pricing estimates, and driver matching simulation. Built with Next.js and Material UI.',
+      'Uber clone I built for REAL Evals. It covers map integration, route calculation, price estimates and a simulated driver match.',
     technologies: ['React', 'TypeScript', 'Next.js', 'Material UI', 'Redux'],
     demoUrl: 'https://real-udriver.vercel.app/',
     imageUrl: getImageUrl('/images/projects/uber-clone-opt.webp'),
@@ -71,7 +78,7 @@ export const projects: Project[] = [
     id: 'real-evals-united',
     title: 'United Airlines Clone - REAL Evals',
     description:
-      'Full-featured airline booking platform clone replicating United Airlines flight search, seat selection, booking flow, and trip management. Implements complex multi-step forms, real-time availability, and responsive design with Next.js and Material UI.',
+      'United Airlines clone I built for REAL Evals. It covers flight search, seat selection, booking and trip management through multi-step forms.',
     technologies: ['React', 'TypeScript', 'Next.js', 'Material UI', 'Redux'],
     demoUrl: 'https://real-flyunified.vercel.app/',
     imageUrl: getImageUrl('/images/projects/united-clone-opt.webp'),
@@ -96,6 +103,7 @@ export const projects: Project[] = [
     ],
     demoUrl: 'https://nfl.playrcx.com/',
     imageUrl: getImageUrl('/images/projects/nfl-finder-opt.webp'),
+    windowLabel: 'rcx-sports / nfl-finder',
     category: 'professional',
     group: 'rcx-sports',
   },
@@ -163,7 +171,7 @@ export const projects: Project[] = [
     id: 'magic-hour',
     title: 'Magic Hour — AI Creation Tools',
     description:
-      'Built frontend features for AI image and video generation, editing workflows, and responsive product interfaces. Integrated generation jobs, asset validation, error handling, and backend APIs into the Next.js application.',
+      "I built frontend features for Magic Hour's AI image and video generation and editing tools. The work included connecting generation jobs, asset validation, error handling and backend APIs in the Next.js app.",
     technologies: [
       'Next.js',
       'React',
@@ -180,7 +188,7 @@ export const projects: Project[] = [
     id: 'factupro',
     title: 'FactuPro - Invoice Management',
     description:
-      'Complete invoice and billing management system for SMBs. Implemented invoice generation, payment tracking, client management, and automated reminders with responsive design and accessibility compliance.',
+      'Invoice and billing app for small businesses. I built invoice generation, payment tracking, client management and automated reminders.',
     technologies: [
       'React',
       'TypeScript',
