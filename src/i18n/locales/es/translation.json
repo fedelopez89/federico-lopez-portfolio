@@ -97,7 +97,7 @@
       "description": "Clon de Gmail que construí para REAL Evals, donde se evalúan agentes de IA contra aplicaciones realistas. Cubre gestión de correos, redacción, etiquetas, carpetas y búsqueda.",
       "caseStudy": {
         "context": "REAL Evals construye clones de alta fidelidad de productos cotidianos, como Gmail, DoorDash, Uber y United Airlines, contra los que se evalúan agentes de IA. Este es el clon de Gmail.",
-        "role": "Desarrollador frontend freelance. Construí la interfaz del clon y sus flujos de producto.",
+        "role": "Ingeniero frontend freelance. Construí la interfaz del clon y sus flujos de producto.",
         "built": [
           "Un clon de Gmail de alta fidelidad con gestión de correos, redacción, etiquetas, carpetas y búsqueda",
           "Flujos de producto realistas sobre los que se evalúan agentes de IA",
@@ -125,7 +125,7 @@
       "description": "Construí funcionalidades frontend para las herramientas de generación y edición de imágenes y videos con IA de Magic Hour. El trabajo incluyó conectar jobs de generación, validación de assets, manejo de errores y APIs backend en la aplicación Next.js.",
       "caseStudy": {
         "context": "Magic Hour ofrece herramientas de IA para generar y editar imágenes y videos.",
-        "role": "Desarrollador frontend freelance. Actualmente construyo funcionalidades frontend del producto.",
+        "role": "Ingeniero frontend freelance. Actualmente construyo funcionalidades frontend del producto.",
         "built": [
           "Funcionalidades frontend para flujos de generación y edición de imágenes y videos con IA",
           "Jobs de generación, validación de assets, manejo de errores y APIs backend, integrados en la aplicación Next.js"
@@ -198,7 +198,7 @@
       "notes": "Entregando aplicaciones escalables en React/Next.js para <strong>Delos Company</strong> y <strong>RCX Sports</strong>, incluyendo el League Finder público de RCX y la plataforma de operadores League Central. Diseñé sistemas de componentes reutilizables con Material UI, Chakra UI y Shadcn UI. Lideré optimizaciones de rendimiento mediante SSR, división de código y mejoras de eficiencia."
     },
     "fullstackFreelance": {
-      "role": "Desarrollador Web Frontend",
+      "role": "Ingeniero Frontend",
       "company": "Freelancer",
       "notes": "Entregué soluciones para clientes internacionales incluyendo <strong>Vrio</strong>, <strong>Wpromote</strong>, <strong>REAL Evals</strong> (destacado por The New York Times) y <strong>FactuPro</strong>. Actualmente construyo funcionalidades frontend para las herramientas de creación de imágenes y video con IA de <strong>Magic Hour</strong>, con Next.js, React y TypeScript. Especializado en SSR, optimización de rendimiento y arquitecturas escalables."
     },

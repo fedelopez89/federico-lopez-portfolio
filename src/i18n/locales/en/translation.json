@@ -97,7 +97,7 @@
       "description": "Gmail clone I built for REAL Evals, where AI agents are evaluated against realistic apps. It covers email management, compose, labels, folders and search.",
       "caseStudy": {
         "context": "REAL Evals builds high-fidelity clones of everyday products, including Gmail, DoorDash, Uber and United Airlines, that AI agents are evaluated against. This is the Gmail clone.",
-        "role": "Freelance frontend developer. I built the clone's interface and its product flows.",
+        "role": "Freelance frontend engineer. I built the clone's interface and its product flows.",
         "built": [
           "A high-fidelity Gmail clone covering email management, compose, labels, folders and search",
           "Realistic product flows that AI agents are evaluated on",
@@ -125,7 +125,7 @@
       "description": "I built frontend features for Magic Hour's AI image and video generation and editing tools. The work included connecting generation jobs, asset validation, error handling and backend APIs in the Next.js app.",
       "caseStudy": {
         "context": "Magic Hour offers AI tools for image and video generation and editing.",
-        "role": "Freelance frontend developer. I am currently building frontend features for the product.",
+        "role": "Freelance frontend engineer. I am currently building frontend features for the product.",
         "built": [
           "Frontend features for AI image and video generation and editing workflows",
           "Generation jobs, asset validation, error handling and backend APIs, integrated into the Next.js application"
@@ -198,7 +198,7 @@
       "notes": "Delivering scalable React/Next.js applications for <strong>Delos Company</strong> and <strong>RCX Sports</strong>, including RCX's public League Finder and the League Central operator platform. Designed reusable component systems using Material UI, Chakra UI, and Shadcn UI. Led performance optimizations through SSR, code splitting, and rendering efficiency improvements."
     },
     "fullstackFreelance": {
-      "role": "Frontend Web Developer",
+      "role": "Frontend Engineer",
       "company": "Freelancer",
       "notes": "Delivered solutions for international clients including <strong>Vrio</strong>, <strong>Wpromote</strong>, <strong>REAL Evals</strong> (featured by The New York Times), and <strong>FactuPro</strong>. Currently building frontend features for <strong>Magic Hour</strong>'s AI image and video creation tools with Next.js, React, and TypeScript. Specialized in SSR, performance optimization, and scalable component architectures."
     },

@@ -21,7 +21,7 @@ He contributed frontend engineering to REAL Evals, an AI evaluation project feat
 ## Experience
 
 - **Senior Frontend Engineer — Bonzzu** (Current): React/Next.js applications for Delos Company and RCX Sports. Reusable component systems, SSR, and performance optimization.
-- **Frontend Web Developer — Freelance**: Clients include REAL Evals (featured in The New York Times), Vrio, Wpromote, and FactuPro.
+- **Frontend Engineer — Freelance**: Clients include REAL Evals (featured in The New York Times), Vrio, Wpromote, and FactuPro.
 - **Full Stack Engineer — Nisum (Science37)**: Clinical research platform using React, Redux, and TypeScript. Storybook component library.
 - **Senior Mainframe COBOL Developer — ICBC**: Anti-Money Laundering systems, COBOL, DB2, CICS.
 - **COBOL Developer — ISBAN / BBVA / Accenture**: Enterprise financial batch systems.
