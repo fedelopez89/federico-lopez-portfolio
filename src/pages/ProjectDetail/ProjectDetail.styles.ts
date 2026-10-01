@@ -142,6 +142,7 @@ export const ScreenshotPlaceholder = styled.div`
  */
 export const Body = styled.div<{ $split?: boolean }>`
   display: flex;
+  max-width: ${({ theme }) => theme.layout.maxWidth.content};
   margin-top: ${({ theme }) => theme.spacing['2xl']};
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing['2xl']};
