@@ -8,14 +8,11 @@ import {
   toDateTimeValue,
 } from '@/utils/dateCalculations';
 import { useRevealOnFocus } from '@/hooks';
-import { RESUME_FILENAME, RESUME_HREF } from '../../../data/resume';
-import { Button } from '../../ui';
 import { fadeUpVariants, inViewProps } from '../../../styles/motion';
 import { SectionHeader } from '../shared/SectionHeader';
 import { sectionTitleId } from '../shared/sectionTitleId';
 import {
   ExperienceContainer,
-  Actions,
   Timeline,
   TimelineItem,
   Meta,
@@ -27,20 +24,7 @@ import {
   CompanyLink,
   CompanyName,
   Notes,
-  FileType,
 } from './Experience.styles';
-
-const DownloadIcon = () => (
-  <svg
-    width="18"
-    height="18"
-    fill="currentColor"
-    viewBox="0 0 24 24"
-    aria-hidden="true"
-  >
-    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
-  </svg>
-);
 
 const Experience: FC = () => {
   const { t, i18n } = useTranslation();
@@ -78,22 +62,6 @@ const Experience: FC = () => {
         title={t('sections.experience')}
         titleId={sectionTitleId('experience')}
       />
-      <Actions
-        variants={fadeUpVariants}
-        {...inViewProps}
-        {...reveal('actions')}
-      >
-        <Button
-          variant="secondary"
-          size="md"
-          href={RESUME_HREF}
-          download={RESUME_FILENAME}
-          icon={<DownloadIcon />}
-        >
-          {t('buttons.downloadResume')}
-          <FileType>{t('buttons.resumeFileType')}</FileType>
-        </Button>
-      </Actions>
       <Timeline>
         {experiences.map((experience) => {
           const { id, company, end } = experience;

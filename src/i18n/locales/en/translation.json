@@ -51,12 +51,10 @@
     "experience": "Experience"
   },
   "buttons": {
-    "downloadResume": "Download resume",
     "liveDemo": "Open live demo",
     "code": "Code",
     "viewDetails": "View details",
     "backToPortfolio": "Back to portfolio",
-    "resumeFileType": "PDF",
     "openApp": "Open app (login required)"
   },
   "footer": {

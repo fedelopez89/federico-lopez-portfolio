@@ -51,12 +51,10 @@
     "experience": "Experiencia"
   },
   "buttons": {
-    "downloadResume": "Descargar CV",
     "liveDemo": "Abrir demo",
     "code": "Código",
     "viewDetails": "Ver detalles",
     "backToPortfolio": "Volver al portfolio",
-    "resumeFileType": "PDF",
     "openApp": "Abrir app (requiere login)"
   },
   "footer": {

@@ -18,7 +18,8 @@ export const lightTheme = {
 
     // Text colors
     text: '#111827',
-    textSecondary: '#6b7280',
+    // Body copy: 10.3:1 on white (was #6b7280, 4.8:1); stays above textMuted.
+    textSecondary: '#374151',
     textTertiary: '#6b7280',
 
     // Border colors
