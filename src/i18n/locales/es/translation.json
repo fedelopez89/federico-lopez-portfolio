@@ -96,7 +96,19 @@
     },
     "realevalsgmail": {
       "title": "Clon de Gmail - REAL Evals",
-      "description": "Clon de Gmail que construí para REAL Evals, donde se evalúan agentes de IA contra aplicaciones realistas. Cubre gestión de correos, redacción, etiquetas, carpetas y búsqueda."
+      "description": "Clon de Gmail que construí para REAL Evals, donde se evalúan agentes de IA contra aplicaciones realistas. Cubre gestión de correos, redacción, etiquetas, carpetas y búsqueda.",
+      "caseStudy": {
+        "context": "REAL Evals construye clones de alta fidelidad de productos cotidianos, como Gmail, DoorDash, Uber y United Airlines, contra los que se evalúan agentes de IA. Este es el clon de Gmail.",
+        "role": "Desarrollador frontend freelance. Construí la interfaz del clon y sus flujos de producto.",
+        "built": [
+          "Un clon de Gmail de alta fidelidad con gestión de correos, redacción, etiquetas, carpetas y búsqueda",
+          "Flujos de producto complejos de varios pasos sobre los que se evalúan agentes de IA",
+          "La interfaz con Next.js, Material UI y Redux"
+        ],
+        "details": [
+          "El fundador de REAL Evals reconoció públicamente mis contribuciones frontend en una publicación de LinkedIn"
+        ]
+      }
     },
     "realevalsdashdish": {
       "title": "Clon de DoorDash - REAL Evals",
@@ -112,11 +124,33 @@
     },
     "magichour": {
       "title": "Magic Hour — Herramientas de creación con IA",
-      "description": "Construí funcionalidades frontend para las herramientas de generación y edición de imágenes y videos con IA de Magic Hour. El trabajo incluyó conectar jobs de generación, validación de assets, manejo de errores y APIs backend en la aplicación Next.js."
+      "description": "Construí funcionalidades frontend para las herramientas de generación y edición de imágenes y videos con IA de Magic Hour. El trabajo incluyó conectar jobs de generación, validación de assets, manejo de errores y APIs backend en la aplicación Next.js.",
+      "caseStudy": {
+        "context": "Magic Hour ofrece herramientas de IA para generar y editar imágenes y videos.",
+        "role": "Desarrollador frontend freelance. Actualmente construyo funcionalidades frontend del producto.",
+        "built": [
+          "Funcionalidades frontend para flujos de generación y edición de imágenes y videos con IA",
+          "Jobs de generación, validación de assets, manejo de errores y APIs backend, integrados en la aplicación Next.js"
+        ]
+      }
     },
     "nflleaguefinder": {
       "title": "Buscador de Ligas NFL - RCX Sports",
-      "description": "Buscador de ligas de NFL FLAG: las familias encuentran programas y temporadas de flag football juvenil cerca de su ubicación y continúan a la inscripción. Integrado directamente en nflflag.playrcx.com."
+      "description": "Buscador de ligas de NFL FLAG: las familias encuentran programas y temporadas de flag football juvenil cerca de su ubicación y continúan a la inscripción. Integrado directamente en nflflag.playrcx.com.",
+      "caseStudy": {
+        "context": "El buscador de ligas público de NFL FLAG, construido para RCX Sports. Las familias lo usan para encontrar programas de flag football juvenil cerca de su ubicación y continuar a la inscripción. RCX Sports tiene buscadores equivalentes para Jr. NBA/WNBA, NHL Street y MLS GO.",
+        "role": "Ingeniero frontend senior en Bonzzu, entregando el League Finder público de RCX Sports.",
+        "built": [
+          "Búsqueda por ubicación con integración de Google Maps y geolocalización",
+          "Datos de programas y temporadas desde APIs REST, con el estado manejado mediante Context API",
+          "Componentes reutilizables con Chakra UI",
+          "SSR y división de código para mejorar el rendimiento",
+          "Integración con el CMS Contentful, para que equipos no técnicos gestionen el contenido"
+        ],
+        "details": [
+          "El buscador está integrado directamente en nflflag.playrcx.com"
+        ]
+      }
     },
     "nbaleaguefinder": {
       "title": "Buscador de Ligas NBA - RCX Sports",
@@ -255,7 +289,13 @@
     "navLabel": "Navegación de proyectos",
     "previous": "Anterior",
     "next": "Siguiente",
-    "loading": "Cargando proyecto…"
+    "loading": "Cargando proyecto…",
+    "caseStudy": {
+      "context": "Contexto",
+      "role": "Mi rol",
+      "built": "Qué construí",
+      "details": "Detalles destacados"
+    }
   },
   "notFound": {
     "title": "Página no encontrada",

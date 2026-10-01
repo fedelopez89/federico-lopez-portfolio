@@ -46,6 +46,11 @@ import {
   Screenshot,
   ScreenshotPlaceholder,
   Body,
+  BodyAside,
+  Narrative,
+  NarrativeSection,
+  NarrativeText,
+  BulletList,
   FeaturedCallout,
   PublicationName,
   CalloutContext,
@@ -58,6 +63,21 @@ import {
   PagerLabel,
   PagerTitle,
 } from './ProjectDetail.styles';
+
+interface CaseStudy {
+  context?: string;
+  role?: string;
+  built?: string[];
+  details?: string[];
+}
+
+/** Case-study sections in reading order; each renders only with content. */
+const CASE_STUDY_SECTIONS = [
+  { key: 'context', list: false },
+  { key: 'role', list: false },
+  { key: 'built', list: true },
+  { key: 'details', list: true },
+] as const;
 
 /** Intrinsic size of the screenshots; reserves space before the image loads. */
 const IMAGE_WIDTH = 1400;
@@ -77,6 +97,19 @@ function ProjectDetail() {
   const { name: translatedTitle, description: translatedDesc } = project
     ? translateProject(project, t as unknown as Translate)
     : { name: '', description: '' };
+
+  const caseStudy = project
+    ? (t(`projects.${projectKey(project.id)}.caseStudy`, {
+        returnObjects: true,
+        defaultValue: null,
+      }) as unknown as CaseStudy | null)
+    : null;
+  const narrative = caseStudy
+    ? CASE_STUDY_SECTIONS.filter(({ key }) => {
+        const value = caseStudy[key];
+        return Array.isArray(value) ? value.length > 0 : Boolean(value);
+      })
+    : [];
 
   const titleRef = useRef<HTMLHeadingElement>(null);
   // Arriving through a view transition: the snapshot needs the final layout,
@@ -251,30 +284,64 @@ function ProjectDetail() {
             </ScreenshotFrame>
           </Stack>
 
-          <Body>
-            {project.featured && (
-              <FeaturedCallout>
-                <Eyebrow>{t('aboutMe.featuredLabel')}</Eyebrow>
-                <PublicationName>{NYT_NAME}</PublicationName>
-                <CalloutContext>{t('aboutMe.featuredContext')}</CalloutContext>
-                <TextLink href={NYT_HREF} external externalLabel={newTab} arrow>
-                  {t('aboutMe.featuredCta')}
-                </TextLink>
-              </FeaturedCallout>
+          <Body $split={narrative.length > 0}>
+            {narrative.length > 0 && caseStudy && (
+              <Narrative>
+                {narrative.map(({ key, list }) => {
+                  const headingId = `project-${key}-title`;
+                  const value = caseStudy[key];
+                  return (
+                    <NarrativeSection key={key} aria-labelledby={headingId}>
+                      <SectionTitle id={headingId}>
+                        {t(`projectDetail.caseStudy.${key}`)}
+                      </SectionTitle>
+                      {list && Array.isArray(value) ? (
+                        <BulletList>
+                          {value.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </BulletList>
+                      ) : (
+                        <NarrativeText>{value}</NarrativeText>
+                      )}
+                    </NarrativeSection>
+                  );
+                })}
+              </Narrative>
             )}
 
-            <TechSection aria-labelledby="project-tech-title">
-              <SectionTitle id="project-tech-title">
-                {t('projectDetail.technologies')}
-              </SectionTitle>
-              <TechList>
-                {[...new Set(project.technologies)].map((tech) => (
-                  <Chip as="li" key={tech}>
-                    {tech}
-                  </Chip>
-                ))}
-              </TechList>
-            </TechSection>
+            <BodyAside>
+              {project.featured && (
+                <FeaturedCallout>
+                  <Eyebrow>{t('aboutMe.featuredLabel')}</Eyebrow>
+                  <PublicationName>{NYT_NAME}</PublicationName>
+                  <CalloutContext>
+                    {t('aboutMe.featuredContext')}
+                  </CalloutContext>
+                  <TextLink
+                    href={NYT_HREF}
+                    external
+                    externalLabel={newTab}
+                    arrow
+                  >
+                    {t('aboutMe.featuredCta')}
+                  </TextLink>
+                </FeaturedCallout>
+              )}
+
+              <TechSection aria-labelledby="project-tech-title">
+                <SectionTitle id="project-tech-title">
+                  {t('projectDetail.technologies')}
+                </SectionTitle>
+                <TechList>
+                  {[...new Set(project.technologies)].map((tech) => (
+                    <Chip as="li" key={tech}>
+                      {tech}
+                    </Chip>
+                  ))}
+                </TechList>
+              </TechSection>
+            </BodyAside>
           </Body>
 
           {neighbours.length > 0 && (

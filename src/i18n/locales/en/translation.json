@@ -96,7 +96,19 @@
     },
     "realevalsgmail": {
       "title": "Gmail Clone - REAL Evals",
-      "description": "Gmail clone I built for REAL Evals, where AI agents are evaluated against realistic apps. It covers email management, compose, labels, folders and search."
+      "description": "Gmail clone I built for REAL Evals, where AI agents are evaluated against realistic apps. It covers email management, compose, labels, folders and search.",
+      "caseStudy": {
+        "context": "REAL Evals builds high-fidelity clones of everyday products, including Gmail, DoorDash, Uber and United Airlines, that AI agents are evaluated against. This is the Gmail clone.",
+        "role": "Freelance frontend developer. I built the clone's interface and its product flows.",
+        "built": [
+          "A high-fidelity Gmail clone covering email management, compose, labels, folders and search",
+          "Complex multi-step product flows that AI agents are evaluated on",
+          "The interface with Next.js, Material UI and Redux"
+        ],
+        "details": [
+          "The REAL Evals founder publicly recognized my frontend contributions in a LinkedIn post"
+        ]
+      }
     },
     "realevalsdashdish": {
       "title": "DoorDash Clone - REAL Evals",
@@ -112,11 +124,33 @@
     },
     "magichour": {
       "title": "Magic Hour — AI Creation Tools",
-      "description": "I built frontend features for Magic Hour's AI image and video generation and editing tools. The work included connecting generation jobs, asset validation, error handling and backend APIs in the Next.js app."
+      "description": "I built frontend features for Magic Hour's AI image and video generation and editing tools. The work included connecting generation jobs, asset validation, error handling and backend APIs in the Next.js app.",
+      "caseStudy": {
+        "context": "Magic Hour offers AI tools for image and video generation and editing.",
+        "role": "Freelance frontend developer. I am currently building frontend features for the product.",
+        "built": [
+          "Frontend features for AI image and video generation and editing workflows",
+          "Generation jobs, asset validation, error handling and backend APIs, integrated into the Next.js application"
+        ]
+      }
     },
     "nflleaguefinder": {
       "title": "NFL League Finder - RCX Sports",
-      "description": "NFL FLAG league finder: families search local youth flag football programs and seasons by location and continue to registration. Integrated directly into nflflag.playrcx.com."
+      "description": "NFL FLAG league finder: families search local youth flag football programs and seasons by location and continue to registration. Integrated directly into nflflag.playrcx.com.",
+      "caseStudy": {
+        "context": "The public League Finder for NFL FLAG, built for RCX Sports. Families use it to find youth flag football programs near them and continue to registration. RCX Sports runs matching finders for Jr. NBA/WNBA, NHL Street and MLS GO.",
+        "role": "Senior frontend engineer at Bonzzu, delivering RCX Sports' public League Finder.",
+        "built": [
+          "Location search with Google Maps integration and geolocation",
+          "Program and season data from REST APIs, with state managed through the Context API",
+          "Reusable components with Chakra UI",
+          "SSR and code splitting for performance",
+          "Contentful CMS integration, so non-technical teams can manage content"
+        ],
+        "details": [
+          "The finder is integrated directly into nflflag.playrcx.com"
+        ]
+      }
     },
     "nbaleaguefinder": {
       "title": "NBA League Finder - RCX Sports",
@@ -255,7 +289,13 @@
     "navLabel": "Project navigation",
     "previous": "Previous",
     "next": "Next",
-    "loading": "Loading project…"
+    "loading": "Loading project…",
+    "caseStudy": {
+      "context": "Context",
+      "role": "My role",
+      "built": "What I built",
+      "details": "Notable details"
+    }
   },
   "notFound": {
     "title": "Page not found",
