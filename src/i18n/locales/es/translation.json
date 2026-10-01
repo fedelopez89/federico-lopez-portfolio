@@ -68,7 +68,7 @@
   "aboutMe": {
     "intro": "Soy frontend engineer y me enfoco en la capa de interfaz: sistemas de componentes, performance, accesibilidad y los detalles que hacen que un producto se sienta terminado. Trabajo principalmente con <strong>React</strong>, <strong>Next.js</strong> y <strong>TypeScript</strong>, muy de cerca con producto y diseño.",
     "experience": "Empecé en 2010 escribiendo COBOL para sistemas bancarios en <strong>ICBC</strong> y <strong>BBVA</strong>, software que no podía caerse. Eso sigue marcando cómo construyo para la web: pienso en casos borde, estados de error y en lo que pasa en producción, no solo en la demo.",
-    "passion": "Desde 2021 trabajo 100% remoto en productos en producción: descubrimiento de ligas deportivas juveniles para <strong>RCX Sports</strong>, clones de aplicaciones de alta fidelidad para <strong>REAL Evals</strong>, destacado por The New York Times, y herramientas de creación con IA en <strong>Magic Hour</strong>.",
+    "passion": "Desde 2021 trabajo 100% remoto en productos en producción: descubrimiento de ligas deportivas juveniles para <strong>RCX Sports</strong>, clones de aplicaciones de alta fidelidad para <strong>REAL Evals</strong> y herramientas de creación con IA en <strong>Magic Hour</strong>.",
     "stats": {
       "yearsExperience": "Años en frontend",
       "companies": "Empresas y productos",
@@ -82,7 +82,7 @@
     "featuredCta": "Ver la publicación en LinkedIn"
   },
   "projects": {
-    "subtitle": "Una selección de mi trabajo, incluyendo proyectos destacados en The New York Times",
+    "subtitle": "Una selección de mi trabajo en evaluación de IA, deporte juvenil y herramientas de creación con IA",
     "nytBadge": "Destacado NYT",
     "featuredCta": "Ver el proyecto",
     "technologiesUsed": "Tecnologías utilizadas",
@@ -171,7 +171,7 @@
     "groups": {
       "real-evals": {
         "title": "REAL Evals",
-        "lead": "Clones de aplicaciones de alta fidelidad creados para evaluación de IA, destacados en The New York Times."
+        "lead": "Clones de aplicaciones de alta fidelidad creados para evaluación de IA."
       },
       "rcx-sports": {
         "title": "RCX Sports",

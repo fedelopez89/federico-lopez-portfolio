@@ -4,11 +4,25 @@ import { Card, Container } from '../../ui';
 
 export const AboutMeContainer = styled(Container)``;
 
-/** Stacks copy, credential and facts with even rhythm on the container edge. */
+/**
+ * Stacks copy, credential and facts on small screens. From lg the copy sits
+ * left and the credential right, aligned to the top, with the facts spanning
+ * the full width below.
+ */
 export const AboutMeBody = styled(motion.div)`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing['3xl']};
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
+    grid-template-areas:
+      'copy callout'
+      'facts facts';
+    align-items: start;
+    column-gap: ${({ theme }) => theme.spacing['4xl']};
+  }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     gap: ${({ theme }) => theme.spacing['2xl']};
@@ -16,6 +30,7 @@ export const AboutMeBody = styled(motion.div)`
 `;
 
 export const Description = styled(motion.div)`
+  grid-area: copy;
   max-width: ${({ theme }) => theme.layout.maxWidth.prose};
 
   p {
@@ -36,6 +51,7 @@ export const Description = styled(motion.div)`
 `;
 
 export const FeaturedCallout = styled(motion.create(Card))`
+  grid-area: callout;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -65,6 +81,7 @@ export const CalloutContext = styled.p`
 `;
 
 export const FactsList = styled(motion.dl)`
+  grid-area: facts;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   margin: 0;

@@ -65,9 +65,7 @@ describe('Projects', () => {
   it('shows a factual one-line lead under each group title', () => {
     renderProjects();
     expect(
-      screen.getByText(
-        'High-fidelity app clones built for AI evaluation, featured in The New York Times.'
-      )
+      screen.getByText('High-fidelity app clones built for AI evaluation.')
     ).toBeInTheDocument();
     expect(
       screen.getByText(
@@ -156,6 +154,17 @@ describe('Projects', () => {
         expect(i18n.t(key, { lng })).not.toMatch(/New York Times/);
       })
     );
+  });
+
+  it('keeps the NYT claim out of the section subtitle and group leads', () => {
+    ['en', 'es'].forEach((lng) => {
+      expect(i18n.t('projects.subtitle', { lng })).not.toMatch(
+        /New York Times/
+      );
+      expect(i18n.t('projects.groups.real-evals.lead', { lng })).not.toMatch(
+        /New York Times/
+      );
+    });
   });
 
   it('lists each technology once per project', () => {

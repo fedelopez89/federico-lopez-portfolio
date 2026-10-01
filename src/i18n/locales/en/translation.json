@@ -68,7 +68,7 @@
   "aboutMe": {
     "intro": "I'm a frontend engineer focused on the interface layer: component systems, performance, accessibility, and the details that make a product feel finished. I work mostly with <strong>React</strong>, <strong>Next.js</strong>, and <strong>TypeScript</strong>, closely with product and design.",
     "experience": "I started in 2010 writing COBOL for banking systems at <strong>ICBC</strong> and <strong>BBVA</strong>, software that couldn't go down. That still shapes how I build for the web: I think about edge cases, failure states, and what happens in production, not just in the demo.",
-    "passion": "Since 2021 I've worked fully remote on production products: youth sports league discovery for <strong>RCX Sports</strong>, high-fidelity app clones for <strong>REAL Evals</strong>, featured by The New York Times, and AI creation tools at <strong>Magic Hour</strong>.",
+    "passion": "Since 2021 I've worked fully remote on production products: youth sports league discovery for <strong>RCX Sports</strong>, high-fidelity app clones for <strong>REAL Evals</strong>, and AI creation tools at <strong>Magic Hour</strong>.",
     "stats": {
       "yearsExperience": "Years in frontend",
       "companies": "Companies & products",
@@ -82,7 +82,7 @@
     "featuredCta": "See the LinkedIn post"
   },
   "projects": {
-    "subtitle": "A selection of my work, including projects featured in The New York Times",
+    "subtitle": "A selection of my work across AI evaluation, youth sports and AI creation tools",
     "nytBadge": "NYT feature",
     "featuredCta": "View project",
     "technologiesUsed": "Technologies used",
@@ -171,7 +171,7 @@
     "groups": {
       "real-evals": {
         "title": "REAL Evals",
-        "lead": "High-fidelity app clones built for AI evaluation, featured in The New York Times."
+        "lead": "High-fidelity app clones built for AI evaluation."
       },
       "rcx-sports": {
         "title": "RCX Sports",

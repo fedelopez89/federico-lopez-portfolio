@@ -1,6 +1,14 @@
-import { describe, it, expect, beforeAll, beforeEach, afterEach, vi } from 'vitest';
+import {
+  describe,
+  it,
+  expect,
+  beforeAll,
+  beforeEach,
+  afterEach,
+  vi,
+} from 'vitest';
 import { screen, within } from '@testing-library/react';
-import '../../../i18n/config';
+import i18n from '../../../i18n/config';
 import AboutMe from './AboutMe';
 import {
   renderWithProviders,
@@ -45,6 +53,16 @@ describe('AboutMe', () => {
     renderWithProviders(<AboutMe />);
     expect(screen.getByText('100%')).toBeInTheDocument();
     expect(screen.getByText('Companies & products')).toBeInTheDocument();
+  });
+
+  it('mentions the New York Times only in the featured callout', () => {
+    renderWithProviders(<AboutMe />);
+    expect(screen.getAllByText(/New York Times/)).toHaveLength(2);
+    const callout = screen.getByText('The New York Times').closest('div');
+    expect(callout).toHaveTextContent(/featured by The New York Times/);
+    ['en', 'es'].forEach((lng) =>
+      expect(i18n.t('aboutMe.passion', { lng })).not.toMatch(/New York Times/)
+    );
   });
 
   it('links the New York Times feature externally with a safe rel', () => {
