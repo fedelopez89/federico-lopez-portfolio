@@ -12,16 +12,6 @@ const markerTop = (pad: string) =>
 
 export const ExperienceContainer = styled(Container)``;
 
-export const Actions = styled(motion.div)`
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: ${({ theme }) => theme.spacing['3xl']};
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    margin-bottom: ${({ theme }) => theme.spacing['2xl']};
-  }
-`;
-
 export const Timeline = styled.ol.attrs({ role: 'list' })`
   position: relative;
   margin: 0;
@@ -96,14 +86,6 @@ export const TimelineItem = styled(motion.li)<{ $current?: boolean }>`
       animation-range: entry 0% entry 25%;
     }
   `)}
-`;
-
-export const FileType = styled.span`
-  font-family: ${({ theme }) => theme.typography.fontFamily.mono};
-  font-size: ${({ theme }) => theme.typography.fontSize.xs};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
-  letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wider};
-  color: ${({ theme }) => theme.colors.textMuted};
 `;
 
 export const Meta = styled.div`

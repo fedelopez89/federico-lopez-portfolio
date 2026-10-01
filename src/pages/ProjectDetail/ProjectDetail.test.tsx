@@ -70,6 +70,56 @@ describe('ProjectDetail', () => {
     ).toBeInTheDocument();
   });
 
+  describe('case studies', () => {
+    it.each([
+      ['real-evals-gmail', 'A high-fidelity Gmail clone'],
+      ['nfl-league-finder', 'Location search with Google Maps'],
+      ['magic-hour', 'Frontend features for AI image and video'],
+    ])('renders the case-study sections for %s', (id, builtItem) => {
+      renderDetail(id);
+      ['Context', 'My role', 'What I built', 'Technologies'].forEach((name) =>
+        expect(
+          screen.getByRole('heading', { level: 2, name })
+        ).toBeInTheDocument()
+      );
+      const built = screen.getByRole('region', { name: 'What I built' });
+      expect(within(built).getAllByRole('listitem')[0]).toHaveTextContent(
+        builtItem
+      );
+    });
+
+    it('only renders sections that have content', () => {
+      renderDetail('magic-hour');
+      expect(
+        screen.queryByRole('heading', { name: 'Notable details' })
+      ).not.toBeInTheDocument();
+      renderDetail('real-evals-gmail');
+      expect(
+        screen.getByRole('heading', { name: 'Notable details' })
+      ).toBeInTheDocument();
+    });
+
+    it('leaves projects without a case study unchanged', () => {
+      renderDetail('factupro');
+      expect(
+        screen.queryByRole('heading', { name: 'My role' })
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByRole('heading', { level: 2, name: 'Technologies' })
+      ).toBeInTheDocument();
+    });
+
+    it('translates the case-study headings to Spanish', async () => {
+      await act(() => i18n.changeLanguage('es'));
+      renderDetail('nfl-league-finder');
+      ['Contexto', 'Mi rol', 'Qué construí'].forEach((name) =>
+        expect(
+          screen.getByRole('heading', { level: 2, name })
+        ).toBeInTheDocument()
+      );
+    });
+  });
+
   it('renders the not-found state with a heading and a link to the projects section', () => {
     renderDetail('non-existent-project');
     expect(

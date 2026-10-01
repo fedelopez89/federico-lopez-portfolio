@@ -51,12 +51,10 @@
     "experience": "Experience"
   },
   "buttons": {
-    "downloadResume": "Download resume",
     "liveDemo": "Open live demo",
     "code": "Code",
     "viewDetails": "View details",
     "backToPortfolio": "Back to portfolio",
-    "resumeFileType": "PDF",
     "openApp": "Open app (login required)"
   },
   "footer": {
@@ -68,7 +66,7 @@
   "aboutMe": {
     "intro": "I'm a frontend engineer focused on the interface layer: component systems, performance, accessibility, and the details that make a product feel finished. I work mostly with <strong>React</strong>, <strong>Next.js</strong>, and <strong>TypeScript</strong>, closely with product and design.",
     "experience": "I started in 2010 writing COBOL for banking systems at <strong>ICBC</strong> and <strong>BBVA</strong>, software that couldn't go down. That still shapes how I build for the web: I think about edge cases, failure states, and what happens in production, not just in the demo.",
-    "passion": "Since 2021 I've worked fully remote on production products: youth sports league discovery for <strong>RCX Sports</strong>, high-fidelity app clones for <strong>REAL Evals</strong>, featured by The New York Times, and AI creation tools at <strong>Magic Hour</strong>.",
+    "passion": "Since 2021 I've worked fully remote on production products: youth sports league discovery for <strong>RCX Sports</strong>, high-fidelity app clones for <strong>REAL Evals</strong>, and AI creation tools at <strong>Magic Hour</strong>.",
     "stats": {
       "yearsExperience": "Years in frontend",
       "companies": "Companies & products",
@@ -82,7 +80,7 @@
     "featuredCta": "See the LinkedIn post"
   },
   "projects": {
-    "subtitle": "A selection of my work, including projects featured in The New York Times",
+    "subtitle": "A selection of my work across AI evaluation, youth sports and AI creation tools",
     "nytBadge": "NYT feature",
     "featuredCta": "View project",
     "technologiesUsed": "Technologies used",
@@ -96,27 +94,60 @@
     },
     "realevalsgmail": {
       "title": "Gmail Clone - REAL Evals",
-      "description": "Production-ready Gmail replica built for AI evaluation platform. Pixel-perfect recreation implementing email management, compose functionality, labels, folders, and advanced search. Built with Next.js and Material UI for optimal performance and accessibility."
+      "description": "Gmail clone I built for REAL Evals, where AI agents are evaluated against realistic apps. It covers email management, compose, labels, folders and search.",
+      "caseStudy": {
+        "context": "REAL Evals builds high-fidelity clones of everyday products, including Gmail, DoorDash, Uber and United Airlines, that AI agents are evaluated against. This is the Gmail clone.",
+        "role": "Freelance frontend engineer. I built the clone's interface and its product flows.",
+        "built": [
+          "A high-fidelity Gmail clone covering email management, compose, labels, folders and search",
+          "Realistic product flows that AI agents are evaluated on",
+          "The interface with Next.js, Material UI and Redux"
+        ],
+        "details": [
+          "The REAL Evals founder publicly recognized my frontend contributions in a LinkedIn post"
+        ]
+      }
     },
     "realevalsdashdish": {
       "title": "DoorDash Clone - REAL Evals",
-      "description": "High-fidelity food delivery platform clone featuring restaurant browsing, menu exploration, cart management, and checkout flow. Built with Next.js and Material UI to replicate DoorDash user experience with responsive design and smooth interactions."
+      "description": "DoorDash clone I built for REAL Evals. It covers restaurant browsing, menus, cart and checkout."
     },
     "realevalsuber": {
       "title": "Uber Clone - REAL Evals",
-      "description": "Comprehensive ride-sharing platform clone with real-time map integration, route calculation, pricing estimates, and driver matching simulation. Built with Next.js and Material UI."
+      "description": "Uber clone I built for REAL Evals. It covers map integration, route calculation, price estimates and a simulated driver match."
     },
     "realevalsunited": {
       "title": "United Airlines Clone - REAL Evals",
-      "description": "Full-featured airline booking platform clone replicating United Airlines flight search, seat selection, booking flow, and trip management. Implements complex multi-step forms, real-time availability, and responsive design with Next.js and Material UI."
+      "description": "United Airlines clone I built for REAL Evals. It covers flight search, seat selection, booking and trip management through multi-step forms."
     },
     "magichour": {
       "title": "Magic Hour — AI Creation Tools",
-      "description": "Built frontend features for AI image and video generation, editing workflows, and responsive product interfaces. Integrated generation jobs, asset validation, error handling, and backend APIs into the Next.js application."
+      "description": "I built frontend features for Magic Hour's AI image and video generation and editing tools. The work included connecting generation jobs, asset validation, error handling and backend APIs in the Next.js app.",
+      "caseStudy": {
+        "context": "Magic Hour offers AI tools for image and video generation and editing.",
+        "role": "Freelance frontend engineer. I am currently building frontend features for the product.",
+        "built": [
+          "Frontend features for AI image and video generation and editing workflows",
+          "Generation jobs, asset validation, error handling and backend APIs, integrated into the Next.js application"
+        ]
+      }
     },
     "nflleaguefinder": {
       "title": "NFL League Finder - RCX Sports",
-      "description": "NFL FLAG league finder: families search local youth flag football programs and seasons by location and continue to registration. Integrated directly into nflflag.playrcx.com."
+      "description": "NFL FLAG league finder: families search local youth flag football programs and seasons by location and continue to registration. Integrated directly into nflflag.playrcx.com.",
+      "caseStudy": {
+        "context": "The public League Finder for NFL FLAG, built for RCX Sports. Families use it to find youth flag football programs near them and continue to registration. RCX Sports runs matching finders for Jr. NBA/WNBA, NHL Street and MLS GO.",
+        "role": "Senior frontend engineer at Bonzzu, delivering RCX Sports' public League Finder.",
+        "built": [
+          "Location search with Google Maps integration and geolocation",
+          "Program and season data from REST APIs, with state managed through the Context API",
+          "Reusable components with Chakra UI"
+        ],
+        "details": [
+          "The finder is integrated directly into nflflag.playrcx.com",
+          "At Bonzzu I also led SSR and code-splitting work and integrated Contentful CMS"
+        ]
+      }
     },
     "nbaleaguefinder": {
       "title": "NBA League Finder - RCX Sports",
@@ -132,12 +163,12 @@
     },
     "factupro": {
       "title": "FactuPro - Invoice Management",
-      "description": "Complete invoice and billing management system for SMBs. Implemented invoice generation, payment tracking, client management, and automated reminders with responsive design and accessibility compliance."
+      "description": "Invoice and billing app for small businesses. I built invoice generation, payment tracking, client management and automated reminders."
     },
     "groups": {
       "real-evals": {
         "title": "REAL Evals",
-        "lead": "High-fidelity app clones built for AI evaluation, featured in The New York Times."
+        "lead": "High-fidelity app clones built for AI evaluation."
       },
       "rcx-sports": {
         "title": "RCX Sports",
@@ -145,6 +176,18 @@
       },
       "independent": {
         "title": "Independent"
+      }
+    },
+    "leagueFinders": {
+      "title": "RCX Sports League Finders",
+      "description": "One league finder for each of NFL FLAG, Jr. NBA/WNBA, NHL Street and MLS GO, built with Next.js and Chakra UI. Families search youth programs and seasons near them on a map and continue to registration.",
+      "linksLabel": "Open a league finder",
+      "linkLabel": "{{league}} league finder",
+      "leagues": {
+        "nfl-league-finder": "NFL FLAG",
+        "nba-league-finder": "Jr. NBA/WNBA",
+        "nhl-league-finder": "NHL Street",
+        "mls-league-finder": "MLS GO"
       }
     }
   },
@@ -155,7 +198,7 @@
       "notes": "Delivering scalable React/Next.js applications for <strong>Delos Company</strong> and <strong>RCX Sports</strong>, including RCX's public League Finder and the League Central operator platform. Designed reusable component systems using Material UI, Chakra UI, and Shadcn UI. Led performance optimizations through SSR, code splitting, and rendering efficiency improvements."
     },
     "fullstackFreelance": {
-      "role": "Frontend Web Developer",
+      "role": "Frontend Engineer",
       "company": "Freelancer",
       "notes": "Delivered solutions for international clients including <strong>Vrio</strong>, <strong>Wpromote</strong>, <strong>REAL Evals</strong> (featured by The New York Times), and <strong>FactuPro</strong>. Currently building frontend features for <strong>Magic Hour</strong>'s AI image and video creation tools with Next.js, React, and TypeScript. Specialized in SSR, performance optimization, and scalable component architectures."
     },
@@ -243,7 +286,13 @@
     "navLabel": "Project navigation",
     "previous": "Previous",
     "next": "Next",
-    "loading": "Loading project…"
+    "loading": "Loading project…",
+    "caseStudy": {
+      "context": "Context",
+      "role": "My role",
+      "built": "What I built",
+      "details": "Notable details"
+    }
   },
   "notFound": {
     "title": "Page not found",

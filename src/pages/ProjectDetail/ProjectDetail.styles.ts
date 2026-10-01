@@ -136,11 +136,84 @@ export const ScreenshotPlaceholder = styled.div`
   background-size: ${GRID_CELL} ${GRID_CELL};
 `;
 
-export const Body = styled.div`
+/**
+ * Without a case study the body is a single column. With one, wide screens
+ * put the narrative on the left and the callout and stack in an aside.
+ */
+export const Body = styled.div<{ $split?: boolean }>`
   display: flex;
+  max-width: ${({ theme }) => theme.layout.maxWidth.content};
   margin-top: ${({ theme }) => theme.spacing['2xl']};
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing['2xl']};
+
+  ${({ $split, theme }) =>
+    $split &&
+    `
+    @media (min-width: ${theme.breakpoints.lg}) {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
+      align-items: start;
+      gap: ${theme.spacing['3xl']};
+    }
+  `}
+`;
+
+export const BodyAside = styled.aside`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing['2xl']};
+  min-width: 0;
+`;
+
+export const Narrative = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing['2xl']};
+  min-width: 0;
+  max-width: ${({ theme }) => theme.layout.maxWidth.prose};
+`;
+
+export const NarrativeSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.md};
+`;
+
+export const NarrativeText = styled.p`
+  margin: 0;
+  font-size: ${({ theme }) => theme.typography.fontSize.lg};
+  line-height: ${({ theme }) => theme.typography.lineHeight.relaxed};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  text-wrap: pretty;
+`;
+
+export const BulletList = styled.ul.attrs({ role: 'list' })`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.sm};
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: ${({ theme }) => theme.typography.fontSize.lg};
+  line-height: ${({ theme }) => theme.typography.lineHeight.relaxed};
+  color: ${({ theme }) => theme.colors.textSecondary};
+
+  & > li {
+    position: relative;
+    padding-left: ${({ theme }) => theme.spacing.lg};
+    text-wrap: pretty;
+  }
+
+  & > li::before {
+    content: '';
+    position: absolute;
+    top: 0.8em;
+    left: 0;
+    width: ${({ theme }) => theme.spacing.md};
+    height: 1px;
+    background: ${({ theme }) => theme.colors.primary};
+  }
 `;
 
 export const FeaturedCallout = styled(Card)`

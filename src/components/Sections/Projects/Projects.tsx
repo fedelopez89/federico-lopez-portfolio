@@ -2,6 +2,7 @@ import { useId, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useCardSpotlight, useRevealOnFocus } from '@/hooks';
 import {
+  COMBINED_GROUPS,
   PROJECT_GROUPS,
   projects,
   type Project,
@@ -10,6 +11,7 @@ import {
 import { fadeUpVariants, inViewProps } from '../../../styles/motion';
 import { isViewTransitionActive } from '../../../utils/viewTransition';
 import ProjectCard from './ProjectCard';
+import LeagueFinderCard from './LeagueFinderCard';
 import { orderGroupItems } from './orderGroupItems';
 import { SectionHeader } from '../shared/SectionHeader';
 import { sectionTitleId } from '../shared/sectionTitleId';
@@ -44,6 +46,16 @@ const ProjectGridItem: React.FC<{ project: Project; wide?: boolean }> = ({
   );
 };
 
+/** Grid cell for a group rendered as one combined card. */
+const CombinedGridItem: React.FC<{ items: Project[] }> = ({ items }) => {
+  const reveal = useRevealOnFocus();
+  return (
+    <ProjectItem $wide variants={fadeUpVariants} {...inViewProps} {...reveal()}>
+      <LeagueFinderCard projects={items} />
+    </ProjectItem>
+  );
+};
+
 const ProjectGroupSection: React.FC<{
   group: ProjectGroup;
   items: Project[];
@@ -61,13 +73,17 @@ const ProjectGroupSection: React.FC<{
         {lead && <GroupLead>{lead}</GroupLead>}
       </GroupHeader>
       <ProjectsGrid aria-labelledby={titleId}>
-        {ordered.map((project) => (
-          <ProjectGridItem
-            key={project.id}
-            project={project}
-            wide={project === highlighted}
-          />
-        ))}
+        {COMBINED_GROUPS.includes(group) ? (
+          <CombinedGridItem items={ordered} />
+        ) : (
+          ordered.map((project) => (
+            <ProjectGridItem
+              key={project.id}
+              project={project}
+              wide={project === highlighted}
+            />
+          ))
+        )}
       </ProjectsGrid>
     </Group>
   );

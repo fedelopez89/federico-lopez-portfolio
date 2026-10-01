@@ -303,6 +303,12 @@ export const Title = styled.h4<WideProps>`
   line-height: ${({ theme }) => theme.typography.lineHeight.tight};
   letter-spacing: ${({ theme }) => theme.typography.letterSpacing.tight};
   color: ${({ theme }) => theme.colors.text};
+  /* Two lines at most, so a long title cannot push the chip rows around. */
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
 
   ${({ $wide, theme }) =>
     $wide &&

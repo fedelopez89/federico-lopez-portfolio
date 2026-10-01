@@ -29,8 +29,9 @@ export const GlobalStyles = createGlobalStyle`
   html {
     scroll-behavior: smooth;
     /* Keeps anchor jumps and focused elements clear of the fixed navbar and
-       the scroll-to-top button (WCAG 2.4.11). One source for every target. */
-    scroll-padding-top: calc(${({ theme }) => theme.layout.navHeight} + 0.5rem);
+       the scroll-to-top button (WCAG 2.4.11). One source for every target.
+       The 2rem gap leaves room for a section eyebrow under the navbar. */
+    scroll-padding-top: calc(${({ theme }) => theme.layout.navHeight} + 2rem);
     scroll-padding-bottom: 4.5rem;
     scrollbar-gutter: stable;
     -webkit-font-smoothing: antialiased;

@@ -88,12 +88,11 @@ describe('Experience', () => {
     expect(link).toHaveAccessibleName(/\(opens in a new tab\)/);
   });
 
-  it('exposes the download link with a name equal to its visible text', () => {
+  it('leaves the resume download to the hero and footer', () => {
     renderWithProviders(<Experience />);
-    const link = screen.getByRole('link', { name: /^Download resume\s*PDF$/ });
-    expect(link).toHaveTextContent(/^Download resume\s*PDF$/);
-    expect(link).toHaveAttribute('download');
-    expect(link).not.toHaveAttribute('aria-label');
+    expect(
+      screen.queryByRole('link', { name: /resume|CV/i })
+    ).not.toBeInTheDocument();
   });
 
   it('highlights company names in notes with <strong> but not technologies', () => {

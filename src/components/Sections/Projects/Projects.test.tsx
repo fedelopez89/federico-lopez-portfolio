@@ -2,7 +2,11 @@ import { describe, it, expect, beforeAll, afterEach } from 'vitest';
 import { act, screen, within } from '@testing-library/react';
 import i18n from '../../../i18n/config';
 import Projects from './Projects';
-import { PROJECT_GROUPS, projects } from '../../../data/projects';
+import {
+  COMBINED_GROUPS,
+  PROJECT_GROUPS,
+  projects,
+} from '../../../data/projects';
 import {
   renderWithProviders,
   setupTestEnvironment,
@@ -61,9 +65,7 @@ describe('Projects', () => {
   it('shows a factual one-line lead under each group title', () => {
     renderProjects();
     expect(
-      screen.getByText(
-        'High-fidelity app clones built for AI evaluation, featured in The New York Times.'
-      )
+      screen.getByText('High-fidelity app clones built for AI evaluation.')
     ).toBeInTheDocument();
     expect(
       screen.getByText(
@@ -94,8 +96,12 @@ describe('Projects', () => {
   it('keeps the outline section h2 > group h3 > card h4', () => {
     renderProjects();
     expect(screen.getAllByRole('heading', { level: 3 })).toHaveLength(3);
+    // The RCX league finders share one combined card.
+    const combined = projects.filter((p) =>
+      COMBINED_GROUPS.includes(p.group)
+    ).length;
     expect(screen.getAllByRole('heading', { level: 4 })).toHaveLength(
-      projects.length
+      projects.length - combined + COMBINED_GROUPS.length
     );
   });
 
@@ -106,7 +112,7 @@ describe('Projects', () => {
       const region = screen.getByRole('list', { name: title });
       const expected = projects.filter((p) => p.group === group);
       expect(within(region).getAllByRole('article')).toHaveLength(
-        expected.length
+        COMBINED_GROUPS.includes(group) ? 1 : expected.length
       );
       expected.forEach((p) =>
         expect(
@@ -116,8 +122,9 @@ describe('Projects', () => {
         ).toBe(true)
       );
     });
+    // The group grids plus the combined card's own link list.
     expect(document.querySelectorAll('ul[role="list"]')).toHaveLength(
-      PROJECT_GROUPS.length
+      PROJECT_GROUPS.length + COMBINED_GROUPS.length
     );
   });
 
@@ -149,6 +156,17 @@ describe('Projects', () => {
     );
   });
 
+  it('keeps the NYT claim out of the section subtitle and group leads', () => {
+    ['en', 'es'].forEach((lng) => {
+      expect(i18n.t('projects.subtitle', { lng })).not.toMatch(
+        /New York Times/
+      );
+      expect(i18n.t('projects.groups.real-evals.lead', { lng })).not.toMatch(
+        /New York Times/
+      );
+    });
+  });
+
   it('lists each technology once per project', () => {
     projects.forEach((p) =>
       expect(new Set(p.technologies).size).toBe(p.technologies.length)
@@ -160,8 +178,9 @@ describe('Projects', () => {
     const region = screen.getByRole('list', { name: 'REAL Evals' });
     const cta = within(region).getAllByText('View project');
     expect(cta).toHaveLength(1);
+    // One grid cell per card; the combined card adds its own link list.
     expect(document.querySelectorAll('ul[role="list"] > li')).toHaveLength(
-      projects.length
+      projects.length - 3 + 4
     );
 
     const items = within(region).getAllByRole('listitem', { hidden: false });
@@ -176,6 +195,42 @@ describe('Projects', () => {
 
     // The other groups have no highlighted project.
     expect(screen.getAllByText('View project')).toHaveLength(1);
+  });
+
+  it('renders the RCX league finders as one combined card with a link to each', () => {
+    renderProjects();
+    const region = screen.getByRole('list', { name: 'RCX Sports' });
+    const card = within(region).getByRole('article', {
+      name: 'RCX Sports League Finders',
+    });
+    expect(
+      within(card).getByRole('heading', {
+        level: 4,
+        name: 'RCX Sports League Finders',
+      })
+    ).toBeInTheDocument();
+    const links = within(
+      within(card).getByRole('list', { name: 'Open a league finder' })
+    ).getAllByRole('link');
+    expect(links.map((a) => a.getAttribute('href'))).toEqual([
+      '/projects/nfl-league-finder',
+      '/projects/nba-league-finder',
+      '/projects/nhl-league-finder',
+      '/projects/mls-league-finder',
+    ]);
+    expect(links[0]).toHaveAccessibleName('NFL FLAG league finder');
+    expect(within(card).getAllByRole('img')).toHaveLength(1);
+  });
+
+  it('translates the combined card to Spanish', async () => {
+    await act(() => i18n.changeLanguage('es'));
+    renderProjects();
+    expect(
+      screen.getByRole('heading', {
+        level: 4,
+        name: 'Buscadores de Ligas de RCX Sports',
+      })
+    ).toBeInTheDocument();
   });
 
   it('translates the featured call to action to Spanish', async () => {
