@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { alpha } from '../../../styles/mixins';
 import { TextLink } from '../../ui';
 import { lightTheme } from '../../../styles/theme';
+import { STACK_BREAKPOINTS } from './WorkStack.styles';
 
 const GRID_SIZE = '72px';
 const GLOW_SIZE = '500px';
@@ -329,7 +330,9 @@ export const SocialLinks = styled.ul.attrs({ role: 'list' })`
 /**
  * Proof points. Stacked below the lg breakpoint so a wrapped row can never
  * start with an orphaned divider; from lg they sit in one row split by
- * hairlines.
+ * hairlines. Where the work stack appears (and always sits to the right of the
+ * text column) they stack again: the longest locale would otherwise run under
+ * the front screenshot card.
  */
 export const ProofList = styled.ul.attrs({ role: 'list' })`
   display: flex;
@@ -342,6 +345,11 @@ export const ProofList = styled.ul.attrs({ role: 'list' })`
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     flex-direction: row;
     align-items: center;
+  }
+
+  @media (min-width: ${STACK_BREAKPOINTS.min}px) {
+    flex-direction: column;
+    align-items: flex-start;
   }
 `;
 
@@ -359,6 +367,14 @@ export const ProofItem = styled.li`
       margin-left: ${({ theme }) => theme.spacing.lg};
       padding-left: ${({ theme }) => theme.spacing.lg};
       border-left: 1px solid ${({ theme }) => theme.colors.border};
+    }
+  }
+
+  @media (min-width: ${STACK_BREAKPOINTS.min}px) {
+    & + & {
+      margin-left: 0;
+      padding-left: 0;
+      border-left: 0;
     }
   }
 `;
