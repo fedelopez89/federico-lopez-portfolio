@@ -9,6 +9,9 @@ import {
   WindowDot,
   WindowLabel,
   ImageFrame,
+  Spotlight,
+  SpotGrid,
+  SpotGlow,
   ProjectImage,
   ImagePlaceholder,
   CardBody,
@@ -38,7 +41,8 @@ const IMAGE_HEIGHT = 740;
  * One card for a group of near-identical projects (the RCX league finders).
  * It shows the first project's screenshot and links to each project's own page.
  * The card is not a link itself, so the per-project links stay valid and each
- * keeps its own focus stop.
+ * keeps its own focus stop. It still gets the link cards' hover treatment
+ * (spotlight, border, screenshot) without a card-wide pointer or arrow.
  */
 const LeagueFinderCard: React.FC<LeagueFinderCardProps> = ({ projects }) => {
   const { t } = useTranslation();
@@ -50,7 +54,11 @@ const LeagueFinderCard: React.FC<LeagueFinderCardProps> = ({ projects }) => {
   const extraCount = lead.technologies.length - MAX_TECH;
 
   return (
-    <CardSurface $wide aria-labelledby={titleId}>
+    <CardSurface $wide aria-labelledby={titleId} data-spot-card data-card-hover>
+      <Spotlight aria-hidden="true">
+        <SpotGrid $wide />
+        <SpotGlow $wide />
+      </Spotlight>
       <WideWindow>
         <WindowBar aria-hidden="true">
           <WindowDot />
