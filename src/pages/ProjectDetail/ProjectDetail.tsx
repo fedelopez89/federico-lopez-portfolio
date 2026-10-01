@@ -310,7 +310,7 @@ function ProjectDetail() {
               </Narrative>
             )}
 
-            <BodyAside>
+            <BodyAside as={narrative.length > 0 ? 'aside' : 'div'}>
               {project.featured && (
                 <FeaturedCallout>
                   <Eyebrow>{t('aboutMe.featuredLabel')}</Eyebrow>

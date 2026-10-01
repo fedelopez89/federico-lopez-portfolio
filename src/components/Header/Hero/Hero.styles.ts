@@ -347,7 +347,8 @@ export const ProofList = styled.ul.attrs({ role: 'list' })`
     align-items: center;
   }
 
-  @media (min-width: ${STACK_BREAKPOINTS.min}px) {
+  @media (min-width: ${STACK_BREAKPOINTS.min -
+    STACK_BREAKPOINTS.hysteresis}px) {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -370,7 +371,8 @@ export const ProofItem = styled.li`
     }
   }
 
-  @media (min-width: ${STACK_BREAKPOINTS.min}px) {
+  @media (min-width: ${STACK_BREAKPOINTS.min -
+    STACK_BREAKPOINTS.hysteresis}px) {
     & + & {
       margin-left: 0;
       padding-left: 0;

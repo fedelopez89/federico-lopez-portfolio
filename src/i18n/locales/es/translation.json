@@ -100,7 +100,7 @@
         "role": "Desarrollador frontend freelance. Construí la interfaz del clon y sus flujos de producto.",
         "built": [
           "Un clon de Gmail de alta fidelidad con gestión de correos, redacción, etiquetas, carpetas y búsqueda",
-          "Flujos de producto complejos de varios pasos sobre los que se evalúan agentes de IA",
+          "Flujos de producto realistas sobre los que se evalúan agentes de IA",
           "La interfaz con Next.js, Material UI y Redux"
         ],
         "details": [
@@ -141,12 +141,11 @@
         "built": [
           "Búsqueda por ubicación con integración de Google Maps y geolocalización",
           "Datos de programas y temporadas desde APIs REST, con el estado manejado mediante Context API",
-          "Componentes reutilizables con Chakra UI",
-          "SSR y división de código para mejorar el rendimiento",
-          "Integración con el CMS Contentful, para que equipos no técnicos gestionen el contenido"
+          "Componentes reutilizables con Chakra UI"
         ],
         "details": [
-          "El buscador está integrado directamente en nflflag.playrcx.com"
+          "El buscador está integrado directamente en nflflag.playrcx.com",
+          "En Bonzzu también lideré el trabajo de SSR y división de código e integré el CMS Contentful"
         ]
       }
     },

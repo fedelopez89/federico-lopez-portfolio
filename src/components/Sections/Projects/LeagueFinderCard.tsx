@@ -62,7 +62,11 @@ const LeagueFinderCard: React.FC<LeagueFinderCardProps> = ({ projects }) => {
           {lead.imageUrl ? (
             <ProjectImage
               src={lead.imageUrl}
-              alt={t('projects.imageAlt', { title })}
+              alt={t('projects.imageAlt', {
+                title: t(`projects.${lead.id.replace(/-/g, '')}.title`, {
+                  defaultValue: lead.title,
+                }),
+              })}
               width={IMAGE_WIDTH}
               height={IMAGE_HEIGHT}
               loading="lazy"
