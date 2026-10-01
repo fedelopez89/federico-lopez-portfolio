@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link as RouterLink } from 'react-router-dom';
 import { alpha, focusRing } from '../../../styles/mixins';
-import { Description } from './ProjectCard.styles';
+import { Description, HOVER_CARD } from './ProjectCard.styles';
 
 /** The combined card shows its copy at every width, unlike the wide card. */
 export const FinderDescription = styled(Description)`
@@ -47,7 +47,10 @@ export const FinderLink = styled(RouterLink)`
     color ${({ theme }) => theme.motion.duration.fast}s
       ${({ theme }) => theme.motion.easeCss};
 
-  &:hover {
+  /* While the card is hovered or focused, hint at the real targets inside it. */
+  &:hover,
+  ${HOVER_CARD}:hover &,
+  ${HOVER_CARD}:focus-within & {
     color: ${({ theme }) => theme.colors.primaryText};
     border-color: ${({ theme }) => alpha(theme.colors.primary, 50)};
   }
@@ -61,4 +64,11 @@ export const FinderLink = styled(RouterLink)`
 
 export const FinderArrow = styled.span`
   color: ${({ theme }) => theme.colors.textMuted};
+  transition: color ${({ theme }) => theme.motion.duration.fast}s
+    ${({ theme }) => theme.motion.easeCss};
+
+  ${HOVER_CARD}:hover &,
+  ${HOVER_CARD}:focus-within & {
+    color: ${({ theme }) => theme.colors.primaryText};
+  }
 `;

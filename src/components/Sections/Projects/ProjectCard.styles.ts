@@ -9,6 +9,13 @@ const GRID_CELL = '1.5rem';
 const SPOT_SIZE = 360;
 const SPOT_SIZE_WIDE = 560;
 
+/**
+ * Marks a card that is not a link itself but holds its own links (the RCX
+ * league card). It gets the same hover treatment as a link card, driven by its
+ * own :hover and :focus-within, minus the "whole card is a link" cues.
+ */
+export const HOVER_CARD = '[data-card-hover]';
+
 interface WideProps {
   $wide?: boolean;
 }
@@ -37,7 +44,9 @@ export const CardSurface = styled(Card).attrs({
     ${({ theme }) => theme.motion.easeCss};
 
   ${CardLink}:hover &,
-  ${CardLink}:focus-visible & {
+  ${CardLink}:focus-visible &,
+  &${HOVER_CARD}:hover,
+  &${HOVER_CARD}:focus-within {
     border-color: ${({ theme }) => alpha(theme.colors.primary, 50)};
   }
 
@@ -139,7 +148,9 @@ export const ProjectImage = styled.img`
     ${({ theme }) => theme.motion.easeCss};
 
   ${CardLink}:hover &,
-  ${CardLink}:focus-visible & {
+  ${CardLink}:focus-visible &,
+  ${HOVER_CARD}:hover &,
+  ${HOVER_CARD}:focus-within & {
     transform: scale(${IMAGE_SCALE});
   }
 
@@ -147,7 +158,9 @@ export const ProjectImage = styled.img`
     transition: none;
 
     ${CardLink}:hover &,
-    ${CardLink}:focus-visible & {
+    ${CardLink}:focus-visible &,
+    ${HOVER_CARD}:hover &,
+    ${HOVER_CARD}:focus-within & {
       transform: none;
     }
   }
@@ -192,7 +205,9 @@ export const Spotlight = styled.div`
       ${({ theme }) => theme.motion.easeCss};
 
     ${CardLink}:hover &,
-    ${CardLink}:focus-visible & {
+    ${CardLink}:focus-visible &,
+    ${HOVER_CARD}:hover &,
+    ${HOVER_CARD}:focus-within & {
       opacity: 1;
     }
   }

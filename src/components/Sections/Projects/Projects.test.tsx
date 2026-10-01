@@ -222,6 +222,21 @@ describe('Projects', () => {
     expect(within(card).getAllByRole('img')).toHaveLength(1);
   });
 
+  it('gives the combined card the hover treatment without making it a link', () => {
+    renderProjects();
+    const card = screen.getByRole('article', {
+      name: 'RCX Sports League Finders',
+    });
+    // Opts into the spotlight and hover styles, but is not itself a link.
+    expect(card).toHaveAttribute('data-spot-card');
+    expect(card).toHaveAttribute('data-card-hover');
+    expect(card.closest('a')).toBeNull();
+    // Decorative spotlight, hidden from assistive tech.
+    const spotlight = card.querySelector('[aria-hidden="true"]:has(div)');
+    expect(spotlight).not.toBeNull();
+    expect(within(card).getAllByRole('link')).toHaveLength(4);
+  });
+
   it('translates the combined card to Spanish', async () => {
     await act(() => i18n.changeLanguage('es'));
     renderProjects();
